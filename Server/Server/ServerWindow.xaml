@@ -1,7 +1,7 @@
-﻿<Window x:Class="Server.MainWindow"
+﻿<Window x:Class="Server.ServerWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="ServerWindow" Height="350" Width="525">
     <Grid>
         
     </Grid>

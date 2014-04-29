@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 
 namespace Server
 {
-    public partial class MainWindow : Window
+    public partial class ServerWindow : Window
     {
-        public MainWindow()
+        public ServerWindow()
         {
             InitializeComponent();
         }
