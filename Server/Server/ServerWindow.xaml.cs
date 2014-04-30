@@ -35,7 +35,6 @@ namespace Server
         private void GenerateProto()
         {
             string proto = Serializer.GetProto<LdpPacket>();
-            txt.Text = proto;
             //File.WriteAllText("Protocol\\messages.proto", proto);
         }
 
