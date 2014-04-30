@@ -1,0 +1,7 @@
+
+option java_outer_classname = "Test";
+option optimize_for = SPEED;
+
+message Auth {
+	required string password = 1;
+}

@@ -54,6 +54,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -71,6 +73,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Network\LdpAuthRequest.cs" />
+    <Compile Include="Network\LdpAuthResponse.cs" />
+    <Compile Include="Network\LdpDisconnectRequest.cs" />
+    <Compile Include="Network\LdpImageData.cs" />
+    <Compile Include="Network\LdpPacket.cs" />
+    <Compile Include="Utils\OSDetector.cs" />
     <Page Include="ServerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,7 +88,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ILdpServer.cs" />
-    <Compile Include="LdpServer.cs" />
+    <Compile Include="Utils\Log.cs" />
+    <Compile Include="ScreenGrabber\BaseGrabber.cs" />
+    <Compile Include="ScreenGrabber\DirectxGrabber.cs" />
+    <Compile Include="TcpServer\LdpTcpServer.cs" />
+    <Compile Include="UdpServer\LdpUdpServer.cs" />
     <Compile Include="ServerWindow.xaml.cs">
       <DependentUpon>ServerWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -113,6 +125,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

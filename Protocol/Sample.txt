@@ -1,0 +1,1 @@
+option java_outer_classname = "RProtocol";

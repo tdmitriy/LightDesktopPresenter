@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    interface ILdpServer
+    class LdpUdpServer
     {
-        void StartServer();
-        void StopServer();
+        //TODO
     }
 }

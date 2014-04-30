@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    class LdpServer : ILdpServer
+    class LdpTcpServer : ILdpServer
     {
-        public LdpServer() { }
+        private int port;
+        public LdpTcpServer(int port) 
+        {
+            this.port = port;
+        }
 
-        public void StartServer(int port)
+        public void StartServer()
         {
             
         }
