@@ -12,12 +12,12 @@ namespace Server
 
         public void StartServer(int port)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void StopServer()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
