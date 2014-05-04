@@ -77,10 +77,12 @@
     <Compile Include="Network\LdpAuthRequest.cs" />
     <Compile Include="Network\LdpAuthResponse.cs" />
     <Compile Include="Network\LdpDisconnectRequest.cs" />
-    <Compile Include="Network\LdpImageData.cs" />
+    <Compile Include="Network\LdpScreenData.cs" />
     <Compile Include="Network\LdpPacket.cs" />
-    <Compile Include="ScreenGrabber\ImageHelper.cs" />
-    <Compile Include="Utils\OSDetector.cs" />
+    <Compile Include="Network\LdpPreparableInfo.cs" />
+    <Compile Include="ProtoGeneration\ProtoGenerator.cs" />
+    <Compile Include="ScreenGrabber\LdpScreenProcessingUtils.cs" />
+    <Compile Include="WindowsUtils\LdpUtils.cs" />
     <Page Include="ServerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -90,9 +92,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ILdpServer.cs" />
-    <Compile Include="Utils\Log.cs" />
-    <Compile Include="ScreenGrabber\BaseGrabber.cs" />
-    <Compile Include="ScreenGrabber\DirectxGrabber.cs" />
+    <Compile Include="WindowsUtils\LdpLog.cs" />
+    <Compile Include="ScreenGrabber\LdpBaseScreenGrabber.cs" />
+    <Compile Include="ScreenGrabber\LdpDirectxGrabber.cs" />
     <Compile Include="TcpServer\LdpTcpServer.cs" />
     <Compile Include="UdpServer\LdpUdpServer.cs" />
     <Compile Include="ServerWindow.xaml.cs">

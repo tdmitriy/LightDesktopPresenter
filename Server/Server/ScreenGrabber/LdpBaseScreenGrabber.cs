@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Server.ScreenGrabber
 {
-    abstract class BaseGrabber
+    abstract class LdpBaseScreenGrabber
     {
         protected abstract void InitializeDX9();
         protected abstract void InitializeDX11();

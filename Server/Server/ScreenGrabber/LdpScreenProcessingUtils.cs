@@ -12,7 +12,7 @@ using System.Text;
 
 namespace TCPServer.ScreenGrabber_SYNC
 {
-    class ImageHelper
+    class LdpScreenProcessingUtils
     {
         private static EncoderParameters encoderParams = 
             new EncoderParameters();

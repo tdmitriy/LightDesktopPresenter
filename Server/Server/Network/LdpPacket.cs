@@ -17,7 +17,7 @@ namespace Server.Network
         [ProtoMember(3)]
         public LdpAuthResponse AuthResponse { get; set; }
         [ProtoMember(4)]
-        public LdpImageData ImageData { get; set; }
+        public LdpScreenData ScreenData { get; set; }
         [ProtoMember(5)]
         public LdpDisconnectRequest DisconnectRequest { get; set; }
 

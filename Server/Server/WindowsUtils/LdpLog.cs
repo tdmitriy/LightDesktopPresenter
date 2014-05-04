@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Utils
+namespace Server.WindowsUtils
 {
-    class Log
+    class LdpLog
     {
         private static string DEBUG = "DEBUG";
         private static string INFO = "INFO";

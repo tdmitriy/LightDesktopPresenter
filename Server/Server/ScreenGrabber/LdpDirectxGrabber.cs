@@ -9,23 +9,23 @@ using System.Windows;
 using SharpDX;
 using SharpDX.DXGI;
 using System.Diagnostics;
-using Server.Utils;
+using Server.WindowsUtils;
 using SharpDX.Direct3D9;
 
 
 namespace Server.ScreenGrabber
 {
-    class DirectxGrabber : BaseGrabber
+    class LdpDirectxGrabber : LdpBaseScreenGrabber
     {
-        private static readonly bool WINDOWS7 = OSDetector.IsWindows7();
-        private static readonly bool WINDOWS8 = OSDetector.IsWindows8();
+        private static readonly bool WINDOWS7 = LdpUtils.WINDOWS7;
+        private static readonly bool WINDOWS8 = LdpUtils.WINDOWS8;
         private Bitmap screenShot;
         private System.Drawing.Imaging.PixelFormat pixelFormat;
         private ScreenshotType screenshotType;
         private System.Drawing.Rectangle boundsRect;
         private BitmapData bmpData;
-        private static readonly int WIDTH = (int)SystemParameters.PrimaryScreenWidth;
-        private static readonly int HEIGHT = (int)SystemParameters.PrimaryScreenHeight;
+        private static readonly int WIDTH = LdpUtils.SCREEN_WIDTH;
+        private static readonly int HEIGHT = LdpUtils.SCREEN_HEIGHT;
         private static readonly int ARGB_WIDTH = WIDTH * 4;
 
         #region DX9Constants
@@ -36,6 +36,7 @@ namespace Server.ScreenGrabber
 
         #region DX11Constants
         private const int NEXT_FRAME_TIMEOUT = 4000;
+        private static ushort MAX_TRYING_ATTEMPS = 0;
         private static SharpDX.Direct3D11.Device dx11Device;
         private static Factory1 dx11Factory;
         private static SharpDX.Direct3D11.Texture2DDescription dx11Texture2Ddescr;
@@ -49,7 +50,7 @@ namespace Server.ScreenGrabber
         #endregion
 
 
-        public DirectxGrabber() 
+        public LdpDirectxGrabber() 
         {
             this.pixelFormat = PixelFormat.Format32bppRgb;
             boundsRect = new System.Drawing.Rectangle(0, 0, WIDTH, HEIGHT);
@@ -91,11 +92,11 @@ namespace Server.ScreenGrabber
             }
             catch (SharpDX.SharpDXException dxe)
             {
-                Log.Error("SharpDX InitializeDX9\n" + dxe.Message);
+                LdpLog.Error("SharpDX InitializeDX9\n" + dxe.Message);
             }
             catch (Exception ex)
             {
-                Log.Error("InitializeDX9\n" + ex.Message);
+                LdpLog.Error("InitializeDX9\n" + ex.Message);
             }
         }
         #endregion
@@ -134,11 +135,11 @@ namespace Server.ScreenGrabber
             }
             catch (SharpDX.SharpDXException dxe)
             {
-                Log.Error("SharpDX InitializeDX11\n" + dxe.Message);
+                LdpLog.Error("SharpDX InitializeDX11\n" + dxe.Message);
             }
             catch (Exception ex)
             {
-                Log.Error("InitializeDX11\n" + ex.Message);
+                LdpLog.Error("InitializeDX11\n" + ex.Message);
             }
         }
         #endregion
@@ -189,49 +190,60 @@ namespace Server.ScreenGrabber
                 screenShot = new Bitmap(WIDTH, HEIGHT, this.pixelFormat);
                 dx11DuplicatedOutput.AcquireNextFrame(NEXT_FRAME_TIMEOUT,
                     out dx11DuplFrameInfo, out dx11ScreenResource);
+
+                if (dx11ScreenResource != null)
+                    dx11Device.ImmediateContext
+                        .CopyResource(dx11ScreenResource.QueryInterface<SharpDX.Direct3D11.Resource>(),
+                        dx11ScreenTexture);
+                //// cast from texture to surface, so we can access its bytes
+                dx11ScreenSurface = dx11ScreenTexture.QueryInterface<SharpDX.DXGI.Surface>();
+                // map the resource to access it
+                dx11Map = dx11ScreenSurface.Map(SharpDX.DXGI.MapFlags.Read);
+                bmpData = screenShot.LockBits(boundsRect, ImageLockMode.WriteOnly, screenShot.PixelFormat);
+                var sourcePtr = dx11Map.DataPointer;
+                var destPtr = bmpData.Scan0;
+                for (int y = 0; y < HEIGHT; y++)
+                {
+                    // Copy a single line 
+                    Utilities.CopyMemory(destPtr, sourcePtr, ARGB_WIDTH);
+                    // Advance pointers
+                    sourcePtr = IntPtr.Add(sourcePtr, dx11Map.Pitch);
+                    destPtr = IntPtr.Add(destPtr, bmpData.Stride);
+                }
+
+                screenShot.UnlockBits(bmpData);
+                dx11ScreenSurface.Unmap();
+                dx11ScreenSurface.Dispose();
+                dx11ScreenResource.Dispose();
+                dx11DuplicatedOutput.ReleaseFrame();
+                dx11ScreenSurface = null;
+                bmpData = null;
+                GC.Collect();
+
+                return screenShot;
             }
             catch (SharpDX.SharpDXException e)
             {
                 if (e.ResultCode.Code == SharpDX.DXGI.ResultCode.WaitTimeout.Result.Code)
                 {
                     //screen does not cnhanged
-                    Log.Warning("DX11 surface timeout.. Recursion is coming:)");
+                    LdpLog.Warning("DX11 surface timeout.. Recursion is coming:)");
                     return GetDX11ScreenShot();
                 }
                 else
                 {
-                    Log.Error("GetDX11ScreenShot\n" + e.Message);
+                    if (MAX_TRYING_ATTEMPS < 10)
+                    {
+                        MAX_TRYING_ATTEMPS++;
+                        LdpLog.Error("GetDX11ScreenShot\n" + e.Message + "\nMaxAttemps=" + MAX_TRYING_ATTEMPS);
+                        return GetDX11ScreenShot();
+                    }
+                    else
+                        return null;
+                    
                 }
             }
-            if (dx11ScreenResource != null)
-                dx11Device.ImmediateContext
-                    .CopyResource(dx11ScreenResource.QueryInterface<SharpDX.Direct3D11.Resource>(),
-                    dx11ScreenTexture);
-            //// cast from texture to surface, so we can access its bytes
-            dx11ScreenSurface = dx11ScreenTexture.QueryInterface<SharpDX.DXGI.Surface>();
-            // map the resource to access it
-            dx11Map = dx11ScreenSurface.Map(SharpDX.DXGI.MapFlags.Read);
-            bmpData = screenShot.LockBits(boundsRect, ImageLockMode.WriteOnly, screenShot.PixelFormat);
-            var sourcePtr = dx11Map.DataPointer;
-            var destPtr = bmpData.Scan0;
-            for (int y = 0; y < HEIGHT; y++)
-            {
-                // Copy a single line 
-                Utilities.CopyMemory(destPtr, sourcePtr, ARGB_WIDTH);
-                // Advance pointers
-                sourcePtr = IntPtr.Add(sourcePtr, dx11Map.Pitch);
-                destPtr = IntPtr.Add(destPtr, bmpData.Stride);
-            }
-
-            screenShot.UnlockBits(bmpData);
-            dx11ScreenSurface.Unmap();
-            dx11ScreenSurface.Dispose();
-            dx11ScreenResource.Dispose();
-            dx11DuplicatedOutput.ReleaseFrame();
-            dx11ScreenSurface = null;
-            bmpData = null;
-            GC.Collect();
-            return screenShot;
+            
         }
         #endregion
 

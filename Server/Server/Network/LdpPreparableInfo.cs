@@ -8,13 +8,11 @@ using ProtoBuf;
 namespace Server.Network
 {
     [ProtoContract]
-    class LdpImageData
+    class LdpPreparableInfo
     {
         [ProtoMember(1)]
-        public byte[] Compressed { get; set; }
+        public int ScreenWidth { get; set; }
         [ProtoMember(2)]
-        public int BaseLenght { get; set; }
-        [ProtoMember(3)]
-        public int BlockPosition { get; set; }
+        public int ScreenHeight { get; set; }
     }
 }
