@@ -1,69 +1,3 @@
 option java_outer_classname = "LdpProtocol";
 option optimize_for = SPEED;
-
-message LdpPacket {
-	enum PacketType {
-		AUTH_REQUEST			= 1;
-		AUTH_RESPONSE			= 2;
-		
-		IMG_DATA				= 3;
-		VOLUME_DATA				= 4;
-		
-		MOUSE_POS_DATA			= 5;
-		CURSOR_DATA				= 6;
-		
-		KEYBOARD_DATA			= 7;
-		
-		DISCONNECT_REQUEST		= 8;
-	}
-	
-	required PacketType type						= 1;
-	optional LdpAuthRequest authRequest				= 2;
-	optional LdpAuthResponse authResponse			= 3;
-	optional LdpImageData imageData					= 4;
-	optional LdpVolumeData volumeData				= 5;
-	optional LdpMousePositionData mousePosData		= 6;
-	optional LdpCursorData cursorData				= 7;
-	optional LdpKeyboardData keyboardData			= 8;
-	optional LdpDisconnectRequest disconRequest		= 9;
-}
-
-message LdpAuthRequest {
-	required string password = 1;
-}
-
-message LdpAuthResponse {
-	enum ResponseMessageType {
-		WRONG_PASSWORD						= 1;
-		EMPTY_PASSWORD						= 2;
-	}
-	required bool isSuccess					= 1;
-	required ResponseMessageType type		= 2;
-}
-
-message LdpImageData {
-	required bytes compressed				= 1;
-	required int32 baseLenght				= 2;
-	required int32 blockPosition			= 3;
-}
-
-message LdpVolumeData {
-	
-}
-
-message LdpMousePositionData {
-	required int32 mouseX					= 1;
-	required int32 mouseY					= 2;
-}
-
-message LdpCursorData {
-	
-}
-
-message LdpKeyboardData {
-	
-}
-
-message LdpDisconnectRequest {
-	required bool isDisconnect = 1;
-}
+message LdpAuthRequest {   optional string Password = 1;}message LdpAuthResponse {   optional bool isSuccess = 1 [default = false];   optional ResponseMessageType Type = 2 [default = 0];}message LdpDisconnectRequest {   optional bool IsDisconnect = 1 [default = false];}message LdpPacket {   optional PacketType Type = 1 [default = 0];   optional LdpAuthRequest AuthRequest = 2;   optional LdpAuthResponse AuthResponse = 3;   optional LdpScreenData ScreenData = 4;   optional LdpDisconnectRequest DisconnectRequest = 5;}message LdpRectangle {   optional int32 Left = 1 [default = 0];   optional int32 Top = 2 [default = 0];   optional int32 Right = 3 [default = 0];   optional int32 Bottom = 4 [default = 0];}message LdpScreenData {   optional bytes CompressedScreen = 1;   optional int32 BaseLenght = 2 [default = 0];   optional int32 BlockPosition = 3 [default = 0];   optional LdpRectangle Rect = 4;}enum PacketType {   AUTH_REQUEST = 1;   AUTH_RESPONSE = 2;   IMG_DATA = 3;   VOLUME_DATA = 4;   MOUSE_POS_DATA = 5;   CURSOR_DATA = 6;   KEYBOARD_DATA = 7;   DISCONNECT_REQUEST = 8;}enum ResponseMessageType {   WRONG_PASSWORD = 1;   EMPTY_PASSWORD = 2;}
