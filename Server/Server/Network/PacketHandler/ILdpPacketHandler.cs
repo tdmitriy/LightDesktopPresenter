@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server
+namespace Server.Network.PacketHandler
 {
-    interface ILdpServer
+    interface ILdpPacketHandler : ILdpPacketListener
     {
-        void StartServer();
-        void StopServer();
+        void Handle();
     }
 }

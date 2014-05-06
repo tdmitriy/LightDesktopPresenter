@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace Server.ProtoGeneration
 {
-    class ProtoGenerator
+    class LdpProtoGenerator
     {
         private static string JAVA_PROTOCOL_NAME = "LdpProtocol";
         private static string PROTO_MESSAGE_NAME = "messages.proto";

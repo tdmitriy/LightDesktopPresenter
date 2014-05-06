@@ -11,6 +11,10 @@ namespace Server.Network
     class LdpDisconnectRequest
     {
         [ProtoMember(1)]
-        public bool IsDisconnect { get; set; }
+        public bool DisconnectFromServer { get; set; }
+        [ProtoMember(2)]
+        public bool DisconnectFromScreenThread { get; set; }
+        [ProtoMember(3)]
+        public bool DisconnectFromVolumeThread { get; set; }
     }
 }
