@@ -18,6 +18,7 @@ using System.IO;
 using Server.WindowsUtils;
 using Server.Network;
 using ProtoBuf;
+using Server.Properties;
 
 
 namespace Server
@@ -31,6 +32,9 @@ namespace Server
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
+            //Settings.Default.Password = "Test";
+            //Settings.Default.Save();
         }
     }
 }

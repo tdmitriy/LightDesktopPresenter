@@ -52,7 +52,6 @@ namespace Server
                 LdpLog.Info(String.Format("Server started on: {0}:{1}.", GetServerIPAddress, port));
 
                 clientSocket = serverSocket.Accept();
-
                 if (OnClientConnected != null)
                     OnClientConnected(clientSocket.LocalEndPoint);
                 LdpLog.Info("Client connected: " + clientSocket.LocalEndPoint);
@@ -79,6 +78,7 @@ namespace Server
             }
         }
 
+        //add packet listeners
         private void AddServerListener()
         {
             LdpPacketListener packetListener = new LdpPacketListener(clientSocket);
@@ -87,21 +87,10 @@ namespace Server
 
         public void Restart()
         {
-            try
-            {
-                LdpLog.Info("Restarting server.");
-                Stop();
-                Start();
-                LdpLog.Info("Restarting server done.");
-            }
-            catch (SocketException sockExc)
-            {
-                LdpLog.Error(sockExc.Message);
-            }
-            catch (Exception ex)
-            {
-                LdpLog.Error(ex.Message);
-            }
+            LdpLog.Info("Restarting server.");
+            Stop();
+            Start();
+            LdpLog.Info("Restarting server done.");
         }
 
         public void Stop()
