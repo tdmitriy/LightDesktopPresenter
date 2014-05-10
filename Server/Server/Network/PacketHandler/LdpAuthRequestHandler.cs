@@ -8,16 +8,12 @@ namespace Server.Network.PacketHandler
 {
     class LdpAuthRequestHandler : ILdpPacketHandler
     {
-        public void Handle()
-        {
-            
-        }
-
-        public void OnPacketReceived(LdpPacket packet)
+        public void Handle(LdpPacket packet)
         {
             switch (packet.Type)
             {
                 case PacketType.AUTH_REQUEST:
+                    //if ok - send auth response
                     break;
             }
         }
