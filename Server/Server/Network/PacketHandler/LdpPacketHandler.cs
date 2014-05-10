@@ -9,12 +9,21 @@ namespace Server.Network.PacketHandler
     abstract class LdpPacketHandler : ILdpPacketHandler
     {
         #region Observer pattern impl
-        private List<ILdpPacketListener> listeners;
-        public void AddListener(ILdpPacketListener listener)
+        private List<ILdpPacketHandler> listeners;
+        public void AddListener(ILdpPacketHandler listener)
         {
             if (listeners == null)
-                listeners = new List<ILdpPacketListener>();
+                listeners = new List<ILdpPacketHandler>();
             listeners.Add(listener);
+        }
+
+        public void RemoveListeners()
+        {
+            if (listeners != null)
+            {
+                listeners.Clear();
+                listeners = null;
+            }
         }
 
         public virtual void OnPacketReceived(LdpPacket packet)
@@ -23,13 +32,13 @@ namespace Server.Network.PacketHandler
             {
                 foreach (var listener in listeners)
                 {
-                    ILdpPacketListener ipl = listener;
-                    ipl.OnPacketReceived(packet);
+                    ILdpPacketHandler ipl = listener;
+                    ipl.Handle(packet);
                 }
             }
         }
         #endregion
 
-        public abstract void Handle();
+        protected abstract void Handle();
     }
 }
