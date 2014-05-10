@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Server.Network.PacketHandler
 {
-    interface ILdpPacketHandler : ILdpPacketListener
+    interface ILdpPacketHandler
     {
-        void Handle();
+        void Handle(LdpPacket packet);
     }
 }
