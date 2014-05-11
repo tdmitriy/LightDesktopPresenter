@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ProtoBuf;
 
-namespace Server.Network
+namespace Server.Network.PacketTypes
 {
     [ProtoContract]
     class LdpScreenData
