@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Network.PacketTypes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace Server.Network.PacketHandler
             }
         }
 
-        public virtual void OnPacketReceived(LdpPacket packet)
+        public virtual void Handle(LdpPacket packet)
         {
             if (listeners != null && listeners.Count != 0)
             {
@@ -40,5 +41,6 @@ namespace Server.Network.PacketHandler
         #endregion
 
         protected abstract void Handle();
+
     }
 }
