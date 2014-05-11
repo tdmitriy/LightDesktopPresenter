@@ -1,4 +1,5 @@
-﻿using Server.Network.PacketHandler;
+﻿using Server.Network;
+using Server.Network.PacketHandler;
 using Server.TcpServer;
 using Server.WindowsUtils;
 using System;
@@ -126,9 +127,8 @@ namespace Server
             {
                 try
                 {
-                    IPHostEntry host;
                     string localIP = "";
-                    host = Dns.GetHostEntry(Dns.GetHostName());
+                    IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
                     foreach (IPAddress ip in host.AddressList)
                     {
                         if (ip.AddressFamily == AddressFamily.InterNetwork)
