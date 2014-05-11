@@ -9,11 +9,11 @@ namespace Server.WindowsUtils
 {
     class LdpLog
     {
-        private static string DEBUG = "DEBUG";
-        private static string INFO = "INFO";
-        private static string WARNING = "WARNING";
-        private static string ERROR = "ERROR";
-        private static string FATAL = "FATAL";
+        private static string DEBUG = "LOG: DEBUG";
+        private static string INFO = "LOG: INFO";
+        private static string WARNING = "LOG: WARNING";
+        private static string ERROR = "LOG: ERROR";
+        private static string FATAL = "LOG: FATAL";
         public static void Debug(string message)
         {
             Trace.WriteLine(String.Format("{0}: {1}.", DEBUG, message));

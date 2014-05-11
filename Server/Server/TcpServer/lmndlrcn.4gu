@@ -1,6 +1,5 @@
 ﻿using Server.Network;
 using Server.Network.PacketHandler;
-using Server.Network.PacketSender;
 using Server.TcpServer;
 using Server.WindowsUtils;
 using System;
@@ -57,7 +56,7 @@ namespace Server
                 if (OnClientConnected != null)
                     OnClientConnected(clientSocket.LocalEndPoint);
                 LdpLog.Info("Client connected: " + clientSocket.LocalEndPoint);
-                AddServerHandlers();
+                AddServerListener();
 
             }
             catch (SocketException sockExc)
@@ -81,11 +80,10 @@ namespace Server
         }
 
         //add packet listeners
-        private void AddServerHandlers()
+        private void AddServerListener()
         {
-            LdpPacketSender packetSender = new LdpPacketSender(this);
-
-            LdpPacketListener packetListener = new LdpPacketListener(this, packetSender);
+            LdpPacketListener packetListener = new LdpPacketListener(clientSocket);
+            packetListener.AddListener(this);
             packetListener.AddListener(new LdpAuthRequestHandler());
         }
 
@@ -147,11 +145,6 @@ namespace Server
                     return "";
                 }
             }
-        }
-
-        public Socket ClientChannel
-        {
-            get { return clientSocket; }
         }
     }
 }

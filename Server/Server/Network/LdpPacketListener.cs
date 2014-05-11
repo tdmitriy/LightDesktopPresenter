@@ -1,6 +1,8 @@
 ﻿using ProtoBuf;
 using Server.Network;
 using Server.Network.PacketHandler;
+using Server.Network.PacketSender;
+using Server.TcpServer;
 using Server.WindowsUtils;
 using System;
 using System.Collections.Generic;
@@ -14,36 +16,37 @@ namespace Server.Network
 {
     class LdpPacketListener : LdpPacketHandler
     {
-        private Socket socket;
-        //private Thread listenerThread;
-        private bool LISTENER = false;
+        private ILdpTcpServer serverHandler;
+        private ILdpPacketSender channel;
+        private Thread listenerThread;
+        private bool workingThread = false;
         private const int CLIENT_DISCON_ERROR_CODE = 10054;
-        public LdpPacketListener(Socket socket) 
+        public LdpPacketListener(ILdpTcpServer serverHandler, ILdpPacketSender channel) 
         {
-            this.socket = socket;
+            this.serverHandler = serverHandler;
+            this.channel = channel;
             StartListenerThread();
         }
 
         private void StartListenerThread()
         {
-            LISTENER = true;
+            workingThread = true;
             LdpLog.Info("Server listener started.");
-            Run();
-            //listenerThread = new Thread(new ThreadStart(Run));
-            //listenerThread.Start();
+            listenerThread = new Thread(new ThreadStart(Run));
+            listenerThread.Start();
         }
 
-        private void Restart()
+        /*private void Restart()
         {
-            /*LdpLog.Info("Restarting server listener thread.");
+            LdpLog.Info("Restarting server listener thread.");
             Stop();
             StartListenerThread();
-            LdpLog.Info("Restarting server listener thread completed.");*/
-        }
+            LdpLog.Info("Restarting server listener thread completed.");
+        }*/
 
         private void Run()
         {
-            while (LISTENER)
+            while (workingThread)
             {
                 Handle();
             }
@@ -53,14 +56,8 @@ namespace Server.Network
         {
             try
             {
-                LISTENER = false;
-                LdpLog.Info("Server packet listener stopped.");
-                /*if (listenerThread.IsAlive)
-                {
-                    listenerThread.Interrupt();
-                    listenerThread.Abort();
-                    LdpLog.Info("Server pakcet listener thread interrupted.");
-                }*/
+                workingThread = false;
+                LdpLog.Info("Server pakcet listener thread interrupted.");
             }
             catch (Exception ex)
             {
@@ -70,31 +67,31 @@ namespace Server.Network
 
         protected override void Handle()
         {
-            //try
-            //{
-                using (var stream = new NetworkStream(socket))
+            try
+            {
+            using (var stream = new NetworkStream(serverHandler.ClientChannel))
                 {
                     var packet = Serializer.DeserializeWithLengthPrefix<LdpPacket>(stream, PrefixStyle.Base128);
                     //base
-                    Handle(packet);
+                    Handle(packet, channel);
                 }
-            //}
-            /*catch (SocketException sockExc)
+            }
+            catch (SocketException sockExc)
             {
                 if (sockExc.ErrorCode == CLIENT_DISCON_ERROR_CODE)
-                { 
-                    // it's ok
+                {
                 }
                 else
                 {
                     LdpLog.Error("LdpPacketListener error: Handle() method throw:\n" + sockExc.Message);
                 }
+                serverHandler.Restart();
             }
             catch (Exception ex)
             {
                 LdpLog.Error("LdpPacketListener error: Handle() method throw:\n" + ex.Message);
-                Restart();
-            }*/
+                serverHandler.Restart();
+            }
         }
     }
 }

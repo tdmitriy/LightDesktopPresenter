@@ -1,4 +1,5 @@
-﻿using Server.Network.PacketTypes;
+﻿using Server.Network.PacketSender;
+using Server.Network.PacketTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace Server.Network.PacketHandler
 {
     abstract class LdpPacketHandler : ILdpPacketHandler
     {
+        protected abstract void Handle();
+
         #region Observer pattern impl
         private List<ILdpPacketHandler> listeners;
         public void AddListener(ILdpPacketHandler listener)
@@ -27,20 +30,17 @@ namespace Server.Network.PacketHandler
             }
         }
 
-        public virtual void Handle(LdpPacket packet)
+        public virtual void Handle(LdpPacket packet, ILdpPacketSender channel)
         {
             if (listeners != null && listeners.Count != 0)
             {
                 foreach (var listener in listeners)
                 {
-                    ILdpPacketHandler ipl = listener;
-                    ipl.Handle(packet);
+                    ILdpPacketHandler ipl = (ILdpPacketHandler)listener;
+                    ipl.Handle(packet, channel);
                 }
             }
         }
         #endregion
-
-        protected abstract void Handle();
-
     }
 }

@@ -19,15 +19,19 @@ using Server.WindowsUtils;
 using Server.Network;
 using ProtoBuf;
 using Server.Properties;
-
+using Server.LdpThreads;
 
 namespace Server
 {
     public partial class ServerWindow : Window
     {
+        LdpScreenThread scr = new LdpScreenThread();
+        //LdpVolumeThread vlm = new LdpVolumeThread();
         public ServerWindow()
         {
             InitializeComponent();
+            scr.Start();
+            //vlm.Start();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,6 +39,9 @@ namespace Server
 
             //Settings.Default.Password = "Test";
             //Settings.Default.Save();
+            //scr.Stop();
+            //vlm.Stop();
+            //LdpScreenThread.StopThreadGlobal();
         }
     }
 }

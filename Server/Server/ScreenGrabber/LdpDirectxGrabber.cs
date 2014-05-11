@@ -17,8 +17,8 @@ namespace Server.ScreenGrabber
 {
     class LdpDirectxGrabber : LdpBaseScreenGrabber
     {
-        private static readonly bool WINDOWS7 = LdpUtils.WINDOWS7;
-        private static readonly bool WINDOWS8 = LdpUtils.WINDOWS8;
+        private static bool WINDOWS7 = LdpUtils.IsWindows7;
+        private static bool WINDOWS8 = LdpUtils.IsWindows8;
         private Bitmap screenShot;
         private System.Drawing.Imaging.PixelFormat pixelFormat;
         private ScreenshotType screenshotType;

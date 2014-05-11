@@ -1,5 +1,4 @@
-﻿using Server.Network.PacketSender;
-using Server.Network.PacketTypes;
+﻿using Server.Network.PacketTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Server.Network.PacketHandler
 {
-    interface ILdpPacketHandler
+    
+    interface ILdpDisconnectPacketHandler
     {
-        void Handle(LdpPacket packet, ILdpPacketSender channel);
+        void Handle(LdpDisconnectRequest packet);
     }
 }

@@ -74,14 +74,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AbstractThread\ILdpBaseThread.cs" />
-    <Compile Include="AbstractThread\LdpBaseThread.cs" />
-    <Compile Include="AbstractThread\LdpScreenThread.cs" />
+    <Compile Include="LdpThreads\ILdpBaseThread.cs" />
+    <Compile Include="LdpThreads\LdpBaseThread.cs" />
+    <Compile Include="LdpThreads\LdpScreenThread.cs" />
+    <Compile Include="LdpThreads\LdpVolumeThread.cs" />
+    <Compile Include="Network\PacketSender\ILdpPacketSender.cs" />
+    <Compile Include="Network\PacketHandler\ILdpDisconnectPacketHandler.cs" />
     <Compile Include="Network\PacketHandler\ILdpPacketHandler.cs" />
     <Compile Include="Network\PacketHandler\LdpAuthRequestHandler.cs" />
     <Compile Include="Network\PacketHandler\LdpDisconnectRequestHandler.cs" />
     <Compile Include="Network\PacketHandler\LdpPacketHandler.cs" />
     <Compile Include="Network\PacketHandler\LdpPreparableInfoResponseHandler.cs" />
+    <Compile Include="Network\PacketSender\LdpPacketSender.cs" />
     <Compile Include="Network\PacketTypes\LdpAuthRequest.cs" />
     <Compile Include="Network\PacketTypes\LdpAuthResponse.cs" />
     <Compile Include="Network\PacketTypes\LdpDisconnectRequest.cs" />
@@ -102,7 +106,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TcpServer\ILdpServer.cs" />
+    <Compile Include="TcpServer\ILdpTcpServer.cs" />
     <Compile Include="WindowsUtils\LdpLog.cs" />
     <Compile Include="ScreenGrabber\LdpBaseScreenGrabber.cs" />
     <Compile Include="ScreenGrabber\LdpDirectxGrabber.cs" />
