@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using ProtoBuf;
 
-namespace Server.Network
+namespace Server.Network.PacketTypes
 {
     [ProtoContract]
     class LdpAuthResponse
     {
-        [ProtoMember(1)]
+        [ProtoMember(1, IsRequired = true)]
         public bool isSuccess { get; set; }
-        [ProtoMember(2)]
+        [ProtoMember(2, IsRequired = true)]
         public ResponseMessageType Type { get; set; }
 
         
