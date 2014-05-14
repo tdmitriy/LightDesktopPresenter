@@ -8,29 +8,49 @@ using System.Threading.Tasks;
 
 namespace Server.Network.PacketHandler
 {
-    abstract class LdpPacketHandler : ILdpPacketHandler
+    abstract class LdpPacketHandler : ILdpObservable, IDisposable
     {
+        private static object MUTEX = new object();
         protected abstract void Handle();
 
-        #region Observer pattern impl
         private List<ILdpPacketHandler> listeners;
+        public LdpPacketHandler()
+        {
+            listeners = new List<ILdpPacketHandler>();
+        }   
+
+        #region Observer pattern impl
         public void AddListener(ILdpPacketHandler listener)
         {
-            if (listeners == null)
-                listeners = new List<ILdpPacketHandler>();
-            listeners.Add(listener);
+            lock (MUTEX)
+            {
+                if (!listeners.Contains(listener))
+                    listeners.Add(listener);
+            }
+        }
+
+        public void RemoveListener(ILdpPacketHandler listener)
+        {
+            lock (MUTEX)
+            {
+                if (listeners.Contains(listener))
+                    listeners.Remove(listener);
+            }
         }
 
         public void RemoveListeners()
         {
-            if (listeners != null)
+            lock (MUTEX)
             {
-                listeners.Clear();
-                listeners = null;
+                if (listeners != null)
+                {
+                    listeners.Clear();
+                    listeners = null;
+                }
             }
         }
 
-        public virtual void Handle(LdpPacket packet, ILdpPacketSender channel)
+        public void NotifyToAllListeners(LdpPacket packet, ILdpPacketSender channel)
         {
             if (listeners != null && listeners.Count != 0)
             {
@@ -42,5 +62,10 @@ namespace Server.Network.PacketHandler
             }
         }
         #endregion
+
+        public void Dispose()
+        {
+            RemoveListeners();
+        }
     }
 }
