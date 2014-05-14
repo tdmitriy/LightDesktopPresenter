@@ -18,6 +18,7 @@ namespace Server
     {
         [DefaultValue(9998)]
         private int port { get; set; }
+        private const int PORT_NUMBER = 9998;
 
         #region Sockets variables
         private Socket serverSocket;
@@ -27,12 +28,6 @@ namespace Server
         private const int CLIENT_DISCON_ERROR_CODE = 10054;
         #endregion
 
-        #region Server events
-        public event ClientConnectedHandler OnClientConnected;
-        public event ClientDisconnectedHandler OnClientDisconnected;
-        public event ServerShutdownHandler OnServerShutdown;
-        #endregion
-
         public LdpTcpServer(int port) 
         {
             this.port = port;
@@ -40,53 +35,56 @@ namespace Server
 
         public LdpTcpServer()
         {
-            this.port = 9998;
+            this.port = PORT_NUMBER;
         }
 
         public void Start()
         {
             try
             {
-                serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                serverSocket = new Socket(AddressFamily.InterNetwork, 
+                    SocketType.Stream, ProtocolType.Tcp);
                 IPEndPoint serverIPEP = new IPEndPoint(IPAddress.Any, port);
                 serverSocket.Bind(serverIPEP);
                 serverSocket.Listen(MAX_CONNECTIONS_PENDING);
-                LdpLog.Info(String.Format("Server started on: {0}:{1}.", GetServerIPAddress, port));
+                LdpLog.Info(String.Format("Server started on: {0}:{1}.", 
+                    GetServerIPAddress, GetServerPort));
 
+                //incoming connection
                 clientSocket = serverSocket.Accept();
-                if (OnClientConnected != null)
-                    OnClientConnected(clientSocket.LocalEndPoint);
-                LdpLog.Info("Client connected: " + clientSocket.LocalEndPoint);
+
+                LdpLog.Info(String.Format("Incoming connection: {0}.\nWaiting auth request..",
+                    clientSocket.LocalEndPoint));
                 AddServerHandlers();
 
             }
-            catch (SocketException sockExc)
+            catch (SocketException sockexc)
             {
-                if (sockExc.ErrorCode == CLIENT_DISCON_ERROR_CODE)
-                {
-                    if (OnClientDisconnected != null)
-                        OnClientDisconnected();
+                if (sockexc.ErrorCode == CLIENT_DISCON_ERROR_CODE)
                     LdpLog.Info("Client disconnected.");
-                    Restart();
-                }
                 else
-                {
-                    LdpLog.Error(sockExc.Message);
-                }
+                    LdpLog.Error(String.Format("Starting server error:\n{0}", 
+                        sockexc.Message));
+                Restart();
             }
             catch (Exception ex)
             {
-                LdpLog.Error(ex.Message);
+                LdpLog.Error(String.Format("Starting server error:\n{0}", 
+                    ex.Message));
             }
         }
 
+        //add packet sender
         //add packet listeners
         private void AddServerHandlers()
         {
             LdpPacketSender packetSender = new LdpPacketSender(this);
 
-            LdpPacketListener packetListener = new LdpPacketListener(this, packetSender);
+            LdpPacketListener packetListener = 
+                new LdpPacketListener(this, packetSender);
             packetListener.AddListener(new LdpAuthRequestHandler());
+            packetListener.AddListener(new LdpClientInfoRequestHandler());
+            packetListener.AddListener(new LdpDisconnectRequestHandler());
         }
 
         public void Restart()
@@ -101,10 +99,7 @@ namespace Server
         {
             try
             {
-                const int SERVER_SHUTDOWN_TIMEOUT = 500;
-                if (OnServerShutdown != null)
-                    OnServerShutdown();
-
+                const int SERVER_SHUTDOWN_TIMEOUT = 200;
                 if (serverSocket != null)
                 {
                     LdpLog.Info("Server shutdown.");
@@ -114,39 +109,47 @@ namespace Server
                     clientSocket = null;
                 }
             }
-            catch (SocketException sockExc)
+            catch (SocketException sockexc)
             {
-                LdpLog.Error("Server shutdown throw:\n" + sockExc.Message);
+                LdpLog.Error("Server shutdown thrown:\n" + sockexc.Message);
             }
             catch (Exception ex)
             {
-                LdpLog.Error("Server shutdown throw:\n" + ex.Message);
+                LdpLog.Error("Server shutdown thrown:\n" + ex.Message);
+            }
+        }
+
+        private string serverIPAddress()
+        {
+            try
+            {
+                string localIP = "";
+                IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+                foreach (IPAddress ip in host.AddressList)
+                {
+                    if (ip.AddressFamily == AddressFamily.InterNetwork)
+                    {
+                        localIP = ip.ToString();
+                        break;
+                    }
+                }
+                return localIP;
+            }
+            catch (SocketException sockexc)
+            {
+                LdpLog.Error("Getting IP address error:\n" + sockexc.Message);
+                return "";
             }
         }
 
         public string GetServerIPAddress
         {
-            get 
-            {
-                try
-                {
-                    string localIP = "";
-                    IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
-                    foreach (IPAddress ip in host.AddressList)
-                    {
-                        if (ip.AddressFamily == AddressFamily.InterNetwork)
-                        {
-                            localIP = ip.ToString();
-                            break;
-                        }
-                    }
-                    return localIP;
-                }
-                catch
-                {
-                    return "";
-                }
-            }
+            get { return serverIPAddress(); }
+        }
+
+        public int GetServerPort
+        {
+            get { return port; }
         }
 
         public Socket ClientChannel

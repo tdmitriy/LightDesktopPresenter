@@ -24,7 +24,7 @@ namespace Server.WindowsUtils
         {
             get
             {
-                Version win7version = new Version(6, 1, 7600, 0);
+                Version win7version = new Version(6, 1);
                 if (os.Platform == PlatformID.Win32NT &&
                     vs == win7version)
                 {
@@ -39,7 +39,7 @@ namespace Server.WindowsUtils
         {
             get
             {
-                Version win8version = new Version(6, 2, 9200, 0);
+                Version win8version = new Version(6, 2);
                 if (os.Platform == PlatformID.Win32NT &&
                     vs >= win8version)
                 {

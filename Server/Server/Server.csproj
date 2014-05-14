@@ -74,10 +74,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClientInfo\LdpClientInfo.cs" />
     <Compile Include="LdpThreads\ILdpBaseThread.cs" />
     <Compile Include="LdpThreads\LdpBaseThread.cs" />
+    <Compile Include="LdpThreads\LdpPacketListenerThread.cs" />
     <Compile Include="LdpThreads\LdpScreenThread.cs" />
     <Compile Include="LdpThreads\LdpVolumeThread.cs" />
+    <Compile Include="Network\PacketHandler\LdpClientInfoRequestHandler.cs" />
+    <Compile Include="Network\PacketHandler\LdpPacketHandlerBase.cs" />
     <Compile Include="Network\PacketSender\ILdpPacketSender.cs" />
     <Compile Include="Network\PacketHandler\ILdpDisconnectPacketHandler.cs" />
     <Compile Include="Network\PacketHandler\ILdpPacketHandler.cs" />
@@ -88,6 +92,7 @@
     <Compile Include="Network\PacketSender\LdpPacketSender.cs" />
     <Compile Include="Network\PacketTypes\LdpAuthRequest.cs" />
     <Compile Include="Network\PacketTypes\LdpAuthResponse.cs" />
+    <Compile Include="Network\PacketTypes\LdpClientInfoRequest.cs" />
     <Compile Include="Network\PacketTypes\LdpDisconnectRequest.cs" />
     <Compile Include="Network\PacketTypes\LdpPreparableInfoRequest.cs" />
     <Compile Include="Network\PacketTypes\LdpScreenData.cs" />
@@ -97,6 +102,7 @@
     <Compile Include="ScreenGrabber\LdpScreenProcessingUtils.cs" />
     <Compile Include="TcpServer\ILdpServerEvents.cs" />
     <Compile Include="Network\LdpPacketListener.cs" />
+    <Compile Include="UserSettings\LdpUserSettings.cs" />
     <Compile Include="WindowsUtils\LdpUtils.cs" />
     <Page Include="ServerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

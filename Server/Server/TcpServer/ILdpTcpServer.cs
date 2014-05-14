@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace Server.TcpServer
 {
-    interface ILdpTcpServer : ILdpServerEvents
+    interface ILdpTcpServer
     {
         Socket ClientChannel { get; }
         void Start();
         void Stop();
         void Restart();
         string GetServerIPAddress { get; }
+        int GetServerPort { get; }
     }
 }

@@ -13,8 +13,8 @@ namespace Server.Network.PacketSender
 {
     class LdpPacketSender : ILdpPacketSender
     {
+
         private ILdpTcpServer serverHandler;
-        private const int CLIENT_DISCON_ERROR_CODE = 10054;
         public LdpPacketSender(ILdpTcpServer serverHandler)
         {
             this.serverHandler = serverHandler;
@@ -31,24 +31,22 @@ namespace Server.Network.PacketSender
             catch (IOException ioexc)
             {
                 LdpLog.Error("Send packet error:\n" + ioexc.Message);
+                Restart();
             }
-            catch (SocketException sockExc)
+            catch (SocketException sockexc)
             {
-                if (sockExc.ErrorCode == CLIENT_DISCON_ERROR_CODE)
-                {
-                    LdpLog.Info("Client disconnected.");
-                    serverHandler.Restart();
-                }
-                else
-                {
-                    LdpLog.Error(sockExc.Message);
-                }
+                LdpLog.Error("Send packet error:\n" + sockexc.Message);
+                Restart();
             }
             catch (Exception ex)
             {
                 LdpLog.Error("Send packet error:\n" + ex.Message);
+                Restart();
             }
-            
+        }
+        private void Restart()
+        {
+            serverHandler.Restart();
         }
     }
 }

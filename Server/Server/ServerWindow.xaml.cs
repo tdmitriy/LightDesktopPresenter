@@ -25,23 +25,37 @@ namespace Server
 {
     public partial class ServerWindow : Window
     {
-        LdpScreenThread scr = new LdpScreenThread();
-        //LdpVolumeThread vlm = new LdpVolumeThread();
         public ServerWindow()
         {
             InitializeComponent();
-            scr.Start();
-            //vlm.Start();
+            CheckWindowsVersion();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            
+        }
 
-            //Settings.Default.Password = "Test";
-            //Settings.Default.Save();
-            //scr.Stop();
-            //vlm.Stop();
-            //LdpScreenThread.StopThreadGlobal();
+        private void CheckWindowsVersion()
+        {
+            if (LdpUtils.IsWindows7)
+            {
+                MessageBox.Show("7");
+                return;
+            }
+                
+            else if (LdpUtils.IsWindows8)
+            {
+                MessageBox.Show("8");
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Unsuported windows version.\nWorks only on Windows 7 or higher..",
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close();
+            }
+                
         }
     }
 }
