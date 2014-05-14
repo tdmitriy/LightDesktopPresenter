@@ -13,6 +13,7 @@ namespace Server.LdpThreads
     {
         protected Thread workingThread;
         protected abstract void Run();
+        protected Action MethodToStart;
         protected bool ThreadWorking { get; set; }
         protected LdpBaseThread()
         {
@@ -20,7 +21,7 @@ namespace Server.LdpThreads
         }
         protected LdpBaseThread(string threadName)
         {
-            //ThreadWorking = true;
+            
             workingThread = new Thread(new ThreadStart(Run));
             workingThread.Name = threadName;
         }
@@ -30,9 +31,17 @@ namespace Server.LdpThreads
             get { return ThreadWorking; }
         }
 
+        public void Start(Action methodToStart)
+        {
+            ThreadWorking = true;
+            MethodToStart = new Action(methodToStart);
+            workingThread.Start();
+            LdpLog.Info(String.Format("Thread: {0} started.", workingThread.Name));
+        }
+
         public void Start()
         {
-            
+            ThreadWorking = true;
             workingThread.Start();
             LdpLog.Info(String.Format("Thread: {0} started.", workingThread.Name));
         }
