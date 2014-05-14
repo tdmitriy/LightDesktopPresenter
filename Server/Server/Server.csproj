@@ -80,10 +80,9 @@
     <Compile Include="LdpThreads\LdpPacketListenerThread.cs" />
     <Compile Include="LdpThreads\LdpScreenThread.cs" />
     <Compile Include="LdpThreads\LdpVolumeThread.cs" />
+    <Compile Include="Network\PacketHandler\ILdpObservable.cs" />
     <Compile Include="Network\PacketHandler\LdpClientInfoRequestHandler.cs" />
-    <Compile Include="Network\PacketHandler\LdpPacketHandlerBase.cs" />
     <Compile Include="Network\PacketSender\ILdpPacketSender.cs" />
-    <Compile Include="Network\PacketHandler\ILdpDisconnectPacketHandler.cs" />
     <Compile Include="Network\PacketHandler\ILdpPacketHandler.cs" />
     <Compile Include="Network\PacketHandler\LdpAuthRequestHandler.cs" />
     <Compile Include="Network\PacketHandler\LdpDisconnectRequestHandler.cs" />
