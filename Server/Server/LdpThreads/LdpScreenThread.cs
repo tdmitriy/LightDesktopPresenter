@@ -13,26 +13,20 @@ namespace Server.LdpThreads
     class LdpScreenThread : LdpBaseThread
     {
         private LdpDirectxGrabber dxGrabber;
-        private static bool worker = true;
-        private static Thread staticThread;
         public LdpScreenThread()
             : base("LdpScreenThread")
         {
-            ThreadWorking = worker;
-            staticThread = workingThread;
             dxGrabber = new LdpDirectxGrabber();
         }
 
         protected override void Run()
         {
-            int i = 0;
-            while (ThreadWorking)
+            //grab screen
+            /*while (ThreadWorking)
             {
-                Console.WriteLine(i);
-                Thread.Sleep(1000);
-                i++;
-            }
-            LdpLog.Info("LdpScreenThread EXITING WHILE LOOP.");
+                //MethodToStart();
+
+            }*/
         }
 
     }
