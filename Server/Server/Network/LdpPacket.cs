@@ -18,8 +18,10 @@ namespace Server.Network
         [ProtoMember(3)]
         public LdpAuthResponse AuthResponse { get; set; }
         [ProtoMember(4)]
-        public LdpScreenData ScreenData { get; set; }
+        public LdpClientInfoRequest ClientInfoRequest { get; set; }
         [ProtoMember(5)]
+        public LdpScreenData ScreenData { get; set; }
+        [ProtoMember(6)]
         public LdpDisconnectRequest DisconnectRequest { get; set; }
 
     }
@@ -29,16 +31,18 @@ namespace Server.Network
 		AUTH_REQUEST = 1,
 		AUTH_RESPONSE = 2,
 
-        PREPARABLE_INFO_REQUEST = 3,
-        PREPARABLE_INFO_RESPONSE = 4,
+        CLIENT_INFO_REQUEST = 3,
+
+        PREPARABLE_INFO_REQUEST = 4,
+        PREPARABLE_INFO_RESPONSE = 5,
 	
-		SCREEN_DATA = 5,
-		VOLUME_DATA = 6,
+		SCREEN_DATA = 6,
+		VOLUME_DATA = 7,
 		
-		MOUSE_DATA = 7,
+		MOUSE_DATA = 8,
 		
-		KEYBOARD_DATA = 8,
+		KEYBOARD_DATA = 9,
 		
-		DISCONNECT_REQUEST = 11,
+		DISCONNECT_REQUEST = 10,
 	}
 }
