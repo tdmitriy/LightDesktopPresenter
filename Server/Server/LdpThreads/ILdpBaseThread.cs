@@ -8,6 +8,7 @@ namespace Server.LdpThreads
 {
     interface ILdpBaseThread
     {
+        void Start(Action methodToStart);
         void Start();
         void Stop();
     }
