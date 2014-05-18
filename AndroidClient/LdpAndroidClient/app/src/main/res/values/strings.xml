@@ -9,9 +9,18 @@
     <string name="action_add_new_connection">Add new connection</string>
     <!-- End settings -->
 
+
+    <!--    New connection activity      -->
+
     <!-- EditText watermark(hints)-->
     <string name="hint_ip_address">IP address</string>
     <string name="hint_displayed_name">Displayed name</string>
-    <!-- End EditText watermark(hints)-->
+
+    <!-- Buttons -->
+    <string name="string_btn_done">Done</string>
+    <string name="string_btn_cancel">Cancel</string>
+
+
+    <!--   End new connection activity      -->
 
 </resources>
