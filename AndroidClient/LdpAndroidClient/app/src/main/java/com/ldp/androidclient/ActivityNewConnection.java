@@ -9,9 +9,6 @@ import android.widget.Button;
 public class ActivityNewConnection extends Activity implements View.OnClickListener {
 
 
-    private Button btnDone;
-    private Button btnCancel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,10 +19,10 @@ public class ActivityNewConnection extends Activity implements View.OnClickListe
     }
 
     private void initControls() {
-        btnDone = (Button) findViewById(R.id.btnDone);
+        Button btnDone = (Button) findViewById(R.id.btnDone);
         btnDone.setOnClickListener(this);
 
-        btnCancel = (Button) findViewById(R.id.btnCancel);
+        Button btnCancel = (Button) findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(this);
     }
 
