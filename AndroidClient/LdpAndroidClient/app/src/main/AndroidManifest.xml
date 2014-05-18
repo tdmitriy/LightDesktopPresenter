@@ -3,6 +3,7 @@
     package="com.ldp.androidclient" >
 
     <application
+        android:name=".utils.user_preferences.LdpObjectPreference"
         android:uiOptions="splitActionBarWhenNarrow"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
