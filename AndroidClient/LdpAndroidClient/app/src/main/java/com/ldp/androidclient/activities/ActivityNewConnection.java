@@ -7,13 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.ldp.androidclient.R;
 import com.ldp.androidclient.utils.user_preferences.LdpComplexPreferences;
 import com.ldp.androidclient.utils.user_preferences.LdpConnectionPreferences;
 import com.ldp.androidclient.utils.user_preferences.LdpObjectPreference;
-
-import java.util.Map;
 
 
 public class ActivityNewConnection extends Activity implements View.OnClickListener {
@@ -58,16 +57,14 @@ public class ActivityNewConnection extends Activity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.btnDone:
-                addNewConnectionPreferences(ip, dispName);
+                if (dispName != null && !dispName.isEmpty())
+                    addNewConnectionPreferences(ip, dispName);
+                else {
+                    // TODO show allert message
+                }
+
                 break;
             case R.id.btnCancel:
-                /*String name = txtDisplayedName.getText().toString();
-                boolean exists = checkPreferencesIfExists(name);
-                if(exists) {
-                    complexPrefenreces.remove(name);
-                    Log.i(TAG, "removed: " + name);
-                }*/
-
                 for (LdpConnectionPreferences pref : complexPrefenreces.getPreferences()) {
                     String ipp = pref.getIPAddress();
                     String name = pref.getDisplayedName();
@@ -83,6 +80,10 @@ public class ActivityNewConnection extends Activity implements View.OnClickListe
         }
     }
 
+    private void showMessage(String mess) {
+        Toast.makeText(this, mess, Toast.LENGTH_LONG).show();
+    }
+
     private void addNewConnectionPreferences(String ipAddress, String displayedName) {
         try {
             LdpConnectionPreferences preferences = new LdpConnectionPreferences();
@@ -94,6 +95,7 @@ public class ActivityNewConnection extends Activity implements View.OnClickListe
             if (!prefExists) {
                 if (complexPrefenreces != null) {
                     complexPrefenreces.putObject(displayedName, preferences);
+                    showMessage("Added new connection: " + ipAddress);
                     Log.i(TAG, "Added new preferences: " + displayedName);
                 } else {
                     Log.e(TAG, "Preference is null");
@@ -107,6 +109,7 @@ public class ActivityNewConnection extends Activity implements View.OnClickListe
         }
 
     }
+
 
     private boolean checkPreferencesIfExists(String displayedName) {
         LdpConnectionPreferences preferences =
