@@ -2,7 +2,16 @@
 <resources>
 
     <string name="app_name">LdpAndroidClient</string>
+
+
+    <!-- Settings -->
     <string name="action_settings">Settings</string>
     <string name="action_add_new_connection">Add new connection</string>
+    <!-- End settings -->
+
+    <!-- EditText watermark(hints)-->
+    <string name="hint_ip_address">IP address</string>
+    <string name="hint_displayed_name">Displayed name</string>
+    <!-- End EditText watermark(hints)-->
 
 </resources>

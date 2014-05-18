@@ -1,13 +1,14 @@
 package com.ldp.androidclient;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 
-public class MainActivity extends Activity {
+public class ActivityMain extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +32,10 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
         switch(id) {
             case R.id.settings_add_new_connection:
-                Toast.makeText(this, "Add new coonection clicked", Toast.LENGTH_SHORT).show();
-                return true;
+                //Toast.makeText(this, "Add new coonection clicked", Toast.LENGTH_SHORT).show();
+                Intent newConnectionActivity = new Intent(this, ActivityNewConnection.class);
+                startActivity(newConnectionActivity);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
