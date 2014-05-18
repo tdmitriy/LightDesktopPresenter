@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ActivityMain"
+            android:name=".activities.ActivityMain"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ActivityNewConnection"/>
+        <activity android:name=".activities.ActivityNewConnection"/>
     </application>
 
 </manifest>
