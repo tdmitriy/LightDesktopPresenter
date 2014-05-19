@@ -1,15 +1,17 @@
 package com.ldp.androidclient.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.ldp.androidclient.R;
+import com.ldp.androidclient.utils.LdpEditTextIPAddressChecker;
+import com.ldp.androidclient.utils.controls.LdpMessageBox;
 import com.ldp.androidclient.utils.user_preferences.LdpComplexPreferences;
 import com.ldp.androidclient.utils.user_preferences.LdpConnectionPreferences;
 import com.ldp.androidclient.utils.user_preferences.LdpObjectPreference;
@@ -44,10 +46,9 @@ public class ActivityNewConnection extends Activity implements View.OnClickListe
         btnCancel.setOnClickListener(this);
 
         txtIP = (EditText) findViewById(R.id.txtIPAddress);
-        txtIP.setFilters(checkIPAddressFilter());
+        txtIP.setFilters(LdpEditTextIPAddressChecker.getIPFilter());
 
         txtDisplayedName = (EditText) findViewById(R.id.txtDisplayedName);
-
     }
 
     @Override
@@ -57,12 +58,7 @@ public class ActivityNewConnection extends Activity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.btnDone:
-                if (dispName != null && !dispName.isEmpty())
-                    addNewConnectionPreferences(ip, dispName);
-                else {
-                    // TODO show allert message
-                }
-
+                addPreferences(ip, dispName);
                 break;
             case R.id.btnCancel:
                 for (LdpConnectionPreferences pref : complexPrefenreces.getPreferences()) {
@@ -80,68 +76,16 @@ public class ActivityNewConnection extends Activity implements View.OnClickListe
         }
     }
 
-    private void showMessage(String mess) {
-        Toast.makeText(this, mess, Toast.LENGTH_LONG).show();
-    }
-
-    private void addNewConnectionPreferences(String ipAddress, String displayedName) {
-        try {
-            LdpConnectionPreferences preferences = new LdpConnectionPreferences();
-            preferences.setIPAddress(ipAddress);
-            preferences.setDisplayedName(displayedName);
-
-            boolean prefExists = checkPreferencesIfExists(displayedName);
-
-            if (!prefExists) {
-                if (complexPrefenreces != null) {
-                    complexPrefenreces.putObject(displayedName, preferences);
-                    showMessage("Added new connection: " + ipAddress);
-                    Log.i(TAG, "Added new preferences: " + displayedName);
-                } else {
-                    Log.e(TAG, "Preference is null");
-                }
-            } else {
-                Log.e(TAG, "Preferences is already exists.");
-            }
-
-        } catch (Exception ex) {
-            Log.e(TAG, "Add preferences error.\n" + ex.getMessage());
+    private void addPreferences(String ipAddress, String displayedName) {
+        if (displayedName != null && !displayedName.isEmpty()) {
+            boolean result = complexPrefenreces.addNewConnectionPreferences(ipAddress,
+                    displayedName);
+            if (!result)
+                LdpMessageBox.show(this, "Current connection name is already exists.",
+                        LdpMessageBox.DialogType.ERROR);
+        } else {
+            LdpMessageBox.show(this, "The fields cannot be empty.",
+                    LdpMessageBox.DialogType.WARNING);
         }
-
     }
-
-
-    private boolean checkPreferencesIfExists(String displayedName) {
-        LdpConnectionPreferences preferences =
-                complexPrefenreces.getObject(displayedName, LdpConnectionPreferences.class);
-        return preferences != null;
-    }
-
-
-    private InputFilter[] checkIPAddressFilter() {
-        InputFilter[] filters = new InputFilter[1];
-        filters[0] = new InputFilter() {
-            @Override
-            public CharSequence filter(CharSequence source, int start, int end,
-                                       android.text.Spanned dest, int dstart, int dend) {
-                if (end > start) {
-                    String destTxt = dest.toString();
-                    String resultingTxt = destTxt.substring(0, dstart) + source.subSequence(start, end) + destTxt.substring(dend);
-                    if (!resultingTxt.matches("^\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3}(\\.(\\d{1,3})?)?)?)?)?)?")) {
-                        return "";
-                    } else {
-                        String[] splits = resultingTxt.split("\\.");
-                        for (String split : splits) {
-                            if (Integer.valueOf(split) > 255) {
-                                return "";
-                            }
-                        }
-                    }
-                }
-                return null;
-            }
-        };
-        return filters;
-    }
-
 }

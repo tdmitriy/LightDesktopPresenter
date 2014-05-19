@@ -1,20 +1,19 @@
 package com.ldp.androidclient.utils.user_preferences;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 
 public class LdpComplexPreferences {
 
+    private static final String TAG = "LdpComplexPreferences";
     private static LdpComplexPreferences complexPreferences;
     private final Context context;
     private final SharedPreferences preferences;
@@ -56,7 +55,7 @@ public class LdpComplexPreferences {
             return false;
     }
 
-    public <T> T getObject(String key, Class<T> a) {
+    private <T> T getObject(String key, Class<T> a) {
         String gsonString = preferences.getString(key, null);
         if (gsonString == null) {
             return null;
@@ -71,6 +70,50 @@ public class LdpComplexPreferences {
         }
     }
 
+    public boolean addNewConnectionPreferences(String ipAddress, String displayedName) {
+        try {
+            LdpConnectionPreferences preferences = new LdpConnectionPreferences();
+            preferences.setIPAddress(ipAddress);
+            preferences.setDisplayedName(displayedName);
+
+            boolean prefExists = checkPreferencesIfExists(displayedName);
+
+            if (!prefExists) {
+                putObject(displayedName, preferences);
+                String mess = "Added new connection: ";
+                showMessage(mess + ipAddress);
+                Log.i(TAG, mess + displayedName);
+                return true;
+            } else {
+                Log.e(TAG, "Preferences is already exists.");
+                return false;
+            }
+
+        } catch (Exception ex) {
+            Log.e(TAG, "Add preferences error.\n" + ex.getMessage());
+            return false;
+        }
+    }
+
+    private void showMessage(String mess) {
+        Toast.makeText(context, mess, Toast.LENGTH_LONG).show();
+    }
+
+    private boolean checkPreferencesIfExists(String displayedName) {
+        LdpConnectionPreferences preferences =
+                getObject(displayedName, LdpConnectionPreferences.class);
+        return preferences != null;
+    }
+
+    public void editPreferences(String ipAddress, String displayedName) {
+        LdpConnectionPreferences preferences = new LdpConnectionPreferences();
+        preferences.setIPAddress(ipAddress);
+        preferences.setDisplayedName(displayedName);
+        putObject(displayedName, preferences);
+        String mess = "Settings successfully changed.";
+        showMessage(mess);
+        Log.i(TAG, mess);
+    }
 
     public ArrayList<LdpConnectionPreferences> getPreferences() {
         Map<String, ?> allPrefs = preferences.getAll();

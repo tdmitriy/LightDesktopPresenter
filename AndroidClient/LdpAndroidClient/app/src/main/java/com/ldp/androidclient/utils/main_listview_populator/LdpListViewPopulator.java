@@ -1,4 +1,4 @@
-package com.ldp.androidclient.utils.user_preferences;
+package com.ldp.androidclient.utils.main_listview_populator;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,9 +9,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ldp.androidclient.R;
+import com.ldp.androidclient.utils.controls.LdpClickableImageView;
+import com.ldp.androidclient.utils.user_preferences.LdpConnectionPreferences;
 
 import java.util.ArrayList;
 
@@ -64,7 +65,7 @@ public class LdpListViewPopulator extends BaseAdapter {
         }
 
         holder.txtConnectionName.setText(pref.get(position).getDisplayedName());
-        Drawable imagePC = vi.getContext().getResources().getDrawable(R.drawable.pc_icon);
+        Drawable imagePC = vi.getContext().getResources().getDrawable(R.drawable.icon_pc);
         Drawable imageSettings = vi.getContext().getResources().getDrawable(R.drawable.ic_action_settings);
         holder.imgPC.setImageDrawable(imagePC);
         holder.imgSettings.setImageDrawable(imageSettings);

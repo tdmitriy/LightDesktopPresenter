@@ -1,4 +1,4 @@
-package com.ldp.androidclient.utils.user_preferences;
+package com.ldp.androidclient.utils.controls;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -3,41 +3,38 @@
     android:layout_height="wrap_content"
     android:background="@drawable/list_item_selector"
     android:orientation="horizontal"
-    android:padding="5dip" >
+    android:padding="13dip">
 
 
     <!-- ListRow Left sied Thumbnail image -->
+    <ImageView
+        android:id="@+id/list_image"
+        android:layout_width="?android:attr/listPreferredItemHeight"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/app_name"
+        android:scaleType="center"
+        android:src="@drawable/icon_pc" />
 
 
+    <!-- txtDisplayedName -->
+    <TextView
+        android:id="@+id/txtConnectionName"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="fill_vertical"
+        android:textColor="#040404"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
 
-        <ImageView
-            android:id="@+id/list_image"
-            android:layout_width="?android:attr/listPreferredItemHeight"
-            android:layout_height="fill_parent"
-            android:scaleType="center"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/pc_icon" />
-
-
-        <!-- txtDisplayedName -->
-        <TextView
-            android:id="@+id/txtConnectionName"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_weight="1"
-            android:textColor="#040404"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:typeface="sans" />
-
-        <com.ldp.androidclient.utils.user_preferences.LdpClickableImageView
-            android:id="@+id/imgViewSettings"
-            android:contentDescription="@string/app_name"
-            android:layout_width="?android:attr/listPreferredItemHeight"
-            android:layout_height="fill_parent"
-            android:scaleType="center"
-            android:clickable="true"
-            android:src="@drawable/ic_action_settings" />
+    <com.ldp.androidclient.utils.controls.LdpClickableImageView
+        android:id="@+id/imgViewSettings"
+        android:layout_width="?android:attr/listPreferredItemHeight"
+        android:layout_height="fill_parent"
+        android:clickable="true"
+        android:contentDescription="@string/app_name"
+        android:scaleType="center"
+        android:src="@drawable/ic_action_settings" />
 
 </LinearLayout>

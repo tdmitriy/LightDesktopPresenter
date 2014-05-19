@@ -1,26 +1,21 @@
 package com.ldp.androidclient.activities;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ldp.androidclient.R;
-import com.ldp.androidclient.utils.user_preferences.LdpClickableImageView;
 import com.ldp.androidclient.utils.user_preferences.LdpComplexPreferences;
 import com.ldp.androidclient.utils.user_preferences.LdpConnectionPreferences;
-import com.ldp.androidclient.utils.user_preferences.LdpListViewPopulator;
+import com.ldp.androidclient.utils.main_listview_populator.LdpListViewPopulator;
 import com.ldp.androidclient.utils.user_preferences.LdpObjectPreference;
 
 import java.util.ArrayList;
@@ -29,10 +24,19 @@ import java.util.ArrayList;
 public class ActivityMain extends ListActivity {
 
     private LdpListViewPopulator listViewPopulator;
+    private LdpObjectPreference objectPreference;
+    private LdpComplexPreferences complexPreferences;
+    private ArrayList<LdpConnectionPreferences> prefs;
+
+    private ImageView background;
+    private TextView txtListEmptyinfo;
+    private Drawable imageBigPC;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initControls();
     }
 
     @Override
@@ -41,25 +45,47 @@ public class ActivityMain extends ListActivity {
         recreateListView();
     }
 
+    private void initControls() {
+        background = (ImageView) findViewById(R.id.imgViewBigPC);
+        txtListEmptyinfo = (TextView) findViewById(R.id.txtListEmptyinfo);
+        imageBigPC = getResources().getDrawable(R.drawable.icon_big_pc);
+
+        objectPreference = (LdpObjectPreference) this.getApplication();
+        complexPreferences = objectPreference.getComplexPreference();
+    }
+
+    private void checkPreferencesIsEmpty() {
+        if (prefs.isEmpty()) {
+            setPreferencesEmptyContent();
+        } else {
+            clearPreferencesContentIfNotEmpty();
+        }
+    }
+
+    private void setPreferencesEmptyContent() {
+        showMessage("Connection list is empty.");
+        background.setImageDrawable(imageBigPC);
+        String message = "Tap + to add new connection.";
+        txtListEmptyinfo.setText(message);
+    }
+
+    private void clearPreferencesContentIfNotEmpty() {
+        background.setImageDrawable(null);
+        txtListEmptyinfo.setText("");
+    }
+
     private void recreateListView() {
-
-        LdpObjectPreference objectPreference = (LdpObjectPreference) this.getApplication();
-        LdpComplexPreferences complexPreferences = objectPreference.getComplexPreference();
-
-        ArrayList<LdpConnectionPreferences> prefs = complexPreferences.getPreferences();
+        if (prefs != null) {
+            prefs.clear();
+            prefs = null;
+        }
+        prefs = complexPreferences.getPreferences();
         listViewPopulator = new LdpListViewPopulator(this, prefs);
         setListAdapter(null);
         setListAdapter(listViewPopulator);
         addImgSettingsOnClickListener();
 
-        LinearLayout layout = (LinearLayout) findViewById(R.id.linear_layout_bg);
-        Drawable imagePC = getResources().getDrawable(R.drawable.pc_icon);
-        if(prefs.isEmpty()) {
-            showMessage("List is empty.");
-            layout.setBackgroundResource(R.drawable.pc_icon);
-        } else {
-            layout.setBackgroundResource(R.drawable.abc_ab_transparent_light_holo);
-        }
+        checkPreferencesIsEmpty();
     }
 
 
