@@ -1,6 +1,7 @@
 package com.ldp.androidclient.utils.user_preferences;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 import android.content.Context;
@@ -46,9 +47,9 @@ public class LdpComplexPreferences {
 
     public boolean remove(LdpConnectionPreferences pref) {
         if (pref != null) {
-            String key = pref.getDisplayedName();
+            String key = pref.getConnectionName();
             LdpConnectionPreferences tmpPref = getObject(key, pref.getClass());
-            editor.remove(tmpPref.getDisplayedName());
+            editor.remove(tmpPref.getConnectionName());
             commit();
             return true;
         } else
@@ -70,19 +71,14 @@ public class LdpComplexPreferences {
         }
     }
 
-    public boolean addNewConnectionPreferences(String ipAddress, String displayedName) {
+    public boolean addNewConnectionPreferences(LdpConnectionPreferences prefs) {
         try {
-            LdpConnectionPreferences preferences = new LdpConnectionPreferences();
-            preferences.setIPAddress(ipAddress);
-            preferences.setDisplayedName(displayedName);
-
-            boolean prefExists = checkPreferencesIfExists(displayedName);
-
+            boolean prefExists = checkPreferencesIfExists(prefs);
+            String connectionName = prefs.getConnectionName();
             if (!prefExists) {
-                putObject(displayedName, preferences);
+                putObject(connectionName, prefs);
                 String mess = "Added new connection: ";
-                showMessage(mess + ipAddress);
-                Log.i(TAG, mess + displayedName);
+                Log.i(TAG, mess + connectionName);
                 return true;
             } else {
                 Log.e(TAG, "Preferences is already exists.");
@@ -95,24 +91,41 @@ public class LdpComplexPreferences {
         }
     }
 
-    private void showMessage(String mess) {
-        Toast.makeText(context, mess, Toast.LENGTH_LONG).show();
-    }
 
-    private boolean checkPreferencesIfExists(String displayedName) {
+    private boolean checkPreferencesIfExists(LdpConnectionPreferences prefs) {
         LdpConnectionPreferences preferences =
-                getObject(displayedName, LdpConnectionPreferences.class);
+                getObject(prefs.getConnectionName(), LdpConnectionPreferences.class);
         return preferences != null;
     }
 
-    public void editPreferences(String ipAddress, String displayedName) {
-        LdpConnectionPreferences preferences = new LdpConnectionPreferences();
-        preferences.setIPAddress(ipAddress);
-        preferences.setDisplayedName(displayedName);
-        putObject(displayedName, preferences);
-        String mess = "Settings successfully changed.";
-        showMessage(mess);
-        Log.i(TAG, mess);
+    private boolean checkEdditablePreferencesIfExists(LdpConnectionPreferences oldPrefs,
+                                                      LdpConnectionPreferences newPrefs) {
+        String newConnectionName = newPrefs.getConnectionName();
+        if (oldPrefs.getConnectionName().equals(newConnectionName)) {
+            return false;
+        } else {
+            LdpConnectionPreferences preferences =
+                    getObject(newConnectionName, LdpConnectionPreferences.class);
+            return preferences != null;
+        }
+    }
+
+    public boolean editPreferences(LdpConnectionPreferences oldPrefs,
+                                   LdpConnectionPreferences newPrefs) {
+        boolean prefExists = checkEdditablePreferencesIfExists(oldPrefs, newPrefs);
+        if (!prefExists) {
+            String newConnectionName = newPrefs.getConnectionName();
+            String oldConnectionName = oldPrefs.getConnectionName();
+            putObject(newConnectionName, newPrefs);
+            if (!oldConnectionName.equals(newConnectionName))
+                remove(oldPrefs);
+            String mess = "Settings successfully changed.";
+            Log.i(TAG, mess + newConnectionName);
+            return true;
+        } else {
+            Log.e(TAG, "Settings is already exists.");
+            return false;
+        }
     }
 
     public ArrayList<LdpConnectionPreferences> getPreferences() {
@@ -124,6 +137,7 @@ public class LdpComplexPreferences {
                     getObject(entry.getKey(), LdpConnectionPreferences.class);
             tmp.add(pref);
         }
+        Collections.reverse(tmp);
         return tmp;
     }
 }

@@ -2,9 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:orientation="vertical"
-    tools:context="com.ldp.androidclient.activities.ActivityMain">
+    tools:context="com.ldp.androidclient.activities.LdpActivityMain">
 
 
     <ListView
@@ -13,27 +11,17 @@
         android:layout_height="wrap_content"
         android:divider="#b5b5b5"
         android:dividerHeight="1dp"
-        android:listSelector="@drawable/list_item_selector"
-        >
-    </ListView>
+        android:listSelector="@drawable/list_item_selector" />
 
-    <ImageView
-        android:id="@+id/imgViewBigPC"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        />
 
     <TextView
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:id="@+id/txtListEmptyinfo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textStyle="normal"
-        android:typeface="sans"
-        android:layout_below="@+id/imgViewBigPC"
-        />
-
+        android:typeface="sans" />
 </RelativeLayout>

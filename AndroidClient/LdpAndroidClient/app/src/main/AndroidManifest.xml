@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ldp.androidclient" >
+    package="com.ldp.androidclient">
 
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,16 +8,19 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 
     <application
-        android:configChanges="orientation|keyboardHidden|screenSize"
         android:name=".utils.user_preferences.LdpObjectPreference"
-        android:uiOptions="splitActionBarWhenNarrow"
         android:allowBackup="true"
+        android:configChanges="orientation|keyboardHidden|screenSize"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+
+
+        <!-- Activity main -->
         <activity
-            android:name=".activities.ActivityMain"
-            android:label="@string/app_name" >
+            android:name=".activities.LdpActivityMain"
+            android:uiOptions="splitActionBarWhenNarrow"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +28,25 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.ActivityNewConnection"/>
+
+        <!-- Activity add preferences -->
+        <activity
+            android:name=".activities.LdpActivityNewConnectionPreferences"
+            android:label="@string/activity_connection_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="@string/activity_LdpLdpActivityMain" />
+        </activity>
+
+        <!-- Activity edit preferences -->
+        <activity
+            android:name=".activities.LdpActivityEditPreferences"
+            android:label="@string/activity_connection_settings_title">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="@string/activity_LdpLdpActivityMain" />
+        </activity>
+
     </application>
 
 </manifest>

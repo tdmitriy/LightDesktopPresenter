@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -56,7 +57,7 @@ public class LdpListViewPopulator extends BaseAdapter {
 
             holder.txtConnectionName = (TextView) vi.findViewById(R.id.txtConnectionName);
             holder.imgPC = (ImageView) vi.findViewById(R.id.list_image);
-            holder.imgSettings = (LdpClickableImageView) vi.findViewById(R.id.imgViewSettings);
+            holder.imgSettings = (LdpClickableImageView) vi.findViewById(R.id.imageViewSettings);
 
             vi.setTag(holder);
         } else {
@@ -64,7 +65,7 @@ public class LdpListViewPopulator extends BaseAdapter {
             holder = (ViewHolder) vi.getTag();
         }
 
-        holder.txtConnectionName.setText(pref.get(position).getDisplayedName());
+        holder.txtConnectionName.setText(pref.get(position).getConnectionName());
         Drawable imagePC = vi.getContext().getResources().getDrawable(R.drawable.icon_pc);
         Drawable imageSettings = vi.getContext().getResources().getDrawable(R.drawable.ic_action_settings);
         holder.imgPC.setImageDrawable(imagePC);

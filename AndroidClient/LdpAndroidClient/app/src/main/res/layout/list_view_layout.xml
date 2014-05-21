@@ -3,7 +3,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/list_item_selector"
     android:orientation="horizontal"
-    android:padding="13dip">
+    android:padding="10dip">
 
 
     <!-- ListRow Left sied Thumbnail image -->
@@ -26,14 +26,20 @@
         android:textColor="#040404"
         android:textSize="20sp"
         android:textStyle="bold"
+
         android:typeface="sans" />
 
-    <com.ldp.androidclient.utils.controls.LdpClickableImageView
-        android:id="@+id/imgViewSettings"
-        android:layout_width="?android:attr/listPreferredItemHeight"
+    <View
+        android:layout_width="1dp"
         android:layout_height="fill_parent"
+        android:background="@color/light_gray" />
+
+    <com.ldp.androidclient.utils.controls.LdpClickableImageView
+        android:id="@+id/imageViewSettings"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
-        android:contentDescription="@string/app_name"
         android:scaleType="center"
         android:src="@drawable/ic_action_settings" />
 
