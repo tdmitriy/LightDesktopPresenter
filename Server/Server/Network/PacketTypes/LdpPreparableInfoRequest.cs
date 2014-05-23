@@ -17,7 +17,7 @@ namespace Server.Network.PacketTypes
     enum ConnectionType
     {
         REMOTE_DESKTOP_CONTROL = 1,
-        REMOTE_VOLUME_CONTROL = 2,
+        REMOTE_VOLUME_CONTROL = 2
     }
 
 }

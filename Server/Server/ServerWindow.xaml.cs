@@ -20,6 +20,7 @@ using Server.Network;
 using ProtoBuf;
 using Server.Properties;
 using Server.LdpThreads;
+using Server.ProtoGeneration;
 
 namespace Server
 {
@@ -33,7 +34,7 @@ namespace Server
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            LdpProtoGenerator.GenerateProtoJava();
         }
 
         private void CheckWindowsVersion()

@@ -12,8 +12,5 @@ namespace Server.Network.PacketTypes
     {
         [ProtoMember(1)]
         public string Password { get; set; }
-       
     }
-
-   
 }

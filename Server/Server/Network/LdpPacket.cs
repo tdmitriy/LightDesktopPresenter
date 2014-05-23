@@ -48,6 +48,6 @@ namespace Server.Network
 		
 		KEYBOARD_DATA = 9,
 		
-		DISCONNECT_REQUEST = 10,
+		DISCONNECT_REQUEST = 10
 	}
 }

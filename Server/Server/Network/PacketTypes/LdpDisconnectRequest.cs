@@ -18,6 +18,6 @@ namespace Server.Network.PacketTypes
     {
         FROM_SERVER = 1,
         FROM_SCREEN_THREAD = 2,
-        FROM_VOLUME_THREAD = 3,
+        FROM_VOLUME_THREAD = 3
     }
 }
