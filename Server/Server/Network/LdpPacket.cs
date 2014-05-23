@@ -20,8 +20,13 @@ namespace Server.Network
         [ProtoMember(4)]
         public LdpClientInfoRequest ClientInfoRequest { get; set; }
         [ProtoMember(5)]
-        public LdpScreenData ScreenData { get; set; }
+        public LdpPreparableInfoRequest PreparableInfoRequest { get; set; }
         [ProtoMember(6)]
+        public LdpPreparableInfoResponse PreparableInfoResponse { get; set; }
+
+        [ProtoMember(7)]
+        public LdpScreenData ScreenData { get; set; }
+        [ProtoMember(8)]
         public LdpDisconnectRequest DisconnectRequest { get; set; }
 
     }

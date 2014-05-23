@@ -15,7 +15,16 @@ namespace Server.Network.PacketHandler
             switch (packet.Type)
             {
                 case PacketType.PREPARABLE_INFO_REQUEST:
-                    //send response
+                    var request = packet.PreparableInfoRequest;
+                    switch (request.Type)
+                    {
+                        case ConnectionType.REMOTE_DESKTOP_CONTROL:
+                            // sends response
+                            // start screen thread and send screen data
+                            break;
+                        case ConnectionType.REMOTE_VOLUME_CONTROL:
+                            break;
+                    }
                     break;
             }
         }

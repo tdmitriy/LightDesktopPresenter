@@ -10,6 +10,14 @@ namespace Server.Network.PacketTypes
     [ProtoContract]
     class LdpPreparableInfoRequest
     {
-        //if this packet has arrived - send PreparableInfoResponse
+        [ProtoMember(1, IsRequired = true)]
+        public ConnectionType Type { get; set; }
     }
+
+    enum ConnectionType
+    {
+        REMOTE_DESKTOP_CONTROL = 1,
+        REMOTE_VOLUME_CONTROL = 2,
+    }
+
 }
