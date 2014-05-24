@@ -10,13 +10,13 @@
     <!-- Activities title's -->
     <string name="activity_connection_title">Add new connection</string>
     <string name="activity_connection_settings_title">Edit connection</string>
+    <string name="activity_conection_chooser">Select the type of connection</string>
 
     <!-- Settings -->
     <string name="action_settings">Settings</string>
     <string name="action_add_new_connection">Add new connection</string>
     <string name="action_delete_connection">Delete connection</string>
     <!-- End settings -->
-
 
 
     <!-- EditText watermark(hints)-->
@@ -33,7 +33,6 @@
     <string name="string_btn_done">Done</string>
     <string name="string_btn_cancel">Cancel</string>
     <string name="string_btn_save">Save</string>
-
 
 
     <!-- Empty connection list -->

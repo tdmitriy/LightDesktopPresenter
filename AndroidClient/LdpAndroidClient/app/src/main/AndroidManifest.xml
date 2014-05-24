@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
 
     <application
-        android:name=".utils.user_preferences.LdpObjectPreference"
+        android:name=".base_application.LdpBaseApplication"
         android:allowBackup="true"
         android:configChanges="orientation|keyboardHidden|screenSize"
         android:icon="@drawable/ic_launcher"
@@ -46,6 +46,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="@string/activity_LdpLdpActivityMain" />
         </activity>
+
+        <!-- Activity connection type -->
+        <activity
+            android:name=".activities.LdpConnectionTypeActivity"
+            android:excludeFromRecents="true"
+            android:label="@string/activity_conection_chooser"
+            android:theme="@style/ThemeConnectionDialog">
+            </activity>
 
     </application>
 

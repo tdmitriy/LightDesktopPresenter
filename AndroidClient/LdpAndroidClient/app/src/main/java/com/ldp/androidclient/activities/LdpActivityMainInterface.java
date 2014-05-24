@@ -3,23 +3,23 @@ package com.ldp.androidclient.activities;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ldp.androidclient.R;
+import com.ldp.androidclient.utils.controls.LdpConnectionTypeAdapter;
 import com.ldp.androidclient.utils.controls.LdpMessageBox;
-import com.ldp.androidclient.utils.main_listview_populator.LdpListViewPopulator;
+import com.ldp.androidclient.utils.controls.LdpListViewPopulator;
+import com.ldp.androidclient.base_application.LdpBaseApplication;
 import com.ldp.androidclient.utils.user_preferences.LdpComplexPreferences;
 import com.ldp.androidclient.utils.user_preferences.LdpConnectionPreferences;
-import com.ldp.androidclient.utils.user_preferences.LdpObjectPreference;
 
 import java.util.ArrayList;
 
@@ -27,10 +27,15 @@ public class LdpActivityMainInterface extends ListActivity implements AdapterVie
         DialogInterface.OnClickListener {
 
     private LdpListViewPopulator listViewPopulator;
-    private LdpObjectPreference objectPreference;
-    private LdpComplexPreferences complexPreferences;
+    protected ListAdapter listViewConnectionTypePopulator;
+
+    String[] items = {"Desktop control", "Volume control"};
+    Integer[] images = {R.drawable.remote_pc_icon, R.drawable.remote_volume_icon};
+
+    private LdpBaseApplication objectPreference;
+    protected LdpComplexPreferences complexPreferences;
     private ArrayList<LdpConnectionPreferences> prefs;
-    private LdpConnectionPreferences selectedPrefs;
+    protected LdpConnectionPreferences selectedPrefs;
 
     private TextView txtListEmptyinfo;
 
@@ -50,13 +55,14 @@ public class LdpActivityMainInterface extends ListActivity implements AdapterVie
     }
 
     private void initializeObjects() {
-        objectPreference = (LdpObjectPreference) this.getApplication();
+        objectPreference = (LdpBaseApplication) this.getApplication();
         complexPreferences = objectPreference.getComplexPreference();
     }
 
     private void initializeControls() {
         txtListEmptyinfo = (TextView) findViewById(R.id.txtListEmptyinfo);
         this.getListView().setOnItemLongClickListener(this);
+        listViewConnectionTypePopulator = new LdpConnectionTypeAdapter(this, items, images);
     }
 
     private void checkPreferencesIsEmpty() {
@@ -114,13 +120,6 @@ public class LdpActivityMainInterface extends ListActivity implements AdapterVie
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    @Override
-    protected void onListItemClick(ListView list, View v, int position, long id) {
-        selectedPrefs = (LdpConnectionPreferences)
-                list.getItemAtPosition(position);
-    }
-
 
     private void addImgSettingsOnClickListener() {
         listViewPopulator.onClickListener = new View.OnClickListener() {

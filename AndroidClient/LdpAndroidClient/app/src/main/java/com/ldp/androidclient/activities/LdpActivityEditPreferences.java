@@ -16,9 +16,9 @@ import android.widget.Toast;
 
 import com.ldp.androidclient.R;
 import com.ldp.androidclient.utils.controls.LdpMessageBox;
+import com.ldp.androidclient.base_application.LdpBaseApplication;
 import com.ldp.androidclient.utils.user_preferences.LdpComplexPreferences;
 import com.ldp.androidclient.utils.user_preferences.LdpConnectionPreferences;
-import com.ldp.androidclient.utils.user_preferences.LdpObjectPreference;
 
 @SuppressLint("AppCompatMethod")
 public class LdpActivityEditPreferences extends Activity implements View.OnClickListener,
@@ -26,7 +26,7 @@ public class LdpActivityEditPreferences extends Activity implements View.OnClick
 
 
     private static final String TAG = "LdpActivityEditPreferences";
-    private LdpObjectPreference objectPreference;
+    private LdpBaseApplication objectPreference;
     private LdpComplexPreferences complexPrefenreces;
 
     private EditText txtIp;
@@ -76,7 +76,7 @@ public class LdpActivityEditPreferences extends Activity implements View.OnClick
         oldPreferences.setPassword(password);
 
 
-        objectPreference = (LdpObjectPreference) this.getApplication();
+        objectPreference = (LdpBaseApplication) this.getApplication();
         complexPrefenreces = objectPreference.getComplexPreference();
 
         txtIp.setText(ipAddress);

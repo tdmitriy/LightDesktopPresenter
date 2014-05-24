@@ -5,7 +5,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -15,15 +14,15 @@ import android.widget.Toast;
 import com.ldp.androidclient.R;
 import com.ldp.androidclient.utils.LdpEditTextIPAddressChecker;
 import com.ldp.androidclient.utils.controls.LdpMessageBox;
+import com.ldp.androidclient.base_application.LdpBaseApplication;
 import com.ldp.androidclient.utils.user_preferences.LdpComplexPreferences;
 import com.ldp.androidclient.utils.user_preferences.LdpConnectionPreferences;
-import com.ldp.androidclient.utils.user_preferences.LdpObjectPreference;
 
 @SuppressLint("AppCompatMethod")
 public class LdpActivityNewConnectionPreferences extends Activity implements View.OnClickListener {
 
     private static final String TAG = "ActivityNewConnectionPreferences";
-    private LdpObjectPreference objectPreference;
+    private LdpBaseApplication objectPreference;
     private LdpComplexPreferences complexPrefenreces;
 
     private EditText txtIP;
@@ -69,7 +68,7 @@ public class LdpActivityNewConnectionPreferences extends Activity implements Vie
     }
 
     private void initializeObjects() {
-        objectPreference = (LdpObjectPreference) this.getApplication();
+        objectPreference = (LdpBaseApplication) this.getApplication();
         complexPrefenreces = objectPreference.getComplexPreference();
     }
 
