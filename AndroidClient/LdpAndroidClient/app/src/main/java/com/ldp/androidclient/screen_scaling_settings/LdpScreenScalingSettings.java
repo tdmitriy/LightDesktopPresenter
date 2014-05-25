@@ -16,7 +16,10 @@ public class LdpScreenScalingSettings implements ILdpScreenScalingSettings {
     private final float heightCoef;
     private final float scaleCoef;
 
-    public LdpScreenScalingSettings() {
+    public LdpScreenScalingSettings(int desktopWidth, int desktopHeight) {
+        rmDesktopWidth = desktopWidth;
+        rmDesktopHeight = desktopHeight;
+
         dm = new DisplayMetrics();
         screenWidth = dm.widthPixels;
         screenHeight = dm.heightPixels;
@@ -36,16 +39,6 @@ public class LdpScreenScalingSettings implements ILdpScreenScalingSettings {
     @Override
     public int getDesktopHeight() {
         return rmDesktopHeight;
-    }
-
-    @Override
-    public void setDesktopWidth(int width) {
-        rmDesktopWidth = width;
-    }
-
-    @Override
-    public void setDesktopHeight(int height) {
-        rmDesktopHeight = height;
     }
 
     @Override

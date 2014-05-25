@@ -7,12 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ldp.androidclient.R;
-import com.ldp.androidclient.utils.controls.LdpClickableImageView;
+import com.ldp.androidclient.utils.controls.image_view.LdpClickableImageView;
 import com.ldp.androidclient.utils.user_preferences.LdpConnectionPreferences;
 
 import java.util.ArrayList;

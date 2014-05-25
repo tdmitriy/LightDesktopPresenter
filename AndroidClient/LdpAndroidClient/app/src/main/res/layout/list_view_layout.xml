@@ -34,7 +34,7 @@
         android:layout_height="fill_parent"
         android:background="@color/light_gray" />
 
-    <com.ldp.androidclient.utils.controls.LdpClickableImageView
+    <com.ldp.androidclient.utils.controls.image_view.LdpClickableImageView
         android:id="@+id/imageViewSettings"
         android:layout_width="45dp"
         android:layout_height="45dp"

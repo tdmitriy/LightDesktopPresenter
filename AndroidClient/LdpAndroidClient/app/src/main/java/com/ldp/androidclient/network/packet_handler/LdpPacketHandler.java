@@ -4,16 +4,18 @@ package com.ldp.androidclient.network.packet_handler;
 import com.ldp.androidclient.protocol.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 abstract public class LdpPacketHandler implements ILdpObservable {
     private static final Object MUTEX = new Object();
 
     protected abstract void handle();
 
-    private ArrayList<ILdpPacketHandler> listeners;
+    private CopyOnWriteArrayList<ILdpPacketHandler> listeners;
 
     public LdpPacketHandler() {
-        listeners = new ArrayList<ILdpPacketHandler>();
+        listeners = new CopyOnWriteArrayList<ILdpPacketHandler>();
     }
 
     @Override
@@ -27,8 +29,10 @@ abstract public class LdpPacketHandler implements ILdpObservable {
     @Override
     public void notifyToAllListeners(LdpProtocol.LdpPacket packet) {
         if (listeners != null && listeners.size() != 0) {
-            for (ILdpPacketHandler listener : listeners) {
-                listener.handle(packet);
+            Iterator<ILdpPacketHandler> iterator = listeners.iterator();
+            while (iterator.hasNext()) {
+                ILdpPacketHandler lis = iterator.next();
+                lis.handle(packet);
             }
         }
     }

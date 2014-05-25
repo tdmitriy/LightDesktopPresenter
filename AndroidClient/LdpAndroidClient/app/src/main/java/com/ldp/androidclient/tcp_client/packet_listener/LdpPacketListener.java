@@ -22,7 +22,7 @@ public class LdpPacketListener extends LdpPacketHandler implements Runnable {
     @Override
     protected void handle() {
         try {
-            LdpPacket packet = LdpPacket.parseDelimitedFrom(clientHandle.getChannel().getInputStream());
+            LdpPacket packet = LdpPacket.parseDelimitedFrom(clientHandle.getSocketChannel().getInputStream());
 
             //base
             notifyToAllListeners(packet);

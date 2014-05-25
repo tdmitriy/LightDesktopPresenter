@@ -1,6 +1,7 @@
-package com.ldp.androidclient.network.packet_handler;
+package com.ldp.androidclient.connection_handler;
 
 import android.content.Context;
+import com.ldp.androidclient.network.packet_handler.ILdpPacketHandler;
 import com.ldp.androidclient.protocol.LdpProtocol.*;
 import com.ldp.androidclient.protocol.LdpProtocolPacketFactory;
 import com.ldp.androidclient.tcp_client.LdpClient;
@@ -8,6 +9,7 @@ import com.ldp.androidclient.utils.LdpClientInfo;
 import com.ldp.androidclient.utils.controls.LdpConnectionProgressDialog;
 import com.ldp.androidclient.utils.controls.LdpMessageBox;
 import com.ldp.androidclient.utils.user_preferences.LdpConnectionPreferences;
+
 
 public class LdpConnectionHandler implements ILdpPacketHandler {
     private final LdpProtocolPacketFactory packetFactory;
@@ -38,7 +40,7 @@ public class LdpConnectionHandler implements ILdpPacketHandler {
                     LdpConnectionProgressDialog.changeMessage("Sending client info..");
                     LdpClientInfoRequest clientInfo =
                             packetFactory.setClientInfoRequest(clientHandler
-                                            .getChannel()
+                                            .getSocketChannel()
                                             .getLocalAddress().toString(),
                                     LdpClientInfo.getOs(),
                                     LdpClientInfo.getDeviceName()
@@ -46,12 +48,12 @@ public class LdpConnectionHandler implements ILdpPacketHandler {
 
 
                     LdpPacket clientInfoRequest = packetFactory.buildPacket(clientInfo);
-                    clientHandler.getPacketSender().send(clientInfoRequest);
+                    clientHandler.getSendingChannel().send(clientInfoRequest);
 
                     LdpConnectionProgressDialog.changeMessage("Sending preparable info..");
                     LdpPreparableInfoRequest request = packetFactory.setPreparableInfoRequest(type);
                     LdpPacket preparablePacket = packetFactory.buildPacket(request);
-                    clientHandler.getPacketSender().send(preparablePacket);
+                    clientHandler.getSendingChannel().send(preparablePacket);
 
 
                     LdpConnectionProgressDialog.changeMessage("Waiting preparable info..");
@@ -63,8 +65,12 @@ public class LdpConnectionHandler implements ILdpPacketHandler {
                 LdpPreparableInfoResponse preparableResponse = packet.getPreparableInfoResponse();
                 int desktoWidth = preparableResponse.getScreenWidth();
                 int desktopHeight = preparableResponse.getScreenHeight();
-                // TODO pass this 2 parameters to intent and start activity
+
                 LdpConnectionProgressDialog.changeMessage("Preparable info received..");
+                LdpConnectionProgressDialog.dismiss();
+
+                // TODO pass this 2 parameters to intent and start activity
+
                 break;
         }
     }

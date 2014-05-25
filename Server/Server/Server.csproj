@@ -93,14 +93,17 @@
     <Compile Include="Network\PacketTypes\LdpAuthResponse.cs" />
     <Compile Include="Network\PacketTypes\LdpClientInfoRequest.cs" />
     <Compile Include="Network\PacketTypes\LdpDisconnectRequest.cs" />
+    <Compile Include="Network\PacketTypes\LdpScreenRequest.cs" />
     <Compile Include="Network\PacketTypes\LdpPreparableInfoRequest.cs" />
-    <Compile Include="Network\PacketTypes\LdpScreenData.cs" />
+    <Compile Include="Network\PacketTypes\LdpScreenResponse.cs" />
     <Compile Include="Network\LdpPacket.cs" />
     <Compile Include="Network\PacketTypes\LdpPreparableInfoResponse.cs" />
     <Compile Include="ProtoGenerator\LdpProtoGenerator.cs" />
     <Compile Include="ScreenGrabber\LdpScreenProcessingUtils.cs" />
     <Compile Include="TcpServer\ILdpServerEvents.cs" />
-    <Compile Include="Network\LdpPacketListener.cs" />
+    <Compile Include="Network\PacketListener\LdpPacketListener.cs" />
+    <Compile Include="TcpServer\ILdpServerHandlers.cs" />
+    <Compile Include="TcpServer\LdpServerBase.cs" />
     <Compile Include="UserSettings\LdpUserSettings.cs" />
     <Compile Include="WindowsUtils\LdpUtils.cs" />
     <Page Include="ServerWindow.xaml">
@@ -111,12 +114,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TcpServer\ILdpTcpServer.cs" />
+    <Compile Include="TcpServer\ILdpServer.cs" />
     <Compile Include="WindowsUtils\LdpLog.cs" />
     <Compile Include="ScreenGrabber\LdpBaseScreenGrabber.cs" />
     <Compile Include="ScreenGrabber\LdpDirectxGrabber.cs" />
-    <Compile Include="TcpServer\LdpTcpServer.cs" />
-    <Compile Include="UdpServer\LdpUdpServer.cs" />
+    <Compile Include="TcpServer\LdpServer.cs" />
     <Compile Include="ServerWindow.xaml.cs">
       <DependentUpon>ServerWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -8,13 +8,21 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.ldp.androidclient.protocol.LdpProtocol.*;
+import com.ldp.androidclient.protocol.LdpProtocolPacketFactory;
+import com.ldp.androidclient.tcp_client.LdpClient;
+import com.ldp.androidclient.utils.controls.LdpConnectionProgressDialog;
 import com.ldp.androidclient.utils.user_preferences.LdpConnectionPreferences;
 
 public class LdpActivityMain extends LdpActivityMainInterface {
 
+    private LdpClient clientHandler;
+    private LdpProtocolPacketFactory packetFactory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        clientHandler = LdpClient.getInstance();
+        packetFactory = new LdpProtocolPacketFactory();
     }
 
     @Override
@@ -32,6 +40,15 @@ public class LdpActivityMain extends LdpActivityMainInterface {
                 .setCancelable(false)
                 .setAdapter(listViewConnectionTypePopulator, connectionClickListener)
                 .show();
+    }
+
+    private void sendAuthRequest() {
+        LdpConnectionProgressDialog.show(this, "Connecting", "Please wait..");
+        LdpConnectionPreferences prefs = getSelectedPrefs();
+        String password = prefs.getPassword();
+        LdpAuthRequest authRequest = packetFactory.setAuthRequest(password);
+        LdpPacket packet = packetFactory.buildPacket(authRequest);
+        clientHandler.getSendingChannel().send(packet);
     }
 
     private DialogInterface.OnClickListener connectionClickListener = new DialogInterface.OnClickListener() {

@@ -18,7 +18,7 @@ public class LdpPacketSender {
 
     public void send(LdpProtocol.LdpPacket packet) {
         try {
-            packet.writeDelimitedTo(clientHandle.getChannel().getOutputStream());
+            packet.writeDelimitedTo(clientHandle.getSocketChannel().getOutputStream());
         } catch (IOException e) {
             clientHandle.disconnect();
             Log.e(TAG, e.getMessage());

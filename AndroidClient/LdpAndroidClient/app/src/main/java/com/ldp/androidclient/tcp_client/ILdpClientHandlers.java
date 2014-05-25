@@ -6,7 +6,7 @@ import com.ldp.androidclient.tcp_client.packet_sender.LdpPacketSender;
 import java.net.Socket;
 
 public interface ILdpClientHandlers {
-    LdpPacketListener getPacketListener();
-    LdpPacketSender getPacketSender();
-    Socket getChannel();
+    LdpPacketListener getListenerChannel();
+    LdpPacketSender getSendingChannel();
+    Socket getSocketChannel();
 }

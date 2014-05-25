@@ -205,25 +205,29 @@ public final class LdpProtocol {
      */
     PREPARABLE_INFO_RESPONSE(4, 5),
     /**
-     * <code>SCREEN_DATA = 6;</code>
+     * <code>SCREEN_REQUEST = 6;</code>
      */
-    SCREEN_DATA(5, 6),
+    SCREEN_REQUEST(5, 6),
     /**
-     * <code>VOLUME_DATA = 7;</code>
+     * <code>SCREEN_RESPONSE = 7;</code>
      */
-    VOLUME_DATA(6, 7),
+    SCREEN_RESPONSE(6, 7),
     /**
-     * <code>MOUSE_DATA = 8;</code>
+     * <code>VOLUME_DATA = 8;</code>
      */
-    MOUSE_DATA(7, 8),
+    VOLUME_DATA(7, 8),
     /**
-     * <code>KEYBOARD_DATA = 9;</code>
+     * <code>MOUSE_DATA = 9;</code>
      */
-    KEYBOARD_DATA(8, 9),
+    MOUSE_DATA(8, 9),
     /**
-     * <code>DISCONNECT_REQUEST = 10;</code>
+     * <code>KEYBOARD_DATA = 10;</code>
      */
-    DISCONNECT_REQUEST(9, 10),
+    KEYBOARD_DATA(9, 10),
+    /**
+     * <code>DISCONNECT_REQUEST = 11;</code>
+     */
+    DISCONNECT_REQUEST(10, 11),
     ;
 
     /**
@@ -247,25 +251,29 @@ public final class LdpProtocol {
      */
     public static final int PREPARABLE_INFO_RESPONSE_VALUE = 5;
     /**
-     * <code>SCREEN_DATA = 6;</code>
+     * <code>SCREEN_REQUEST = 6;</code>
      */
-    public static final int SCREEN_DATA_VALUE = 6;
+    public static final int SCREEN_REQUEST_VALUE = 6;
     /**
-     * <code>VOLUME_DATA = 7;</code>
+     * <code>SCREEN_RESPONSE = 7;</code>
      */
-    public static final int VOLUME_DATA_VALUE = 7;
+    public static final int SCREEN_RESPONSE_VALUE = 7;
     /**
-     * <code>MOUSE_DATA = 8;</code>
+     * <code>VOLUME_DATA = 8;</code>
      */
-    public static final int MOUSE_DATA_VALUE = 8;
+    public static final int VOLUME_DATA_VALUE = 8;
     /**
-     * <code>KEYBOARD_DATA = 9;</code>
+     * <code>MOUSE_DATA = 9;</code>
      */
-    public static final int KEYBOARD_DATA_VALUE = 9;
+    public static final int MOUSE_DATA_VALUE = 9;
     /**
-     * <code>DISCONNECT_REQUEST = 10;</code>
+     * <code>KEYBOARD_DATA = 10;</code>
      */
-    public static final int DISCONNECT_REQUEST_VALUE = 10;
+    public static final int KEYBOARD_DATA_VALUE = 10;
+    /**
+     * <code>DISCONNECT_REQUEST = 11;</code>
+     */
+    public static final int DISCONNECT_REQUEST_VALUE = 11;
 
 
     public final int getNumber() { return value; }
@@ -277,11 +285,12 @@ public final class LdpProtocol {
         case 3: return CLIENT_INFO_REQUEST;
         case 4: return PREPARABLE_INFO_REQUEST;
         case 5: return PREPARABLE_INFO_RESPONSE;
-        case 6: return SCREEN_DATA;
-        case 7: return VOLUME_DATA;
-        case 8: return MOUSE_DATA;
-        case 9: return KEYBOARD_DATA;
-        case 10: return DISCONNECT_REQUEST;
+        case 6: return SCREEN_REQUEST;
+        case 7: return SCREEN_RESPONSE;
+        case 8: return VOLUME_DATA;
+        case 9: return MOUSE_DATA;
+        case 10: return KEYBOARD_DATA;
+        case 11: return DISCONNECT_REQUEST;
         default: return null;
       }
     }
@@ -424,7 +433,7 @@ public final class LdpProtocol {
       return LdpProtocol.internal_static_LdpAuthRequest_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return LdpProtocol.internal_static_LdpAuthRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -595,7 +604,7 @@ public final class LdpProtocol {
 
     @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -610,7 +619,7 @@ public final class LdpProtocol {
         return LdpProtocol.internal_static_LdpAuthRequest_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return LdpProtocol.internal_static_LdpAuthRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -623,7 +632,7 @@ public final class LdpProtocol {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -807,13 +816,13 @@ public final class LdpProtocol {
   public interface LdpAuthResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // required bool isSuccess = 1 [default = false];
+    // required bool isSuccess = 1;
     /**
-     * <code>required bool isSuccess = 1 [default = false];</code>
+     * <code>required bool isSuccess = 1;</code>
      */
     boolean hasIsSuccess();
     /**
-     * <code>required bool isSuccess = 1 [default = false];</code>
+     * <code>required bool isSuccess = 1;</code>
      */
     boolean getIsSuccess();
   }
@@ -890,7 +899,7 @@ public final class LdpProtocol {
       return LdpProtocol.internal_static_LdpAuthResponse_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return LdpProtocol.internal_static_LdpAuthResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -913,17 +922,17 @@ public final class LdpProtocol {
     }
 
     private int bitField0_;
-    // required bool isSuccess = 1 [default = false];
+    // required bool isSuccess = 1;
     public static final int ISSUCCESS_FIELD_NUMBER = 1;
     private boolean isSuccess_;
     /**
-     * <code>required bool isSuccess = 1 [default = false];</code>
+     * <code>required bool isSuccess = 1;</code>
      */
     public boolean hasIsSuccess() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>required bool isSuccess = 1 [default = false];</code>
+     * <code>required bool isSuccess = 1;</code>
      */
     public boolean getIsSuccess() {
       return isSuccess_;
@@ -1038,7 +1047,7 @@ public final class LdpProtocol {
 
     @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1053,7 +1062,7 @@ public final class LdpProtocol {
         return LdpProtocol.internal_static_LdpAuthResponse_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return LdpProtocol.internal_static_LdpAuthResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -1066,7 +1075,7 @@ public final class LdpProtocol {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1164,22 +1173,22 @@ public final class LdpProtocol {
       }
       private int bitField0_;
 
-      // required bool isSuccess = 1 [default = false];
+      // required bool isSuccess = 1;
       private boolean isSuccess_ ;
       /**
-       * <code>required bool isSuccess = 1 [default = false];</code>
+       * <code>required bool isSuccess = 1;</code>
        */
       public boolean hasIsSuccess() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>required bool isSuccess = 1 [default = false];</code>
+       * <code>required bool isSuccess = 1;</code>
        */
       public boolean getIsSuccess() {
         return isSuccess_;
       }
       /**
-       * <code>required bool isSuccess = 1 [default = false];</code>
+       * <code>required bool isSuccess = 1;</code>
        */
       public Builder setIsSuccess(boolean value) {
         bitField0_ |= 0x00000001;
@@ -1188,7 +1197,7 @@ public final class LdpProtocol {
         return this;
       }
       /**
-       * <code>required bool isSuccess = 1 [default = false];</code>
+       * <code>required bool isSuccess = 1;</code>
        */
       public Builder clearIsSuccess() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -1339,7 +1348,7 @@ public final class LdpProtocol {
       return LdpProtocol.internal_static_LdpClientInfoRequest_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return LdpProtocol.internal_static_LdpClientInfoRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -1624,7 +1633,7 @@ public final class LdpProtocol {
 
     @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1639,7 +1648,7 @@ public final class LdpProtocol {
         return LdpProtocol.internal_static_LdpClientInfoRequest_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return LdpProtocol.internal_static_LdpClientInfoRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -1652,7 +1661,7 @@ public final class LdpProtocol {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -2107,7 +2116,7 @@ public final class LdpProtocol {
       return LdpProtocol.internal_static_LdpDisconnectRequest_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return LdpProtocol.internal_static_LdpDisconnectRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -2255,7 +2264,7 @@ public final class LdpProtocol {
 
     @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -2270,7 +2279,7 @@ public final class LdpProtocol {
         return LdpProtocol.internal_static_LdpDisconnectRequest_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return LdpProtocol.internal_static_LdpDisconnectRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -2283,7 +2292,7 @@ public final class LdpProtocol {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -2511,31 +2520,45 @@ public final class LdpProtocol {
      */
     LdpPreparableInfoResponseOrBuilder getPreparableInfoResponseOrBuilder();
 
-    // optional .LdpScreenData ScreenData = 7;
+    // optional .LdpScreenRequest ScreenRequest = 7;
     /**
-     * <code>optional .LdpScreenData ScreenData = 7;</code>
+     * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
      */
-    boolean hasScreenData();
+    boolean hasScreenRequest();
     /**
-     * <code>optional .LdpScreenData ScreenData = 7;</code>
+     * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
      */
-    LdpScreenData getScreenData();
+    LdpScreenRequest getScreenRequest();
     /**
-     * <code>optional .LdpScreenData ScreenData = 7;</code>
+     * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
      */
-    LdpScreenDataOrBuilder getScreenDataOrBuilder();
+    LdpScreenRequestOrBuilder getScreenRequestOrBuilder();
 
-    // optional .LdpDisconnectRequest DisconnectRequest = 8;
+    // optional .LdpScreenResponse ScreenResponse = 8;
     /**
-     * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+     * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
+     */
+    boolean hasScreenResponse();
+    /**
+     * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
+     */
+    LdpScreenResponse getScreenResponse();
+    /**
+     * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
+     */
+    LdpScreenResponseOrBuilder getScreenResponseOrBuilder();
+
+    // optional .LdpDisconnectRequest DisconnectRequest = 9;
+    /**
+     * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
      */
     boolean hasDisconnectRequest();
     /**
-     * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+     * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
      */
     LdpDisconnectRequest getDisconnectRequest();
     /**
-     * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+     * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
      */
     LdpDisconnectRequestOrBuilder getDisconnectRequestOrBuilder();
   }
@@ -2667,21 +2690,34 @@ public final class LdpProtocol {
               break;
             }
             case 58: {
-              LdpScreenData.Builder subBuilder = null;
+              LdpScreenRequest.Builder subBuilder = null;
               if (((bitField0_ & 0x00000040) == 0x00000040)) {
-                subBuilder = screenData_.toBuilder();
+                subBuilder = screenRequest_.toBuilder();
               }
-              screenData_ = input.readMessage(LdpScreenData.PARSER, extensionRegistry);
+              screenRequest_ = input.readMessage(LdpScreenRequest.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(screenData_);
-                screenData_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(screenRequest_);
+                screenRequest_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000040;
               break;
             }
             case 66: {
-              LdpDisconnectRequest.Builder subBuilder = null;
+              LdpScreenResponse.Builder subBuilder = null;
               if (((bitField0_ & 0x00000080) == 0x00000080)) {
+                subBuilder = screenResponse_.toBuilder();
+              }
+              screenResponse_ = input.readMessage(LdpScreenResponse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(screenResponse_);
+                screenResponse_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000080;
+              break;
+            }
+            case 74: {
+              LdpDisconnectRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000100) == 0x00000100)) {
                 subBuilder = disconnectRequest_.toBuilder();
               }
               disconnectRequest_ = input.readMessage(LdpDisconnectRequest.PARSER, extensionRegistry);
@@ -2689,7 +2725,7 @@ public final class LdpProtocol {
                 subBuilder.mergeFrom(disconnectRequest_);
                 disconnectRequest_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000080;
+              bitField0_ |= 0x00000100;
               break;
             }
           }
@@ -2709,7 +2745,7 @@ public final class LdpProtocol {
       return LdpProtocol.internal_static_LdpPacket_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return LdpProtocol.internal_static_LdpPacket_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -2858,45 +2894,67 @@ public final class LdpProtocol {
       return preparableInfoResponse_;
     }
 
-    // optional .LdpScreenData ScreenData = 7;
-    public static final int SCREENDATA_FIELD_NUMBER = 7;
-    private LdpScreenData screenData_;
+    // optional .LdpScreenRequest ScreenRequest = 7;
+    public static final int SCREENREQUEST_FIELD_NUMBER = 7;
+    private LdpScreenRequest screenRequest_;
     /**
-     * <code>optional .LdpScreenData ScreenData = 7;</code>
+     * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
      */
-    public boolean hasScreenData() {
+    public boolean hasScreenRequest() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
     /**
-     * <code>optional .LdpScreenData ScreenData = 7;</code>
+     * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
      */
-    public LdpScreenData getScreenData() {
-      return screenData_;
+    public LdpScreenRequest getScreenRequest() {
+      return screenRequest_;
     }
     /**
-     * <code>optional .LdpScreenData ScreenData = 7;</code>
+     * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
      */
-    public LdpScreenDataOrBuilder getScreenDataOrBuilder() {
-      return screenData_;
+    public LdpScreenRequestOrBuilder getScreenRequestOrBuilder() {
+      return screenRequest_;
     }
 
-    // optional .LdpDisconnectRequest DisconnectRequest = 8;
-    public static final int DISCONNECTREQUEST_FIELD_NUMBER = 8;
-    private LdpDisconnectRequest disconnectRequest_;
+    // optional .LdpScreenResponse ScreenResponse = 8;
+    public static final int SCREENRESPONSE_FIELD_NUMBER = 8;
+    private LdpScreenResponse screenResponse_;
     /**
-     * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+     * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
      */
-    public boolean hasDisconnectRequest() {
+    public boolean hasScreenResponse() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
     /**
-     * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+     * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
+     */
+    public LdpScreenResponse getScreenResponse() {
+      return screenResponse_;
+    }
+    /**
+     * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
+     */
+    public LdpScreenResponseOrBuilder getScreenResponseOrBuilder() {
+      return screenResponse_;
+    }
+
+    // optional .LdpDisconnectRequest DisconnectRequest = 9;
+    public static final int DISCONNECTREQUEST_FIELD_NUMBER = 9;
+    private LdpDisconnectRequest disconnectRequest_;
+    /**
+     * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
+     */
+    public boolean hasDisconnectRequest() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
      */
     public LdpDisconnectRequest getDisconnectRequest() {
       return disconnectRequest_;
     }
     /**
-     * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+     * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
      */
     public LdpDisconnectRequestOrBuilder getDisconnectRequestOrBuilder() {
       return disconnectRequest_;
@@ -2909,7 +2967,8 @@ public final class LdpProtocol {
       clientInfoRequest_ = LdpClientInfoRequest.getDefaultInstance();
       preparableInfoRequest_ = LdpPreparableInfoRequest.getDefaultInstance();
       preparableInfoResponse_ = LdpPreparableInfoResponse.getDefaultInstance();
-      screenData_ = LdpScreenData.getDefaultInstance();
+      screenRequest_ = LdpScreenRequest.getDefaultInstance();
+      screenResponse_ = LdpScreenResponse.getDefaultInstance();
       disconnectRequest_ = LdpDisconnectRequest.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -2935,6 +2994,12 @@ public final class LdpProtocol {
       }
       if (hasPreparableInfoRequest()) {
         if (!getPreparableInfoRequest().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasScreenResponse()) {
+        if (!getScreenResponse().isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -2971,10 +3036,13 @@ public final class LdpProtocol {
         output.writeMessage(6, preparableInfoResponse_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
-        output.writeMessage(7, screenData_);
+        output.writeMessage(7, screenRequest_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
-        output.writeMessage(8, disconnectRequest_);
+        output.writeMessage(8, screenResponse_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeMessage(9, disconnectRequest_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3011,11 +3079,15 @@ public final class LdpProtocol {
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, screenData_);
+          .computeMessageSize(7, screenRequest_);
       }
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(8, disconnectRequest_);
+          .computeMessageSize(8, screenResponse_);
+      }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(9, disconnectRequest_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3091,7 +3163,7 @@ public final class LdpProtocol {
 
     @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3106,7 +3178,7 @@ public final class LdpProtocol {
         return LdpProtocol.internal_static_LdpPacket_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return LdpProtocol.internal_static_LdpPacket_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -3119,7 +3191,7 @@ public final class LdpProtocol {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -3130,7 +3202,8 @@ public final class LdpProtocol {
           getClientInfoRequestFieldBuilder();
           getPreparableInfoRequestFieldBuilder();
           getPreparableInfoResponseFieldBuilder();
-          getScreenDataFieldBuilder();
+          getScreenRequestFieldBuilder();
+          getScreenResponseFieldBuilder();
           getDisconnectRequestFieldBuilder();
         }
       }
@@ -3172,18 +3245,24 @@ public final class LdpProtocol {
           preparableInfoResponseBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000020);
-        if (screenDataBuilder_ == null) {
-          screenData_ = LdpScreenData.getDefaultInstance();
+        if (screenRequestBuilder_ == null) {
+          screenRequest_ = LdpScreenRequest.getDefaultInstance();
         } else {
-          screenDataBuilder_.clear();
+          screenRequestBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000040);
+        if (screenResponseBuilder_ == null) {
+          screenResponse_ = LdpScreenResponse.getDefaultInstance();
+        } else {
+          screenResponseBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000080);
         if (disconnectRequestBuilder_ == null) {
           disconnectRequest_ = LdpDisconnectRequest.getDefaultInstance();
         } else {
           disconnectRequestBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
 
@@ -3259,13 +3338,21 @@ public final class LdpProtocol {
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
         }
-        if (screenDataBuilder_ == null) {
-          result.screenData_ = screenData_;
+        if (screenRequestBuilder_ == null) {
+          result.screenRequest_ = screenRequest_;
         } else {
-          result.screenData_ = screenDataBuilder_.build();
+          result.screenRequest_ = screenRequestBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
           to_bitField0_ |= 0x00000080;
+        }
+        if (screenResponseBuilder_ == null) {
+          result.screenResponse_ = screenResponse_;
+        } else {
+          result.screenResponse_ = screenResponseBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000100;
         }
         if (disconnectRequestBuilder_ == null) {
           result.disconnectRequest_ = disconnectRequest_;
@@ -3306,8 +3393,11 @@ public final class LdpProtocol {
         if (other.hasPreparableInfoResponse()) {
           mergePreparableInfoResponse(other.getPreparableInfoResponse());
         }
-        if (other.hasScreenData()) {
-          mergeScreenData(other.getScreenData());
+        if (other.hasScreenRequest()) {
+          mergeScreenRequest(other.getScreenRequest());
+        }
+        if (other.hasScreenResponse()) {
+          mergeScreenResponse(other.getScreenResponse());
         }
         if (other.hasDisconnectRequest()) {
           mergeDisconnectRequest(other.getDisconnectRequest());
@@ -3335,6 +3425,12 @@ public final class LdpProtocol {
         }
         if (hasPreparableInfoRequest()) {
           if (!getPreparableInfoRequest().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasScreenResponse()) {
+          if (!getScreenResponse().isInitialized()) {
             
             return false;
           }
@@ -3988,135 +4084,252 @@ public final class LdpProtocol {
         return preparableInfoResponseBuilder_;
       }
 
-      // optional .LdpScreenData ScreenData = 7;
-      private LdpScreenData screenData_ = LdpScreenData.getDefaultInstance();
+      // optional .LdpScreenRequest ScreenRequest = 7;
+      private LdpScreenRequest screenRequest_ = LdpScreenRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          LdpScreenData, LdpScreenData.Builder, LdpScreenDataOrBuilder> screenDataBuilder_;
+          LdpScreenRequest, LdpScreenRequest.Builder, LdpScreenRequestOrBuilder> screenRequestBuilder_;
       /**
-       * <code>optional .LdpScreenData ScreenData = 7;</code>
+       * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
        */
-      public boolean hasScreenData() {
+      public boolean hasScreenRequest() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>optional .LdpScreenData ScreenData = 7;</code>
+       * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
        */
-      public LdpScreenData getScreenData() {
-        if (screenDataBuilder_ == null) {
-          return screenData_;
+      public LdpScreenRequest getScreenRequest() {
+        if (screenRequestBuilder_ == null) {
+          return screenRequest_;
         } else {
-          return screenDataBuilder_.getMessage();
+          return screenRequestBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .LdpScreenData ScreenData = 7;</code>
+       * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
        */
-      public Builder setScreenData(LdpScreenData value) {
-        if (screenDataBuilder_ == null) {
+      public Builder setScreenRequest(LdpScreenRequest value) {
+        if (screenRequestBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          screenData_ = value;
+          screenRequest_ = value;
           onChanged();
         } else {
-          screenDataBuilder_.setMessage(value);
+          screenRequestBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .LdpScreenData ScreenData = 7;</code>
+       * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
        */
-      public Builder setScreenData(
-          LdpScreenData.Builder builderForValue) {
-        if (screenDataBuilder_ == null) {
-          screenData_ = builderForValue.build();
+      public Builder setScreenRequest(
+          LdpScreenRequest.Builder builderForValue) {
+        if (screenRequestBuilder_ == null) {
+          screenRequest_ = builderForValue.build();
           onChanged();
         } else {
-          screenDataBuilder_.setMessage(builderForValue.build());
+          screenRequestBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .LdpScreenData ScreenData = 7;</code>
+       * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
        */
-      public Builder mergeScreenData(LdpScreenData value) {
-        if (screenDataBuilder_ == null) {
+      public Builder mergeScreenRequest(LdpScreenRequest value) {
+        if (screenRequestBuilder_ == null) {
           if (((bitField0_ & 0x00000040) == 0x00000040) &&
-              screenData_ != LdpScreenData.getDefaultInstance()) {
-            screenData_ =
-              LdpScreenData.newBuilder(screenData_).mergeFrom(value).buildPartial();
+              screenRequest_ != LdpScreenRequest.getDefaultInstance()) {
+            screenRequest_ =
+              LdpScreenRequest.newBuilder(screenRequest_).mergeFrom(value).buildPartial();
           } else {
-            screenData_ = value;
+            screenRequest_ = value;
           }
           onChanged();
         } else {
-          screenDataBuilder_.mergeFrom(value);
+          screenRequestBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000040;
         return this;
       }
       /**
-       * <code>optional .LdpScreenData ScreenData = 7;</code>
+       * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
        */
-      public Builder clearScreenData() {
-        if (screenDataBuilder_ == null) {
-          screenData_ = LdpScreenData.getDefaultInstance();
+      public Builder clearScreenRequest() {
+        if (screenRequestBuilder_ == null) {
+          screenRequest_ = LdpScreenRequest.getDefaultInstance();
           onChanged();
         } else {
-          screenDataBuilder_.clear();
+          screenRequestBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
       /**
-       * <code>optional .LdpScreenData ScreenData = 7;</code>
+       * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
        */
-      public LdpScreenData.Builder getScreenDataBuilder() {
+      public LdpScreenRequest.Builder getScreenRequestBuilder() {
         bitField0_ |= 0x00000040;
         onChanged();
-        return getScreenDataFieldBuilder().getBuilder();
+        return getScreenRequestFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .LdpScreenData ScreenData = 7;</code>
+       * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
        */
-      public LdpScreenDataOrBuilder getScreenDataOrBuilder() {
-        if (screenDataBuilder_ != null) {
-          return screenDataBuilder_.getMessageOrBuilder();
+      public LdpScreenRequestOrBuilder getScreenRequestOrBuilder() {
+        if (screenRequestBuilder_ != null) {
+          return screenRequestBuilder_.getMessageOrBuilder();
         } else {
-          return screenData_;
+          return screenRequest_;
         }
       }
       /**
-       * <code>optional .LdpScreenData ScreenData = 7;</code>
+       * <code>optional .LdpScreenRequest ScreenRequest = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          LdpScreenData, LdpScreenData.Builder, LdpScreenDataOrBuilder>
-          getScreenDataFieldBuilder() {
-        if (screenDataBuilder_ == null) {
-          screenDataBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              LdpScreenData, LdpScreenData.Builder, LdpScreenDataOrBuilder>(
-                  screenData_,
+          LdpScreenRequest, LdpScreenRequest.Builder, LdpScreenRequestOrBuilder>
+          getScreenRequestFieldBuilder() {
+        if (screenRequestBuilder_ == null) {
+          screenRequestBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              LdpScreenRequest, LdpScreenRequest.Builder, LdpScreenRequestOrBuilder>(
+                  screenRequest_,
                   getParentForChildren(),
                   isClean());
-          screenData_ = null;
+          screenRequest_ = null;
         }
-        return screenDataBuilder_;
+        return screenRequestBuilder_;
       }
 
-      // optional .LdpDisconnectRequest DisconnectRequest = 8;
+      // optional .LdpScreenResponse ScreenResponse = 8;
+      private LdpScreenResponse screenResponse_ = LdpScreenResponse.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          LdpScreenResponse, LdpScreenResponse.Builder, LdpScreenResponseOrBuilder> screenResponseBuilder_;
+      /**
+       * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
+       */
+      public boolean hasScreenResponse() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      /**
+       * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
+       */
+      public LdpScreenResponse getScreenResponse() {
+        if (screenResponseBuilder_ == null) {
+          return screenResponse_;
+        } else {
+          return screenResponseBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
+       */
+      public Builder setScreenResponse(LdpScreenResponse value) {
+        if (screenResponseBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          screenResponse_ = value;
+          onChanged();
+        } else {
+          screenResponseBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
+       */
+      public Builder setScreenResponse(
+          LdpScreenResponse.Builder builderForValue) {
+        if (screenResponseBuilder_ == null) {
+          screenResponse_ = builderForValue.build();
+          onChanged();
+        } else {
+          screenResponseBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
+       */
+      public Builder mergeScreenResponse(LdpScreenResponse value) {
+        if (screenResponseBuilder_ == null) {
+          if (((bitField0_ & 0x00000080) == 0x00000080) &&
+              screenResponse_ != LdpScreenResponse.getDefaultInstance()) {
+            screenResponse_ =
+              LdpScreenResponse.newBuilder(screenResponse_).mergeFrom(value).buildPartial();
+          } else {
+            screenResponse_ = value;
+          }
+          onChanged();
+        } else {
+          screenResponseBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000080;
+        return this;
+      }
+      /**
+       * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
+       */
+      public Builder clearScreenResponse() {
+        if (screenResponseBuilder_ == null) {
+          screenResponse_ = LdpScreenResponse.getDefaultInstance();
+          onChanged();
+        } else {
+          screenResponseBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000080);
+        return this;
+      }
+      /**
+       * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
+       */
+      public LdpScreenResponse.Builder getScreenResponseBuilder() {
+        bitField0_ |= 0x00000080;
+        onChanged();
+        return getScreenResponseFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
+       */
+      public LdpScreenResponseOrBuilder getScreenResponseOrBuilder() {
+        if (screenResponseBuilder_ != null) {
+          return screenResponseBuilder_.getMessageOrBuilder();
+        } else {
+          return screenResponse_;
+        }
+      }
+      /**
+       * <code>optional .LdpScreenResponse ScreenResponse = 8;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          LdpScreenResponse, LdpScreenResponse.Builder, LdpScreenResponseOrBuilder>
+          getScreenResponseFieldBuilder() {
+        if (screenResponseBuilder_ == null) {
+          screenResponseBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              LdpScreenResponse, LdpScreenResponse.Builder, LdpScreenResponseOrBuilder>(
+                  screenResponse_,
+                  getParentForChildren(),
+                  isClean());
+          screenResponse_ = null;
+        }
+        return screenResponseBuilder_;
+      }
+
+      // optional .LdpDisconnectRequest DisconnectRequest = 9;
       private LdpDisconnectRequest disconnectRequest_ = LdpDisconnectRequest.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           LdpDisconnectRequest, LdpDisconnectRequest.Builder, LdpDisconnectRequestOrBuilder> disconnectRequestBuilder_;
       /**
-       * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+       * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
        */
       public boolean hasDisconnectRequest() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000100) == 0x00000100);
       }
       /**
-       * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+       * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
        */
       public LdpDisconnectRequest getDisconnectRequest() {
         if (disconnectRequestBuilder_ == null) {
@@ -4126,7 +4339,7 @@ public final class LdpProtocol {
         }
       }
       /**
-       * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+       * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
        */
       public Builder setDisconnectRequest(LdpDisconnectRequest value) {
         if (disconnectRequestBuilder_ == null) {
@@ -4138,11 +4351,11 @@ public final class LdpProtocol {
         } else {
           disconnectRequestBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         return this;
       }
       /**
-       * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+       * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
        */
       public Builder setDisconnectRequest(
           LdpDisconnectRequest.Builder builderForValue) {
@@ -4152,15 +4365,15 @@ public final class LdpProtocol {
         } else {
           disconnectRequestBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         return this;
       }
       /**
-       * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+       * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
        */
       public Builder mergeDisconnectRequest(LdpDisconnectRequest value) {
         if (disconnectRequestBuilder_ == null) {
-          if (((bitField0_ & 0x00000080) == 0x00000080) &&
+          if (((bitField0_ & 0x00000100) == 0x00000100) &&
               disconnectRequest_ != LdpDisconnectRequest.getDefaultInstance()) {
             disconnectRequest_ =
               LdpDisconnectRequest.newBuilder(disconnectRequest_).mergeFrom(value).buildPartial();
@@ -4171,11 +4384,11 @@ public final class LdpProtocol {
         } else {
           disconnectRequestBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         return this;
       }
       /**
-       * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+       * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
        */
       public Builder clearDisconnectRequest() {
         if (disconnectRequestBuilder_ == null) {
@@ -4184,19 +4397,19 @@ public final class LdpProtocol {
         } else {
           disconnectRequestBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
       /**
-       * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+       * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
        */
       public LdpDisconnectRequest.Builder getDisconnectRequestBuilder() {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000100;
         onChanged();
         return getDisconnectRequestFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+       * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
        */
       public LdpDisconnectRequestOrBuilder getDisconnectRequestOrBuilder() {
         if (disconnectRequestBuilder_ != null) {
@@ -4206,7 +4419,7 @@ public final class LdpProtocol {
         }
       }
       /**
-       * <code>optional .LdpDisconnectRequest DisconnectRequest = 8;</code>
+       * <code>optional .LdpDisconnectRequest DisconnectRequest = 9;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           LdpDisconnectRequest, LdpDisconnectRequest.Builder, LdpDisconnectRequestOrBuilder>
@@ -4325,7 +4538,7 @@ public final class LdpProtocol {
       return LdpProtocol.internal_static_LdpPreparableInfoRequest_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return LdpProtocol.internal_static_LdpPreparableInfoRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -4473,7 +4686,7 @@ public final class LdpProtocol {
 
     @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -4488,7 +4701,7 @@ public final class LdpProtocol {
         return LdpProtocol.internal_static_LdpPreparableInfoRequest_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return LdpProtocol.internal_static_LdpPreparableInfoRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -4501,7 +4714,7 @@ public final class LdpProtocol {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -4649,23 +4862,23 @@ public final class LdpProtocol {
   public interface LdpPreparableInfoResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 ScreenWidth = 1 [default = 0];
+    // optional int32 ScreenWidth = 1;
     /**
-     * <code>optional int32 ScreenWidth = 1 [default = 0];</code>
+     * <code>optional int32 ScreenWidth = 1;</code>
      */
     boolean hasScreenWidth();
     /**
-     * <code>optional int32 ScreenWidth = 1 [default = 0];</code>
+     * <code>optional int32 ScreenWidth = 1;</code>
      */
     int getScreenWidth();
 
-    // optional int32 ScreenHeight = 2 [default = 0];
+    // optional int32 ScreenHeight = 2;
     /**
-     * <code>optional int32 ScreenHeight = 2 [default = 0];</code>
+     * <code>optional int32 ScreenHeight = 2;</code>
      */
     boolean hasScreenHeight();
     /**
-     * <code>optional int32 ScreenHeight = 2 [default = 0];</code>
+     * <code>optional int32 ScreenHeight = 2;</code>
      */
     int getScreenHeight();
   }
@@ -4747,7 +4960,7 @@ public final class LdpProtocol {
       return LdpProtocol.internal_static_LdpPreparableInfoResponse_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return LdpProtocol.internal_static_LdpPreparableInfoResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -4770,33 +4983,33 @@ public final class LdpProtocol {
     }
 
     private int bitField0_;
-    // optional int32 ScreenWidth = 1 [default = 0];
+    // optional int32 ScreenWidth = 1;
     public static final int SCREENWIDTH_FIELD_NUMBER = 1;
     private int screenWidth_;
     /**
-     * <code>optional int32 ScreenWidth = 1 [default = 0];</code>
+     * <code>optional int32 ScreenWidth = 1;</code>
      */
     public boolean hasScreenWidth() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 ScreenWidth = 1 [default = 0];</code>
+     * <code>optional int32 ScreenWidth = 1;</code>
      */
     public int getScreenWidth() {
       return screenWidth_;
     }
 
-    // optional int32 ScreenHeight = 2 [default = 0];
+    // optional int32 ScreenHeight = 2;
     public static final int SCREENHEIGHT_FIELD_NUMBER = 2;
     private int screenHeight_;
     /**
-     * <code>optional int32 ScreenHeight = 2 [default = 0];</code>
+     * <code>optional int32 ScreenHeight = 2;</code>
      */
     public boolean hasScreenHeight() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 ScreenHeight = 2 [default = 0];</code>
+     * <code>optional int32 ScreenHeight = 2;</code>
      */
     public int getScreenHeight() {
       return screenHeight_;
@@ -4915,7 +5128,7 @@ public final class LdpProtocol {
 
     @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -4930,7 +5143,7 @@ public final class LdpProtocol {
         return LdpProtocol.internal_static_LdpPreparableInfoResponse_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return LdpProtocol.internal_static_LdpPreparableInfoResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -4943,7 +5156,7 @@ public final class LdpProtocol {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -5046,22 +5259,22 @@ public final class LdpProtocol {
       }
       private int bitField0_;
 
-      // optional int32 ScreenWidth = 1 [default = 0];
+      // optional int32 ScreenWidth = 1;
       private int screenWidth_ ;
       /**
-       * <code>optional int32 ScreenWidth = 1 [default = 0];</code>
+       * <code>optional int32 ScreenWidth = 1;</code>
        */
       public boolean hasScreenWidth() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 ScreenWidth = 1 [default = 0];</code>
+       * <code>optional int32 ScreenWidth = 1;</code>
        */
       public int getScreenWidth() {
         return screenWidth_;
       }
       /**
-       * <code>optional int32 ScreenWidth = 1 [default = 0];</code>
+       * <code>optional int32 ScreenWidth = 1;</code>
        */
       public Builder setScreenWidth(int value) {
         bitField0_ |= 0x00000001;
@@ -5070,7 +5283,7 @@ public final class LdpProtocol {
         return this;
       }
       /**
-       * <code>optional int32 ScreenWidth = 1 [default = 0];</code>
+       * <code>optional int32 ScreenWidth = 1;</code>
        */
       public Builder clearScreenWidth() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -5079,22 +5292,22 @@ public final class LdpProtocol {
         return this;
       }
 
-      // optional int32 ScreenHeight = 2 [default = 0];
+      // optional int32 ScreenHeight = 2;
       private int screenHeight_ ;
       /**
-       * <code>optional int32 ScreenHeight = 2 [default = 0];</code>
+       * <code>optional int32 ScreenHeight = 2;</code>
        */
       public boolean hasScreenHeight() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 ScreenHeight = 2 [default = 0];</code>
+       * <code>optional int32 ScreenHeight = 2;</code>
        */
       public int getScreenHeight() {
         return screenHeight_;
       }
       /**
-       * <code>optional int32 ScreenHeight = 2 [default = 0];</code>
+       * <code>optional int32 ScreenHeight = 2;</code>
        */
       public Builder setScreenHeight(int value) {
         bitField0_ |= 0x00000002;
@@ -5103,7 +5316,7 @@ public final class LdpProtocol {
         return this;
       }
       /**
-       * <code>optional int32 ScreenHeight = 2 [default = 0];</code>
+       * <code>optional int32 ScreenHeight = 2;</code>
        */
       public Builder clearScreenHeight() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -5126,43 +5339,43 @@ public final class LdpProtocol {
   public interface LdpRectangleOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 Left = 1 [default = 0];
+    // required int32 Left = 1;
     /**
-     * <code>optional int32 Left = 1 [default = 0];</code>
+     * <code>required int32 Left = 1;</code>
      */
     boolean hasLeft();
     /**
-     * <code>optional int32 Left = 1 [default = 0];</code>
+     * <code>required int32 Left = 1;</code>
      */
     int getLeft();
 
-    // optional int32 Top = 2 [default = 0];
+    // required int32 Top = 2;
     /**
-     * <code>optional int32 Top = 2 [default = 0];</code>
+     * <code>required int32 Top = 2;</code>
      */
     boolean hasTop();
     /**
-     * <code>optional int32 Top = 2 [default = 0];</code>
+     * <code>required int32 Top = 2;</code>
      */
     int getTop();
 
-    // optional int32 Right = 3 [default = 0];
+    // required int32 Right = 3;
     /**
-     * <code>optional int32 Right = 3 [default = 0];</code>
+     * <code>required int32 Right = 3;</code>
      */
     boolean hasRight();
     /**
-     * <code>optional int32 Right = 3 [default = 0];</code>
+     * <code>required int32 Right = 3;</code>
      */
     int getRight();
 
-    // optional int32 Bottom = 4 [default = 0];
+    // required int32 Bottom = 4;
     /**
-     * <code>optional int32 Bottom = 4 [default = 0];</code>
+     * <code>required int32 Bottom = 4;</code>
      */
     boolean hasBottom();
     /**
-     * <code>optional int32 Bottom = 4 [default = 0];</code>
+     * <code>required int32 Bottom = 4;</code>
      */
     int getBottom();
   }
@@ -5254,7 +5467,7 @@ public final class LdpProtocol {
       return LdpProtocol.internal_static_LdpRectangle_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return LdpProtocol.internal_static_LdpRectangle_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -5277,65 +5490,65 @@ public final class LdpProtocol {
     }
 
     private int bitField0_;
-    // optional int32 Left = 1 [default = 0];
+    // required int32 Left = 1;
     public static final int LEFT_FIELD_NUMBER = 1;
     private int left_;
     /**
-     * <code>optional int32 Left = 1 [default = 0];</code>
+     * <code>required int32 Left = 1;</code>
      */
     public boolean hasLeft() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 Left = 1 [default = 0];</code>
+     * <code>required int32 Left = 1;</code>
      */
     public int getLeft() {
       return left_;
     }
 
-    // optional int32 Top = 2 [default = 0];
+    // required int32 Top = 2;
     public static final int TOP_FIELD_NUMBER = 2;
     private int top_;
     /**
-     * <code>optional int32 Top = 2 [default = 0];</code>
+     * <code>required int32 Top = 2;</code>
      */
     public boolean hasTop() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 Top = 2 [default = 0];</code>
+     * <code>required int32 Top = 2;</code>
      */
     public int getTop() {
       return top_;
     }
 
-    // optional int32 Right = 3 [default = 0];
+    // required int32 Right = 3;
     public static final int RIGHT_FIELD_NUMBER = 3;
     private int right_;
     /**
-     * <code>optional int32 Right = 3 [default = 0];</code>
+     * <code>required int32 Right = 3;</code>
      */
     public boolean hasRight() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 Right = 3 [default = 0];</code>
+     * <code>required int32 Right = 3;</code>
      */
     public int getRight() {
       return right_;
     }
 
-    // optional int32 Bottom = 4 [default = 0];
+    // required int32 Bottom = 4;
     public static final int BOTTOM_FIELD_NUMBER = 4;
     private int bottom_;
     /**
-     * <code>optional int32 Bottom = 4 [default = 0];</code>
+     * <code>required int32 Bottom = 4;</code>
      */
     public boolean hasBottom() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>optional int32 Bottom = 4 [default = 0];</code>
+     * <code>required int32 Bottom = 4;</code>
      */
     public int getBottom() {
       return bottom_;
@@ -5352,6 +5565,22 @@ public final class LdpProtocol {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (!hasLeft()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTop()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRight()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBottom()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -5470,7 +5699,7 @@ public final class LdpProtocol {
 
     @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -5485,7 +5714,7 @@ public final class LdpProtocol {
         return LdpProtocol.internal_static_LdpRectangle_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return LdpProtocol.internal_static_LdpRectangle_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -5498,7 +5727,7 @@ public final class LdpProtocol {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -5597,6 +5826,22 @@ public final class LdpProtocol {
       }
 
       public final boolean isInitialized() {
+        if (!hasLeft()) {
+          
+          return false;
+        }
+        if (!hasTop()) {
+          
+          return false;
+        }
+        if (!hasRight()) {
+          
+          return false;
+        }
+        if (!hasBottom()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -5619,22 +5864,22 @@ public final class LdpProtocol {
       }
       private int bitField0_;
 
-      // optional int32 Left = 1 [default = 0];
+      // required int32 Left = 1;
       private int left_ ;
       /**
-       * <code>optional int32 Left = 1 [default = 0];</code>
+       * <code>required int32 Left = 1;</code>
        */
       public boolean hasLeft() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 Left = 1 [default = 0];</code>
+       * <code>required int32 Left = 1;</code>
        */
       public int getLeft() {
         return left_;
       }
       /**
-       * <code>optional int32 Left = 1 [default = 0];</code>
+       * <code>required int32 Left = 1;</code>
        */
       public Builder setLeft(int value) {
         bitField0_ |= 0x00000001;
@@ -5643,7 +5888,7 @@ public final class LdpProtocol {
         return this;
       }
       /**
-       * <code>optional int32 Left = 1 [default = 0];</code>
+       * <code>required int32 Left = 1;</code>
        */
       public Builder clearLeft() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -5652,22 +5897,22 @@ public final class LdpProtocol {
         return this;
       }
 
-      // optional int32 Top = 2 [default = 0];
+      // required int32 Top = 2;
       private int top_ ;
       /**
-       * <code>optional int32 Top = 2 [default = 0];</code>
+       * <code>required int32 Top = 2;</code>
        */
       public boolean hasTop() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 Top = 2 [default = 0];</code>
+       * <code>required int32 Top = 2;</code>
        */
       public int getTop() {
         return top_;
       }
       /**
-       * <code>optional int32 Top = 2 [default = 0];</code>
+       * <code>required int32 Top = 2;</code>
        */
       public Builder setTop(int value) {
         bitField0_ |= 0x00000002;
@@ -5676,7 +5921,7 @@ public final class LdpProtocol {
         return this;
       }
       /**
-       * <code>optional int32 Top = 2 [default = 0];</code>
+       * <code>required int32 Top = 2;</code>
        */
       public Builder clearTop() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -5685,22 +5930,22 @@ public final class LdpProtocol {
         return this;
       }
 
-      // optional int32 Right = 3 [default = 0];
+      // required int32 Right = 3;
       private int right_ ;
       /**
-       * <code>optional int32 Right = 3 [default = 0];</code>
+       * <code>required int32 Right = 3;</code>
        */
       public boolean hasRight() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional int32 Right = 3 [default = 0];</code>
+       * <code>required int32 Right = 3;</code>
        */
       public int getRight() {
         return right_;
       }
       /**
-       * <code>optional int32 Right = 3 [default = 0];</code>
+       * <code>required int32 Right = 3;</code>
        */
       public Builder setRight(int value) {
         bitField0_ |= 0x00000004;
@@ -5709,7 +5954,7 @@ public final class LdpProtocol {
         return this;
       }
       /**
-       * <code>optional int32 Right = 3 [default = 0];</code>
+       * <code>required int32 Right = 3;</code>
        */
       public Builder clearRight() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -5718,22 +5963,22 @@ public final class LdpProtocol {
         return this;
       }
 
-      // optional int32 Bottom = 4 [default = 0];
+      // required int32 Bottom = 4;
       private int bottom_ ;
       /**
-       * <code>optional int32 Bottom = 4 [default = 0];</code>
+       * <code>required int32 Bottom = 4;</code>
        */
       public boolean hasBottom() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>optional int32 Bottom = 4 [default = 0];</code>
+       * <code>required int32 Bottom = 4;</code>
        */
       public int getBottom() {
         return bottom_;
       }
       /**
-       * <code>optional int32 Bottom = 4 [default = 0];</code>
+       * <code>required int32 Bottom = 4;</code>
        */
       public Builder setBottom(int value) {
         bitField0_ |= 0x00000008;
@@ -5742,7 +5987,7 @@ public final class LdpProtocol {
         return this;
       }
       /**
-       * <code>optional int32 Bottom = 4 [default = 0];</code>
+       * <code>required int32 Bottom = 4;</code>
        */
       public Builder clearBottom() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -5762,72 +6007,28 @@ public final class LdpProtocol {
     // @@protoc_insertion_point(class_scope:LdpRectangle)
   }
 
-  public interface LdpScreenDataOrBuilder
+  public interface LdpScreenRequestOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
-
-    // optional bytes CompressedScreen = 1;
-    /**
-     * <code>optional bytes CompressedScreen = 1;</code>
-     */
-    boolean hasCompressedScreen();
-    /**
-     * <code>optional bytes CompressedScreen = 1;</code>
-     */
-    com.google.protobuf.ByteString getCompressedScreen();
-
-    // optional int32 BaseLenght = 2 [default = 0];
-    /**
-     * <code>optional int32 BaseLenght = 2 [default = 0];</code>
-     */
-    boolean hasBaseLenght();
-    /**
-     * <code>optional int32 BaseLenght = 2 [default = 0];</code>
-     */
-    int getBaseLenght();
-
-    // optional int32 BlockPosition = 3 [default = 0];
-    /**
-     * <code>optional int32 BlockPosition = 3 [default = 0];</code>
-     */
-    boolean hasBlockPosition();
-    /**
-     * <code>optional int32 BlockPosition = 3 [default = 0];</code>
-     */
-    int getBlockPosition();
-
-    // optional .LdpRectangle Rect = 4;
-    /**
-     * <code>optional .LdpRectangle Rect = 4;</code>
-     */
-    boolean hasRect();
-    /**
-     * <code>optional .LdpRectangle Rect = 4;</code>
-     */
-    LdpRectangle getRect();
-    /**
-     * <code>optional .LdpRectangle Rect = 4;</code>
-     */
-    LdpRectangleOrBuilder getRectOrBuilder();
   }
   /**
-   * Protobuf type {@code LdpScreenData}
+   * Protobuf type {@code LdpScreenRequest}
    */
-  public static final class LdpScreenData extends
+  public static final class LdpScreenRequest extends
       com.google.protobuf.GeneratedMessage
-      implements LdpScreenDataOrBuilder {
-    // Use LdpScreenData.newBuilder() to construct.
-    private LdpScreenData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      implements LdpScreenRequestOrBuilder {
+    // Use LdpScreenRequest.newBuilder() to construct.
+    private LdpScreenRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private LdpScreenData(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private LdpScreenRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final LdpScreenData defaultInstance;
-    public static LdpScreenData getDefaultInstance() {
+    private static final LdpScreenRequest defaultInstance;
+    public static LdpScreenRequest getDefaultInstance() {
       return defaultInstance;
     }
 
-    public LdpScreenData getDefaultInstanceForType() {
+    public LdpScreenRequest getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -5837,7 +6038,350 @@ public final class LdpProtocol {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private LdpScreenData(
+    private LdpScreenRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return LdpProtocol.internal_static_LdpScreenRequest_descriptor;
+    }
+
+    protected FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return LdpProtocol.internal_static_LdpScreenRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              LdpScreenRequest.class, Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<LdpScreenRequest> PARSER =
+        new com.google.protobuf.AbstractParser<LdpScreenRequest>() {
+      public LdpScreenRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new LdpScreenRequest(input, extensionRegistry);
+      }
+    };
+
+    @Override
+    public com.google.protobuf.Parser<LdpScreenRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @Override
+    protected Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static LdpScreenRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static LdpScreenRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static LdpScreenRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static LdpScreenRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static LdpScreenRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static LdpScreenRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static LdpScreenRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static LdpScreenRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static LdpScreenRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static LdpScreenRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(LdpScreenRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @Override
+    protected Builder newBuilderForType(
+        BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code LdpScreenRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements LdpScreenRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return LdpProtocol.internal_static_LdpScreenRequest_descriptor;
+      }
+
+      protected FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return LdpProtocol.internal_static_LdpScreenRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                LdpScreenRequest.class, Builder.class);
+      }
+
+      // Construct using LdpProtocol.LdpScreenRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return LdpProtocol.internal_static_LdpScreenRequest_descriptor;
+      }
+
+      public LdpScreenRequest getDefaultInstanceForType() {
+        return LdpScreenRequest.getDefaultInstance();
+      }
+
+      public LdpScreenRequest build() {
+        LdpScreenRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public LdpScreenRequest buildPartial() {
+        LdpScreenRequest result = new LdpScreenRequest(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof LdpScreenRequest) {
+          return mergeFrom((LdpScreenRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(LdpScreenRequest other) {
+        if (other == LdpScreenRequest.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        LdpScreenRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (LdpScreenRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:LdpScreenRequest)
+    }
+
+    static {
+      defaultInstance = new LdpScreenRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:LdpScreenRequest)
+  }
+
+  public interface LdpScreenResponseOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required bytes CompressedScreen = 1;
+    /**
+     * <code>required bytes CompressedScreen = 1;</code>
+     */
+    boolean hasCompressedScreen();
+    /**
+     * <code>required bytes CompressedScreen = 1;</code>
+     */
+    com.google.protobuf.ByteString getCompressedScreen();
+
+    // required int32 BaseLenght = 2;
+    /**
+     * <code>required int32 BaseLenght = 2;</code>
+     */
+    boolean hasBaseLenght();
+    /**
+     * <code>required int32 BaseLenght = 2;</code>
+     */
+    int getBaseLenght();
+
+    // required .LdpRectangle Rect = 3;
+    /**
+     * <code>required .LdpRectangle Rect = 3;</code>
+     */
+    boolean hasRect();
+    /**
+     * <code>required .LdpRectangle Rect = 3;</code>
+     */
+    LdpRectangle getRect();
+    /**
+     * <code>required .LdpRectangle Rect = 3;</code>
+     */
+    LdpRectangleOrBuilder getRectOrBuilder();
+  }
+  /**
+   * Protobuf type {@code LdpScreenResponse}
+   */
+  public static final class LdpScreenResponse extends
+      com.google.protobuf.GeneratedMessage
+      implements LdpScreenResponseOrBuilder {
+    // Use LdpScreenResponse.newBuilder() to construct.
+    private LdpScreenResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private LdpScreenResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final LdpScreenResponse defaultInstance;
+    public static LdpScreenResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public LdpScreenResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private LdpScreenResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5870,14 +6414,9 @@ public final class LdpProtocol {
               baseLenght_ = input.readInt32();
               break;
             }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              blockPosition_ = input.readInt32();
-              break;
-            }
-            case 34: {
+            case 26: {
               LdpRectangle.Builder subBuilder = null;
-              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
                 subBuilder = rect_.toBuilder();
               }
               rect_ = input.readMessage(LdpRectangle.PARSER, extensionRegistry);
@@ -5885,7 +6424,7 @@ public final class LdpProtocol {
                 subBuilder.mergeFrom(rect_);
                 rect_ = subBuilder.buildPartial();
               }
-              bitField0_ |= 0x00000008;
+              bitField0_ |= 0x00000004;
               break;
             }
           }
@@ -5902,97 +6441,81 @@ public final class LdpProtocol {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return LdpProtocol.internal_static_LdpScreenData_descriptor;
+      return LdpProtocol.internal_static_LdpScreenResponse_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return LdpProtocol.internal_static_LdpScreenData_fieldAccessorTable
+      return LdpProtocol.internal_static_LdpScreenResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              LdpScreenData.class, Builder.class);
+              LdpScreenResponse.class, Builder.class);
     }
 
-    public static com.google.protobuf.Parser<LdpScreenData> PARSER =
-        new com.google.protobuf.AbstractParser<LdpScreenData>() {
-      public LdpScreenData parsePartialFrom(
+    public static com.google.protobuf.Parser<LdpScreenResponse> PARSER =
+        new com.google.protobuf.AbstractParser<LdpScreenResponse>() {
+      public LdpScreenResponse parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new LdpScreenData(input, extensionRegistry);
+        return new LdpScreenResponse(input, extensionRegistry);
       }
     };
 
     @Override
-    public com.google.protobuf.Parser<LdpScreenData> getParserForType() {
+    public com.google.protobuf.Parser<LdpScreenResponse> getParserForType() {
       return PARSER;
     }
 
     private int bitField0_;
-    // optional bytes CompressedScreen = 1;
+    // required bytes CompressedScreen = 1;
     public static final int COMPRESSEDSCREEN_FIELD_NUMBER = 1;
     private com.google.protobuf.ByteString compressedScreen_;
     /**
-     * <code>optional bytes CompressedScreen = 1;</code>
+     * <code>required bytes CompressedScreen = 1;</code>
      */
     public boolean hasCompressedScreen() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional bytes CompressedScreen = 1;</code>
+     * <code>required bytes CompressedScreen = 1;</code>
      */
     public com.google.protobuf.ByteString getCompressedScreen() {
       return compressedScreen_;
     }
 
-    // optional int32 BaseLenght = 2 [default = 0];
+    // required int32 BaseLenght = 2;
     public static final int BASELENGHT_FIELD_NUMBER = 2;
     private int baseLenght_;
     /**
-     * <code>optional int32 BaseLenght = 2 [default = 0];</code>
+     * <code>required int32 BaseLenght = 2;</code>
      */
     public boolean hasBaseLenght() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 BaseLenght = 2 [default = 0];</code>
+     * <code>required int32 BaseLenght = 2;</code>
      */
     public int getBaseLenght() {
       return baseLenght_;
     }
 
-    // optional int32 BlockPosition = 3 [default = 0];
-    public static final int BLOCKPOSITION_FIELD_NUMBER = 3;
-    private int blockPosition_;
+    // required .LdpRectangle Rect = 3;
+    public static final int RECT_FIELD_NUMBER = 3;
+    private LdpRectangle rect_;
     /**
-     * <code>optional int32 BlockPosition = 3 [default = 0];</code>
+     * <code>required .LdpRectangle Rect = 3;</code>
      */
-    public boolean hasBlockPosition() {
+    public boolean hasRect() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional int32 BlockPosition = 3 [default = 0];</code>
-     */
-    public int getBlockPosition() {
-      return blockPosition_;
-    }
-
-    // optional .LdpRectangle Rect = 4;
-    public static final int RECT_FIELD_NUMBER = 4;
-    private LdpRectangle rect_;
-    /**
-     * <code>optional .LdpRectangle Rect = 4;</code>
-     */
-    public boolean hasRect() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>optional .LdpRectangle Rect = 4;</code>
+     * <code>required .LdpRectangle Rect = 3;</code>
      */
     public LdpRectangle getRect() {
       return rect_;
     }
     /**
-     * <code>optional .LdpRectangle Rect = 4;</code>
+     * <code>required .LdpRectangle Rect = 3;</code>
      */
     public LdpRectangleOrBuilder getRectOrBuilder() {
       return rect_;
@@ -6001,7 +6524,6 @@ public final class LdpProtocol {
     private void initFields() {
       compressedScreen_ = com.google.protobuf.ByteString.EMPTY;
       baseLenght_ = 0;
-      blockPosition_ = 0;
       rect_ = LdpRectangle.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
@@ -6009,6 +6531,22 @@ public final class LdpProtocol {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (!hasCompressedScreen()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBaseLenght()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasRect()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getRect().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -6023,10 +6561,7 @@ public final class LdpProtocol {
         output.writeInt32(2, baseLenght_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, blockPosition_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeMessage(4, rect_);
+        output.writeMessage(3, rect_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -6047,11 +6582,7 @@ public final class LdpProtocol {
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, blockPosition_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, rect_);
+          .computeMessageSize(3, rect_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -6065,53 +6596,53 @@ public final class LdpProtocol {
       return super.writeReplace();
     }
 
-    public static LdpScreenData parseFrom(
+    public static LdpScreenResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static LdpScreenData parseFrom(
+    public static LdpScreenResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static LdpScreenData parseFrom(byte[] data)
+    public static LdpScreenResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static LdpScreenData parseFrom(
+    public static LdpScreenResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static LdpScreenData parseFrom(java.io.InputStream input)
+    public static LdpScreenResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static LdpScreenData parseFrom(
+    public static LdpScreenResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static LdpScreenData parseDelimitedFrom(java.io.InputStream input)
+    public static LdpScreenResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static LdpScreenData parseDelimitedFrom(
+    public static LdpScreenResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static LdpScreenData parseFrom(
+    public static LdpScreenResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static LdpScreenData parseFrom(
+    public static LdpScreenResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6120,42 +6651,42 @@ public final class LdpProtocol {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(LdpScreenData prototype) {
+    public static Builder newBuilder(LdpScreenResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
 
     @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
     /**
-     * Protobuf type {@code LdpScreenData}
+     * Protobuf type {@code LdpScreenResponse}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements LdpScreenDataOrBuilder {
+       implements LdpScreenResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return LdpProtocol.internal_static_LdpScreenData_descriptor;
+        return LdpProtocol.internal_static_LdpScreenResponse_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return LdpProtocol.internal_static_LdpScreenData_fieldAccessorTable
+        return LdpProtocol.internal_static_LdpScreenResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                LdpScreenData.class, Builder.class);
+                LdpScreenResponse.class, Builder.class);
       }
 
-      // Construct using LdpProtocol.LdpScreenData.newBuilder()
+      // Construct using LdpProtocol.LdpScreenResponse.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -6174,14 +6705,12 @@ public final class LdpProtocol {
         bitField0_ = (bitField0_ & ~0x00000001);
         baseLenght_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
-        blockPosition_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
         if (rectBuilder_ == null) {
           rect_ = LdpRectangle.getDefaultInstance();
         } else {
           rectBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -6191,23 +6720,23 @@ public final class LdpProtocol {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return LdpProtocol.internal_static_LdpScreenData_descriptor;
+        return LdpProtocol.internal_static_LdpScreenResponse_descriptor;
       }
 
-      public LdpScreenData getDefaultInstanceForType() {
-        return LdpScreenData.getDefaultInstance();
+      public LdpScreenResponse getDefaultInstanceForType() {
+        return LdpScreenResponse.getDefaultInstance();
       }
 
-      public LdpScreenData build() {
-        LdpScreenData result = buildPartial();
+      public LdpScreenResponse build() {
+        LdpScreenResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public LdpScreenData buildPartial() {
-        LdpScreenData result = new LdpScreenData(this);
+      public LdpScreenResponse buildPartial() {
+        LdpScreenResponse result = new LdpScreenResponse(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -6221,10 +6750,6 @@ public final class LdpProtocol {
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.blockPosition_ = blockPosition_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
         if (rectBuilder_ == null) {
           result.rect_ = rect_;
         } else {
@@ -6236,24 +6761,21 @@ public final class LdpProtocol {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof LdpScreenData) {
-          return mergeFrom((LdpScreenData)other);
+        if (other instanceof LdpScreenResponse) {
+          return mergeFrom((LdpScreenResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(LdpScreenData other) {
-        if (other == LdpScreenData.getDefaultInstance()) return this;
+      public Builder mergeFrom(LdpScreenResponse other) {
+        if (other == LdpScreenResponse.getDefaultInstance()) return this;
         if (other.hasCompressedScreen()) {
           setCompressedScreen(other.getCompressedScreen());
         }
         if (other.hasBaseLenght()) {
           setBaseLenght(other.getBaseLenght());
-        }
-        if (other.hasBlockPosition()) {
-          setBlockPosition(other.getBlockPosition());
         }
         if (other.hasRect()) {
           mergeRect(other.getRect());
@@ -6263,6 +6785,22 @@ public final class LdpProtocol {
       }
 
       public final boolean isInitialized() {
+        if (!hasCompressedScreen()) {
+          
+          return false;
+        }
+        if (!hasBaseLenght()) {
+          
+          return false;
+        }
+        if (!hasRect()) {
+          
+          return false;
+        }
+        if (!getRect().isInitialized()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -6270,11 +6808,11 @@ public final class LdpProtocol {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        LdpScreenData parsedMessage = null;
+        LdpScreenResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (LdpScreenData) e.getUnfinishedMessage();
+          parsedMessage = (LdpScreenResponse) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -6285,22 +6823,22 @@ public final class LdpProtocol {
       }
       private int bitField0_;
 
-      // optional bytes CompressedScreen = 1;
+      // required bytes CompressedScreen = 1;
       private com.google.protobuf.ByteString compressedScreen_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>optional bytes CompressedScreen = 1;</code>
+       * <code>required bytes CompressedScreen = 1;</code>
        */
       public boolean hasCompressedScreen() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional bytes CompressedScreen = 1;</code>
+       * <code>required bytes CompressedScreen = 1;</code>
        */
       public com.google.protobuf.ByteString getCompressedScreen() {
         return compressedScreen_;
       }
       /**
-       * <code>optional bytes CompressedScreen = 1;</code>
+       * <code>required bytes CompressedScreen = 1;</code>
        */
       public Builder setCompressedScreen(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -6312,7 +6850,7 @@ public final class LdpProtocol {
         return this;
       }
       /**
-       * <code>optional bytes CompressedScreen = 1;</code>
+       * <code>required bytes CompressedScreen = 1;</code>
        */
       public Builder clearCompressedScreen() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -6321,22 +6859,22 @@ public final class LdpProtocol {
         return this;
       }
 
-      // optional int32 BaseLenght = 2 [default = 0];
+      // required int32 BaseLenght = 2;
       private int baseLenght_ ;
       /**
-       * <code>optional int32 BaseLenght = 2 [default = 0];</code>
+       * <code>required int32 BaseLenght = 2;</code>
        */
       public boolean hasBaseLenght() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 BaseLenght = 2 [default = 0];</code>
+       * <code>required int32 BaseLenght = 2;</code>
        */
       public int getBaseLenght() {
         return baseLenght_;
       }
       /**
-       * <code>optional int32 BaseLenght = 2 [default = 0];</code>
+       * <code>required int32 BaseLenght = 2;</code>
        */
       public Builder setBaseLenght(int value) {
         bitField0_ |= 0x00000002;
@@ -6345,7 +6883,7 @@ public final class LdpProtocol {
         return this;
       }
       /**
-       * <code>optional int32 BaseLenght = 2 [default = 0];</code>
+       * <code>required int32 BaseLenght = 2;</code>
        */
       public Builder clearBaseLenght() {
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -6354,51 +6892,18 @@ public final class LdpProtocol {
         return this;
       }
 
-      // optional int32 BlockPosition = 3 [default = 0];
-      private int blockPosition_ ;
-      /**
-       * <code>optional int32 BlockPosition = 3 [default = 0];</code>
-       */
-      public boolean hasBlockPosition() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional int32 BlockPosition = 3 [default = 0];</code>
-       */
-      public int getBlockPosition() {
-        return blockPosition_;
-      }
-      /**
-       * <code>optional int32 BlockPosition = 3 [default = 0];</code>
-       */
-      public Builder setBlockPosition(int value) {
-        bitField0_ |= 0x00000004;
-        blockPosition_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 BlockPosition = 3 [default = 0];</code>
-       */
-      public Builder clearBlockPosition() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        blockPosition_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional .LdpRectangle Rect = 4;
+      // required .LdpRectangle Rect = 3;
       private LdpRectangle rect_ = LdpRectangle.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           LdpRectangle, LdpRectangle.Builder, LdpRectangleOrBuilder> rectBuilder_;
       /**
-       * <code>optional .LdpRectangle Rect = 4;</code>
+       * <code>required .LdpRectangle Rect = 3;</code>
        */
       public boolean hasRect() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional .LdpRectangle Rect = 4;</code>
+       * <code>required .LdpRectangle Rect = 3;</code>
        */
       public LdpRectangle getRect() {
         if (rectBuilder_ == null) {
@@ -6408,7 +6913,7 @@ public final class LdpProtocol {
         }
       }
       /**
-       * <code>optional .LdpRectangle Rect = 4;</code>
+       * <code>required .LdpRectangle Rect = 3;</code>
        */
       public Builder setRect(LdpRectangle value) {
         if (rectBuilder_ == null) {
@@ -6420,11 +6925,11 @@ public final class LdpProtocol {
         } else {
           rectBuilder_.setMessage(value);
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional .LdpRectangle Rect = 4;</code>
+       * <code>required .LdpRectangle Rect = 3;</code>
        */
       public Builder setRect(
           LdpRectangle.Builder builderForValue) {
@@ -6434,15 +6939,15 @@ public final class LdpProtocol {
         } else {
           rectBuilder_.setMessage(builderForValue.build());
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional .LdpRectangle Rect = 4;</code>
+       * <code>required .LdpRectangle Rect = 3;</code>
        */
       public Builder mergeRect(LdpRectangle value) {
         if (rectBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
               rect_ != LdpRectangle.getDefaultInstance()) {
             rect_ =
               LdpRectangle.newBuilder(rect_).mergeFrom(value).buildPartial();
@@ -6453,11 +6958,11 @@ public final class LdpProtocol {
         } else {
           rectBuilder_.mergeFrom(value);
         }
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         return this;
       }
       /**
-       * <code>optional .LdpRectangle Rect = 4;</code>
+       * <code>required .LdpRectangle Rect = 3;</code>
        */
       public Builder clearRect() {
         if (rectBuilder_ == null) {
@@ -6466,19 +6971,19 @@ public final class LdpProtocol {
         } else {
           rectBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000008);
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
       /**
-       * <code>optional .LdpRectangle Rect = 4;</code>
+       * <code>required .LdpRectangle Rect = 3;</code>
        */
       public LdpRectangle.Builder getRectBuilder() {
-        bitField0_ |= 0x00000008;
+        bitField0_ |= 0x00000004;
         onChanged();
         return getRectFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .LdpRectangle Rect = 4;</code>
+       * <code>required .LdpRectangle Rect = 3;</code>
        */
       public LdpRectangleOrBuilder getRectOrBuilder() {
         if (rectBuilder_ != null) {
@@ -6488,7 +6993,7 @@ public final class LdpProtocol {
         }
       }
       /**
-       * <code>optional .LdpRectangle Rect = 4;</code>
+       * <code>required .LdpRectangle Rect = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           LdpRectangle, LdpRectangle.Builder, LdpRectangleOrBuilder>
@@ -6504,15 +7009,15 @@ public final class LdpProtocol {
         return rectBuilder_;
       }
 
-      // @@protoc_insertion_point(builder_scope:LdpScreenData)
+      // @@protoc_insertion_point(builder_scope:LdpScreenResponse)
     }
 
     static {
-      defaultInstance = new LdpScreenData(true);
+      defaultInstance = new LdpScreenResponse(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:LdpScreenData)
+    // @@protoc_insertion_point(class_scope:LdpScreenResponse)
   }
 
   private static com.google.protobuf.Descriptors.Descriptor
@@ -6556,10 +7061,15 @@ public final class LdpProtocol {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_LdpRectangle_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_LdpScreenData_descriptor;
+    internal_static_LdpScreenRequest_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_LdpScreenData_fieldAccessorTable;
+      internal_static_LdpScreenRequest_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_LdpScreenResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_LdpScreenResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -6570,39 +7080,40 @@ public final class LdpProtocol {
   static {
     String[] descriptorData = {
       "\n\016messages.proto\"\"\n\016LdpAuthRequest\022\020\n\010Pa" +
-      "ssword\030\001 \001(\t\"+\n\017LdpAuthResponse\022\030\n\tisSuc" +
-      "cess\030\001 \002(\010:\005false\"B\n\024LdpClientInfoReques" +
-      "t\022\n\n\002IP\030\001 \002(\t\022\n\n\002OS\030\002 \002(\t\022\022\n\nDeviceName\030" +
-      "\003 \002(\t\"8\n\024LdpDisconnectRequest\022 \n\004Type\030\001 " +
-      "\002(\0162\022.DisconnectionType\"\362\002\n\tLdpPacket\022\031\n" +
-      "\004Type\030\001 \002(\0162\013.PacketType\022$\n\013AuthRequest\030" +
-      "\002 \001(\0132\017.LdpAuthRequest\022&\n\014AuthResponse\030\003" +
-      " \001(\0132\020.LdpAuthResponse\0220\n\021ClientInfoRequ" +
-      "est\030\004 \001(\0132\025.LdpClientInfoRequest\0228\n\025Prep",
-      "arableInfoRequest\030\005 \001(\0132\031.LdpPreparableI" +
-      "nfoRequest\022:\n\026PreparableInfoResponse\030\006 \001" +
-      "(\0132\032.LdpPreparableInfoResponse\022\"\n\nScreen" +
-      "Data\030\007 \001(\0132\016.LdpScreenData\0220\n\021Disconnect" +
-      "Request\030\010 \001(\0132\025.LdpDisconnectRequest\"9\n\030" +
-      "LdpPreparableInfoRequest\022\035\n\004Type\030\001 \002(\0162\017" +
-      ".ConnectionType\"L\n\031LdpPreparableInfoResp" +
-      "onse\022\026\n\013ScreenWidth\030\001 \001(\005:\0010\022\027\n\014ScreenHe" +
-      "ight\030\002 \001(\005:\0010\"T\n\014LdpRectangle\022\017\n\004Left\030\001 " +
-      "\001(\005:\0010\022\016\n\003Top\030\002 \001(\005:\0010\022\020\n\005Right\030\003 \001(\005:\0010",
-      "\022\021\n\006Bottom\030\004 \001(\005:\0010\"w\n\rLdpScreenData\022\030\n\020" +
-      "CompressedScreen\030\001 \001(\014\022\025\n\nBaseLenght\030\002 \001" +
-      "(\005:\0010\022\030\n\rBlockPosition\030\003 \001(\005:\0010\022\033\n\004Rect\030" +
-      "\004 \001(\0132\r.LdpRectangle*G\n\016ConnectionType\022\032" +
-      "\n\026REMOTE_DESKTOP_CONTROL\020\001\022\031\n\025REMOTE_VOL" +
-      "UME_CONTROL\020\002*T\n\021DisconnectionType\022\017\n\013FR" +
-      "OM_SERVER\020\001\022\026\n\022FROM_SCREEN_THREAD\020\002\022\026\n\022F" +
-      "ROM_VOLUME_THREAD\020\003*\342\001\n\nPacketType\022\020\n\014AU" +
-      "TH_REQUEST\020\001\022\021\n\rAUTH_RESPONSE\020\002\022\027\n\023CLIEN" +
-      "T_INFO_REQUEST\020\003\022\033\n\027PREPARABLE_INFO_REQU",
-      "EST\020\004\022\034\n\030PREPARABLE_INFO_RESPONSE\020\005\022\017\n\013S" +
-      "CREEN_DATA\020\006\022\017\n\013VOLUME_DATA\020\007\022\016\n\nMOUSE_D" +
-      "ATA\020\010\022\021\n\rKEYBOARD_DATA\020\t\022\026\n\022DISCONNECT_R" +
-      "EQUEST\020\nB\017B\013LdpProtocolH\001"
+      "ssword\030\001 \001(\t\"$\n\017LdpAuthResponse\022\021\n\tisSuc" +
+      "cess\030\001 \002(\010\"B\n\024LdpClientInfoRequest\022\n\n\002IP" +
+      "\030\001 \002(\t\022\n\n\002OS\030\002 \002(\t\022\022\n\nDeviceName\030\003 \002(\t\"8" +
+      "\n\024LdpDisconnectRequest\022 \n\004Type\030\001 \002(\0162\022.D" +
+      "isconnectionType\"\244\003\n\tLdpPacket\022\031\n\004Type\030\001" +
+      " \002(\0162\013.PacketType\022$\n\013AuthRequest\030\002 \001(\0132\017" +
+      ".LdpAuthRequest\022&\n\014AuthResponse\030\003 \001(\0132\020." +
+      "LdpAuthResponse\0220\n\021ClientInfoRequest\030\004 \001" +
+      "(\0132\025.LdpClientInfoRequest\0228\n\025PreparableI",
+      "nfoRequest\030\005 \001(\0132\031.LdpPreparableInfoRequ" +
+      "est\022:\n\026PreparableInfoResponse\030\006 \001(\0132\032.Ld" +
+      "pPreparableInfoResponse\022(\n\rScreenRequest" +
+      "\030\007 \001(\0132\021.LdpScreenRequest\022*\n\016ScreenRespo" +
+      "nse\030\010 \001(\0132\022.LdpScreenResponse\0220\n\021Disconn" +
+      "ectRequest\030\t \001(\0132\025.LdpDisconnectRequest\"" +
+      "9\n\030LdpPreparableInfoRequest\022\035\n\004Type\030\001 \002(" +
+      "\0162\017.ConnectionType\"F\n\031LdpPreparableInfoR" +
+      "esponse\022\023\n\013ScreenWidth\030\001 \001(\005\022\024\n\014ScreenHe" +
+      "ight\030\002 \001(\005\"H\n\014LdpRectangle\022\014\n\004Left\030\001 \002(\005",
+      "\022\013\n\003Top\030\002 \002(\005\022\r\n\005Right\030\003 \002(\005\022\016\n\006Bottom\030\004" +
+      " \002(\005\"\022\n\020LdpScreenRequest\"^\n\021LdpScreenRes" +
+      "ponse\022\030\n\020CompressedScreen\030\001 \002(\014\022\022\n\nBaseL" +
+      "enght\030\002 \002(\005\022\033\n\004Rect\030\003 \002(\0132\r.LdpRectangle" +
+      "*G\n\016ConnectionType\022\032\n\026REMOTE_DESKTOP_CON" +
+      "TROL\020\001\022\031\n\025REMOTE_VOLUME_CONTROL\020\002*T\n\021Dis" +
+      "connectionType\022\017\n\013FROM_SERVER\020\001\022\026\n\022FROM_" +
+      "SCREEN_THREAD\020\002\022\026\n\022FROM_VOLUME_THREAD\020\003*" +
+      "\372\001\n\nPacketType\022\020\n\014AUTH_REQUEST\020\001\022\021\n\rAUTH" +
+      "_RESPONSE\020\002\022\027\n\023CLIENT_INFO_REQUEST\020\003\022\033\n\027",
+      "PREPARABLE_INFO_REQUEST\020\004\022\034\n\030PREPARABLE_" +
+      "INFO_RESPONSE\020\005\022\022\n\016SCREEN_REQUEST\020\006\022\023\n\017S" +
+      "CREEN_RESPONSE\020\007\022\017\n\013VOLUME_DATA\020\010\022\016\n\nMOU" +
+      "SE_DATA\020\t\022\021\n\rKEYBOARD_DATA\020\n\022\026\n\022DISCONNE" +
+      "CT_REQUEST\020\013B\017B\013LdpProtocolH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -6638,7 +7149,7 @@ public final class LdpProtocol {
           internal_static_LdpPacket_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_LdpPacket_descriptor,
-              new String[] { "Type", "AuthRequest", "AuthResponse", "ClientInfoRequest", "PreparableInfoRequest", "PreparableInfoResponse", "ScreenData", "DisconnectRequest", });
+              new String[] { "Type", "AuthRequest", "AuthResponse", "ClientInfoRequest", "PreparableInfoRequest", "PreparableInfoResponse", "ScreenRequest", "ScreenResponse", "DisconnectRequest", });
           internal_static_LdpPreparableInfoRequest_descriptor =
             getDescriptor().getMessageTypes().get(5);
           internal_static_LdpPreparableInfoRequest_fieldAccessorTable = new
@@ -6657,12 +7168,18 @@ public final class LdpProtocol {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_LdpRectangle_descriptor,
               new String[] { "Left", "Top", "Right", "Bottom", });
-          internal_static_LdpScreenData_descriptor =
+          internal_static_LdpScreenRequest_descriptor =
             getDescriptor().getMessageTypes().get(8);
-          internal_static_LdpScreenData_fieldAccessorTable = new
+          internal_static_LdpScreenRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_LdpScreenData_descriptor,
-              new String[] { "CompressedScreen", "BaseLenght", "BlockPosition", "Rect", });
+              internal_static_LdpScreenRequest_descriptor,
+              new String[] { });
+          internal_static_LdpScreenResponse_descriptor =
+            getDescriptor().getMessageTypes().get(9);
+          internal_static_LdpScreenResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_LdpScreenResponse_descriptor,
+              new String[] { "CompressedScreen", "BaseLenght", "Rect", });
           return null;
         }
       };

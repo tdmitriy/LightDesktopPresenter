@@ -10,6 +10,6 @@ namespace Server.Network.PacketHandler
 {
     interface ILdpPacketHandler
     {
-        void Handle(LdpPacket packet, ILdpPacketSender channel);
+        void Handle(LdpPacket packet);
     }
 }

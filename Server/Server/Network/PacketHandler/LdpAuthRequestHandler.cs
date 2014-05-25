@@ -13,6 +13,7 @@ namespace Server.Network.PacketHandler
 {
     class LdpAuthRequestHandler : ILdpPacketHandler
     {
+        private LdpServer serverHandler = LdpServer.GetInstance();
         private LdpUserSettings userSettings;
         private string password;
         public LdpAuthRequestHandler()
@@ -21,7 +22,7 @@ namespace Server.Network.PacketHandler
             password = userSettings.GetPassword;
         }
 
-        public void Handle(LdpPacket packet, ILdpPacketSender channel)
+        public void Handle(LdpPacket packet)
         {
             switch (packet.Type)
             {
@@ -36,14 +37,14 @@ namespace Server.Network.PacketHandler
                     {
                         authResponse.isSuccess = true;
                         responsePacket.AuthResponse = authResponse;
-                        channel.Send(responsePacket);
+                        serverHandler.GetSenderChannel.Send(responsePacket);
                         LdpLog.Info("Auth successfull.");
                     }
                     else
                     {
                         authResponse.isSuccess = false;
                         responsePacket.AuthResponse = authResponse;
-                        channel.Send(responsePacket);
+                        serverHandler.GetSenderChannel.Send(responsePacket);
                         LdpLog.Info("Auth failed: wrong password.");
                     }
                     break;

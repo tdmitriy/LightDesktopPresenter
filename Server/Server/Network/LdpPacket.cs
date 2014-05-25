@@ -25,8 +25,10 @@ namespace Server.Network
         public LdpPreparableInfoResponse PreparableInfoResponse { get; set; }
 
         [ProtoMember(7)]
-        public LdpScreenData ScreenData { get; set; }
+        public LdpScreenRequest ScreenRequest { get; set; }
         [ProtoMember(8)]
+        public LdpScreenResponse ScreenResponse { get; set; }
+        [ProtoMember(9)]
         public LdpDisconnectRequest DisconnectRequest { get; set; }
 
     }
@@ -41,13 +43,15 @@ namespace Server.Network
         PREPARABLE_INFO_REQUEST = 4,
         PREPARABLE_INFO_RESPONSE = 5,
 	
-		SCREEN_DATA = 6,
-		VOLUME_DATA = 7,
+		SCREEN_REQUEST = 6,
+        SCREEN_RESPONSE = 7,
+
+		VOLUME_DATA = 8,
 		
-		MOUSE_DATA = 8,
+		MOUSE_DATA = 9,
 		
-		KEYBOARD_DATA = 9,
+		KEYBOARD_DATA = 10,
 		
-		DISCONNECT_REQUEST = 10
+		DISCONNECT_REQUEST = 11
 	}
 }

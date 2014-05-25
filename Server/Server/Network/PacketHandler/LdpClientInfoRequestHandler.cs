@@ -9,7 +9,8 @@ namespace Server.Network.PacketHandler
 {
     class LdpClientInfoRequestHandler : ILdpPacketHandler
     {
-        public void Handle(LdpPacket packet, PacketSender.ILdpPacketSender channel)
+        private LdpServer serverHandler = LdpServer.GetInstance();
+        public void Handle(LdpPacket packet)
         {
             switch (packet.Type)
             {
@@ -18,6 +19,8 @@ namespace Server.Network.PacketHandler
                     LdpClientInfo.IP = clientInfo.IP;
                     LdpClientInfo.OS = clientInfo.OS;
                     LdpClientInfo.DEVICE_NAME = clientInfo.DeviceName;
+
+                    serverHandler.GetListenerChannel.RemoveListener(this);
                     break;
             }
         }

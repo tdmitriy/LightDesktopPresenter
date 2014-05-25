@@ -1,4 +1,4 @@
-package com.ldp.androidclient.utils.controls;
+package com.ldp.androidclient.utils.controls.image_view;
 
 import android.content.Context;
 import android.util.AttributeSet;

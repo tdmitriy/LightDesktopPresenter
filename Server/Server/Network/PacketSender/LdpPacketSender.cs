@@ -13,17 +13,12 @@ namespace Server.Network.PacketSender
 {
     class LdpPacketSender : ILdpPacketSender
     {
-
-        private ILdpTcpServer serverHandler;
-        public LdpPacketSender(ILdpTcpServer serverHandler)
-        {
-            this.serverHandler = serverHandler;
-        }
+        private LdpServer serverHandler = LdpServer.GetInstance();
         public void Send(LdpPacket packet)
         {
             try
             {
-                using (var stream = new NetworkStream(serverHandler.ClientChannel))
+                using (var stream = new NetworkStream(serverHandler.GetSocketChannel))
                 {
                     Serializer.SerializeWithLengthPrefix<LdpPacket>(stream, packet, PrefixStyle.Base128);
                 }

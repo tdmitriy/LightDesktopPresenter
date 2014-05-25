@@ -12,6 +12,6 @@ namespace Server.Network.PacketHandler
         void AddListener(ILdpPacketHandler listener);
         void RemoveListener(ILdpPacketHandler listener);
         void RemoveListeners();
-        void NotifyToAllListeners(LdpPacket packet, ILdpPacketSender channel);
+        void NotifyToAllListeners(LdpPacket packet);
     }
 }

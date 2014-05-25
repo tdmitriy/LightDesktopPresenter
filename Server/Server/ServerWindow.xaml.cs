@@ -21,6 +21,7 @@ using ProtoBuf;
 using Server.Properties;
 using Server.LdpThreads;
 using Server.ProtoGeneration;
+using System.Text.RegularExpressions;
 
 namespace Server
 {
@@ -29,12 +30,12 @@ namespace Server
         public ServerWindow()
         {
             InitializeComponent();
-            CheckWindowsVersion();
+            //CheckWindowsVersion();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            LdpProtoGenerator.GenerateProtoJava();
+            //LdpProtoGenerator.GenerateProtoJava();
         }
 
         private void CheckWindowsVersion()
@@ -44,7 +45,6 @@ namespace Server
                 MessageBox.Show("7");
                 return;
             }
-                
             else if (LdpUtils.IsWindows8)
             {
                 MessageBox.Show("8");

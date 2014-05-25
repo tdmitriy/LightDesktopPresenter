@@ -23,7 +23,8 @@ import com.ldp.androidclient.utils.user_preferences.LdpConnectionPreferences;
 
 import java.util.ArrayList;
 
-public class LdpActivityMainInterface extends ListActivity implements AdapterView.OnItemLongClickListener,
+public class LdpActivityMainInterface extends ListActivity implements
+        AdapterView.OnItemLongClickListener,
         DialogInterface.OnClickListener {
 
     private LdpListViewPopulator listViewPopulator;
@@ -176,6 +177,10 @@ public class LdpActivityMainInterface extends ListActivity implements AdapterVie
     private void deleteCurrentPrefs() {
         complexPreferences.remove(selectedPrefs);
         recreateListView();
+    }
+
+    protected LdpConnectionPreferences getSelectedPrefs() {
+        return selectedPrefs;
     }
 
 }

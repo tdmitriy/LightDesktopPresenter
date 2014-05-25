@@ -10,7 +10,7 @@ namespace Server.Network.PacketHandler
 {
     class LdpPreparableInfoResponseHandler : ILdpPacketHandler
     {
-        public void Handle(LdpPacket packet, ILdpPacketSender channel)
+        public void Handle(LdpPacket packet)
         {
             switch (packet.Type)
             {

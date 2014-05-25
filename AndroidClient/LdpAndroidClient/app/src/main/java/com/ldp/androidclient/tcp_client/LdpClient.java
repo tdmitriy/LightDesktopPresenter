@@ -2,7 +2,8 @@ package com.ldp.androidclient.tcp_client;
 
 import android.content.Context;
 import android.util.Log;
-import com.ldp.androidclient.network.packet_handler.LdpConnectionHandler;
+
+import com.ldp.androidclient.connection_handler.LdpConnectionHandler;
 import com.ldp.androidclient.protocol.LdpProtocol;
 import com.ldp.androidclient.tcp_client.packet_listener.LdpPacketListener;
 import com.ldp.androidclient.tcp_client.packet_sender.LdpPacketSender;
@@ -26,8 +27,10 @@ public class LdpClient implements ILdpClient {
     private LdpConnectionPreferences prefs;
     private LdpProtocol.ConnectionType type;
 
+    private boolean settingsInitialized = false;
+
     public static void initSingleInstance(Context context) {
-        if(instance == null) {
+        if (instance == null) {
             instance = new LdpClient();
             LdpClient.context = context;
         }
@@ -45,10 +48,14 @@ public class LdpClient implements ILdpClient {
     public void initSettings(LdpConnectionPreferences prefs, LdpProtocol.ConnectionType type) {
         this.prefs = prefs;
         this.type = type;
+        settingsInitialized = true;
     }
+
     @Override
     public void connect(String ipAddress, int port) {
         try {
+            if (!settingsInitialized)
+                throw new ExceptionInInitializerError("initSettings is not initialized.");
             disconnect();
             channel = new Socket(ipAddress, port);
             addClientHandlers();
@@ -57,6 +64,9 @@ public class LdpClient implements ILdpClient {
             Log.e(TAG, e.getMessage());
             LdpMessageBox.show(context, "Unable to connect to: " + ipAddress,
                     LdpMessageBox.DialogType.ERROR);
+        } catch (ExceptionInInitializerError initErr) {
+            disconnect();
+            Log.e(TAG, initErr.getMessage());
         }
     }
 
@@ -73,6 +83,7 @@ public class LdpClient implements ILdpClient {
         }
 
         if (packetListener != null && packetSender != null) {
+            packetListener.removeListeners();
             packetListener = null;
             packetSender = null;
         }
@@ -87,17 +98,17 @@ public class LdpClient implements ILdpClient {
     }
 
     @Override
-    public LdpPacketListener getPacketListener() {
+    public LdpPacketListener getListenerChannel() {
         return packetListener;
     }
 
     @Override
-    public LdpPacketSender getPacketSender() {
+    public LdpPacketSender getSendingChannel() {
         return packetSender;
     }
 
     @Override
-    public Socket getChannel() {
+    public Socket getSocketChannel() {
         return channel;
     }
 }

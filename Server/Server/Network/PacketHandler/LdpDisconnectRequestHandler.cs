@@ -10,7 +10,8 @@ namespace Server.Network.PacketHandler
 {
     class LdpDisconnectRequestHandler : ILdpPacketHandler
     {
-        public void Handle(LdpPacket packet, ILdpPacketSender channel)
+        private LdpServer serverHandler = LdpServer.GetInstance();
+        public void Handle(LdpPacket packet)
         {
             switch (packet.Type)
             {
@@ -23,6 +24,7 @@ namespace Server.Network.PacketHandler
                         case DisconnectionType.FROM_VOLUME_THREAD:
                             break;
                         case DisconnectionType.FROM_SERVER:
+                            serverHandler.Restart();
                             break;
                     }
                     break;
