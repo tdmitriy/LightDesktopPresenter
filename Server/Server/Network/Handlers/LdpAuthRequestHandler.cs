@@ -18,17 +18,18 @@ namespace Server.Network.Handlers
         private LdpServer serverHandler;
         private LdpUserSettings userSettings;
         private LdpProtocolPacketFactory packetFactory;
-        private string password;
+        private LdpClientInfoRequestHandler infoRequest;
+        private LdpAuthResponse authResponse;
+        private LdpPacket responsePacket;
+
+
+        private string settingsPassword;
         public LdpAuthRequestHandler()
         {
             serverHandler = LdpServer.GetInstance();
             packetFactory = new LdpProtocolPacketFactory();
             userSettings = new LdpUserSettings();
-            password = userSettings.GetPassword;
-            /*if (password == "")
-                MessageBox.Show("Password is empty.");
-            else
-                MessageBox.Show("Passworid is not empty=" + password);*/
+            settingsPassword = userSettings.GetPassword;
         }
 
         public void Handle(LdpPacket packet)
@@ -38,31 +39,37 @@ namespace Server.Network.Handlers
                 case PacketType.AUTH_REQUEST:
                     //if ok - send auth response
                     var auth = packet.AuthRequest;
-                    LdpAuthResponse authResponse;
-                    LdpPacket responsePacket;
-
-                    if (auth.Password == password)
-                    {
-                        authResponse = packetFactory.SetAuthResponse(true);
-                        responsePacket = packetFactory.BuildPacket(authResponse);
-                        serverHandler.GetSenderChannel.Send(responsePacket);
-                        LdpLog.Info("Auth successfull.");
-                        serverHandler.GetListenerChannel.RemoveListener(this);
-                    }
-                    else
-                    {
-                        authResponse = packetFactory.SetAuthResponse(false);
-                        responsePacket = packetFactory.BuildPacket(authResponse);
-                        serverHandler.GetSenderChannel.Send(responsePacket);
-                        LdpLog.Info("Auth failed: wrong password.");
-                    }
-                    
+                    CheckPassword(auth.Password);
                     break;
+            }
+        }
+
+        private void CheckPassword(string requestPassword)
+        {
+            if (requestPassword == settingsPassword)
+            {
+                infoRequest = new LdpClientInfoRequestHandler();
+                serverHandler.GetListenerChannel.AddListener(infoRequest);
+
+                authResponse = packetFactory.SetAuthResponse(true);
+                responsePacket = packetFactory.BuildPacket(authResponse);
+                serverHandler.GetSenderChannel.Send(responsePacket);
+                LdpLog.Info("Auth successfull.");
+                serverHandler.GetListenerChannel.RemoveListener(this);
+            }
+            else
+            {
+                authResponse = packetFactory.SetAuthResponse(false);
+                responsePacket = packetFactory.BuildPacket(authResponse);
+                serverHandler.GetSenderChannel.Send(responsePacket);
+                LdpLog.Info("Auth failed: wrong password.");
             }
         }
 
         public void Dispose()
         {
+            authResponse = null;
+            responsePacket = null;
             serverHandler = null;
             userSettings = null;
             packetFactory = null;

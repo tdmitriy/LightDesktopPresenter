@@ -49,6 +49,26 @@ namespace Server.WindowsUtils
                 return false;
             }
         }
+
+        public static void CheckStartupWindowsVersion(ServerWindow window)
+        {
+            if (LdpUtils.IsWindows7)
+            {
+                MessageBox.Show("7");
+                return;
+            }
+            else if (LdpUtils.IsWindows8)
+            {
+                MessageBox.Show("8");
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Unsuported windows version.\nWorks only on Windows 7 or higher..",
+                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                window.Close();
+            }
+        }
         #endregion
     }
 }

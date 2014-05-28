@@ -10,35 +10,38 @@ import java.io.IOException;
 
 public class LdpPacketListener extends LdpPacketHandler implements Runnable {
     private static final String TAG = "LdpClientPacketListener";
-    private final LdpClient clientHandle;
+    private LdpClient clientHandler;
     private boolean thread_working = false;
 
     public LdpPacketListener() {
-        clientHandle = LdpClient.getInstance();
+        clientHandler = LdpClient.getInstance();
         thread_working = true;
-    }
-
-    public boolean isThreadAlive() {
-        return thread_working;
-    }
-
-    public void stopWorkingThread() {
-        thread_working = false;
     }
 
     @Override
     protected void handle() {
         try {
-            LdpPacket packet = LdpPacket.parseDelimitedFrom(clientHandle.getSocketChannel()
+            LdpPacket packet = LdpPacket.parseDelimitedFrom(clientHandler.getSocketChannel()
                     .getInputStream());
 
             //base
             notifyToAllListeners(packet);
         } catch (IOException e) {
             thread_working = false;
-            clientHandle.disconnect();
-            Log.i(TAG,  "" + e.getMessage());
+            clientHandler.disconnect();
+            //Log.i(TAG,  "" + e);
+        } catch (Exception ex) {
+            thread_working = false;
+            clientHandler.disconnect();
+            //Log.i(TAG,  "" + ex);
         }
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        thread_working = false;
+        clientHandler = null;
     }
 
     @Override
@@ -46,6 +49,6 @@ public class LdpPacketListener extends LdpPacketHandler implements Runnable {
         while(thread_working) {
             handle();
         }
-        Log.i(TAG, "Exiting working thread.");
+        Log.i(TAG, "Exiting packetListening thread.");
     }
 }

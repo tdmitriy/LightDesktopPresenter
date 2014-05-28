@@ -25,7 +25,7 @@ namespace Server.Network.Handlers
                     switch (discon.Type)
                     {
                         case DisconnectionType.FROM_SERVER:
-                            serverHandler.Stop();
+                            serverHandler.Restart();
                             break;
                     }
                     break;

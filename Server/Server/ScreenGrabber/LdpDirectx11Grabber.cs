@@ -1,37 +1,27 @@
-﻿using System;
+﻿using Server.WindowsUtils;
+using SharpDX;
+using SharpDX.DXGI;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Windows;
-using SharpDX;
-using SharpDX.DXGI;
-using System.Diagnostics;
-using Server.WindowsUtils;
-using SharpDX.Direct3D9;
-
 
 namespace Server.ScreenGrabber
 {
-    class LdpDirectxGrabber : LdpBaseScreenGrabber, IDisposable
+    sealed class LdpDirectx11Grabber : LdpScreenGrabberBase
     {
-        private static bool WINDOWS7 = LdpUtils.IsWindows7;
-        private static bool WINDOWS8 = LdpUtils.IsWindows8;
+        #region Variables
         private Bitmap screenShot;
         private System.Drawing.Imaging.PixelFormat pixelFormat;
-        private ScreenshotType screenshotType;
         private System.Drawing.Rectangle boundsRect;
         private BitmapData bmpData;
         private static readonly int WIDTH = LdpUtils.SCREEN_WIDTH;
         private static readonly int HEIGHT = LdpUtils.SCREEN_HEIGHT;
         private static readonly int ARGB_WIDTH = WIDTH * 4;
-
-        #region DX9Constants
-        private SharpDX.Direct3D9.Device dx9Device;
-        private SharpDX.Direct3D9.Surface dx9ScreenSurface;
-        private DataRectangle dx9Map;
         #endregion
 
         #region DX11Constants
@@ -49,63 +39,18 @@ namespace Server.ScreenGrabber
         private DataRectangle dx11Map;
         #endregion
 
-
-        public LdpDirectxGrabber() 
+        public LdpDirectx11Grabber()
         {
-            this.pixelFormat = PixelFormat.Format32bppRgb;
-            boundsRect = new System.Drawing.Rectangle(0, 0, WIDTH, HEIGHT);
-
-            if (WINDOWS7)
-            {
-                screenshotType = ScreenshotType.DX9_SCREENSHOT;
-                InitializeDX9();
-            }
-            else if (WINDOWS8)
-            {
-                screenshotType = ScreenshotType.DX11_SCREENSHOT;
-                InitializeDX11();
-            }
-                
+            InitGrabber();
         }
-        #region DX9Init
-        protected override void InitializeDX9()
+
+        private void InitGrabber()
         {
             try
             {
-                var format = SharpDX.Direct3D9.Format.A8R8G8B8;
-                SharpDX.Direct3D9.PresentParameters present_params = new SharpDX.Direct3D9.PresentParameters();
-                present_params.Windowed = true;
-                present_params.BackBufferFormat = format;
-                present_params.SwapEffect = SharpDX.Direct3D9.SwapEffect.Discard;
-                present_params.BackBufferWidth = WIDTH;
-                present_params.BackBufferHeight = HEIGHT;
-                dx9Device = new SharpDX.Direct3D9.Device(new SharpDX.Direct3D9.Direct3D(),
-                                                      0,
-                                                      SharpDX.Direct3D9.DeviceType.Hardware,
-                                                      IntPtr.Zero,
-                                                      SharpDX.Direct3D9.CreateFlags.HardwareVertexProcessing,
-                                                      present_params);
+                this.pixelFormat = PixelFormat.Format32bppRgb;
+                boundsRect = new System.Drawing.Rectangle(0, 0, WIDTH, HEIGHT);
 
-                dx9Device.SetRenderState(RenderState.CullMode, Cull.None);
-                dx9Device.SetRenderState(RenderState.Lighting, false);
-                dx9Device.SetRenderState(RenderState.AntialiasedLineEnable, false);
-            }
-            catch (SharpDX.SharpDXException dxe)
-            {
-                LdpLog.Error("SharpDX InitializeDX9\n" + dxe.Message);
-            }
-            catch (Exception ex)
-            {
-                LdpLog.Error("InitializeDX9\n" + ex.Message);
-            }
-        }
-        #endregion
-
-        #region DX11Init
-        protected override void InitializeDX11()
-        {
-            try
-            {
                 uint numAdapter = 0;   // # of graphics card adapter
                 uint numOutput = 0;    // # of output device (i.e. monitor)
 
@@ -135,54 +80,24 @@ namespace Server.ScreenGrabber
             }
             catch (SharpDX.SharpDXException dxe)
             {
-                LdpLog.Error("SharpDX InitializeDX11\n" + dxe.Message);
+                string error = "Directx 11 initializer error.\n" + dxe.Message;
+                LdpLog.Error(error);
+                MessageBox.Show(error, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception ex)
             {
-                LdpLog.Error("InitializeDX11\n" + ex.Message);
+                string error = "Directx 11 initializer error.\n" + ex.Message;
+                LdpLog.Error(error);
+                MessageBox.Show(error, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        #endregion
 
-        #region DX9Grabber
-        protected override Bitmap GetDX9ScreenShot()
+        public override Bitmap GetScreenShot()
         {
-            screenShot = null;
-            screenShot = new System.Drawing.Bitmap(WIDTH, HEIGHT, pixelFormat);
-            dx9ScreenSurface = SharpDX.Direct3D9.Surface.CreateOffscreenPlain(
-            dx9Device,
-            WIDTH,
-            HEIGHT,
-            SharpDX.Direct3D9.Format.A8R8G8B8,
-            Pool.SystemMemory);
-
-            dx9Device.GetFrontBufferData(0, dx9ScreenSurface);
-
-            dx9Map = dx9ScreenSurface.LockRectangle(LockFlags.None);
-            bmpData = screenShot.LockBits(boundsRect,
-                System.Drawing.Imaging.ImageLockMode.WriteOnly, screenShot.PixelFormat);
-
-            var sourcePtr = dx9Map.DataPointer;
-            var destPtr = bmpData.Scan0;
-            for (int y = 0; y < HEIGHT; y++)
-            {
-                // Copy a single line 
-                Utilities.CopyMemory(destPtr, sourcePtr, ARGB_WIDTH);
-                // Advance pointers
-                sourcePtr = IntPtr.Add(sourcePtr, dx9Map.Pitch);
-                destPtr = IntPtr.Add(destPtr, bmpData.Stride);
-            }
-
-            screenShot.UnlockBits(bmpData);
-            dx9ScreenSurface.UnlockRectangle();
-            dx9ScreenSurface.Dispose();
-            bmpData = null;
-            return screenShot;
+            return GetDX11ScreenShot();
         }
-        #endregion
 
-        #region DX11Grabber
-        protected override Bitmap GetDX11ScreenShot()
+        private Bitmap GetDX11ScreenShot()
         {
             try
             {
@@ -240,37 +155,14 @@ namespace Server.ScreenGrabber
                     }
                     else
                         return null;
-                    
+
                 }
             }
-            
-        }
-        #endregion
 
-        public override Bitmap GetScreenShot()
-        {
-            switch (screenshotType)
-            {
-                case ScreenshotType.DX9_SCREENSHOT:
-                    return GetDX9ScreenShot();
-                case ScreenshotType.DX11_SCREENSHOT:
-                    return GetDX11ScreenShot();
-                default: return null;
-            }
         }
 
-        enum ScreenshotType
+        public override void Dispose()
         {
-            DX9_SCREENSHOT,
-            DX11_SCREENSHOT
-        }
-
-        public void Dispose()
-        {
-            if (dx9Device != null)
-                dx9Device.Dispose();
-            if (dx9ScreenSurface != null)
-                dx9ScreenSurface.Dispose();
             if (dx11Device != null)
                 dx11Device.Dispose();
             if (dx11Factory != null)

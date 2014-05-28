@@ -21,7 +21,7 @@ namespace Server.RemoteDesktopSender
         private LdpServer serverHandler;
         private LdpScreenResponse screenResponse;
         private LdpProtocolPacketFactory packetFactory;
-        private LdpDirectxGrabber screenGrabber;
+        private LdpScreenGrabber screenGrabber;
         private LdpPacket responsePacket;
 
         private Bitmap nextScreen;
@@ -44,7 +44,7 @@ namespace Server.RemoteDesktopSender
             serverHandler.GetListenerChannel.AddListener(this);
 
             packetFactory = new LdpProtocolPacketFactory();
-            screenGrabber = new LdpDirectxGrabber();
+            screenGrabber = new LdpScreenGrabber();
         }
 
         public void Handle(LdpPacket packet)
@@ -61,7 +61,7 @@ namespace Server.RemoteDesktopSender
                         case DisconnectionType.FROM_SCREEN_THREAD:
                             ScreenThread = false;
                             LdpLog.Info("Exiting screen thread.");
-                            Dispose();
+                            serverHandler.GetListenerChannel.RemoveListener(this);
                             break;
                     }
                     break;
@@ -117,6 +117,7 @@ namespace Server.RemoteDesktopSender
                     SendScreenResponse(compressed, baseLenght, rect);
 
                     ScreenThread = false;
+                    difference.Dispose();
                 }
                 prevScreen = nextScreen;
                 try
@@ -129,14 +130,15 @@ namespace Server.RemoteDesktopSender
 
         public void Dispose()
         {
+            ScreenThread = false;
             serverHandler = null;
             screenResponse = null;
             packetFactory = null;
             responsePacket = null;
 
-            if (screenGrabber != null)
-                screenGrabber.Dispose();
+            screenGrabber.Dispose();
             screenGrabber = null;
+
             if (nextScreen != null)
                 nextScreen.Dispose();
             if (prevScreen != null)

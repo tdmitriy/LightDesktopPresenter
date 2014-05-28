@@ -30,8 +30,8 @@ namespace Server.Network.Handlers.PacketHandlerBase
             if (listeners.Contains(listener))
             {
                 listeners.Remove(listener);
-                LdpLog.Info(String.Format("Listener removed: {0}.", listener.GetType()));
                 listener.Dispose();
+                LdpLog.Info(String.Format("Listener removed: {0}.", listener.GetType()));
                 listener = null;
             }
         }
@@ -67,6 +67,17 @@ namespace Server.Network.Handlers.PacketHandlerBase
         {
             RemoveListeners();
             listeners = null;
+        }
+
+
+        public List<ILdpPacketHandler> GetListenersList
+        {
+            get 
+            {
+                if (listeners != null && listeners.Count != 0)
+                    return listeners;
+                else return new List<ILdpPacketHandler>();
+            }
         }
     }
 }

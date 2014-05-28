@@ -25,13 +25,17 @@ public class LdpConnectionProgressDialog {
     }
 
     public static void dismiss() {
-        handler.removeCallbacks(dismissDialog);
-        dialog.dismiss();
+        if(dialog != null) {
+            handler.removeCallbacks(dismissDialog);
+            dialog.dismiss();
+        }
     }
 
     public static void changeMessage(String message) {
-        dialogMessage = message;
-        handler.sendEmptyMessage(0);
+        if(dialog != null) {
+            dialogMessage = message;
+            handler.sendEmptyMessage(0);
+        }
     }
 
     private static Runnable dismissDialog = new Runnable() {

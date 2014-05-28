@@ -19,7 +19,6 @@ using Server.WindowsUtils;
 using Server.Network;
 using ProtoBuf;
 using Server.Properties;
-using Server.LdpThreads;
 using Server.ProtoGeneration;
 using System.Text.RegularExpressions;
 
@@ -32,7 +31,7 @@ namespace Server
         {
             InitializeComponent();
             server = LdpServer.GetInstance();
-            //CheckWindowsVersion();
+            //LdpUtils.CheckStartupWindowsVersion(this);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -46,27 +45,6 @@ namespace Server
         {
             base.OnClosed(e);
             server.Stop();
-        }
-
-        private void CheckWindowsVersion()
-        {
-            if (LdpUtils.IsWindows7)
-            {
-                MessageBox.Show("7");
-                return;
-            }
-            else if (LdpUtils.IsWindows8)
-            {
-                MessageBox.Show("8");
-                return;
-            }
-            else
-            {
-                MessageBox.Show("Unsuported windows version.\nWorks only on Windows 7 or higher..",
-                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.Close();
-            }
-                
         }
     }
 }

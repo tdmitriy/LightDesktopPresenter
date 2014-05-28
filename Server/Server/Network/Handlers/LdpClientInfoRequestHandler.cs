@@ -11,6 +11,7 @@ namespace Server.Network.Handlers
     class LdpClientInfoRequestHandler : ILdpPacketHandler
     {
         private LdpServer serverHandler;
+        private LdpPreparableInfoRequestHandler preparableRequestHandler;
         public LdpClientInfoRequestHandler()
         {
             serverHandler = LdpServer.GetInstance();
@@ -25,6 +26,9 @@ namespace Server.Network.Handlers
                     LdpClientInfo.IP = serverHandler.GetClientIPAddress;
                     LdpClientInfo.OS = clientInfo.OS;
                     LdpClientInfo.DEVICE_NAME = clientInfo.DeviceName;
+
+                    preparableRequestHandler = new LdpPreparableInfoRequestHandler();
+                    serverHandler.GetListenerChannel.AddListener(preparableRequestHandler);
 
                     serverHandler.GetListenerChannel.RemoveListener(this);
                     break;

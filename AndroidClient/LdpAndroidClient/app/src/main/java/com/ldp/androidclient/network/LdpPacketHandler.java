@@ -51,8 +51,8 @@ abstract public class LdpPacketHandler implements ILdpObservable, ILdpDisposable
         if (listeners != null && listeners.size() != 0) {
             Iterator<ILdpPacketHandler> iterator = listeners.iterator();
             while (iterator.hasNext()) {
-                ILdpPacketHandler lis = iterator.next();
-                lis.dispose();
+                ILdpPacketHandler listener = iterator.next();
+                listener.dispose();
             }
             listeners.clear();
             listeners = null;
@@ -62,6 +62,5 @@ abstract public class LdpPacketHandler implements ILdpObservable, ILdpDisposable
     @Override
     public void dispose() {
         removeListeners();
-        listeners = null;
     }
 }

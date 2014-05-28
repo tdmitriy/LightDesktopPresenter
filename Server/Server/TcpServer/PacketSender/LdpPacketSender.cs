@@ -12,7 +12,7 @@ using Server.Network;
 
 namespace Server.TcpServer.PacketSender
 {
-    class LdpPacketSender : ILdpPacketSender
+    class LdpPacketSender : ILdpPacketSender, IDisposable
     {
         private LdpServer serverHandler = LdpServer.GetInstance();
         public void Send(LdpPacket packet)
@@ -43,6 +43,11 @@ namespace Server.TcpServer.PacketSender
         private void Restart()
         {
             serverHandler.Restart();
+        }
+
+        public void Dispose()
+        {
+            serverHandler = null;
         }
     }
 }

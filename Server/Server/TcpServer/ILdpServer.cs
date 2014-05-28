@@ -16,7 +16,7 @@ namespace Server.TcpServer
         void Restart();
 
         int GetServerPort { get; }
-        string GetServerIPAddress { get; }
+        List<string> GetLocalIpAddressList { get; }
         string GetClientIPAddress { get; }
         
     }

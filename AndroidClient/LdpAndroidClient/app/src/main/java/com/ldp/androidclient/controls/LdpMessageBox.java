@@ -64,7 +64,7 @@ public class LdpMessageBox {
         }
         dialog.setTitle(title);
         dialog.setMessage(message);
-        dialog.setCancelable(true);
+        dialog.setCancelable(false);
         dialog.create().show();
     }
 

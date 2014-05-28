@@ -15,7 +15,7 @@ namespace Server.Network.Handlers
     {
         private LdpServer serverHandler;
         private LdpProtocolPacketFactory packetFactory;
-        private LdpRemoteDesktopSender remoteDesktopSender; 
+        private LdpRemoteDesktopSender remoteDesktopSender;
         public LdpPreparableInfoRequestHandler()
         {
             packetFactory = new LdpProtocolPacketFactory();
@@ -31,15 +31,7 @@ namespace Server.Network.Handlers
                     switch (request.Type)
                     {
                         case ConnectionType.REMOTE_DESKTOP_CONTROL:
-                            LdpPreparableInfoResponse response = packetFactory
-                                .SetRemoteDesktopInfo(LdpUtils.SCREEN_WIDTH, 
-                                LdpUtils.SCREEN_HEIGHT);
-                            LdpPacket responsePacket = packetFactory.BuildPacket(response);
-                            serverHandler.GetSenderChannel.Send(responsePacket);
-
-                            serverHandler.GetListenerChannel.RemoveListener(this);
-
-                            remoteDesktopSender = new LdpRemoteDesktopSender();
+                            SendPreparableInfoResponse(ConnectionType.REMOTE_DESKTOP_CONTROL);
                             break;
                         case ConnectionType.REMOTE_VOLUME_CONTROL:
                             break;
@@ -48,13 +40,40 @@ namespace Server.Network.Handlers
             }
         }
 
+        private void SendPreparableInfoResponse(ConnectionType type)
+        {
+            switch (type)
+            {
+                case ConnectionType.REMOTE_DESKTOP_CONTROL:
+                    SendRemoteDesktopPreparableInfo();
+                    break;
+                case ConnectionType.REMOTE_VOLUME_CONTROL:
+                    break;
+            }
+        }
+
+        private void SendRemoteDesktopPreparableInfo()
+        {
+            LdpPreparableInfoResponse response = packetFactory
+                                .SetRemoteDesktopInfo(LdpUtils.SCREEN_WIDTH,
+                                LdpUtils.SCREEN_HEIGHT);
+            LdpPacket responsePacket = packetFactory.BuildPacket(response);
+            serverHandler.GetSenderChannel.Send(responsePacket);
+
+            remoteDesktopSender = new LdpRemoteDesktopSender();
+            serverHandler.GetListenerChannel.AddListener(remoteDesktopSender);
+            serverHandler.GetListenerChannel.RemoveListener(this);
+        }
+
+        private void SendRemoteVolumePreparableInfo()
+        {
+            // TODO
+        }
+
         public void Dispose()
         {
             serverHandler = null;
             packetFactory = null;
-            if (remoteDesktopSender != null)
-                remoteDesktopSender.Dispose();
-            remoteDesktopSender = null;
         }
     }
 }

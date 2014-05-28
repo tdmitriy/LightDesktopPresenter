@@ -15,4 +15,6 @@ public interface ILdpClient extends ILdpClientHandlers {
     boolean connect();
 
     void disconnect();
+
+    String getClientIpAddress();
 }

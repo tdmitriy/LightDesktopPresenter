@@ -32,6 +32,7 @@ public class LdpActivityMain extends LdpActivityMainInterface {
     private LdpProtocolPacketFactory packetFactory;
     private AlertDialog connectionTypeDialog;
     private static Context context;
+    private static Activity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class LdpActivityMain extends LdpActivityMainInterface {
         packetFactory = new LdpProtocolPacketFactory();
         permitNetworkThreadPolicy();
         context = this;
+        mainActivity = this;
     }
 
     //to avoid NetworkOnMainThreadException
@@ -53,6 +55,10 @@ public class LdpActivityMain extends LdpActivityMainInterface {
 
     public static Context getContext() {
         return context;
+    }
+
+    public static Activity getMainActivity() {
+        return mainActivity;
     }
 
     @Override
@@ -79,33 +85,16 @@ public class LdpActivityMain extends LdpActivityMainInterface {
         clientHandler.disconnect();
     }
 
-    private void connect(final LdpConnectionPreferences prefs, final ConnectionType type) {
-        //connectionTypeDialog.dismiss();
-        //LdpConnectionProgressDialog.show(context, "Connecting", "Please wait..");
-        clientHandler.dispose();
+    private void connect(LdpConnectionPreferences prefs, ConnectionType type) {
         clientHandler.initSettings(prefs, type);
-        boolean result = clientHandler.connect();
-        if (result)
-            sendAuthRequest();
-        /*ConnectionThread connectionThread = new ConnectionThread(prefs, type);
-        connectionThread.execute();*/
-    }
-
-
-    private void sendAuthRequest() {
-        LdpConnectionPreferences prefs = getSelectedPrefs();
-        String password = prefs.getPassword();
-        Log.i(TAG, "Sending password=" + password);
-        LdpAuthRequest authRequest = packetFactory.setAuthRequest(password);
-        LdpPacket packet = packetFactory.buildPacket(authRequest);
-        clientHandler.getSendingChannel().send(packet);
+        LdpClientThread connectionThread = new LdpClientThread();
+        connectionThread.execute();
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            clientHandler.disconnect();
-            finish();
+            return super.onKeyDown(keyCode, event);
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -126,26 +115,18 @@ public class LdpActivityMain extends LdpActivityMainInterface {
     };
 
 
-    private final class ConnectionThread extends AsyncTask<Void, Void, Void> {
-        private LdpConnectionPreferences prefs;
-        private ConnectionType type;
-        boolean connectionResult = false;
-
-        public ConnectionThread(LdpConnectionPreferences prefs, ConnectionType type) {
-            this.prefs = prefs;
-            this.type = type;
-        }
+    private final class LdpClientThread extends AsyncTask<Void, Void, Void> {
+        boolean success = false;
 
         @Override
         protected void onPreExecute() {
-            LdpConnectionProgressDialog.show(context, "Connecting", "Please wait..");
+            LdpConnectionProgressDialog.show(LdpActivityMain.getContext(), "Connecting", "Please wait..");
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            clientHandler.initSettings(prefs, type);
-            connectionResult = clientHandler.connect();
-            if (connectionResult)
+            success = clientHandler.connect();
+            if (success)
                 sendAuthRequest();
             return null;
         }
@@ -153,6 +134,15 @@ public class LdpActivityMain extends LdpActivityMainInterface {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+        }
+
+        private void sendAuthRequest() {
+            LdpConnectionPreferences prefs = getSelectedPrefs();
+            String password = prefs.getPassword();
+            Log.i(TAG, "Sending password=" + password);
+            LdpAuthRequest authRequest = packetFactory.setAuthRequest(password);
+            LdpPacket packet = packetFactory.buildPacket(authRequest);
+            clientHandler.getSendingChannel().send(packet);
         }
     }
 

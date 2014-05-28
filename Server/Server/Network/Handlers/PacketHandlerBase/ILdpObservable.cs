@@ -12,5 +12,6 @@ namespace Server.Network.Handlers.PacketHandlerBase
         void RemoveListener(ILdpPacketHandler listener);
         void RemoveListeners();
         void NotifyToAllListeners(LdpPacket packet);
+        List<ILdpPacketHandler> GetListenersList { get; }
     }
 }
