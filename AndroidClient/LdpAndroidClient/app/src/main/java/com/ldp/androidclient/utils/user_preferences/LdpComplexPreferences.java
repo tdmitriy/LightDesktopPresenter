@@ -64,7 +64,7 @@ public class LdpComplexPreferences {
             try {
                 return gson.fromJson(gsonString, a);
             } catch (Exception e) {
-                Log.e("", "Object stored with key "
+                Log.i("", "Object stored with key "
                         + key + " is instance of other class");
                 return null;
             }
@@ -81,12 +81,12 @@ public class LdpComplexPreferences {
                 Log.i(TAG, mess + connectionName);
                 return true;
             } else {
-                Log.e(TAG, "Preferences is already exists.");
+                Log.i(TAG, "Preferences is already exists.");
                 return false;
             }
 
         } catch (Exception ex) {
-            Log.e(TAG, "Add preferences error.\n" + ex.getMessage());
+            Log.i(TAG, "Add preferences error.\n" + ex.getMessage());
             return false;
         }
     }
@@ -123,7 +123,7 @@ public class LdpComplexPreferences {
             Log.i(TAG, mess + newConnectionName);
             return true;
         } else {
-            Log.e(TAG, "Settings is already exists.");
+            Log.i(TAG, "Settings is already exists.");
             return false;
         }
     }

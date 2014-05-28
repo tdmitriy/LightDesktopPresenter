@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.ldp.androidclient.R;
 import com.ldp.androidclient.utils.LdpEditTextIPAddressChecker;
-import com.ldp.androidclient.utils.controls.LdpMessageBox;
+import com.ldp.androidclient.controls.LdpMessageBox;
 import com.ldp.androidclient.base_application.LdpBaseApplication;
 import com.ldp.androidclient.utils.user_preferences.LdpComplexPreferences;
 import com.ldp.androidclient.utils.user_preferences.LdpConnectionPreferences;

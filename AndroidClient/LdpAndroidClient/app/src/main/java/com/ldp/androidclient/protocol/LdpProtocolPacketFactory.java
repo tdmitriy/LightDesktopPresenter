@@ -30,6 +30,16 @@ public class LdpProtocolPacketFactory {
                 .build();
     }
 
+    public LdpScreenRequest setScreenRequest() {
+        return LdpScreenRequest.newBuilder().build();
+    }
+
+    public LdpPacket buildPacket(LdpScreenRequest screenRequest) {
+        return LdpPacket.newBuilder()
+                .setType(PacketType.SCREEN_REQUEST)
+                .build();
+    }
+
     public LdpPacket buildPacket(LdpAuthRequest builder) {
         return LdpPacket.newBuilder()
                 .setType(PacketType.AUTH_REQUEST)

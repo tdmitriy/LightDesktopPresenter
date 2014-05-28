@@ -16,7 +16,7 @@ public class LdpBaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         //init singleton
-        LdpClient.initSingleInstance(this);
+        LdpClient.initSingleInstance();
         complexPrefenreces = LdpComplexPreferences.getComplexPreferences(getBaseContext(),
                 SETTINGS_VALUE, MODE_PRIVATE);
         android.util.Log.i(TAG, "Preference loaded: " + SETTINGS_VALUE);

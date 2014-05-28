@@ -14,9 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ldp.androidclient.R;
-import com.ldp.androidclient.utils.controls.LdpConnectionTypeAdapter;
-import com.ldp.androidclient.utils.controls.LdpMessageBox;
-import com.ldp.androidclient.utils.controls.LdpListViewPopulator;
+import com.ldp.androidclient.controls.LdpConnectionTypeAdapter;
+import com.ldp.androidclient.controls.LdpMessageBox;
+import com.ldp.androidclient.controls.LdpListViewPopulator;
 import com.ldp.androidclient.base_application.LdpBaseApplication;
 import com.ldp.androidclient.utils.user_preferences.LdpComplexPreferences;
 import com.ldp.androidclient.utils.user_preferences.LdpConnectionPreferences;
@@ -99,7 +99,7 @@ public class LdpActivityMainInterface extends ListActivity implements
     }
 
 
-    private void showMessage(String mess) {
+    protected void showMessage(String mess) {
         Toast.makeText(this, mess, Toast.LENGTH_SHORT).show();
     }
 
@@ -152,12 +152,9 @@ public class LdpActivityMainInterface extends ListActivity implements
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {
             case 0:
-                showMessage("Connect");
-                break;
-            case 1:
                 editSelectedPrefs();
                 break;
-            case 2:
+            case 1:
                 deleteCurrentPrefs();
                 break;
         }

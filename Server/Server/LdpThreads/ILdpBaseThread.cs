@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server.LdpThreads
 {
-    interface ILdpBaseThread
+    interface ILdpBaseThread : IDisposable
     {
         void Start(Action methodToStart);
         void Start();

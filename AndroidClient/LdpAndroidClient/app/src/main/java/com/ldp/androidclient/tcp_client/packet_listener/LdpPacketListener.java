@@ -2,9 +2,8 @@ package com.ldp.androidclient.tcp_client.packet_listener;
 
 import android.util.Log;
 
-import com.ldp.androidclient.network.packet_handler.LdpPacketHandler;
+import com.ldp.androidclient.network.LdpPacketHandler;
 import com.ldp.androidclient.protocol.LdpProtocol.*;
-import com.ldp.androidclient.tcp_client.ILdpClient;
 import com.ldp.androidclient.tcp_client.LdpClient;
 
 import java.io.IOException;
@@ -19,17 +18,26 @@ public class LdpPacketListener extends LdpPacketHandler implements Runnable {
         thread_working = true;
     }
 
+    public boolean isThreadAlive() {
+        return thread_working;
+    }
+
+    public void stopWorkingThread() {
+        thread_working = false;
+    }
+
     @Override
     protected void handle() {
         try {
-            LdpPacket packet = LdpPacket.parseDelimitedFrom(clientHandle.getSocketChannel().getInputStream());
+            LdpPacket packet = LdpPacket.parseDelimitedFrom(clientHandle.getSocketChannel()
+                    .getInputStream());
 
             //base
             notifyToAllListeners(packet);
         } catch (IOException e) {
             thread_working = false;
             clientHandle.disconnect();
-            Log.e(TAG,  e.getMessage());
+            Log.i(TAG,  "" + e.getMessage());
         }
     }
 
@@ -38,6 +46,6 @@ public class LdpPacketListener extends LdpPacketHandler implements Runnable {
         while(thread_working) {
             handle();
         }
-        Log.d(TAG, "Exiting working thread.");
+        Log.i(TAG, "Exiting working thread.");
     }
 }

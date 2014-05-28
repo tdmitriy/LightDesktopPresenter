@@ -15,7 +15,7 @@ using SharpDX.Direct3D9;
 
 namespace Server.ScreenGrabber
 {
-    class LdpDirectxGrabber : LdpBaseScreenGrabber
+    class LdpDirectxGrabber : LdpBaseScreenGrabber, IDisposable
     {
         private static bool WINDOWS7 = LdpUtils.IsWindows7;
         private static bool WINDOWS8 = LdpUtils.IsWindows8;
@@ -195,7 +195,7 @@ namespace Server.ScreenGrabber
                     dx11Device.ImmediateContext
                         .CopyResource(dx11ScreenResource.QueryInterface<SharpDX.Direct3D11.Resource>(),
                         dx11ScreenTexture);
-                //// cast from texture to surface, so we can access its bytes
+                // cast from texture to surface, so we can access its bytes
                 dx11ScreenSurface = dx11ScreenTexture.QueryInterface<SharpDX.DXGI.Surface>();
                 // map the resource to access it
                 dx11Map = dx11ScreenSurface.Map(SharpDX.DXGI.MapFlags.Read);
@@ -226,7 +226,7 @@ namespace Server.ScreenGrabber
             {
                 if (e.ResultCode.Code == SharpDX.DXGI.ResultCode.WaitTimeout.Result.Code)
                 {
-                    //screen does not cnhanged
+                    //screen does not changed
                     LdpLog.Warning("DX11 surface timeout.. Recursion is coming:)");
                     return GetDX11ScreenShot();
                 }
@@ -263,6 +263,32 @@ namespace Server.ScreenGrabber
         {
             DX9_SCREENSHOT,
             DX11_SCREENSHOT
+        }
+
+        public void Dispose()
+        {
+            if (dx9Device != null)
+                dx9Device.Dispose();
+            if (dx9ScreenSurface != null)
+                dx9ScreenSurface.Dispose();
+            if (dx11Device != null)
+                dx11Device.Dispose();
+            if (dx11Factory != null)
+                dx11Factory.Dispose();
+            if (dx11Output != null)
+                dx11Output.Dispose();
+            if (dx11DuplicatedOutput != null)
+                dx11DuplicatedOutput.Dispose();
+            if (dx11ScreenTexture != null)
+                dx11ScreenTexture.Dispose();
+            if (dx11ScreenResource != null)
+                dx11ScreenResource.Dispose();
+            if (dx11ScreenSurface != null)
+                dx11ScreenSurface.Dispose();
+
+            if (screenShot != null)
+                screenShot.Dispose();
+            bmpData = null;
         }
     }
 }

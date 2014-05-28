@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Threading;
 using Server.ScreenGrabber;
 using Server.WindowsUtils;
-using Server.Network.PacketHandler;
 
 namespace Server.LdpThreads
 {

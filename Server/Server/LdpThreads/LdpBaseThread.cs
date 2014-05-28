@@ -21,7 +21,6 @@ namespace Server.LdpThreads
         }
         protected LdpBaseThread(string threadName)
         {
-            
             workingThread = new Thread(new ThreadStart(Run));
             workingThread.Name = threadName;
         }
@@ -57,6 +56,17 @@ namespace Server.LdpThreads
                 }
                 catch { }
             }
+        }
+
+        public virtual void Dispose()
+        {
+            ThreadWorking = false;
+            MethodToStart = null;
+            try
+            {
+                workingThread.Interrupt();
+            }
+            catch { }
         }
     }
 }

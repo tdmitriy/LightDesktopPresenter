@@ -2,12 +2,10 @@
 <resources>
 
     <!-- array list for connection type preferences (settings) dialog -->
-    <string name="item_string_connect">Connect</string>
     <string name="item_string_edit_con">Edit connection</string>
     <string name="item_string_delete_con">Delete connection</string>
 
     <string-array name="connection_info_list">
-        <item>@string/item_string_connect</item>
         <item>@string/item_string_edit_con</item>
         <item>@string/item_string_delete_con</item>
     </string-array>

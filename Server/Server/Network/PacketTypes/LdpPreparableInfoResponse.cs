@@ -12,9 +12,7 @@ namespace Server.Network.PacketTypes
     {
         [ProtoMember(1)]
         public int ScreenWidth { get; set; }
-
         [ProtoMember(2)]
         public int ScreenHeight { get; set; }
-
     }
 }

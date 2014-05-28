@@ -27,15 +27,25 @@ namespace Server
 {
     public partial class ServerWindow : Window
     {
+        private LdpServer server;
         public ServerWindow()
         {
             InitializeComponent();
+            server = LdpServer.GetInstance();
             //CheckWindowsVersion();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //LdpProtoGenerator.GenerateProtoJava();
+            server.Start();
+            txt.Text = "";
+            txt.Text = "Started";
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            server.Stop();
         }
 
         private void CheckWindowsVersion()

@@ -10,71 +10,17 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace TCPServer.ScreenGrabber_SYNC
+namespace Server.ScreenGrabber
 {
     class LdpScreenProcessingUtils
     {
+        public static long IMAGE_QUALITY_VALUE = 80L;
         private static EncoderParameters encoderParams = 
             new EncoderParameters();
         private static EncoderParameter qualityParam = 
-            new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, 80L);
+            new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, IMAGE_QUALITY_VALUE);
 
         private static ImageCodecInfo encoder = GetEncoder(ImageFormat.Jpeg);
-
-        public static List<Bitmap> CropImage(Bitmap img, int numTiles)
-        {
-            List<Bitmap> tmp = new List<Bitmap>();
-            double res = img.Height / numTiles;
-            int tileHeight = (int)Math.Round(res);
-            int height = img.Height;
-            int width = img.Width;
-            for (int size = 0, i = 0; size < height; size += tileHeight, i++)
-            {
-                if (i == numTiles - 1 && (size + tileHeight) != height)
-                {
-                    size = height - tileHeight;
-                    tmp.Add(CutImage(img, new Rectangle(0, size, width, tileHeight)));
-                    break;
-                }
-                tmp.Add(CutImage(img, new Rectangle(0, size, width, tileHeight)));
-            }
-            return tmp;
-        }
-
-        public static List<KeyValuePair<Bitmap, Rectangle>> CropImageIntoRectangles(Bitmap img,
-            List<Rectangle> list)
-        {
-            var tmp = new List<KeyValuePair<Bitmap, Rectangle>>();
-            int height = img.Height;
-            int width = img.Width;
-            
-            foreach (var rect in list)
-                tmp.Add(new KeyValuePair<Bitmap, Rectangle>(CutImage(img, rect), rect));
-            return tmp;
-        }
-
-        public static List<Rectangle> DivideIntoRectangles(int w, int h, ushort rectsPerRow)
-        {
-            ushort DIVIDE_CONST = rectsPerRow;
-            int i = w / DIVIDE_CONST;
-            int j = h / DIVIDE_CONST;
-            int m = 0;
-            var rect = new List<Rectangle>();
-            Rectangle lRect = Rectangle.Empty;
-            for (int k = 0; k < DIVIDE_CONST; k++)
-                for (m = 0; m < DIVIDE_CONST; m++)
-                {
-                    lRect = new Rectangle();
-                    lRect.X = (i * k);
-                    lRect.Y = (j * m);
-                    lRect.Width = i;
-                    lRect.Height = j;
-                    //Rect = Helper.AlignRectangle(lRect, w, h);
-                    rect.Add(lRect);
-                }
-            return rect;
-        }
-
 
         public static byte[] ImageToByteArray(Bitmap imageIn)
         {
@@ -87,8 +33,7 @@ namespace TCPServer.ScreenGrabber_SYNC
             }
         }
 
-
-        public static Rectangle GetBoundingBoxForChanges(Bitmap newBmp, Bitmap oldBmp)
+        public static Rectangle GetBoundingBoxForChanges(Bitmap newBitmap, Bitmap previousBitmap)
         {
             // The search algorithm starts by looking
             //	for the top and left bounds. The search
@@ -108,21 +53,33 @@ namespace TCPServer.ScreenGrabber_SYNC
             //	to increase the speed.
             //
 
-            // Validate the images are the same shape and type.
+            // If the previous image does not exist, then
+            //	in essence everything has changed.
             //
-            if (oldBmp.Width != newBmp.Width ||
-                oldBmp.Height != newBmp.Height ||
-                oldBmp.PixelFormat != newBmp.PixelFormat)
+            if (previousBitmap == null)
+            {
+                return new Rectangle(0, 0, newBitmap.Width, newBitmap.Height);
+            }
+
+            // Validate the images are the same shape and type.
+            //	If they are not the same size, then in essence
+            //	everything has changed.
+            //
+
+            /*if (previousBitmap.Width != newBitmap.Width ||
+                previousBitmap.Height != newBitmap.Height ||
+                previousBitmap.PixelFormat != newBitmap.PixelFormat)
             {
                 // Not the same shape...can't do the search.
                 //
-                return Rectangle.Empty;
-            }
+                return new Rectangle(0, 0, newBitmap.Width, newBitmap.Height);
+            }*/
 
             // Init the search parameters.
             //
-            int width = newBmp.Width;
-            int height = newBmp.Height;
+
+            int width = newBitmap.Width;
+            int height = newBitmap.Height;
             int left = width;
             int right = 0;
             int top = height;
@@ -134,12 +91,14 @@ namespace TCPServer.ScreenGrabber_SYNC
             {
                 // Lock the bits into memory.
                 //
-                bmNewData = newBmp.LockBits(
-                    new Rectangle(0, 0, newBmp.Width, newBmp.Height),
-                    ImageLockMode.ReadOnly, newBmp.PixelFormat);
-                bmPrevData = oldBmp.LockBits(
-                    new Rectangle(0, 0, oldBmp.Width, oldBmp.Height),
-                    ImageLockMode.ReadOnly, oldBmp.PixelFormat);
+
+                bmNewData = newBitmap.LockBits(
+                    new Rectangle(0, 0, newBitmap.Width, newBitmap.Height),
+                    ImageLockMode.ReadOnly, newBitmap.PixelFormat);
+
+                bmPrevData = previousBitmap.LockBits(
+                    new Rectangle(0, 0, previousBitmap.Width, previousBitmap.Height),
+                    ImageLockMode.ReadOnly, previousBitmap.PixelFormat);
 
                 // The images are ARGB (4 bytes)
                 //
@@ -179,7 +138,7 @@ namespace TCPServer.ScreenGrabber_SYNC
                     //
                     // For all rows of pixels (top to bottom)
                     //
-                    for (int y = 0; y < newBmp.Height; ++y)
+                    for (int y = 0; y < height; ++y)
                     {
                         // For pixels up to the current bound (left to right)
                         //
@@ -217,7 +176,6 @@ namespace TCPServer.ScreenGrabber_SYNC
                         pPrev += stridePrev;
                     }
 
-
                     // If we did not find any changed pixels
                     //	then no need to do a second pass.
                     //
@@ -238,16 +196,16 @@ namespace TCPServer.ScreenGrabber_SYNC
                         //
                         pNew = (int*)(void*)scanNew0;
                         pPrev = (int*)(void*)scanPrev0;
-                        pNew += (newBmp.Height - 1) * strideNew;
-                        pPrev += (oldBmp.Height - 1) * stridePrev;
+                        pNew += (height - 1) * strideNew;
+                        pPrev += (height - 1) * stridePrev;
 
                         // For each row (bottom to top)
                         //
-                        for (int y = newBmp.Height - 1; y > top; y--)
+                        for (int y = height - 1; y > top; y--)
                         {
                             // For each column (right to left)
                             //
-                            for (int x = newBmp.Width - 1; x > right; x--)
+                            for (int x = width - 1; x > right; x--)
                             {
                                 // Use pointer arithmetic to index the
                                 //	next pixel in this row.
@@ -277,7 +235,6 @@ namespace TCPServer.ScreenGrabber_SYNC
             }
             catch (Exception)
             {
-                // Do something with this info.
             }
             finally
             {
@@ -285,11 +242,11 @@ namespace TCPServer.ScreenGrabber_SYNC
                 //
                 if (bmNewData != null)
                 {
-                    newBmp.UnlockBits(bmNewData);
+                    newBitmap.UnlockBits(bmNewData);
                 }
                 if (bmPrevData != null)
                 {
-                    oldBmp.UnlockBits(bmPrevData);
+                    previousBitmap.UnlockBits(bmPrevData);
                 }
             }
 
@@ -306,7 +263,8 @@ namespace TCPServer.ScreenGrabber_SYNC
 
             // Return the bounding box.
             //
-            return new Rectangle(left, top, diffImgWidth, diffImgHeight);
+            //return new Rectangle(left, top, diffImgWidth, diffImgHeight);
+            return new Rectangle(left - 20, top - 20, diffImgWidth + 40, diffImgHeight + 40);
         }
 
         public static Bitmap ImageFromByteArray(byte[] byteArrayIn)
@@ -315,6 +273,30 @@ namespace TCPServer.ScreenGrabber_SYNC
             {
                 return (Bitmap)Image.FromStream(ms);
             }
+        }
+
+        private static ImageCodecInfo GetEncoder(ImageFormat format)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
+            foreach (ImageCodecInfo codec in codecs)
+            {
+                if (codec.FormatID == format.Guid)
+                {
+                    return codec;
+                }
+            }
+            return null;
+        }
+
+        public static Bitmap CopyRegion(Bitmap srcBitmap, Rectangle bounds)
+        {
+            Bitmap bmp = new Bitmap(bounds.Width, bounds.Height);
+            using (var gr = Graphics.FromImage(bmp))
+            {
+                gr.DrawImage(srcBitmap, 0, 0, bounds, GraphicsUnit.Pixel);
+                gr.Dispose();
+            }
+            return bmp;
         }
 
         #region MarshalArray
@@ -350,24 +332,5 @@ namespace TCPServer.ScreenGrabber_SYNC
             return image;
         }
         #endregion
-
-        private static ImageCodecInfo GetEncoder(ImageFormat format)
-        {
-            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageDecoders();
-            foreach (ImageCodecInfo codec in codecs)
-            {
-                if (codec.FormatID == format.Guid)
-                {
-                    return codec;
-                }
-            }
-            return null;
-        }
-
-        public static Bitmap CutImage(Bitmap img, Rectangle cutArea)
-        {
-            Bitmap bmpCrop = img.Clone(cutArea, img.PixelFormat);
-            return bmpCrop;
-        }
     }
 }

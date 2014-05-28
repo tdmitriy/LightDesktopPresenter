@@ -2,15 +2,17 @@ package com.ldp.androidclient.screen_scaling_settings;
 
 import android.util.DisplayMetrics;
 
+import com.ldp.androidclient.activities.LdpActivityMain;
+
 public class LdpScreenScalingSettings implements ILdpScreenScalingSettings {
     private DisplayMetrics dm;
-    private final int screenWidth;
-    private final int screenHeight;
+    private final float screenWidth;
+    private final float screenHeight;
 
-    private int rmDesktopWidth;
-    private int rmDesktopHeight;
+    private float rmDesktopWidth;
+    private float rmDesktopHeight;
 
-    private final int canvasWidth;
+    private final float canvasWidth;
 
     private final float widthCoef;
     private final float heightCoef;
@@ -20,7 +22,7 @@ public class LdpScreenScalingSettings implements ILdpScreenScalingSettings {
         rmDesktopWidth = desktopWidth;
         rmDesktopHeight = desktopHeight;
 
-        dm = new DisplayMetrics();
+        dm = LdpActivityMain.getContext().getResources().getDisplayMetrics();
         screenWidth = dm.widthPixels;
         screenHeight = dm.heightPixels;
 
@@ -33,12 +35,12 @@ public class LdpScreenScalingSettings implements ILdpScreenScalingSettings {
 
     @Override
     public int getDesktopWidth() {
-        return rmDesktopWidth;
+        return (int) rmDesktopWidth;
     }
 
     @Override
     public int getDesktopHeight() {
-        return rmDesktopHeight;
+        return (int) rmDesktopHeight;
     }
 
     @Override
@@ -58,11 +60,11 @@ public class LdpScreenScalingSettings implements ILdpScreenScalingSettings {
 
     @Override
     public int getCanvasWidth() {
-        return canvasWidth;
+        return (int) canvasWidth;
     }
 
     @Override
     public int getCanvasHeight() {
-        return screenHeight;
+        return (int) screenHeight;
     }
 }

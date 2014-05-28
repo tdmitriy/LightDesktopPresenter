@@ -47,13 +47,9 @@
                 android:value="@string/activity_LdpLdpActivityMain" />
         </activity>
 
-        <!-- Activity connection type -->
+        <!-- Activity remote desktop control -->
         <activity
-            android:name=".activities.LdpConnectionTypeActivity"
-            android:excludeFromRecents="true"
-            android:label="@string/activity_conection_chooser"
-            android:theme="@style/ThemeConnectionDialog">
-            </activity>
+            android:name=".activities.LdpActivityRemoteDesktop"/>
 
     </application>
 
