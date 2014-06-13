@@ -1,6 +1,6 @@
 ﻿using Server.ClientInfo;
 using Server.Network.Handlers.PacketHandlerBase;
-using Server.Network.PacketTypes;
+using Server.Protocol;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +25,7 @@ namespace Server.Network.Handlers
                     switch (discon.Type)
                     {
                         case DisconnectionType.FROM_SERVER:
+                            serverHandler.GetListenerChannel.RemoveListener(this);
                             serverHandler.Restart();
                             break;
                     }
@@ -35,6 +36,7 @@ namespace Server.Network.Handlers
         public void Dispose()
         {
             serverHandler = null;
+            GC.SuppressFinalize(this);
         }
     }
 }

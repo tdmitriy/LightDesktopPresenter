@@ -71,7 +71,6 @@ public class LdpActivityRemoteDesktop extends LdpActivityRemoteDesktopBase
         imageProcessor = null;
         scalingSettings = null;
         clientHandler = null;
-        Log.i(TAG, "sending disconnect request from server.");
     }
 
     private void initializeObjects() {
@@ -135,7 +134,6 @@ public class LdpActivityRemoteDesktop extends LdpActivityRemoteDesktopBase
                     case FROM_SCREEN_THREAD:
                         pausingScreenRequestSending = true;
                         showDisconnectionMessage();
-                        showDeleyProgressDialog();
                         dispose();
                         finish();
                         break;
@@ -194,20 +192,6 @@ public class LdpActivityRemoteDesktop extends LdpActivityRemoteDesktopBase
 
     }
 
-    private void showDeleyProgressDialog() {
-        LdpConnectionProgressDialog.show(this, "Please waiting", "Loading");
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                    LdpConnectionProgressDialog.dismiss();
-                } catch (InterruptedException ignored) {
-
-                }
-            }
-        }).start();
-    }
 
     private void showDisconnectionMessage() {
         context = this;
@@ -236,7 +220,6 @@ public class LdpActivityRemoteDesktop extends LdpActivityRemoteDesktopBase
                         case DialogInterface.BUTTON_POSITIVE:
                             sendDisconnectRequestFromScreenThread();
                             clientHandler.disconnect();
-                            showDeleyProgressDialog();
                             finish();
                             break;
                         case DialogInterface.BUTTON_NEGATIVE:

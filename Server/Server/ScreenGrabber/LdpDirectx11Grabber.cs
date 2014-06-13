@@ -28,10 +28,10 @@ namespace Server.ScreenGrabber
         private const int NEXT_FRAME_TIMEOUT = 4000;
         private static ushort MAX_TRYING_ATTEMPS = 0;
         private static SharpDX.Direct3D11.Device dx11Device;
-        private static Factory1 dx11Factory;
+        private static SharpDX.DXGI.Factory1 dx11Factory;
         private static SharpDX.Direct3D11.Texture2DDescription dx11Texture2Ddescr;
-        private static Output1 dx11Output;
-        private static OutputDuplication dx11DuplicatedOutput;
+        private static SharpDX.DXGI.Output1 dx11Output;
+        private static SharpDX.DXGI.OutputDuplication dx11DuplicatedOutput;
         private SharpDX.Direct3D11.Texture2D dx11ScreenTexture;
         private OutputDuplicateFrameInformation dx11DuplFrameInfo;
         private SharpDX.DXGI.Resource dx11ScreenResource;
@@ -147,7 +147,7 @@ namespace Server.ScreenGrabber
                 }
                 else
                 {
-                    if (MAX_TRYING_ATTEMPS < 10)
+                    if (MAX_TRYING_ATTEMPS < 5)
                     {
                         MAX_TRYING_ATTEMPS++;
                         LdpLog.Error("GetDX11ScreenShot\n" + e.Message + "\nMaxAttemps=" + MAX_TRYING_ATTEMPS);
@@ -180,7 +180,18 @@ namespace Server.ScreenGrabber
 
             if (screenShot != null)
                 screenShot.Dispose();
+
+            dx11Device = null;
+            dx11Factory = null;
+            dx11Output = null;
+            dx11DuplicatedOutput = null;
+            dx11ScreenTexture = null;
+            dx11ScreenResource = null;
+            dx11ScreenSurface = null;
+            screenShot = null;
+
             bmpData = null;
+            GC.SuppressFinalize(this);
         }
     }
 }

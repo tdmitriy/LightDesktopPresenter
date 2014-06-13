@@ -82,11 +82,12 @@ public class LdpActivityMain extends LdpActivityMainInterface {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        clientHandler.disconnect();
+
     }
 
     private void connect(LdpConnectionPreferences prefs, ConnectionType type) {
         clientHandler.initSettings(prefs, type);
+
         LdpClientThread connectionThread = new LdpClientThread();
         connectionThread.execute();
     }
@@ -94,6 +95,7 @@ public class LdpActivityMain extends LdpActivityMainInterface {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            clientHandler.disconnect();
             return super.onKeyDown(keyCode, event);
         }
         return super.onKeyDown(keyCode, event);
@@ -114,7 +116,6 @@ public class LdpActivityMain extends LdpActivityMainInterface {
         }
     };
 
-
     private final class LdpClientThread extends AsyncTask<Void, Void, Void> {
         boolean success = false;
 
@@ -131,11 +132,6 @@ public class LdpActivityMain extends LdpActivityMainInterface {
             return null;
         }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-        }
-
         private void sendAuthRequest() {
             LdpConnectionPreferences prefs = getSelectedPrefs();
             String password = prefs.getPassword();
@@ -144,6 +140,13 @@ public class LdpActivityMain extends LdpActivityMainInterface {
             LdpPacket packet = packetFactory.buildPacket(authRequest);
             clientHandler.getSendingChannel().send(packet);
         }
+
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
     }
 
 }

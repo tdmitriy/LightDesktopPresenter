@@ -35,11 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google.ProtocolBuffers">
+      <HintPath>..\libs\Google.ProtocolBuffers.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.ProtocolBuffers.Serialization">
+      <HintPath>..\libs\Google.ProtocolBuffers.Serialization.dll</HintPath>
+    </Reference>
     <Reference Include="LZ4">
       <HintPath>..\libs\LZ4.dll</HintPath>
     </Reference>
-    <Reference Include="protobuf-net">
-      <HintPath>..\libs\protobuf-net.dll</HintPath>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\packages\MahApps.Metro.0.13.1.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX">
       <HintPath>..\libs\SharpDX.dll</HintPath>
@@ -57,6 +63,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.0.13.1.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -74,15 +83,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ClientInfo\LdpClientInfo.cs" />
     <Compile Include="Network\Handlers\PacketHandlerBase\ILdpObservable.cs" />
     <Compile Include="Network\Handlers\LdpClientInfoRequestHandler.cs" />
+    <Compile Include="Password_form.xaml.cs">
+      <DependentUpon>Password_form.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Protocol\LdpProtocol.cs" />
     <Compile Include="RemoteDesktopSender\LdpRemoteDesktopSender.cs" />
+    <Compile Include="RemoteVolumeSender\LdpRemoteVolumeSender.cs" />
     <Compile Include="ScreenGrabber\LdpDirectx11Grabber.cs" />
     <Compile Include="ScreenGrabber\LdpDirectx9Grabber.cs" />
     <Compile Include="ScreenGrabber\LdpScreenGrabber.cs" />
     <Compile Include="ScreenGrabber\LdpScreenGrabberBase.cs" />
     <Compile Include="ScreenGrabber\LdpScreenGrabberType.cs" />
+    <Compile Include="SoundControlling\LdpSoundController.cs" />
     <Compile Include="TcpServer\LdpServerInitializator.cs" />
     <Compile Include="TcpServer\PacketSender\ILdpPacketSender.cs" />
     <Compile Include="Network\Handlers\PacketHandlerBase\ILdpPacketHandler.cs" />
@@ -91,15 +109,6 @@
     <Compile Include="Network\Handlers\PacketHandlerBase\LdpPacketHandler.cs" />
     <Compile Include="Network\Handlers\LdpPreparableInfoRequestHandler.cs" />
     <Compile Include="TcpServer\PacketSender\LdpPacketSender.cs" />
-    <Compile Include="Network\PacketTypes\LdpAuthRequest.cs" />
-    <Compile Include="Network\PacketTypes\LdpAuthResponse.cs" />
-    <Compile Include="Network\PacketTypes\LdpClientInfoRequest.cs" />
-    <Compile Include="Network\PacketTypes\LdpDisconnectRequest.cs" />
-    <Compile Include="Network\PacketTypes\LdpScreenRequest.cs" />
-    <Compile Include="Network\PacketTypes\LdpPreparableInfoRequest.cs" />
-    <Compile Include="Network\PacketTypes\LdpScreenResponse.cs" />
-    <Compile Include="Network\LdpPacket.cs" />
-    <Compile Include="Network\PacketTypes\LdpPreparableInfoResponse.cs" />
     <Compile Include="Protocol\LdpProtocolPacketFactory.cs" />
     <Compile Include="ProtoGenerator\LdpProtoGenerator.cs" />
     <Compile Include="ScreenGrabber\LdpScreenProcessingUtils.cs" />
@@ -109,6 +118,14 @@
     <Compile Include="TcpServer\LdpServerBase.cs" />
     <Compile Include="UserSettings\LdpUserSettings.cs" />
     <Compile Include="WindowsUtils\LdpUtils.cs" />
+    <Page Include="About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Password_form.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ServerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -143,6 +160,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -151,6 +170,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\phone_image.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

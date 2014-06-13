@@ -1,4 +1,4 @@
-﻿using Server.Network.PacketTypes;
+﻿using Server.Protocol;
 using Server.WindowsUtils;
 using System;
 using System.Collections.Generic;
@@ -29,8 +29,8 @@ namespace Server.Network.Handlers.PacketHandlerBase
         {
             if (listeners.Contains(listener))
             {
-                listeners.Remove(listener);
                 listener.Dispose();
+                listeners.Remove(listener);
                 LdpLog.Info(String.Format("Listener removed: {0}.", listener.GetType()));
                 listener = null;
             }
@@ -46,7 +46,6 @@ namespace Server.Network.Handlers.PacketHandlerBase
                     listeners[i] = null;
                     listeners.Remove(listeners[i]);
                 }
-                listeners = null;
             }
         }
 
@@ -63,12 +62,6 @@ namespace Server.Network.Handlers.PacketHandlerBase
         }
         #endregion
 
-        public virtual void Dispose()
-        {
-            RemoveListeners();
-            listeners = null;
-        }
-
 
         public List<ILdpPacketHandler> GetListenersList
         {
@@ -78,6 +71,13 @@ namespace Server.Network.Handlers.PacketHandlerBase
                     return listeners;
                 else return new List<ILdpPacketHandler>();
             }
+        }
+
+        public virtual void Dispose()
+        {
+            RemoveListeners();
+            listeners = null;
+            GC.SuppressFinalize(this);
         }
     }
 }

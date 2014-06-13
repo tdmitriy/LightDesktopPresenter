@@ -1,6 +1,6 @@
-﻿using ProtoBuf;
-using Server.Network;
+﻿using Server.Network;
 using Server.Network.Handlers.PacketHandlerBase;
+using Server.Protocol;
 using Server.TcpServer;
 using Server.WindowsUtils;
 using System;
@@ -26,6 +26,7 @@ namespace Server.TcpServer.PacketListener
             client_connected = true;
             listening_thread = new Thread(() => StartListening());
             listening_thread.Start();
+            LdpLog.Info("Listener thread started.");
         }
 
         private void StartListening()
@@ -42,15 +43,20 @@ namespace Server.TcpServer.PacketListener
             {
                 using (var stream = new NetworkStream(serverHandler.GetSocketChannel))
                 {
-                    var packet = Serializer.DeserializeWithLengthPrefix<LdpPacket>(stream, 
-                        PrefixStyle.Base128);
-                    //base - notify to all listeners
+                    var packet = LdpPacket.ParseDelimitedFrom(stream);
+
+                    ProcessPacket(packet);
+                    //base - notify to all subscribers
                     NotifyToAllListeners(packet);
+                    //stream.Close();
                 }
             }
             catch (IOException ioexc)
             {
-                LdpLog.Error("LdpPacketListener IOException: Handle() method throw:\n" + ioexc.Message);
+                string error =
+                            String.Format(@"LdpPacketListener IOException: 
+                                    Handle() method throw:\n{0}.", ioexc.Message);
+                LdpLog.Error(error);
                 Restart();
             }
             catch (SocketException sockexc)
@@ -58,7 +64,7 @@ namespace Server.TcpServer.PacketListener
                 switch (sockexc.ErrorCode)
                 {
                     case CLIENT_DISCON_ERROR_CODE:
-                        LdpLog.Info("LdpPacketListener: client diskonnected.");
+                        LdpLog.Info("LdpPacketListener: client disconnected.");
                         Restart();
                         break;
                     default:
@@ -72,22 +78,55 @@ namespace Server.TcpServer.PacketListener
             }
             catch (Exception ex)
             {
-                LdpLog.Error("LdpPacketListener Exception: Handle() method throw:\n" + ex.Message);
+                string error =
+                            String.Format(@"LdpPacketListener Exception: 
+                                    Handle() method throw:\n{0}.", ex.Message);
+                LdpLog.Error(error);
                 Restart();
             }
         }
+        private void ProcessPacket(LdpPacket packet)
+        {
+            switch (packet.Type)
+            {
+                case PacketType.DISCONNECT_REQUEST:
+                    switch (packet.DisconnectRequest.Type)
+                    {
+                        case DisconnectionType.FROM_SERVER:
+                            Restart();
+                            break;
+                    }
+                    break;
+            }
+        }
+
         private void Restart()
         {
-            client_connected = false;
+            
+            AbortListenerThread();
             if (serverHandler != null)
                 serverHandler.Restart();
+        }
+
+        private void AbortListenerThread()
+        {
+            client_connected = false;
+            if (listening_thread != null)
+                try
+                {
+                    listening_thread.Abort();
+                    listening_thread = null;
+                }
+                catch { }
         }
 
         public override void Dispose()
         {
             base.Dispose();
-            client_connected = false;
+            AbortListenerThread();
             serverHandler = null;
+            GC.SuppressFinalize(this);
+            LdpLog.Info("Listener thread stopped.");
         }
     }
 }

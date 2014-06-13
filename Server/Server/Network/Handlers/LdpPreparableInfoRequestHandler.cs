@@ -1,5 +1,4 @@
 ﻿using Server.Network.Handlers.PacketHandlerBase;
-using Server.Network.PacketTypes;
 using Server.Protocol;
 using Server.RemoteDesktopSender;
 using Server.WindowsUtils;
@@ -74,6 +73,7 @@ namespace Server.Network.Handlers
         {
             serverHandler = null;
             packetFactory = null;
+            GC.SuppressFinalize(this);
         }
     }
 }

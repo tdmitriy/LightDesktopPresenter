@@ -2,7 +2,6 @@
 using Server.Network;
 using Server.Network.Handlers;
 using Server.Network.Handlers.PacketHandlerBase;
-using Server.Network.PacketTypes;
 using Server.Protocol;
 using Server.RemoteDesktopSender;
 using Server.TcpServer.PacketListener;
@@ -36,9 +35,6 @@ namespace Server.TcpServer
         protected LdpPacketSender packetSender { get; private set; }
         protected LdpPacketListener packetListener { get; private set; }
 
-        private LdpAuthRequestHandler authRequestHandler;
-        private LdpDisconnectRequestHandler disconnectHandler;
-
         private void InitializeServer(int port)
         {
             try
@@ -48,6 +44,7 @@ namespace Server.TcpServer
                 IPEndPoint serverIPEP = new IPEndPoint(IPAddress.Any, port);
                 serverSocket.Bind(serverIPEP);
                 serverSocket.Listen(MAX_CONNECTIONS_PENDING);
+                LdpLog.Info("Server started.");
 
 
                 //incoming connection
@@ -77,12 +74,15 @@ namespace Server.TcpServer
             
         }
 
-        protected void StartServerThread(int port)
+        protected void StartServer(int port)
         {
             try
             {
                 if (serverThread != null && serverThread.IsAlive)
+                {
                     serverThread.Abort();
+                    serverThread = null;
+                }
             }
             catch { }
             serverThread = new Thread(() => InitializeServer(port));
@@ -93,49 +93,35 @@ namespace Server.TcpServer
         {
             packetListener = new LdpPacketListener();
             packetSender = new LdpPacketSender();
-            
-            authRequestHandler = new LdpAuthRequestHandler();
-            disconnectHandler = new LdpDisconnectRequestHandler();
+
+            LdpAuthRequestHandler authRequestHandler = 
+                new LdpAuthRequestHandler();
+            /*LdpDisconnectRequestHandler disconnectHandler = 
+                new LdpDisconnectRequestHandler();*/
 
             packetListener.AddListener(authRequestHandler);
-            packetListener.AddListener(disconnectHandler);
+            //packetListener.AddListener(disconnectHandler);
         }
 
         protected void StopServer()
         {
-            
-            SendDisconnectionRequestFromScreen();
-
-            SendDisconnectionRequest();
-
-            Cleanup();
             try
             {
-                if (clientSocket != null && clientSocket.Connected)
+                Cleanup();
+                /*if (clientSocket != null)
                 {
-                    clientSocket.Shutdown(SocketShutdown.Both);
                     clientSocket.Close();
                     clientSocket.Dispose();
-                }
-            }
-            catch (SocketException sockexc)
-            {
-                LdpLog.Error("Server shutdown thrown:\n" + sockexc.Message);
-            }
-            catch (Exception ex)
-            {
-                LdpLog.Error("Server shutdown thrown:\n" + ex.Message);
-            }
-            finally
-            {
-                clientSocket = null;
-            }
-
-            try
-            {
+                }*/
                 if (serverSocket != null)
                 {
                     LdpLog.Info("Server shutdown.");
+                    if (clientSocket != null && clientSocket.Connected)
+                    {
+                        clientSocket.Shutdown(SocketShutdown.Both);
+                        clientSocket.Close();
+                        clientSocket.Dispose();
+                    }
                     serverSocket.Close();
                     serverSocket.Dispose();
                 }
@@ -150,20 +136,23 @@ namespace Server.TcpServer
             }
             finally
             {
+                clientSocket = null;
                 serverSocket = null;
             }
 
             try
             {
-                if (serverThread != null && serverThread.IsAlive)
+                if (serverThread != null)
                 {
                     serverThread.Abort();
+                    serverThread = null;
                 }
+                    
             }
             catch { LdpLog.Error("ServerThread interrupted."); }
         }
 
-        private void SendDisconnectionRequestFromScreen()
+        /*private void SendDisconnectionRequestFromScreen()
         {
             try
             {
@@ -187,9 +176,9 @@ namespace Server.TcpServer
             {
                 LdpLog.Error("SendDisconnectionRequestFromScreen error.\n" + ex.Message);
             }
-        }
+        }*/
 
-        private void SendDisconnectionRequest()
+        /*private void SendDisconnectionRequest()
         {
             try
             {
@@ -208,7 +197,7 @@ namespace Server.TcpServer
                 LdpLog.Error("SendDisconnectionRequest error.");
             }
 
-        }
+        }*/
         private void Cleanup()
         {
             ClearClientInfo();
@@ -224,8 +213,6 @@ namespace Server.TcpServer
                 packetSender.Dispose();
                 packetSender = null;
             }
-
-           
         }
 
         private void ClearClientInfo()

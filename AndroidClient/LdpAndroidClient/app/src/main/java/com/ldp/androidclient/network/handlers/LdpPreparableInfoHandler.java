@@ -19,10 +19,9 @@ public class LdpPreparableInfoHandler implements ILdpPacketHandler {
     private LdpClient clientHandler;
     private LdpProtocolPacketFactory packetFactory;
     private LdpPreparableInfoResponse preparableInfoResponse;
-    private Context context;
 
     public LdpPreparableInfoHandler() {
-        this.context = LdpActivityMain.getContext();
+
         clientHandler = LdpClient.getInstance();
         packetFactory = new LdpProtocolPacketFactory();
     }
@@ -45,11 +44,11 @@ public class LdpPreparableInfoHandler implements ILdpPacketHandler {
         //showDialogInfo(InfoType.RECEIVED_PREPARABLE_INFO);
 
         try {
-            Intent intent = new Intent(context, LdpActivityRemoteDesktop.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Intent intent = new Intent(LdpActivityMain.getContext(), LdpActivityRemoteDesktop.class);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("RmDesktopWidth", desktopWidth);
             intent.putExtra("RmDesktopHeight", desktopHeight);
-            context.startActivity(intent);
+            LdpActivityMain.getContext().startActivity(intent);
             Log.i(TAG, "Starting activity LdpActivityRemoteDesktop");
             showDialogInfo(InfoType.RECEIVED_PREPARABLE_INFO);
             clientHandler.getListenerChannel().removeListener(this);
@@ -84,7 +83,6 @@ public class LdpPreparableInfoHandler implements ILdpPacketHandler {
     @Override
     public void dispose() {
         clientHandler = null;
-        context = null;
         packetFactory = null;
         preparableInfoResponse = null;
     }

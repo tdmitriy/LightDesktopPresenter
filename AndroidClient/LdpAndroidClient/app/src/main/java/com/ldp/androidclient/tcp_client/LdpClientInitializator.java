@@ -37,16 +37,15 @@ public abstract class LdpClientInitializator {
 
     private static final Object LOCKER = new Object();
 
-    protected void initSettings(LdpConnectionPreferences prefs, ConnectionType type) {
+    protected void initClientSettings(LdpConnectionPreferences prefs, ConnectionType type) {
         this.prefs = prefs;
         this.type = type;
         settingsInitialized = true;
     }
 
-    protected boolean connect(int port) {
+    protected boolean connectToServer(int port) {
         String ipAddress;
         try {
-            disconnect();
             if (!settingsInitialized) {
                 Log.i(TAG, "initSettings is not initialized.");
                 LdpConnectionProgressDialog.dismiss();
@@ -63,7 +62,7 @@ public abstract class LdpClientInitializator {
         } catch (IOException e) {
             Log.i(TAG, "" + e.getMessage());
             showErrorDialog(ErrorType.NO_CONNECTION);
-            disconnect();
+            disconnectFromServer();
             return false;
         }
     }
@@ -97,11 +96,10 @@ public abstract class LdpClientInitializator {
         }
     }
 
-    protected void disconnect() {
+    protected void disconnectFromServer() {
         if (channel != null) {
             sendDisconnectionPacket();
             try {
-                //showErrorDialog(ErrorType.DISCONNECTED);
                 channel.close();
                 channel = null;
             } catch (Exception e) {
@@ -140,15 +138,15 @@ public abstract class LdpClientInitializator {
 
     }
 
-    protected Socket getSocketChannel() {
+    protected Socket getClientSocketChannel() {
         return channel;
     }
 
-    protected LdpPacketListener getListenerChannel() {
+    protected LdpPacketListener getClientListenerChannel() {
         return packetListener;
     }
 
-    protected LdpPacketSender getSendingChannel() {
+    protected LdpPacketSender getClientSendingChannel() {
         return packetSender;
     }
 

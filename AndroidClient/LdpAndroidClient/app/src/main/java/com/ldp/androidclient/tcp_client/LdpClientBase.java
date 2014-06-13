@@ -16,23 +16,23 @@ public abstract class LdpClientBase extends LdpClientInitializator implements IL
 
     @Override
     public void initSettings(LdpConnectionPreferences prefs, ConnectionType type) {
-        super.initSettings(prefs, type);
+        super.initClientSettings(prefs, type);
     }
 
     @Override
     public boolean connect(int port) {
-        return super.connect(port);
+        return super.connectToServer(port);
     }
 
     @Override
     public boolean connect() {
-        return connect(DEFAULT_PORT);
+        return super.connectToServer(DEFAULT_PORT);
     }
 
 
     @Override
     public void disconnect() {
-        super.disconnect();
+        super.disconnectFromServer();
     }
 
     @Override
@@ -42,17 +42,17 @@ public abstract class LdpClientBase extends LdpClientInitializator implements IL
 
     @Override
     public LdpPacketListener getListenerChannel() {
-        return super.getListenerChannel();
+        return super.getClientListenerChannel();
     }
 
     @Override
     public LdpPacketSender getSendingChannel() {
-        return super.getSendingChannel();
+        return super.getClientSendingChannel();
     }
 
     @Override
     public Socket getSocketChannel() {
-        return super.getSocketChannel();
+        return super.getClientSocketChannel();
     }
 
 

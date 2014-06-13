@@ -1,5 +1,4 @@
-﻿using ProtoBuf;
-using Server.Network;
+﻿using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -44,7 +43,7 @@ namespace Server.ProtoGeneration
         {
             try
             {
-                string proto = Serializer.GetProto<LdpPacket>();
+                string proto = "";
                 string[] splittet = proto.Split('\n');
                 splittet[0] = "option java_outer_classname = \"" + JAVA_PROTOCOL_NAME + "\";" + "\r\n";
                 splittet[0] += "option optimize_for = SPEED;" + "\r\n";

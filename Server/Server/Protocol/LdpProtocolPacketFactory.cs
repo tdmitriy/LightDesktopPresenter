@@ -1,5 +1,5 @@
-﻿using Server.Network;
-using Server.Network.PacketTypes;
+﻿using Google.ProtocolBuffers;
+using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,66 +12,67 @@ namespace Server.Protocol
     {
         public LdpAuthResponse SetAuthResponse(bool authResult)
         {
-            var response = new LdpAuthResponse();
-            response.isSuccess = authResult;
-            return response;
+            var response = LdpAuthResponse.CreateBuilder();
+            response.IsSuccess = authResult;
+            return response.Build();
         }
 
         public LdpPreparableInfoResponse SetRemoteDesktopInfo(int width, int height)
         {
-            var response = new LdpPreparableInfoResponse();
+            var response = LdpPreparableInfoResponse.CreateBuilder();
             response.ScreenWidth = width;
             response.ScreenHeight = height;
-            return response;
+            return response.Build();
         }
 
         public LdpDisconnectRequest SetDisconnectRequest(DisconnectionType type)
         {
-            var response = new LdpDisconnectRequest();
+            var response = LdpDisconnectRequest.CreateBuilder();
             response.Type = type;
-            return response;
+            return response.Build();
         }
 
         public LdpScreenResponse SetScreenResponse(byte[] compressed, 
-            int baseLenght, LdpRectangle rect)
+            int baseLenght, LdpRectangle.Builder rect)
         {
-            var response = new LdpScreenResponse();
-            response.CompressedScreen = compressed;
+            var response = LdpScreenResponse.CreateBuilder();
+            ByteString bytes = ByteString.CopyFrom(compressed);
+            response.CompressedScreen = bytes;
             response.BaseLenght = baseLenght;
-            response.Rect = rect;
-            return response;
+            response.SetRect(rect);
+            return response.Build();
         }
 
         public LdpPacket BuildPacket(LdpAuthResponse response)
         {
-            var packet = new LdpPacket();
+            var packet = LdpPacket.CreateBuilder();
             packet.Type = PacketType.AUTH_RESPONSE;
             packet.AuthResponse = response;
-            return packet;
+            return packet.Build();
         }
 
         public LdpPacket BuildPacket(LdpPreparableInfoResponse response)
         {
-            var packet = new LdpPacket();
+            var packet = LdpPacket.CreateBuilder();
             packet.Type = PacketType.PREPARABLE_INFO_RESPONSE;
             packet.PreparableInfoResponse = response;
-            return packet;
+            return packet.Build();
         }
 
         public LdpPacket BuildPacket(LdpDisconnectRequest response)
         {
-            var packet = new LdpPacket();
+            var packet = LdpPacket.CreateBuilder();
             packet.Type = PacketType.DISCONNECT_REQUEST;
             packet.DisconnectRequest = response;
-            return packet;
+            return packet.Build();
         }
 
         public LdpPacket BuildPacket(LdpScreenResponse response)
         {
-            var packet = new LdpPacket();
+            var packet = LdpPacket.CreateBuilder();
             packet.Type = PacketType.SCREEN_RESPONSE;
             packet.ScreenResponse = response;
-            return packet;
+            return packet.Build();
         }
     }
 }

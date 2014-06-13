@@ -1,6 +1,5 @@
 ﻿using Server.Network;
 using Server.Network.Handlers.PacketHandlerBase;
-using Server.Network.PacketTypes;
 using Server.Protocol;
 using Server.ScreenGrabber;
 using Server.WindowsUtils;
@@ -34,7 +33,7 @@ namespace Server.RemoteDesktopSender
         private bool ScreenThread = false;
         private int baseLenght;
         private byte[] origData, compressed;
-        private LdpRectangle rect;
+        private LdpRectangle.Builder rect;
         private static readonly int SLEEP_TIME = 10;
         #endregion
 
@@ -68,7 +67,7 @@ namespace Server.RemoteDesktopSender
             }
         }
 
-        private void SendScreenResponse(byte[] compr, int len, LdpRectangle r)
+        private void SendScreenResponse(byte[] compr, int len, LdpRectangle.Builder r)
         {
             screenResponse = null;
             responsePacket = null;
@@ -108,7 +107,7 @@ namespace Server.RemoteDesktopSender
                     baseLenght = origData.Length;
                     compressed = LZ4Codec.Encode(origData, 0, baseLenght);
 
-                    rect = new LdpRectangle();
+                    rect = LdpRectangle.CreateBuilder();
                     rect.Left = bounds.Left;
                     rect.Top = bounds.Top;
                     rect.Right = bounds.Right;
@@ -145,6 +144,8 @@ namespace Server.RemoteDesktopSender
                 prevScreen.Dispose();
             if (difference != null)
                 difference.Dispose();
+
+            GC.SuppressFinalize(this);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Server.Network.Handlers.PacketHandlerBase;
-using Server.Network.PacketTypes;
 using Server.Protocol;
 using Server.TcpServer;
 using Server.UserSettings;
@@ -63,6 +62,7 @@ namespace Server.Network.Handlers
                 responsePacket = packetFactory.BuildPacket(authResponse);
                 serverHandler.GetSenderChannel.Send(responsePacket);
                 LdpLog.Info("Auth failed: wrong password.");
+                serverHandler.GetListenerChannel.RemoveListener(this);
             }
         }
 
@@ -73,6 +73,7 @@ namespace Server.Network.Handlers
             serverHandler = null;
             userSettings = null;
             packetFactory = null;
+            GC.SuppressFinalize(this);
         }
     }
 }
