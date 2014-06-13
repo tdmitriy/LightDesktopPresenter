@@ -96,6 +96,7 @@ public class LdpActivityMain extends LdpActivityMainInterface {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             clientHandler.disconnect();
+            Log.i(TAG,  "Send clientHandler.disconnect()");
             return super.onKeyDown(keyCode, event);
         }
         return super.onKeyDown(keyCode, event);
@@ -144,6 +145,7 @@ public class LdpActivityMain extends LdpActivityMainInterface {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            Log.i(TAG, "Exiting AsyncTask connector.");
             super.onPostExecute(aVoid);
         }
 

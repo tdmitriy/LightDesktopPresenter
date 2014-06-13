@@ -1,13 +1,11 @@
 package com.ldp.androidclient.network.handlers;
 
-import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
 import com.ldp.androidclient.activities.LdpActivityMain;
 import com.ldp.androidclient.activities.LdpActivityRemoteDesktop;
 import com.ldp.androidclient.controls.LdpConnectionProgressDialog;
-import com.ldp.androidclient.controls.LdpMessageBox;
 import com.ldp.androidclient.network.ILdpPacketHandler;
 import com.ldp.androidclient.protocol.LdpProtocol.*;
 import com.ldp.androidclient.protocol.LdpProtocolPacketFactory;
@@ -55,6 +53,7 @@ public class LdpPreparableInfoHandler implements ILdpPacketHandler {
         } catch (Exception ex) {
             Log.i(TAG, "starting LdpActivityRemoteDesktop error: " + ex.getMessage());
             clientHandler.disconnect();
+            Log.i(TAG,  "Send clientHandler.disconnect()");
         }
     }
 

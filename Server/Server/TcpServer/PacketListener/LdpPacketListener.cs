@@ -35,6 +35,7 @@ namespace Server.TcpServer.PacketListener
             {
                 Handle();
             }
+            LdpLog.Info("Listener thread stopped.");
         }
 
         protected override void Handle()
@@ -111,13 +112,13 @@ namespace Server.TcpServer.PacketListener
         private void AbortListenerThread()
         {
             client_connected = false;
-            if (listening_thread != null)
+            /*if (listening_thread != null)
                 try
                 {
                     listening_thread.Abort();
                     listening_thread = null;
                 }
-                catch { }
+                catch { }*/
         }
 
         public override void Dispose()
@@ -126,7 +127,6 @@ namespace Server.TcpServer.PacketListener
             AbortListenerThread();
             serverHandler = null;
             GC.SuppressFinalize(this);
-            LdpLog.Info("Listener thread stopped.");
         }
     }
 }

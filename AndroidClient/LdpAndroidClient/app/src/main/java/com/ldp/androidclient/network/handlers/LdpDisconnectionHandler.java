@@ -7,6 +7,7 @@ import com.ldp.androidclient.protocol.LdpProtocol;
 import com.ldp.androidclient.tcp_client.LdpClient;
 
 public class LdpDisconnectionHandler implements ILdpPacketHandler {
+    private static final String TAG = "LdpDisconnectionHandler";
     private LdpClient clientHandler;
 
     public LdpDisconnectionHandler() {
@@ -20,6 +21,7 @@ public class LdpDisconnectionHandler implements ILdpPacketHandler {
                 switch (packet.getDisconnectRequest().getType()) {
                     case FROM_SERVER:
                         clientHandler.disconnect();
+                        Log.i(TAG,  "Send clientHandler.disconnect()");
                         break;
                 }
                 break;

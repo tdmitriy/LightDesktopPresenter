@@ -16,6 +16,7 @@ namespace Server.Network.Handlers
         public LdpClientInfoRequestHandler()
         {
             serverHandler = LdpServer.GetInstance();
+            serverHandler.GetListenerChannel.AddListener(this);
         }
 
         public void Handle(LdpPacket packet)
@@ -29,8 +30,6 @@ namespace Server.Network.Handlers
                     LdpClientInfo.DEVICE_NAME = clientInfo.DeviceName;
 
                     preparableRequestHandler = new LdpPreparableInfoRequestHandler();
-                    serverHandler.GetListenerChannel.AddListener(preparableRequestHandler);
-
                     serverHandler.GetListenerChannel.RemoveListener(this);
                     break;
             }

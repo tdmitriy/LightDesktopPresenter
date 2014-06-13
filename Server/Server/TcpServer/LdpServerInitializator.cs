@@ -35,6 +35,9 @@ namespace Server.TcpServer
         protected LdpPacketSender packetSender { get; private set; }
         protected LdpPacketListener packetListener { get; private set; }
 
+        private LdpAuthRequestHandler authRequestHandler;
+        private LdpDisconnectRequestHandler disconnectHandler;
+
         private void InitializeServer(int port)
         {
             try
@@ -94,13 +97,11 @@ namespace Server.TcpServer
             packetListener = new LdpPacketListener();
             packetSender = new LdpPacketSender();
 
-            LdpAuthRequestHandler authRequestHandler = 
-                new LdpAuthRequestHandler();
-            /*LdpDisconnectRequestHandler disconnectHandler = 
-                new LdpDisconnectRequestHandler();*/
-
+            authRequestHandler = new LdpAuthRequestHandler();
+            disconnectHandler = new LdpDisconnectRequestHandler();
+                
             packetListener.AddListener(authRequestHandler);
-            //packetListener.AddListener(disconnectHandler);
+            packetListener.AddListener(disconnectHandler);
         }
 
         protected void StopServer()
@@ -150,6 +151,7 @@ namespace Server.TcpServer
                     
             }
             catch { LdpLog.Error("ServerThread interrupted."); }
+            GC.Collect();
         }
 
         /*private void SendDisconnectionRequestFromScreen()

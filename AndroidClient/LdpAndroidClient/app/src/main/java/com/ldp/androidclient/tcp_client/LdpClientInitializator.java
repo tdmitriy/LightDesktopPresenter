@@ -35,8 +35,6 @@ public abstract class LdpClientInitializator {
 
     private boolean settingsInitialized = false;
 
-    private static final Object LOCKER = new Object();
-
     protected void initClientSettings(LdpConnectionPreferences prefs, ConnectionType type) {
         this.prefs = prefs;
         this.type = type;
@@ -71,14 +69,23 @@ public abstract class LdpClientInitializator {
         packetSender = new LdpPacketSender();
         packetListener = new LdpPacketListener();
 
+        if(packetListenerThread != null) {
+            packetListenerThread.interrupt();
+        }
+        packetListenerThread = new Thread(packetListener);
+        packetListenerThread.start();
+
         authHandler = new LdpAuthHandler(type);
         disconnectionHandler = new LdpDisconnectionHandler();
 
         packetListener.addListener(authHandler);
         packetListener.addListener(disconnectionHandler);
 
-        packetListenerThread = new Thread(packetListener);
-        packetListenerThread.start();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void sendDisconnectionPacket() {
@@ -97,11 +104,10 @@ public abstract class LdpClientInitializator {
     }
 
     protected void disconnectFromServer() {
+        sendDisconnectionPacket();
         if (channel != null) {
-            sendDisconnectionPacket();
             try {
                 channel.close();
-                channel = null;
             } catch (Exception e) {
                 Log.i(TAG, e.getMessage());
             }
@@ -116,6 +122,8 @@ public abstract class LdpClientInitializator {
             packetSender.dispose();
             packetSender = null;
         }
+
+        channel = null;
     }
 
     private void showErrorDialog(final ErrorType type) {

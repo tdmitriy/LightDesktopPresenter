@@ -19,6 +19,7 @@ namespace Server.Network.Handlers
         {
             packetFactory = new LdpProtocolPacketFactory();
             serverHandler = LdpServer.GetInstance();
+            serverHandler.GetListenerChannel.AddListener(this);
         }
 
         public void Handle(LdpPacket packet)
@@ -33,6 +34,7 @@ namespace Server.Network.Handlers
                             SendPreparableInfoResponse(ConnectionType.REMOTE_DESKTOP_CONTROL);
                             break;
                         case ConnectionType.REMOTE_VOLUME_CONTROL:
+                            //TODO
                             break;
                     }
                     break;
@@ -47,6 +49,7 @@ namespace Server.Network.Handlers
                     SendRemoteDesktopPreparableInfo();
                     break;
                 case ConnectionType.REMOTE_VOLUME_CONTROL:
+                    //TODO
                     break;
             }
         }
@@ -60,7 +63,6 @@ namespace Server.Network.Handlers
             serverHandler.GetSenderChannel.Send(responsePacket);
 
             remoteDesktopSender = new LdpRemoteDesktopSender();
-            serverHandler.GetListenerChannel.AddListener(remoteDesktopSender);
             serverHandler.GetListenerChannel.RemoveListener(this);
         }
 

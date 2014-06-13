@@ -29,7 +29,7 @@ public class LdpActivityRemoteDesktop extends LdpActivityRemoteDesktopBase
     private Context context = this;
     private AlertDialog.Builder disconnectionDialog;
 
-    private LdpClient clientHandler = LdpClient.getInstance();
+    private LdpClient clientHandler;
     private LdpScreenRequest screenRequest;
     private LdpScreenResponse screenResponse;
     private LdpPacket requestPacket;
@@ -52,6 +52,7 @@ public class LdpActivityRemoteDesktop extends LdpActivityRemoteDesktopBase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        clientHandler = LdpClient.getInstance();
         clientHandler.getListenerChannel().addListener(this);
 
         initializeObjects();
@@ -63,14 +64,6 @@ public class LdpActivityRemoteDesktop extends LdpActivityRemoteDesktopBase
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        pausingScreenRequestSending = false;
-        screenRequest = null;
-        screenResponse = null;
-        requestPacket = null;
-        packetFactory = null;
-        imageProcessor = null;
-        scalingSettings = null;
-        clientHandler = null;
     }
 
     private void initializeObjects() {
@@ -134,7 +127,6 @@ public class LdpActivityRemoteDesktop extends LdpActivityRemoteDesktopBase
                     case FROM_SCREEN_THREAD:
                         pausingScreenRequestSending = true;
                         showDisconnectionMessage();
-                        dispose();
                         finish();
                         break;
                 }
@@ -185,6 +177,7 @@ public class LdpActivityRemoteDesktop extends LdpActivityRemoteDesktopBase
                     packetFactory.setDisconnectRequest(DisconnectionType.FROM_SCREEN_THREAD);
             LdpPacket disconnPacket = packetFactory.buildPacket(request);
             clientHandler.getSendingChannel().send(disconnPacket);
+            //clientHandler.getListenerChannel().removeListener(this);
             Log.i(TAG, "sending disconnect request from screen thread.");
         } catch (Exception ignored) {
             finish();
@@ -212,6 +205,13 @@ public class LdpActivityRemoteDesktop extends LdpActivityRemoteDesktopBase
         });
     }
 
+    private void sleep(long time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException ignored) {
+        }
+    }
+
     private DialogInterface.OnClickListener disconnectListener =
             new DialogInterface.OnClickListener() {
                 @Override
@@ -219,7 +219,10 @@ public class LdpActivityRemoteDesktop extends LdpActivityRemoteDesktopBase
                     switch (which) {
                         case DialogInterface.BUTTON_POSITIVE:
                             sendDisconnectRequestFromScreenThread();
-                            clientHandler.disconnect();
+                            if(clientHandler != null) {
+                                clientHandler.disconnect();
+                                Log.i(TAG,  "Send clientHandler.disconnect()");
+                            }
                             finish();
                             break;
                         case DialogInterface.BUTTON_NEGATIVE:

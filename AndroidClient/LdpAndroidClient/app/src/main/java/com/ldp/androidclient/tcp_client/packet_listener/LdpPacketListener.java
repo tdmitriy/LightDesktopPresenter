@@ -28,12 +28,12 @@ public class LdpPacketListener extends LdpPacketHandler implements Runnable {
             notifyToAllListeners(packet);
         } catch (IOException e) {
             thread_working = false;
-            clientHandler.disconnect();
-            //Log.i(TAG,  "" + e);
+            //clientHandler.disconnect();
+            //Log.i(TAG,  "Send clientHandler.disconnect()" + e);
         } catch (Exception ex) {
             thread_working = false;
-            clientHandler.disconnect();
-            //Log.i(TAG,  "" + ex);
+            //clientHandler.disconnect();
+            //Log.i(TAG,  "Send clientHandler.disconnect()" + ex);
         }
     }
 

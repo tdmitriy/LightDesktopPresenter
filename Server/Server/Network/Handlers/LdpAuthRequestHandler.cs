@@ -48,7 +48,6 @@ namespace Server.Network.Handlers
             if (requestPassword == settingsPassword)
             {
                 infoRequest = new LdpClientInfoRequestHandler();
-                serverHandler.GetListenerChannel.AddListener(infoRequest);
 
                 authResponse = packetFactory.SetAuthResponse(true);
                 responsePacket = packetFactory.BuildPacket(authResponse);

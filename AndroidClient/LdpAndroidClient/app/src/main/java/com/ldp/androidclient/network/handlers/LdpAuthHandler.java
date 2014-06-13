@@ -61,6 +61,7 @@ public class LdpAuthHandler implements ILdpPacketHandler {
             showDialogInfo(InfoType.WRONG_PASSWORD);
             Log.i(TAG, "WRONG_PASSWORD");
             clientHandler.disconnect();
+            Log.i(TAG,  "Send clientHandler.disconnect()");
         }
     }
 
