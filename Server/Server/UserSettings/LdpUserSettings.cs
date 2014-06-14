@@ -33,8 +33,7 @@ namespace Server.UserSettings
             Settings.Default.Save();
             string success = "User settings: password updated successfully.";
             LdpLog.Info(success);
-            MessageBox.Show(success, "Info", MessageBoxButton.OK,
-                MessageBoxImage.Information);
+            
         }
 
     }

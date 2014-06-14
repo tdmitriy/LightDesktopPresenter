@@ -27,29 +27,39 @@ namespace Server
     public partial class ServerWindow : MetroWindow
     {
         private LdpServer server;
-        string text = "Try to use one of the folowing ip to connect:\n" +
-                        "192.168.0.48\n";
+        private LdpLabelStatus labelStatus;
         public ServerWindow()
         {
+            
             InitializeComponent();
             server = LdpServer.GetInstance();
+            labelStatus = LdpLabelStatus.GetInstance();
+            lblConnectionStatus.DataContext = labelStatus;
             //LdpUtils.CheckStartupWindowsVersion(this);
-            lblConnectionStatus.Text = text;
-            server.Start();
+            StartServer();
+
+            //Binding LdpDisplayedConnectionInfo to label
+            
+            
             //LdpProtoGenerator.GenerateProtoJava();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void StartServer()
         {
-            /*server.Start();
-            txt.Text = "";
-            txt.Text = "Started";*/
+            if (server != null)
+                server.Start();
+        }
+
+        private void StopServer()
+        {
+            if (server != null)
+                server.Stop();
         }
 
         protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
-            server.Stop();
+            StopServer();
         }
 
         private void btnAbout_Click(object sender, RoutedEventArgs e)

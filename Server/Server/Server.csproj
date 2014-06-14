@@ -117,6 +117,7 @@
     <Compile Include="TcpServer\ILdpServerHandlers.cs" />
     <Compile Include="TcpServer\LdpServerBase.cs" />
     <Compile Include="UserSettings\LdpUserSettings.cs" />
+    <Compile Include="WindowsUtils\LdpLabelStatus.cs" />
     <Compile Include="WindowsUtils\LdpUtils.cs" />
     <Page Include="About.xaml">
       <SubType>Designer</SubType>

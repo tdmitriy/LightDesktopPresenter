@@ -26,7 +26,6 @@ namespace Server.TcpServer
             try
             {
                 this.PORT = port;
-                PrintServerStarting();
                 base.StartServer(port);
             }
             catch (Exception ex)
@@ -38,7 +37,7 @@ namespace Server.TcpServer
 
         public void Start()
         {
-            base.StartServer(DEFAULT_PORT_NUMBER);
+            Start(DEFAULT_PORT_NUMBER);
         }
 
         public void Restart()
@@ -53,13 +52,7 @@ namespace Server.TcpServer
             base.StopServer();
         }
 
-        private void PrintServerStarting()
-        {
-            LdpLog.Info("Try to use one of the following IP:");
-            var IpList = GetLocalIpAddressList;
-            foreach (var ip in IpList)
-                LdpLog.Info(ip);
-        }
+        
 
         public int GetServerPort
         {

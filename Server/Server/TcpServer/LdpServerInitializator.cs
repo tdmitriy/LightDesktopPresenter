@@ -47,8 +47,8 @@ namespace Server.TcpServer
                 IPEndPoint serverIPEP = new IPEndPoint(IPAddress.Any, port);
                 serverSocket.Bind(serverIPEP);
                 serverSocket.Listen(MAX_CONNECTIONS_PENDING);
-                LdpLog.Info("Server started.");
 
+                PrintServerStarting();
 
                 //incoming connection
                 clientSocket = serverSocket.Accept();
@@ -200,6 +200,19 @@ namespace Server.TcpServer
             }
 
         }*/
+
+        private void PrintServerStarting()
+        {
+            string text = "Try to use one of the following IP:\n";
+            LdpLog.Info(text);
+            foreach (var ip in GetLocalIpAddressList())
+            {
+                text += ip + "\n";
+            }
+            LdpLog.Info(text);
+            LdpLabelStatus.GetInstance().StateText = text;
+        }
+
         private void Cleanup()
         {
             ClearClientInfo();

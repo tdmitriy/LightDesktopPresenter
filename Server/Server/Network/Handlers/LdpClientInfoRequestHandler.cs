@@ -1,6 +1,7 @@
 ﻿using Server.ClientInfo;
 using Server.Network.Handlers.PacketHandlerBase;
 using Server.Protocol;
+using Server.WindowsUtils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,10 @@ namespace Server.Network.Handlers
     {
         private LdpServer serverHandler;
         private LdpPreparableInfoRequestHandler preparableRequestHandler;
+        private StringBuilder lblText;
         public LdpClientInfoRequestHandler()
         {
+            lblText = new StringBuilder();
             serverHandler = LdpServer.GetInstance();
             serverHandler.GetListenerChannel.AddListener(this);
         }
@@ -28,6 +31,12 @@ namespace Server.Network.Handlers
                     LdpClientInfo.IP = serverHandler.GetClientIPAddress;
                     LdpClientInfo.OS = clientInfo.OS;
                     LdpClientInfo.DEVICE_NAME = clientInfo.DeviceName;
+                    lblText.AppendLine("Client connected:");
+                    lblText.AppendLine("IP: " + LdpClientInfo.IP);
+                    lblText.AppendLine("Device: " + LdpClientInfo.DEVICE_NAME);
+                    lblText.AppendLine("OS: " + LdpClientInfo.OS);
+
+                    LdpLabelStatus.GetInstance().StateText = lblText.ToString();
 
                     preparableRequestHandler = new LdpPreparableInfoRequestHandler();
                     serverHandler.GetListenerChannel.RemoveListener(this);
