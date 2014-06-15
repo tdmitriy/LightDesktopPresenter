@@ -26,9 +26,9 @@ namespace Server.ScreenGrabber
         {
             using (var ms = new MemoryStream())
             {
-                encoderParams.Param[0] = qualityParam;
-                imageIn.Save(ms, encoder, encoderParams);
-                //imageIn.Save(ms, ImageFormat.Jpeg);
+                //encoderParams.Param[0] = qualityParam;
+                //imageIn.Save(ms, encoder, encoderParams);
+                imageIn.Save(ms, ImageFormat.Png);
                 return ms.ToArray();
             }
         }

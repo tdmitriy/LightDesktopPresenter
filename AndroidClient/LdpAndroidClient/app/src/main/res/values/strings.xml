@@ -16,6 +16,7 @@
     <string name="action_settings">Settings</string>
     <string name="action_add_new_connection">Add new connection</string>
     <string name="action_delete_connection">Delete connection</string>
+    <string name="action_show_keyboard">Show keyboard</string>
     <!-- End settings -->
 
 

@@ -52,7 +52,10 @@ namespace Server.TcpServer
             base.StopServer();
         }
 
-        
+        public void DisconnectClient()
+        {
+            base.DisconntectClientFromServer();
+        }
 
         public int GetServerPort
         {
@@ -83,5 +86,8 @@ namespace Server.TcpServer
         {
             get { return GetLocalIpAddressList(); }
         }
+
+
+        
     }
 }

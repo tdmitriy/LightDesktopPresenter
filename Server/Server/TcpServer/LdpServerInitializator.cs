@@ -4,6 +4,7 @@ using Server.Network.Handlers;
 using Server.Network.Handlers.PacketHandlerBase;
 using Server.Protocol;
 using Server.RemoteDesktopSender;
+using Server.RemoteVolumeSender;
 using Server.TcpServer.PacketListener;
 using Server.TcpServer.PacketSender;
 using Server.WindowsUtils;
@@ -109,11 +110,6 @@ namespace Server.TcpServer
             try
             {
                 Cleanup();
-                /*if (clientSocket != null)
-                {
-                    clientSocket.Close();
-                    clientSocket.Dispose();
-                }*/
                 if (serverSocket != null)
                 {
                     LdpLog.Info("Server shutdown.");
@@ -154,57 +150,59 @@ namespace Server.TcpServer
             GC.Collect();
         }
 
-        /*private void SendDisconnectionRequestFromScreen()
+        protected void DisconntectClientFromServer()
         {
-            try
+            if (clientSocket != null && clientSocket.Connected)
             {
-                var listeners = packetListener.GetListenersList;
-                foreach (var listener in listeners)
+                try
                 {
-                    if (listener is LdpRemoteDesktopSender)
+                    var factory = new LdpProtocolPacketFactory();
+                    var list = packetListener.GetListenersList;
+                    LdpDisconnectRequest disconnectPacket = null;
+                    LdpPacket packet = null;
+                    const int TIMEOUT = 100;
+                    if (list != null && list.Count != 0)
                     {
-                        LdpDisconnectRequest discRequest = new LdpProtocolPacketFactory()
-                                            .SetDisconnectRequest(DisconnectionType.FROM_SCREEN_THREAD);
-                        LdpPacket packet = new LdpProtocolPacketFactory()
-                            .BuildPacket(discRequest);
-
-                        packetSender.Send(packet);
-                        packetListener.Dispose();
-                        break;
+                        foreach (var item in list)
+                        {
+                            if (item is LdpRemoteDesktopSender)
+                            {
+                                disconnectPacket = factory
+                                    .SetDisconnectRequest(DisconnectionType.FROM_SCREEN_THREAD);
+                                packet = factory.BuildPacket(disconnectPacket);
+                                packetSender.Send(packet);
+                                Thread.Sleep(TIMEOUT);
+                                break;
+                            }
+                            else if (item is LdpRemoteVolumeSender)
+                            {
+                                disconnectPacket = factory
+                                    .SetDisconnectRequest(DisconnectionType.FROM_VOLUME_THREAD);
+                                packet = factory.BuildPacket(disconnectPacket);
+                                packetSender.Send(packet);
+                                Thread.Sleep(TIMEOUT);
+                                break;
+                            }
+                        }
                     }
-                }
-            }
-            catch (Exception ex)
-            {
-                LdpLog.Error("SendDisconnectionRequestFromScreen error.\n" + ex.Message);
-            }
-        }*/
 
-        /*private void SendDisconnectionRequest()
-        {
-            try
-            {
-                if (clientSocket != null && clientSocket.Connected)
-                {
-                    LdpDisconnectRequest discRequest = new LdpProtocolPacketFactory()
-                        .SetDisconnectRequest(DisconnectionType.FROM_SERVER);
-                    LdpPacket packet = new LdpProtocolPacketFactory()
-                        .BuildPacket(discRequest);
-
+                    disconnectPacket = factory
+                                    .SetDisconnectRequest(DisconnectionType.FROM_SERVER);
+                    packet = factory.BuildPacket(disconnectPacket);
                     packetSender.Send(packet);
+                    disconnectPacket = null;
+                    packet = null;
+                }
+                catch(Exception exc)
+                {
+                    LdpLog.Error("DisconntectClient error.\n" + exc.Message);
                 }
             }
-            catch
-            {
-                LdpLog.Error("SendDisconnectionRequest error.");
-            }
-
-        }*/
+        }
 
         private void PrintServerStarting()
         {
             string text = "Try to use one of the following IP:\n";
-            LdpLog.Info(text);
             foreach (var ip in GetLocalIpAddressList())
             {
                 text += ip + "\n";

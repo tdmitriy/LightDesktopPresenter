@@ -2,11 +2,26 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="seekArcStyle">@style/SeekArcLight</item>
+        <!--    <item name="seekArcStyle">@style/SeekArc</item> -->
     </style>
 
     <style name="ThemeConnectionDialog" parent="android:Theme.Holo.Light.Dialog">
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="ThemeRemoteDesktop" parent="android:Theme.Holo.Light">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+
+    <!-- Seek Arc -->
+    <style name="SeekArc">
+        <item name="arcColor">@color/progress_gray_dark</item>
+    </style>
+
+    <style name="SeekArcLight">
+        <item name="arcColor">@color/progress_gray</item>
     </style>
 
 </resources>

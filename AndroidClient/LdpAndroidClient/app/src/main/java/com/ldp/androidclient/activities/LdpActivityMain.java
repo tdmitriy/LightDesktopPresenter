@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -112,6 +113,9 @@ public class LdpActivityMain extends LdpActivityMainInterface {
                 case 1:
                     //connect(getSelectedPrefs(), ConnectionType.REMOTE_VOLUME_CONTROL);
                     Toast.makeText(getApplication(), "Volume control", Toast.LENGTH_SHORT).show();
+                    Intent volumeActivity = new Intent(LdpActivityMain.this,
+                            LdpActivityVolumeControl.class);
+                    startActivity(volumeActivity);
                     break;
             }
         }

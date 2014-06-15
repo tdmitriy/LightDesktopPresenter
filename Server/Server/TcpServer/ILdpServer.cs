@@ -14,6 +14,7 @@ namespace Server.TcpServer
         void Start();
         void Stop();
         void Restart();
+        void DisconnectClient();
 
         int GetServerPort { get; }
         List<string> GetLocalIpAddressList { get; }

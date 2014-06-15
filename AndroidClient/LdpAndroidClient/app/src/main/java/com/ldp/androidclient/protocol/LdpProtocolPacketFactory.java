@@ -34,6 +34,14 @@ public class LdpProtocolPacketFactory {
         return LdpScreenRequest.newBuilder().build();
     }
 
+    public LdpMouseInfoResponse setMouseInfoResponse(int x, int y, MouseType type) {
+        return LdpMouseInfoResponse.newBuilder()
+                .setType(type)
+                .setX(x)
+                .setY(y)
+                .build();
+    }
+
     public LdpPacket buildPacket(LdpScreenRequest screenRequest) {
         return LdpPacket.newBuilder()
                 .setType(PacketType.SCREEN_REQUEST)
@@ -65,6 +73,13 @@ public class LdpProtocolPacketFactory {
         return LdpPacket.newBuilder()
                 .setType(PacketType.DISCONNECT_REQUEST)
                 .setDisconnectRequest(builder)
+                .build();
+    }
+
+    public LdpPacket buildPacket(LdpMouseInfoResponse builder) {
+        return LdpPacket.newBuilder()
+                .setType(PacketType.MOUSE_INFO_RESPONSE)
+                .setMouseInfoResponse(builder)
                 .build();
     }
 }

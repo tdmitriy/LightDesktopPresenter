@@ -30,17 +30,20 @@ namespace Server.RemoteDesktopSender
         private static readonly int SCREEN_WIDTH = LdpUtils.SCREEN_WIDTH;
         private static readonly int SCREEN_HEIGHT = LdpUtils.SCREEN_HEIGHT;
 
-        private bool ScreenThread = false;
+        private Thread ScreenProcessing;
+        private static readonly object LOCK = new object();
         private int baseLenght;
         private byte[] origData, compressed;
         private LdpRectangle.Builder rect;
         private static readonly int SLEEP_TIME = 10;
         #endregion
 
+        private LdpMouseController mouseController;
         public LdpRemoteDesktopSender()
         {
             serverHandler = LdpServer.GetInstance();
             serverHandler.GetListenerChannel.AddListener(this);
+            mouseController = new LdpMouseController();
 
             packetFactory = new LdpProtocolPacketFactory();
             screenGrabber = new LdpScreenGrabber();
@@ -51,14 +54,14 @@ namespace Server.RemoteDesktopSender
             switch (packet.Type)
             {
                 case PacketType.SCREEN_REQUEST:
-                    GetScreen();
+                    ScreenProcessing = new Thread(() => GetScreen());
+                    ScreenProcessing.Start();
                     break;
                 case PacketType.DISCONNECT_REQUEST:
                     var result = packet.DisconnectRequest;
                     switch (result.Type)
                     {
                         case DisconnectionType.FROM_SCREEN_THREAD:
-                            ScreenThread = false;
                             LdpLog.Info("Exiting screen thread.");
                             serverHandler.GetListenerChannel.RemoveListener(this);
                             break;
@@ -90,50 +93,64 @@ namespace Server.RemoteDesktopSender
 
         private void GetScreen()
         {
-            Rectangle bounds = Rectangle.Empty;
-            ScreenThread = true;
-            while (ScreenThread)
+            lock (LOCK)
             {
-                nextScreen = screenGrabber.GetScreenShot();
-                bounds = LdpScreenProcessingUtils.GetBoundingBoxForChanges(nextScreen, prevScreen);
+                Rectangle bounds = Rectangle.Empty;
 
-                if (bounds != Rectangle.Empty)
+                while (bounds == Rectangle.Empty)
                 {
-                    CheckRectangleBounds(ref bounds);
-                    difference = null;
-                    difference = LdpScreenProcessingUtils.CopyRegion(nextScreen, bounds);
+                    nextScreen = screenGrabber.GetScreenShot();
+                    bounds = LdpScreenProcessingUtils.GetBoundingBoxForChanges(nextScreen, prevScreen);
 
-                    origData = LdpScreenProcessingUtils.ImageToByteArray(difference);
-                    baseLenght = origData.Length;
-                    compressed = LZ4Codec.Encode(origData, 0, baseLenght);
+                    if (bounds != Rectangle.Empty)
+                    {
+                        CheckRectangleBounds(ref bounds);
+                        difference = LdpScreenProcessingUtils.CopyRegion(nextScreen, bounds);
 
-                    rect = LdpRectangle.CreateBuilder();
-                    rect.Left = bounds.Left;
-                    rect.Top = bounds.Top;
-                    rect.Right = bounds.Right;
-                    rect.Bottom = bounds.Bottom;
+                        origData = LdpScreenProcessingUtils.ImageToByteArray(difference);
+                        baseLenght = origData.Length;
+                        compressed = LZ4Codec.Encode(origData, 0, baseLenght);
 
-                    SendScreenResponse(compressed, baseLenght, rect);
+                        rect = LdpRectangle.CreateBuilder();
+                        rect.Left = bounds.Left;
+                        rect.Top = bounds.Top;
+                        rect.Right = bounds.Right;
+                        rect.Bottom = bounds.Bottom;
 
-                    ScreenThread = false;
-                    difference.Dispose();
+                        SendScreenResponse(compressed, baseLenght, rect);
+
+                        difference.Dispose();
+                        difference = null;
+                        rect = null;
+                        origData = null;
+                        compressed = null;
+                    }
+                    prevScreen = nextScreen;
+                    try
+                    {
+                        Thread.Sleep(SLEEP_TIME);
+                    }
+                    catch { }
                 }
-                prevScreen = nextScreen;
-                try
-                {
-                    Thread.Sleep(SLEEP_TIME);
-                }
-                catch { }
             }
         }
 
         public void Dispose()
         {
-            ScreenThread = false;
             serverHandler = null;
             screenResponse = null;
             packetFactory = null;
             responsePacket = null;
+
+            try
+            {
+                if (ScreenProcessing != null)
+                    ScreenProcessing.Abort();
+            }
+            catch { }
+           
+            mouseController.Dispose();
+            mouseController = null;
 
             screenGrabber.Dispose();
             screenGrabber = null;

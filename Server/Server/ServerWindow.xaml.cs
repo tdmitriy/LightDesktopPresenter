@@ -53,13 +53,26 @@ namespace Server
         private void StopServer()
         {
             if (server != null)
+            {
+                server.DisconnectClient();
                 server.Stop();
+            }
         }
 
-        protected override void OnClosed(EventArgs e)
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            base.OnClosed(e);
-            StopServer();
+            if (MessageBox.Show("Close server?", "Question", 
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                StopServer();
+                e.Cancel = false;
+                base.OnClosing(e);       
+            }
+            else
+            {
+                e.Cancel = true;
+                return;
+            }
         }
 
         private void btnAbout_Click(object sender, RoutedEventArgs e)

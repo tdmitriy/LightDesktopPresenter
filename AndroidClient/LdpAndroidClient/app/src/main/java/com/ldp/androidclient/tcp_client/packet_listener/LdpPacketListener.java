@@ -24,16 +24,11 @@ public class LdpPacketListener extends LdpPacketHandler implements Runnable {
             LdpPacket packet = LdpPacket.parseDelimitedFrom(clientHandler.getSocketChannel()
                     .getInputStream());
 
-            //base
-            notifyToAllListeners(packet);
+            super.notifyToAllListeners(packet);
         } catch (IOException e) {
             thread_working = false;
-            //clientHandler.disconnect();
-            //Log.i(TAG,  "Send clientHandler.disconnect()" + e);
         } catch (Exception ex) {
             thread_working = false;
-            //clientHandler.disconnect();
-            //Log.i(TAG,  "Send clientHandler.disconnect()" + ex);
         }
     }
 

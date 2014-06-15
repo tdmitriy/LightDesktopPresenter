@@ -69,20 +69,20 @@ public abstract class LdpClientInitializator {
         packetSender = new LdpPacketSender();
         packetListener = new LdpPacketListener();
 
-        if(packetListenerThread != null) {
-            packetListenerThread.interrupt();
-        }
-        packetListenerThread = new Thread(packetListener);
-        packetListenerThread.start();
-
         authHandler = new LdpAuthHandler(type);
         disconnectionHandler = new LdpDisconnectionHandler();
 
         packetListener.addListener(authHandler);
         packetListener.addListener(disconnectionHandler);
 
+        if(packetListenerThread != null) {
+            packetListenerThread.interrupt();
+        }
+        packetListenerThread = new Thread(packetListener);
+        packetListenerThread.start();
+
         try {
-            Thread.sleep(500);
+            Thread.sleep(600);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
