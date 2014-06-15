@@ -42,6 +42,20 @@ public class LdpProtocolPacketFactory {
                 .build();
     }
 
+    public LdpVolumeInfoResponse setVolumeInfoResponse(int volume) {
+        return LdpVolumeInfoResponse.newBuilder()
+                .setType(VolumeInfoType.VOLUME)
+                .setVolume(volume)
+                .build();
+    }
+
+    public LdpVolumeInfoResponse setVolumeInfoResponse(boolean mute) {
+        return LdpVolumeInfoResponse.newBuilder()
+                .setType(VolumeInfoType.MUTE)
+                .setIsMute(mute)
+                .build();
+    }
+
     public LdpPacket buildPacket(LdpScreenRequest screenRequest) {
         return LdpPacket.newBuilder()
                 .setType(PacketType.SCREEN_REQUEST)
@@ -80,6 +94,13 @@ public class LdpProtocolPacketFactory {
         return LdpPacket.newBuilder()
                 .setType(PacketType.MOUSE_INFO_RESPONSE)
                 .setMouseInfoResponse(builder)
+                .build();
+    }
+
+    public LdpPacket buildPacket(LdpVolumeInfoResponse builder) {
+        return LdpPacket.newBuilder()
+                .setType(PacketType.VOLUME_INFO_RESPONSE)
+                .setVolumeInfoResponse(builder)
                 .build();
     }
 }

@@ -24,9 +24,9 @@ message LdpKeyboardInfoResponse {
 }
 
 message LdpMouseInfoResponse {
-   optional int32 X = 1;
-   optional int32 Y = 2;
-   optional MouseType Type = 3;
+   required MouseType Type = 1;
+   optional int32 X = 2;
+   optional int32 Y = 3;
 }
 
 message LdpPacket {
@@ -35,23 +35,25 @@ message LdpPacket {
    optional LdpAuthResponse AuthResponse = 3;
    optional LdpClientInfoRequest ClientInfoRequest = 4;
    optional LdpPreparableInfoRequest PreparableInfoRequest = 5;
-   optional LdpPreparableInfoResponse PreparableInfoResponse = 6;
+   optional LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;
    optional LdpScreenRequest ScreenRequest = 7;
    optional LdpScreenResponse ScreenResponse = 8;
    optional LdpDisconnectRequest DisconnectRequest = 9;
    optional LdpMouseInfoResponse MouseInfoResponse = 10;
    optional LdpKeyboardInfoResponse KeyboardInfoResponse = 11;
-   optional LdpVolumeInfoRequest VolumeInfoRequest = 12;
+   optional LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;
+   optional LdpVolumeInfoResponse VolumeInfoResponse = 13;
 }
 
 message LdpPreparableInfoRequest {
    required ConnectionType Type = 1;
 }
 
-message LdpPreparableInfoResponse {
+message LdpPreparableDesktopInfoResponse {
    optional int32 ScreenWidth = 1;
    optional int32 ScreenHeight = 2;
 }
+
 message LdpRectangle {
    required int32 Left = 1;
    required int32 Top = 2;
@@ -60,6 +62,7 @@ message LdpRectangle {
 }
 
 message LdpScreenRequest {
+
 }
 
 message LdpScreenResponse {
@@ -68,9 +71,20 @@ message LdpScreenResponse {
    required LdpRectangle Rect = 3;
 }
 
-message LdpVolumeInfoRequest {
+message LdpPreparableVolumeInfoResponse {
    optional int32 Volume = 1;
    optional bool IsMute = 2;
+}
+
+message LdpVolumeInfoResponse {
+	required VolumeInfoType Type = 1;
+	optional int32 Volume = 2;
+	optional bool IsMute = 3;
+}
+
+enum VolumeInfoType {
+	VOLUME = 1;
+	MUTE = 2;
 }
 
 enum ConnectionType {
@@ -96,11 +110,13 @@ enum PacketType {
    AUTH_RESPONSE = 2;
    CLIENT_INFO_REQUEST = 3;
    PREPARABLE_INFO_REQUEST = 4;
-   PREPARABLE_INFO_RESPONSE = 5;
+   PREPARABLE_DESKTOP_INFO_RESPONSE = 5;
    SCREEN_REQUEST = 6;
    SCREEN_RESPONSE = 7;
-   VOLUME_INFO_REQUEST = 8;
-   MOUSE_INFO_RESPONSE = 9;
-   KEYBOARD_INFO_RESPONSE = 10;
-   DISCONNECT_REQUEST = 11;
+   PREPARABLE_VOLUME_INFO_RESPONSE = 8;
+   VOLUME_INFO_RESPONSE = 9;
+   MOUSE_INFO_RESPONSE = 10;
+   KEYBOARD_INFO_RESPONSE = 11;
+   DISCONNECT_REQUEST = 12;
 }
+

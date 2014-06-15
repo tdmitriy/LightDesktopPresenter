@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.ldp.androidclient.activities.LdpActivityMain;
 import com.ldp.androidclient.activities.LdpActivityRemoteDesktop;
+import com.ldp.androidclient.activities.LdpActivityVolumeControl;
 import com.ldp.androidclient.controls.LdpConnectionProgressDialog;
 import com.ldp.androidclient.network.ILdpPacketHandler;
 import com.ldp.androidclient.protocol.LdpProtocol.*;
@@ -15,50 +16,63 @@ public class LdpPreparableInfoHandler implements ILdpPacketHandler {
     private static final String TAG = "LdpPreparableInfoHandler";
 
     private LdpClient clientHandler;
-    private LdpProtocolPacketFactory packetFactory;
-    private LdpPreparableInfoResponse preparableInfoResponse;
+    private LdpPreparableDesktopInfoResponse preparableInfoResponse;
+    private LdpPreparableVolumeInfoResponse preparableVolumeInfoResponse;
 
     public LdpPreparableInfoHandler() {
-
         clientHandler = LdpClient.getInstance();
-        packetFactory = new LdpProtocolPacketFactory();
+        clientHandler.getListenerChannel().addListener(this);
     }
 
     @Override
     public void handle(LdpPacket packet) {
         switch (packet.getType()) {
-            case PREPARABLE_INFO_RESPONSE:
+            case PREPARABLE_DESKTOP_INFO_RESPONSE:
                 processPreparableDesktopInfoResponse(packet);
+                break;
+            case PREPARABLE_VOLUME_INFO_RESPONSE:
+                processPreparableVolumeInfoResponse(packet);
                 break;
         }
     }
 
     private void processPreparableDesktopInfoResponse(LdpPacket packet) {
-        preparableInfoResponse = packet.getPreparableInfoResponse();
+        preparableInfoResponse = packet.getPreparableDesktopResponse();
         int desktopWidth = preparableInfoResponse.getScreenWidth();
         int desktopHeight = preparableInfoResponse.getScreenHeight();
-        Log.i(TAG, "processAuthResponse: width=" + desktopWidth + " height=" + desktopHeight);
-
-        //showDialogInfo(InfoType.RECEIVED_PREPARABLE_INFO);
-
         try {
             Intent intent = new Intent(LdpActivityMain.getContext(), LdpActivityRemoteDesktop.class);
-            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("RmDesktopWidth", desktopWidth);
             intent.putExtra("RmDesktopHeight", desktopHeight);
             LdpActivityMain.getContext().startActivity(intent);
-            Log.i(TAG, "Starting activity LdpActivityRemoteDesktop");
+
             showDialogInfo(InfoType.RECEIVED_PREPARABLE_INFO);
             clientHandler.getListenerChannel().removeListener(this);
+            Log.i(TAG, "Starting activity LdpActivityRemoteDesktop");
         } catch (Exception ex) {
             Log.i(TAG, "starting LdpActivityRemoteDesktop error: " + ex.getMessage());
             clientHandler.disconnect();
-            Log.i(TAG,  "Send clientHandler.disconnect()");
         }
     }
 
     private void processPreparableVolumeInfoResponse(LdpPacket packet) {
-        // TODO processPreparableVolumeInfoResponse
+        preparableVolumeInfoResponse = packet.getPreparableVolumeInfoResponse();
+        int volume = preparableVolumeInfoResponse.getVolume();
+        boolean mute = preparableVolumeInfoResponse.getIsMute();
+
+        try {
+            Intent intent = new Intent(LdpActivityMain.getContext(), LdpActivityVolumeControl.class);
+            intent.putExtra("Volume", volume);
+            intent.putExtra("Mute", mute);
+            LdpActivityMain.getContext().startActivity(intent);
+
+            showDialogInfo(InfoType.RECEIVED_PREPARABLE_INFO);
+            clientHandler.getListenerChannel().removeListener(this);
+            Log.i(TAG, "Starting activity LdpActivityVolumeControl");
+        } catch (Exception ex) {
+            Log.i(TAG, "starting LdpActivityVolumeControl error: " + ex.getMessage());
+            clientHandler.disconnect();
+        }
     }
 
     private void showDialogInfo(final InfoType infoType) {
@@ -82,7 +96,6 @@ public class LdpPreparableInfoHandler implements ILdpPacketHandler {
     @Override
     public void dispose() {
         clientHandler = null;
-        packetFactory = null;
         preparableInfoResponse = null;
     }
 }

@@ -17,9 +17,9 @@ namespace Server.Protocol
             return response.Build();
         }
 
-        public LdpPreparableInfoResponse SetRemoteDesktopInfo(int width, int height)
+        public LdpPreparableDesktopInfoResponse SetRemoteDesktopInfo(int width, int height)
         {
-            var response = LdpPreparableInfoResponse.CreateBuilder();
+            var response = LdpPreparableDesktopInfoResponse.CreateBuilder();
             response.ScreenWidth = width;
             response.ScreenHeight = height;
             return response.Build();
@@ -43,6 +43,30 @@ namespace Server.Protocol
             return response.Build();
         }
 
+        public LdpPreparableVolumeInfoResponse SetPreparableVolumeInfoRequest(int volume, bool mute)
+        {
+            var response = LdpPreparableVolumeInfoResponse.CreateBuilder();
+            response.Volume = volume;
+            response.IsMute = mute;
+            return response.Build();
+        }
+
+        public LdpVolumeInfoResponse SetVolumeInfoResponse(int volume)
+        {
+            var response = LdpVolumeInfoResponse.CreateBuilder();
+            response.Type = VolumeInfoType.VOLUME;
+            response.Volume = volume;
+            return response.Build();
+        }
+
+        public LdpVolumeInfoResponse SetVolumeInfoResponse(bool mute)
+        {
+            var response = LdpVolumeInfoResponse.CreateBuilder();
+            response.Type = VolumeInfoType.MUTE;
+            response.IsMute = mute;
+            return response.Build();
+        }
+
         public LdpPacket BuildPacket(LdpAuthResponse response)
         {
             var packet = LdpPacket.CreateBuilder();
@@ -51,11 +75,11 @@ namespace Server.Protocol
             return packet.Build();
         }
 
-        public LdpPacket BuildPacket(LdpPreparableInfoResponse response)
+        public LdpPacket BuildPacket(LdpPreparableDesktopInfoResponse response)
         {
             var packet = LdpPacket.CreateBuilder();
-            packet.Type = PacketType.PREPARABLE_INFO_RESPONSE;
-            packet.PreparableInfoResponse = response;
+            packet.Type = PacketType.PREPARABLE_DESKTOP_INFO_RESPONSE;
+            packet.PreparableDesktopResponse = response;
             return packet.Build();
         }
 
@@ -72,6 +96,22 @@ namespace Server.Protocol
             var packet = LdpPacket.CreateBuilder();
             packet.Type = PacketType.SCREEN_RESPONSE;
             packet.ScreenResponse = response;
+            return packet.Build();
+        }
+
+        public LdpPacket BuildPacket(LdpPreparableVolumeInfoResponse response)
+        {
+            var packet = LdpPacket.CreateBuilder();
+            packet.Type = PacketType.PREPARABLE_VOLUME_INFO_RESPONSE;
+            packet.PreparableVolumeInfoResponse = response;
+            return packet.Build();
+        }
+
+        public LdpPacket BuildPacket(LdpVolumeInfoResponse response)
+        {
+            var packet = LdpPacket.CreateBuilder();
+            packet.Type = PacketType.VOLUME_INFO_RESPONSE;
+            packet.VolumeInfoResponse = response;
             return packet.Build();
         }
     }

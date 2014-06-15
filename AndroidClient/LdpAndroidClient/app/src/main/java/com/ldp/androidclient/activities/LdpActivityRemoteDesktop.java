@@ -158,7 +158,8 @@ public class LdpActivityRemoteDesktop extends LdpActivityRemoteDesktopBase
             disconnectionDialog = new AlertDialog.Builder(this);
             disconnectionDialog.setCancelable(false);
             disconnectionDialog.setTitle("Close connection");
-            disconnectionDialog.setIcon(R.drawable.ic_action_help);
+            disconnectionDialog.setMessage("Close connection and return to the main screen?");
+            disconnectionDialog.setIcon(R.drawable.ic_action_warning);
             disconnectionDialog.setPositiveButton("Close", disconnectListener);
             disconnectionDialog.setNegativeButton("Cancel", disconnectListener);
             disconnectionDialog.show();
@@ -202,13 +203,6 @@ public class LdpActivityRemoteDesktop extends LdpActivityRemoteDesktopBase
                 clientHandler.disconnect();
         }
 
-    }
-
-    private void sleep(long time) {
-        try {
-            Thread.sleep(time);
-        } catch (InterruptedException ignored) {
-        }
     }
 
     private DialogInterface.OnClickListener closeListener =

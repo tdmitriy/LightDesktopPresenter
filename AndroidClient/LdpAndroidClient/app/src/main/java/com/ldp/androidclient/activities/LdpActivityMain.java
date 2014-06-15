@@ -97,7 +97,7 @@ public class LdpActivityMain extends LdpActivityMainInterface {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
             clientHandler.disconnect();
-            Log.i(TAG,  "Send clientHandler.disconnect()");
+            Log.i(TAG, "Send clientHandler.disconnect()");
             return super.onKeyDown(keyCode, event);
         }
         return super.onKeyDown(keyCode, event);
@@ -111,11 +111,7 @@ public class LdpActivityMain extends LdpActivityMainInterface {
                     connect(getSelectedPrefs(), ConnectionType.REMOTE_DESKTOP_CONTROL);
                     break;
                 case 1:
-                    //connect(getSelectedPrefs(), ConnectionType.REMOTE_VOLUME_CONTROL);
-                    Toast.makeText(getApplication(), "Volume control", Toast.LENGTH_SHORT).show();
-                    Intent volumeActivity = new Intent(LdpActivityMain.this,
-                            LdpActivityVolumeControl.class);
-                    startActivity(volumeActivity);
+                    connect(getSelectedPrefs(), ConnectionType.REMOTE_VOLUME_CONTROL);
                     break;
             }
         }
@@ -126,7 +122,8 @@ public class LdpActivityMain extends LdpActivityMainInterface {
 
         @Override
         protected void onPreExecute() {
-            LdpConnectionProgressDialog.show(LdpActivityMain.getContext(), "Connecting", "Please wait..");
+            LdpConnectionProgressDialog.show(LdpActivityMain.getContext(),
+                    "Connecting", "Please wait..");
         }
 
         @Override
@@ -152,7 +149,5 @@ public class LdpActivityMain extends LdpActivityMainInterface {
             Log.i(TAG, "Exiting AsyncTask connector.");
             super.onPostExecute(aVoid);
         }
-
     }
-
 }

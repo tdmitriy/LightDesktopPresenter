@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:controls="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:controls="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/volumeProgressContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp">
 
         <com.ldp.androidclient.controls.seek_arc.SeekArc
             android:id="@+id/volumeControl"
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_gravity="center_horizontal"
+
             android:padding="30dp"
             controls:rotation="180"
             controls:startAngle="30"
@@ -37,12 +39,13 @@
 
 
         <Switch
+            android:id="@+id/muteControl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textOn="On"
             android:textOff="Off"
-            android:id="@+id/switch1" />
-    </RelativeLayout >
+            android:textOn="On" />
+
+    </RelativeLayout>
 
 </LinearLayout>

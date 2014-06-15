@@ -16,7 +16,6 @@ public class LdpAuthHandler implements ILdpPacketHandler {
     private LdpProtocolPacketFactory packetFactory;
     private LdpClient clientHandler;
     private LdpClientInfoRequest clientInfoRequest;
-    private LdpPreparableInfoRequest preparableInfoRequest;
     private LdpPacket packet;
     private static final int DELEY = 150;
 
@@ -50,9 +49,8 @@ public class LdpAuthHandler implements ILdpPacketHandler {
             showDialogInfo(InfoType.SEND_PREPARABLE_INFO);
 
             preparableInfoHandler = new LdpPreparableInfoHandler();
-            clientHandler.getListenerChannel().addListener(preparableInfoHandler);
 
-            sendPreparableDesktopInfoRequest();
+            sendPreparableInfoRequest();
 
             showDialogInfo(InfoType.WAIT_PREPARABLE_INFO);
 
@@ -77,15 +75,12 @@ public class LdpAuthHandler implements ILdpPacketHandler {
         clientHandler.getSendingChannel().send(packet);
     }
 
-    private void sendPreparableDesktopInfoRequest() {
-        preparableInfoRequest = packetFactory.setPreparableInfoRequest(type);
+    private void sendPreparableInfoRequest() {
+        LdpPreparableInfoRequest preparableInfoRequest =
+                packetFactory.setPreparableInfoRequest(type);
         packet = null;
         packet = packetFactory.buildPacket(preparableInfoRequest);
         clientHandler.getSendingChannel().send(packet);
-    }
-
-    private void sendPreparableVolumeInfoRequest() {
-        // TODO sendPreparableVolumeInfoRequest
     }
 
     private void showDialogInfo(final InfoType infoType) {
@@ -141,6 +136,5 @@ public class LdpAuthHandler implements ILdpPacketHandler {
         packetFactory = null;
         clientHandler = null;
         clientInfoRequest = null;
-        preparableInfoRequest = null;
     }
 }

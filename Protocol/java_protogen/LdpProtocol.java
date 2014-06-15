@@ -7,6 +7,88 @@ public final class LdpProtocol {
       com.google.protobuf.ExtensionRegistry registry) {
   }
   /**
+   * Protobuf enum {@code VolumeInfoType}
+   */
+  public enum VolumeInfoType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>VOLUME = 1;</code>
+     */
+    VOLUME(0, 1),
+    /**
+     * <code>MUTE = 2;</code>
+     */
+    MUTE(1, 2),
+    ;
+
+    /**
+     * <code>VOLUME = 1;</code>
+     */
+    public static final int VOLUME_VALUE = 1;
+    /**
+     * <code>MUTE = 2;</code>
+     */
+    public static final int MUTE_VALUE = 2;
+
+
+    public final int getNumber() { return value; }
+
+    public static VolumeInfoType valueOf(int value) {
+      switch (value) {
+        case 1: return VOLUME;
+        case 2: return MUTE;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<VolumeInfoType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<VolumeInfoType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<VolumeInfoType>() {
+            public VolumeInfoType findValueByNumber(int number) {
+              return VolumeInfoType.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return LdpProtocol.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final VolumeInfoType[] VALUES = values();
+
+    public static VolumeInfoType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private VolumeInfoType(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:VolumeInfoType)
+  }
+
+  /**
    * Protobuf enum {@code ConnectionType}
    */
   public enum ConnectionType
@@ -63,7 +145,7 @@ public final class LdpProtocol {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return LdpProtocol.getDescriptor().getEnumTypes().get(0);
+      return LdpProtocol.getDescriptor().getEnumTypes().get(1);
     }
 
     private static final ConnectionType[] VALUES = values();
@@ -154,7 +236,7 @@ public final class LdpProtocol {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return LdpProtocol.getDescriptor().getEnumTypes().get(1);
+      return LdpProtocol.getDescriptor().getEnumTypes().get(2);
     }
 
     private static final DisconnectionType[] VALUES = values();
@@ -254,7 +336,7 @@ public final class LdpProtocol {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return LdpProtocol.getDescriptor().getEnumTypes().get(2);
+      return LdpProtocol.getDescriptor().getEnumTypes().get(3);
     }
 
     private static final MouseType[] VALUES = values();
@@ -301,9 +383,9 @@ public final class LdpProtocol {
      */
     PREPARABLE_INFO_REQUEST(3, 4),
     /**
-     * <code>PREPARABLE_INFO_RESPONSE = 5;</code>
+     * <code>PREPARABLE_DESKTOP_INFO_RESPONSE = 5;</code>
      */
-    PREPARABLE_INFO_RESPONSE(4, 5),
+    PREPARABLE_DESKTOP_INFO_RESPONSE(4, 5),
     /**
      * <code>SCREEN_REQUEST = 6;</code>
      */
@@ -313,21 +395,25 @@ public final class LdpProtocol {
      */
     SCREEN_RESPONSE(6, 7),
     /**
-     * <code>VOLUME_INFO_REQUEST = 8;</code>
+     * <code>PREPARABLE_VOLUME_INFO_RESPONSE = 8;</code>
      */
-    VOLUME_INFO_REQUEST(7, 8),
+    PREPARABLE_VOLUME_INFO_RESPONSE(7, 8),
     /**
-     * <code>MOUSE_INFO_RESPONSE = 9;</code>
+     * <code>VOLUME_INFO_RESPONSE = 9;</code>
      */
-    MOUSE_INFO_RESPONSE(8, 9),
+    VOLUME_INFO_RESPONSE(8, 9),
     /**
-     * <code>KEYBOARD_INFO_RESPONSE = 10;</code>
+     * <code>MOUSE_INFO_RESPONSE = 10;</code>
      */
-    KEYBOARD_INFO_RESPONSE(9, 10),
+    MOUSE_INFO_RESPONSE(9, 10),
     /**
-     * <code>DISCONNECT_REQUEST = 11;</code>
+     * <code>KEYBOARD_INFO_RESPONSE = 11;</code>
      */
-    DISCONNECT_REQUEST(10, 11),
+    KEYBOARD_INFO_RESPONSE(10, 11),
+    /**
+     * <code>DISCONNECT_REQUEST = 12;</code>
+     */
+    DISCONNECT_REQUEST(11, 12),
     ;
 
     /**
@@ -347,9 +433,9 @@ public final class LdpProtocol {
      */
     public static final int PREPARABLE_INFO_REQUEST_VALUE = 4;
     /**
-     * <code>PREPARABLE_INFO_RESPONSE = 5;</code>
+     * <code>PREPARABLE_DESKTOP_INFO_RESPONSE = 5;</code>
      */
-    public static final int PREPARABLE_INFO_RESPONSE_VALUE = 5;
+    public static final int PREPARABLE_DESKTOP_INFO_RESPONSE_VALUE = 5;
     /**
      * <code>SCREEN_REQUEST = 6;</code>
      */
@@ -359,21 +445,25 @@ public final class LdpProtocol {
      */
     public static final int SCREEN_RESPONSE_VALUE = 7;
     /**
-     * <code>VOLUME_INFO_REQUEST = 8;</code>
+     * <code>PREPARABLE_VOLUME_INFO_RESPONSE = 8;</code>
      */
-    public static final int VOLUME_INFO_REQUEST_VALUE = 8;
+    public static final int PREPARABLE_VOLUME_INFO_RESPONSE_VALUE = 8;
     /**
-     * <code>MOUSE_INFO_RESPONSE = 9;</code>
+     * <code>VOLUME_INFO_RESPONSE = 9;</code>
      */
-    public static final int MOUSE_INFO_RESPONSE_VALUE = 9;
+    public static final int VOLUME_INFO_RESPONSE_VALUE = 9;
     /**
-     * <code>KEYBOARD_INFO_RESPONSE = 10;</code>
+     * <code>MOUSE_INFO_RESPONSE = 10;</code>
      */
-    public static final int KEYBOARD_INFO_RESPONSE_VALUE = 10;
+    public static final int MOUSE_INFO_RESPONSE_VALUE = 10;
     /**
-     * <code>DISCONNECT_REQUEST = 11;</code>
+     * <code>KEYBOARD_INFO_RESPONSE = 11;</code>
      */
-    public static final int DISCONNECT_REQUEST_VALUE = 11;
+    public static final int KEYBOARD_INFO_RESPONSE_VALUE = 11;
+    /**
+     * <code>DISCONNECT_REQUEST = 12;</code>
+     */
+    public static final int DISCONNECT_REQUEST_VALUE = 12;
 
 
     public final int getNumber() { return value; }
@@ -384,13 +474,14 @@ public final class LdpProtocol {
         case 2: return AUTH_RESPONSE;
         case 3: return CLIENT_INFO_REQUEST;
         case 4: return PREPARABLE_INFO_REQUEST;
-        case 5: return PREPARABLE_INFO_RESPONSE;
+        case 5: return PREPARABLE_DESKTOP_INFO_RESPONSE;
         case 6: return SCREEN_REQUEST;
         case 7: return SCREEN_RESPONSE;
-        case 8: return VOLUME_INFO_REQUEST;
-        case 9: return MOUSE_INFO_RESPONSE;
-        case 10: return KEYBOARD_INFO_RESPONSE;
-        case 11: return DISCONNECT_REQUEST;
+        case 8: return PREPARABLE_VOLUME_INFO_RESPONSE;
+        case 9: return VOLUME_INFO_RESPONSE;
+        case 10: return MOUSE_INFO_RESPONSE;
+        case 11: return KEYBOARD_INFO_RESPONSE;
+        case 12: return DISCONNECT_REQUEST;
         default: return null;
       }
     }
@@ -417,7 +508,7 @@ public final class LdpProtocol {
     }
     public static final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptor() {
-      return LdpProtocol.getDescriptor().getEnumTypes().get(3);
+      return LdpProtocol.getDescriptor().getEnumTypes().get(4);
     }
 
     private static final PacketType[] VALUES = values();
@@ -3011,35 +3102,35 @@ public final class LdpProtocol {
   public interface LdpMouseInfoResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // optional int32 X = 1;
+    // required .MouseType Type = 1;
     /**
-     * <code>optional int32 X = 1;</code>
-     */
-    boolean hasX();
-    /**
-     * <code>optional int32 X = 1;</code>
-     */
-    int getX();
-
-    // optional int32 Y = 2;
-    /**
-     * <code>optional int32 Y = 2;</code>
-     */
-    boolean hasY();
-    /**
-     * <code>optional int32 Y = 2;</code>
-     */
-    int getY();
-
-    // optional .MouseType Type = 3;
-    /**
-     * <code>optional .MouseType Type = 3;</code>
+     * <code>required .MouseType Type = 1;</code>
      */
     boolean hasType();
     /**
-     * <code>optional .MouseType Type = 3;</code>
+     * <code>required .MouseType Type = 1;</code>
      */
     LdpProtocol.MouseType getType();
+
+    // optional int32 X = 2;
+    /**
+     * <code>optional int32 X = 2;</code>
+     */
+    boolean hasX();
+    /**
+     * <code>optional int32 X = 2;</code>
+     */
+    int getX();
+
+    // optional int32 Y = 3;
+    /**
+     * <code>optional int32 Y = 3;</code>
+     */
+    boolean hasY();
+    /**
+     * <code>optional int32 Y = 3;</code>
+     */
+    int getY();
   }
   /**
    * Protobuf type {@code LdpMouseInfoResponse}
@@ -3093,24 +3184,24 @@ public final class LdpProtocol {
               break;
             }
             case 8: {
-              bitField0_ |= 0x00000001;
-              x_ = input.readInt32();
+              int rawValue = input.readEnum();
+              LdpProtocol.MouseType value = LdpProtocol.MouseType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                type_ = value;
+              }
               break;
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              y_ = input.readInt32();
+              x_ = input.readInt32();
               break;
             }
             case 24: {
-              int rawValue = input.readEnum();
-              LdpProtocol.MouseType value = LdpProtocol.MouseType.valueOf(rawValue);
-              if (value == null) {
-                unknownFields.mergeVarintField(3, rawValue);
-              } else {
-                bitField0_ |= 0x00000004;
-                type_ = value;
-              }
+              bitField0_ |= 0x00000004;
+              y_ = input.readInt32();
               break;
             }
           }
@@ -3153,64 +3244,68 @@ public final class LdpProtocol {
     }
 
     private int bitField0_;
-    // optional int32 X = 1;
-    public static final int X_FIELD_NUMBER = 1;
-    private int x_;
+    // required .MouseType Type = 1;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private LdpProtocol.MouseType type_;
     /**
-     * <code>optional int32 X = 1;</code>
+     * <code>required .MouseType Type = 1;</code>
      */
-    public boolean hasX() {
+    public boolean hasType() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional int32 X = 1;</code>
-     */
-    public int getX() {
-      return x_;
-    }
-
-    // optional int32 Y = 2;
-    public static final int Y_FIELD_NUMBER = 2;
-    private int y_;
-    /**
-     * <code>optional int32 Y = 2;</code>
-     */
-    public boolean hasY() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>optional int32 Y = 2;</code>
-     */
-    public int getY() {
-      return y_;
-    }
-
-    // optional .MouseType Type = 3;
-    public static final int TYPE_FIELD_NUMBER = 3;
-    private LdpProtocol.MouseType type_;
-    /**
-     * <code>optional .MouseType Type = 3;</code>
-     */
-    public boolean hasType() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>optional .MouseType Type = 3;</code>
+     * <code>required .MouseType Type = 1;</code>
      */
     public LdpProtocol.MouseType getType() {
       return type_;
     }
 
+    // optional int32 X = 2;
+    public static final int X_FIELD_NUMBER = 2;
+    private int x_;
+    /**
+     * <code>optional int32 X = 2;</code>
+     */
+    public boolean hasX() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 X = 2;</code>
+     */
+    public int getX() {
+      return x_;
+    }
+
+    // optional int32 Y = 3;
+    public static final int Y_FIELD_NUMBER = 3;
+    private int y_;
+    /**
+     * <code>optional int32 Y = 3;</code>
+     */
+    public boolean hasY() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 Y = 3;</code>
+     */
+    public int getY() {
+      return y_;
+    }
+
     private void initFields() {
+      type_ = LdpProtocol.MouseType.LEFT_CLICK;
       x_ = 0;
       y_ = 0;
-      type_ = LdpProtocol.MouseType.LEFT_CLICK;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
 
+      if (!hasType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -3219,13 +3314,13 @@ public final class LdpProtocol {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, x_);
+        output.writeEnum(1, type_.getNumber());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, y_);
+        output.writeInt32(2, x_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeEnum(3, type_.getNumber());
+        output.writeInt32(3, y_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -3238,15 +3333,15 @@ public final class LdpProtocol {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, x_);
+          .computeEnumSize(1, type_.getNumber());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, y_);
+          .computeInt32Size(2, x_);
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, type_.getNumber());
+          .computeInt32Size(3, y_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3364,11 +3459,11 @@ public final class LdpProtocol {
 
       public Builder clear() {
         super.clear();
-        x_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        y_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
         type_ = LdpProtocol.MouseType.LEFT_CLICK;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        x_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        y_ = 0;
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
@@ -3401,15 +3496,15 @@ public final class LdpProtocol {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.x_ = x_;
+        result.type_ = type_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.y_ = y_;
+        result.x_ = x_;
         if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
           to_bitField0_ |= 0x00000004;
         }
-        result.type_ = type_;
+        result.y_ = y_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3426,20 +3521,24 @@ public final class LdpProtocol {
 
       public Builder mergeFrom(LdpProtocol.LdpMouseInfoResponse other) {
         if (other == LdpProtocol.LdpMouseInfoResponse.getDefaultInstance()) return this;
+        if (other.hasType()) {
+          setType(other.getType());
+        }
         if (other.hasX()) {
           setX(other.getX());
         }
         if (other.hasY()) {
           setY(other.getY());
         }
-        if (other.hasType()) {
-          setType(other.getType());
-        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
+        if (!hasType()) {
+          
+          return false;
+        }
         return true;
       }
 
@@ -3462,104 +3561,104 @@ public final class LdpProtocol {
       }
       private int bitField0_;
 
-      // optional int32 X = 1;
-      private int x_ ;
+      // required .MouseType Type = 1;
+      private LdpProtocol.MouseType type_ = LdpProtocol.MouseType.LEFT_CLICK;
       /**
-       * <code>optional int32 X = 1;</code>
+       * <code>required .MouseType Type = 1;</code>
        */
-      public boolean hasX() {
+      public boolean hasType() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional int32 X = 1;</code>
-       */
-      public int getX() {
-        return x_;
-      }
-      /**
-       * <code>optional int32 X = 1;</code>
-       */
-      public Builder setX(int value) {
-        bitField0_ |= 0x00000001;
-        x_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 X = 1;</code>
-       */
-      public Builder clearX() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        x_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional int32 Y = 2;
-      private int y_ ;
-      /**
-       * <code>optional int32 Y = 2;</code>
-       */
-      public boolean hasY() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int32 Y = 2;</code>
-       */
-      public int getY() {
-        return y_;
-      }
-      /**
-       * <code>optional int32 Y = 2;</code>
-       */
-      public Builder setY(int value) {
-        bitField0_ |= 0x00000002;
-        y_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 Y = 2;</code>
-       */
-      public Builder clearY() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        y_ = 0;
-        onChanged();
-        return this;
-      }
-
-      // optional .MouseType Type = 3;
-      private LdpProtocol.MouseType type_ = LdpProtocol.MouseType.LEFT_CLICK;
-      /**
-       * <code>optional .MouseType Type = 3;</code>
-       */
-      public boolean hasType() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>optional .MouseType Type = 3;</code>
+       * <code>required .MouseType Type = 1;</code>
        */
       public LdpProtocol.MouseType getType() {
         return type_;
       }
       /**
-       * <code>optional .MouseType Type = 3;</code>
+       * <code>required .MouseType Type = 1;</code>
        */
       public Builder setType(LdpProtocol.MouseType value) {
         if (value == null) {
           throw new NullPointerException();
         }
-        bitField0_ |= 0x00000004;
+        bitField0_ |= 0x00000001;
         type_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional .MouseType Type = 3;</code>
+       * <code>required .MouseType Type = 1;</code>
        */
       public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000001);
         type_ = LdpProtocol.MouseType.LEFT_CLICK;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 X = 2;
+      private int x_ ;
+      /**
+       * <code>optional int32 X = 2;</code>
+       */
+      public boolean hasX() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 X = 2;</code>
+       */
+      public int getX() {
+        return x_;
+      }
+      /**
+       * <code>optional int32 X = 2;</code>
+       */
+      public Builder setX(int value) {
+        bitField0_ |= 0x00000002;
+        x_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 X = 2;</code>
+       */
+      public Builder clearX() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        x_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 Y = 3;
+      private int y_ ;
+      /**
+       * <code>optional int32 Y = 3;</code>
+       */
+      public boolean hasY() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 Y = 3;</code>
+       */
+      public int getY() {
+        return y_;
+      }
+      /**
+       * <code>optional int32 Y = 3;</code>
+       */
+      public Builder setY(int value) {
+        bitField0_ |= 0x00000004;
+        y_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 Y = 3;</code>
+       */
+      public Builder clearY() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        y_ = 0;
         onChanged();
         return this;
       }
@@ -3644,19 +3743,19 @@ public final class LdpProtocol {
      */
     LdpProtocol.LdpPreparableInfoRequestOrBuilder getPreparableInfoRequestOrBuilder();
 
-    // optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;
+    // optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;
     /**
-     * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+     * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
      */
-    boolean hasPreparableInfoResponse();
+    boolean hasPreparableDesktopResponse();
     /**
-     * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+     * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
      */
-    LdpProtocol.LdpPreparableInfoResponse getPreparableInfoResponse();
+    LdpProtocol.LdpPreparableDesktopInfoResponse getPreparableDesktopResponse();
     /**
-     * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+     * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
      */
-    LdpProtocol.LdpPreparableInfoResponseOrBuilder getPreparableInfoResponseOrBuilder();
+    LdpProtocol.LdpPreparableDesktopInfoResponseOrBuilder getPreparableDesktopResponseOrBuilder();
 
     // optional .LdpScreenRequest ScreenRequest = 7;
     /**
@@ -3728,19 +3827,33 @@ public final class LdpProtocol {
      */
     LdpProtocol.LdpKeyboardInfoResponseOrBuilder getKeyboardInfoResponseOrBuilder();
 
-    // optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;
+    // optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;
     /**
-     * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+     * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
      */
-    boolean hasVolumeInfoRequest();
+    boolean hasPreparableVolumeInfoResponse();
     /**
-     * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+     * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
      */
-    LdpProtocol.LdpVolumeInfoRequest getVolumeInfoRequest();
+    LdpProtocol.LdpPreparableVolumeInfoResponse getPreparableVolumeInfoResponse();
     /**
-     * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+     * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
      */
-    LdpProtocol.LdpVolumeInfoRequestOrBuilder getVolumeInfoRequestOrBuilder();
+    LdpProtocol.LdpPreparableVolumeInfoResponseOrBuilder getPreparableVolumeInfoResponseOrBuilder();
+
+    // optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;
+    /**
+     * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+     */
+    boolean hasVolumeInfoResponse();
+    /**
+     * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+     */
+    LdpProtocol.LdpVolumeInfoResponse getVolumeInfoResponse();
+    /**
+     * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+     */
+    LdpProtocol.LdpVolumeInfoResponseOrBuilder getVolumeInfoResponseOrBuilder();
   }
   /**
    * Protobuf type {@code LdpPacket}
@@ -3857,14 +3970,14 @@ public final class LdpProtocol {
               break;
             }
             case 50: {
-              LdpProtocol.LdpPreparableInfoResponse.Builder subBuilder = null;
+              LdpProtocol.LdpPreparableDesktopInfoResponse.Builder subBuilder = null;
               if (((bitField0_ & 0x00000020) == 0x00000020)) {
-                subBuilder = preparableInfoResponse_.toBuilder();
+                subBuilder = preparableDesktopResponse_.toBuilder();
               }
-              preparableInfoResponse_ = input.readMessage(LdpProtocol.LdpPreparableInfoResponse.PARSER, extensionRegistry);
+              preparableDesktopResponse_ = input.readMessage(LdpProtocol.LdpPreparableDesktopInfoResponse.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(preparableInfoResponse_);
-                preparableInfoResponse_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(preparableDesktopResponse_);
+                preparableDesktopResponse_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000020;
               break;
@@ -3935,16 +4048,29 @@ public final class LdpProtocol {
               break;
             }
             case 98: {
-              LdpProtocol.LdpVolumeInfoRequest.Builder subBuilder = null;
+              LdpProtocol.LdpPreparableVolumeInfoResponse.Builder subBuilder = null;
               if (((bitField0_ & 0x00000800) == 0x00000800)) {
-                subBuilder = volumeInfoRequest_.toBuilder();
+                subBuilder = preparableVolumeInfoResponse_.toBuilder();
               }
-              volumeInfoRequest_ = input.readMessage(LdpProtocol.LdpVolumeInfoRequest.PARSER, extensionRegistry);
+              preparableVolumeInfoResponse_ = input.readMessage(LdpProtocol.LdpPreparableVolumeInfoResponse.PARSER, extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(volumeInfoRequest_);
-                volumeInfoRequest_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(preparableVolumeInfoResponse_);
+                preparableVolumeInfoResponse_ = subBuilder.buildPartial();
               }
               bitField0_ |= 0x00000800;
+              break;
+            }
+            case 106: {
+              LdpProtocol.LdpVolumeInfoResponse.Builder subBuilder = null;
+              if (((bitField0_ & 0x00001000) == 0x00001000)) {
+                subBuilder = volumeInfoResponse_.toBuilder();
+              }
+              volumeInfoResponse_ = input.readMessage(LdpProtocol.LdpVolumeInfoResponse.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(volumeInfoResponse_);
+                volumeInfoResponse_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00001000;
               break;
             }
           }
@@ -4091,26 +4217,26 @@ public final class LdpProtocol {
       return preparableInfoRequest_;
     }
 
-    // optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;
-    public static final int PREPARABLEINFORESPONSE_FIELD_NUMBER = 6;
-    private LdpProtocol.LdpPreparableInfoResponse preparableInfoResponse_;
+    // optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;
+    public static final int PREPARABLEDESKTOPRESPONSE_FIELD_NUMBER = 6;
+    private LdpProtocol.LdpPreparableDesktopInfoResponse preparableDesktopResponse_;
     /**
-     * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+     * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
      */
-    public boolean hasPreparableInfoResponse() {
+    public boolean hasPreparableDesktopResponse() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+     * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
      */
-    public LdpProtocol.LdpPreparableInfoResponse getPreparableInfoResponse() {
-      return preparableInfoResponse_;
+    public LdpProtocol.LdpPreparableDesktopInfoResponse getPreparableDesktopResponse() {
+      return preparableDesktopResponse_;
     }
     /**
-     * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+     * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
      */
-    public LdpProtocol.LdpPreparableInfoResponseOrBuilder getPreparableInfoResponseOrBuilder() {
-      return preparableInfoResponse_;
+    public LdpProtocol.LdpPreparableDesktopInfoResponseOrBuilder getPreparableDesktopResponseOrBuilder() {
+      return preparableDesktopResponse_;
     }
 
     // optional .LdpScreenRequest ScreenRequest = 7;
@@ -4223,26 +4349,48 @@ public final class LdpProtocol {
       return keyboardInfoResponse_;
     }
 
-    // optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;
-    public static final int VOLUMEINFOREQUEST_FIELD_NUMBER = 12;
-    private LdpProtocol.LdpVolumeInfoRequest volumeInfoRequest_;
+    // optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;
+    public static final int PREPARABLEVOLUMEINFORESPONSE_FIELD_NUMBER = 12;
+    private LdpProtocol.LdpPreparableVolumeInfoResponse preparableVolumeInfoResponse_;
     /**
-     * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+     * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
      */
-    public boolean hasVolumeInfoRequest() {
+    public boolean hasPreparableVolumeInfoResponse() {
       return ((bitField0_ & 0x00000800) == 0x00000800);
     }
     /**
-     * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+     * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
      */
-    public LdpProtocol.LdpVolumeInfoRequest getVolumeInfoRequest() {
-      return volumeInfoRequest_;
+    public LdpProtocol.LdpPreparableVolumeInfoResponse getPreparableVolumeInfoResponse() {
+      return preparableVolumeInfoResponse_;
     }
     /**
-     * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+     * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
      */
-    public LdpProtocol.LdpVolumeInfoRequestOrBuilder getVolumeInfoRequestOrBuilder() {
-      return volumeInfoRequest_;
+    public LdpProtocol.LdpPreparableVolumeInfoResponseOrBuilder getPreparableVolumeInfoResponseOrBuilder() {
+      return preparableVolumeInfoResponse_;
+    }
+
+    // optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;
+    public static final int VOLUMEINFORESPONSE_FIELD_NUMBER = 13;
+    private LdpProtocol.LdpVolumeInfoResponse volumeInfoResponse_;
+    /**
+     * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+     */
+    public boolean hasVolumeInfoResponse() {
+      return ((bitField0_ & 0x00001000) == 0x00001000);
+    }
+    /**
+     * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+     */
+    public LdpProtocol.LdpVolumeInfoResponse getVolumeInfoResponse() {
+      return volumeInfoResponse_;
+    }
+    /**
+     * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+     */
+    public LdpProtocol.LdpVolumeInfoResponseOrBuilder getVolumeInfoResponseOrBuilder() {
+      return volumeInfoResponse_;
     }
 
     private void initFields() {
@@ -4251,13 +4399,14 @@ public final class LdpProtocol {
       authResponse_ = LdpProtocol.LdpAuthResponse.getDefaultInstance();
       clientInfoRequest_ = LdpProtocol.LdpClientInfoRequest.getDefaultInstance();
       preparableInfoRequest_ = LdpProtocol.LdpPreparableInfoRequest.getDefaultInstance();
-      preparableInfoResponse_ = LdpProtocol.LdpPreparableInfoResponse.getDefaultInstance();
+      preparableDesktopResponse_ = LdpProtocol.LdpPreparableDesktopInfoResponse.getDefaultInstance();
       screenRequest_ = LdpProtocol.LdpScreenRequest.getDefaultInstance();
       screenResponse_ = LdpProtocol.LdpScreenResponse.getDefaultInstance();
       disconnectRequest_ = LdpProtocol.LdpDisconnectRequest.getDefaultInstance();
       mouseInfoResponse_ = LdpProtocol.LdpMouseInfoResponse.getDefaultInstance();
       keyboardInfoResponse_ = LdpProtocol.LdpKeyboardInfoResponse.getDefaultInstance();
-      volumeInfoRequest_ = LdpProtocol.LdpVolumeInfoRequest.getDefaultInstance();
+      preparableVolumeInfoResponse_ = LdpProtocol.LdpPreparableVolumeInfoResponse.getDefaultInstance();
+      volumeInfoResponse_ = LdpProtocol.LdpVolumeInfoResponse.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -4298,6 +4447,18 @@ public final class LdpProtocol {
           return false;
         }
       }
+      if (hasMouseInfoResponse()) {
+        if (!getMouseInfoResponse().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasVolumeInfoResponse()) {
+        if (!getVolumeInfoResponse().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -4321,7 +4482,7 @@ public final class LdpProtocol {
         output.writeMessage(5, preparableInfoRequest_);
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeMessage(6, preparableInfoResponse_);
+        output.writeMessage(6, preparableDesktopResponse_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeMessage(7, screenRequest_);
@@ -4339,7 +4500,10 @@ public final class LdpProtocol {
         output.writeMessage(11, keyboardInfoResponse_);
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
-        output.writeMessage(12, volumeInfoRequest_);
+        output.writeMessage(12, preparableVolumeInfoResponse_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        output.writeMessage(13, volumeInfoResponse_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -4372,7 +4536,7 @@ public final class LdpProtocol {
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, preparableInfoResponse_);
+          .computeMessageSize(6, preparableDesktopResponse_);
       }
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         size += com.google.protobuf.CodedOutputStream
@@ -4396,7 +4560,11 @@ public final class LdpProtocol {
       }
       if (((bitField0_ & 0x00000800) == 0x00000800)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(12, volumeInfoRequest_);
+          .computeMessageSize(12, preparableVolumeInfoResponse_);
+      }
+      if (((bitField0_ & 0x00001000) == 0x00001000)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(13, volumeInfoResponse_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -4510,13 +4678,14 @@ public final class LdpProtocol {
           getAuthResponseFieldBuilder();
           getClientInfoRequestFieldBuilder();
           getPreparableInfoRequestFieldBuilder();
-          getPreparableInfoResponseFieldBuilder();
+          getPreparableDesktopResponseFieldBuilder();
           getScreenRequestFieldBuilder();
           getScreenResponseFieldBuilder();
           getDisconnectRequestFieldBuilder();
           getMouseInfoResponseFieldBuilder();
           getKeyboardInfoResponseFieldBuilder();
-          getVolumeInfoRequestFieldBuilder();
+          getPreparableVolumeInfoResponseFieldBuilder();
+          getVolumeInfoResponseFieldBuilder();
         }
       }
       private static Builder create() {
@@ -4551,10 +4720,10 @@ public final class LdpProtocol {
           preparableInfoRequestBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000010);
-        if (preparableInfoResponseBuilder_ == null) {
-          preparableInfoResponse_ = LdpProtocol.LdpPreparableInfoResponse.getDefaultInstance();
+        if (preparableDesktopResponseBuilder_ == null) {
+          preparableDesktopResponse_ = LdpProtocol.LdpPreparableDesktopInfoResponse.getDefaultInstance();
         } else {
-          preparableInfoResponseBuilder_.clear();
+          preparableDesktopResponseBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000020);
         if (screenRequestBuilder_ == null) {
@@ -4587,12 +4756,18 @@ public final class LdpProtocol {
           keyboardInfoResponseBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000400);
-        if (volumeInfoRequestBuilder_ == null) {
-          volumeInfoRequest_ = LdpProtocol.LdpVolumeInfoRequest.getDefaultInstance();
+        if (preparableVolumeInfoResponseBuilder_ == null) {
+          preparableVolumeInfoResponse_ = LdpProtocol.LdpPreparableVolumeInfoResponse.getDefaultInstance();
         } else {
-          volumeInfoRequestBuilder_.clear();
+          preparableVolumeInfoResponseBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000800);
+        if (volumeInfoResponseBuilder_ == null) {
+          volumeInfoResponse_ = LdpProtocol.LdpVolumeInfoResponse.getDefaultInstance();
+        } else {
+          volumeInfoResponseBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00001000);
         return this;
       }
 
@@ -4660,10 +4835,10 @@ public final class LdpProtocol {
         if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000020;
         }
-        if (preparableInfoResponseBuilder_ == null) {
-          result.preparableInfoResponse_ = preparableInfoResponse_;
+        if (preparableDesktopResponseBuilder_ == null) {
+          result.preparableDesktopResponse_ = preparableDesktopResponse_;
         } else {
-          result.preparableInfoResponse_ = preparableInfoResponseBuilder_.build();
+          result.preparableDesktopResponse_ = preparableDesktopResponseBuilder_.build();
         }
         if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000040;
@@ -4708,10 +4883,18 @@ public final class LdpProtocol {
         if (((from_bitField0_ & 0x00000800) == 0x00000800)) {
           to_bitField0_ |= 0x00000800;
         }
-        if (volumeInfoRequestBuilder_ == null) {
-          result.volumeInfoRequest_ = volumeInfoRequest_;
+        if (preparableVolumeInfoResponseBuilder_ == null) {
+          result.preparableVolumeInfoResponse_ = preparableVolumeInfoResponse_;
         } else {
-          result.volumeInfoRequest_ = volumeInfoRequestBuilder_.build();
+          result.preparableVolumeInfoResponse_ = preparableVolumeInfoResponseBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00001000) == 0x00001000)) {
+          to_bitField0_ |= 0x00001000;
+        }
+        if (volumeInfoResponseBuilder_ == null) {
+          result.volumeInfoResponse_ = volumeInfoResponse_;
+        } else {
+          result.volumeInfoResponse_ = volumeInfoResponseBuilder_.build();
         }
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -4744,8 +4927,8 @@ public final class LdpProtocol {
         if (other.hasPreparableInfoRequest()) {
           mergePreparableInfoRequest(other.getPreparableInfoRequest());
         }
-        if (other.hasPreparableInfoResponse()) {
-          mergePreparableInfoResponse(other.getPreparableInfoResponse());
+        if (other.hasPreparableDesktopResponse()) {
+          mergePreparableDesktopResponse(other.getPreparableDesktopResponse());
         }
         if (other.hasScreenRequest()) {
           mergeScreenRequest(other.getScreenRequest());
@@ -4762,8 +4945,11 @@ public final class LdpProtocol {
         if (other.hasKeyboardInfoResponse()) {
           mergeKeyboardInfoResponse(other.getKeyboardInfoResponse());
         }
-        if (other.hasVolumeInfoRequest()) {
-          mergeVolumeInfoRequest(other.getVolumeInfoRequest());
+        if (other.hasPreparableVolumeInfoResponse()) {
+          mergePreparableVolumeInfoResponse(other.getPreparableVolumeInfoResponse());
+        }
+        if (other.hasVolumeInfoResponse()) {
+          mergeVolumeInfoResponse(other.getVolumeInfoResponse());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -4800,6 +4986,18 @@ public final class LdpProtocol {
         }
         if (hasDisconnectRequest()) {
           if (!getDisconnectRequest().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasMouseInfoResponse()) {
+          if (!getMouseInfoResponse().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasVolumeInfoResponse()) {
+          if (!getVolumeInfoResponse().isInitialized()) {
             
             return false;
           }
@@ -5330,121 +5528,121 @@ public final class LdpProtocol {
         return preparableInfoRequestBuilder_;
       }
 
-      // optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;
-      private LdpProtocol.LdpPreparableInfoResponse preparableInfoResponse_ = LdpProtocol.LdpPreparableInfoResponse.getDefaultInstance();
+      // optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;
+      private LdpProtocol.LdpPreparableDesktopInfoResponse preparableDesktopResponse_ = LdpProtocol.LdpPreparableDesktopInfoResponse.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          LdpProtocol.LdpPreparableInfoResponse, LdpProtocol.LdpPreparableInfoResponse.Builder, LdpProtocol.LdpPreparableInfoResponseOrBuilder> preparableInfoResponseBuilder_;
+          LdpProtocol.LdpPreparableDesktopInfoResponse, LdpProtocol.LdpPreparableDesktopInfoResponse.Builder, LdpProtocol.LdpPreparableDesktopInfoResponseOrBuilder> preparableDesktopResponseBuilder_;
       /**
-       * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+       * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
        */
-      public boolean hasPreparableInfoResponse() {
+      public boolean hasPreparableDesktopResponse() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+       * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
        */
-      public LdpProtocol.LdpPreparableInfoResponse getPreparableInfoResponse() {
-        if (preparableInfoResponseBuilder_ == null) {
-          return preparableInfoResponse_;
+      public LdpProtocol.LdpPreparableDesktopInfoResponse getPreparableDesktopResponse() {
+        if (preparableDesktopResponseBuilder_ == null) {
+          return preparableDesktopResponse_;
         } else {
-          return preparableInfoResponseBuilder_.getMessage();
+          return preparableDesktopResponseBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+       * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
        */
-      public Builder setPreparableInfoResponse(LdpProtocol.LdpPreparableInfoResponse value) {
-        if (preparableInfoResponseBuilder_ == null) {
+      public Builder setPreparableDesktopResponse(LdpProtocol.LdpPreparableDesktopInfoResponse value) {
+        if (preparableDesktopResponseBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          preparableInfoResponse_ = value;
+          preparableDesktopResponse_ = value;
           onChanged();
         } else {
-          preparableInfoResponseBuilder_.setMessage(value);
+          preparableDesktopResponseBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+       * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
        */
-      public Builder setPreparableInfoResponse(
-          LdpProtocol.LdpPreparableInfoResponse.Builder builderForValue) {
-        if (preparableInfoResponseBuilder_ == null) {
-          preparableInfoResponse_ = builderForValue.build();
+      public Builder setPreparableDesktopResponse(
+          LdpProtocol.LdpPreparableDesktopInfoResponse.Builder builderForValue) {
+        if (preparableDesktopResponseBuilder_ == null) {
+          preparableDesktopResponse_ = builderForValue.build();
           onChanged();
         } else {
-          preparableInfoResponseBuilder_.setMessage(builderForValue.build());
+          preparableDesktopResponseBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+       * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
        */
-      public Builder mergePreparableInfoResponse(LdpProtocol.LdpPreparableInfoResponse value) {
-        if (preparableInfoResponseBuilder_ == null) {
+      public Builder mergePreparableDesktopResponse(LdpProtocol.LdpPreparableDesktopInfoResponse value) {
+        if (preparableDesktopResponseBuilder_ == null) {
           if (((bitField0_ & 0x00000020) == 0x00000020) &&
-              preparableInfoResponse_ != LdpProtocol.LdpPreparableInfoResponse.getDefaultInstance()) {
-            preparableInfoResponse_ =
-              LdpProtocol.LdpPreparableInfoResponse.newBuilder(preparableInfoResponse_).mergeFrom(value).buildPartial();
+              preparableDesktopResponse_ != LdpProtocol.LdpPreparableDesktopInfoResponse.getDefaultInstance()) {
+            preparableDesktopResponse_ =
+              LdpProtocol.LdpPreparableDesktopInfoResponse.newBuilder(preparableDesktopResponse_).mergeFrom(value).buildPartial();
           } else {
-            preparableInfoResponse_ = value;
+            preparableDesktopResponse_ = value;
           }
           onChanged();
         } else {
-          preparableInfoResponseBuilder_.mergeFrom(value);
+          preparableDesktopResponseBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000020;
         return this;
       }
       /**
-       * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+       * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
        */
-      public Builder clearPreparableInfoResponse() {
-        if (preparableInfoResponseBuilder_ == null) {
-          preparableInfoResponse_ = LdpProtocol.LdpPreparableInfoResponse.getDefaultInstance();
+      public Builder clearPreparableDesktopResponse() {
+        if (preparableDesktopResponseBuilder_ == null) {
+          preparableDesktopResponse_ = LdpProtocol.LdpPreparableDesktopInfoResponse.getDefaultInstance();
           onChanged();
         } else {
-          preparableInfoResponseBuilder_.clear();
+          preparableDesktopResponseBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       /**
-       * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+       * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
        */
-      public LdpProtocol.LdpPreparableInfoResponse.Builder getPreparableInfoResponseBuilder() {
+      public LdpProtocol.LdpPreparableDesktopInfoResponse.Builder getPreparableDesktopResponseBuilder() {
         bitField0_ |= 0x00000020;
         onChanged();
-        return getPreparableInfoResponseFieldBuilder().getBuilder();
+        return getPreparableDesktopResponseFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+       * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
        */
-      public LdpProtocol.LdpPreparableInfoResponseOrBuilder getPreparableInfoResponseOrBuilder() {
-        if (preparableInfoResponseBuilder_ != null) {
-          return preparableInfoResponseBuilder_.getMessageOrBuilder();
+      public LdpProtocol.LdpPreparableDesktopInfoResponseOrBuilder getPreparableDesktopResponseOrBuilder() {
+        if (preparableDesktopResponseBuilder_ != null) {
+          return preparableDesktopResponseBuilder_.getMessageOrBuilder();
         } else {
-          return preparableInfoResponse_;
+          return preparableDesktopResponse_;
         }
       }
       /**
-       * <code>optional .LdpPreparableInfoResponse PreparableInfoResponse = 6;</code>
+       * <code>optional .LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          LdpProtocol.LdpPreparableInfoResponse, LdpProtocol.LdpPreparableInfoResponse.Builder, LdpProtocol.LdpPreparableInfoResponseOrBuilder> 
-          getPreparableInfoResponseFieldBuilder() {
-        if (preparableInfoResponseBuilder_ == null) {
-          preparableInfoResponseBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              LdpProtocol.LdpPreparableInfoResponse, LdpProtocol.LdpPreparableInfoResponse.Builder, LdpProtocol.LdpPreparableInfoResponseOrBuilder>(
-                  preparableInfoResponse_,
+          LdpProtocol.LdpPreparableDesktopInfoResponse, LdpProtocol.LdpPreparableDesktopInfoResponse.Builder, LdpProtocol.LdpPreparableDesktopInfoResponseOrBuilder> 
+          getPreparableDesktopResponseFieldBuilder() {
+        if (preparableDesktopResponseBuilder_ == null) {
+          preparableDesktopResponseBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              LdpProtocol.LdpPreparableDesktopInfoResponse, LdpProtocol.LdpPreparableDesktopInfoResponse.Builder, LdpProtocol.LdpPreparableDesktopInfoResponseOrBuilder>(
+                  preparableDesktopResponse_,
                   getParentForChildren(),
                   isClean());
-          preparableInfoResponse_ = null;
+          preparableDesktopResponse_ = null;
         }
-        return preparableInfoResponseBuilder_;
+        return preparableDesktopResponseBuilder_;
       }
 
       // optional .LdpScreenRequest ScreenRequest = 7;
@@ -6032,121 +6230,238 @@ public final class LdpProtocol {
         return keyboardInfoResponseBuilder_;
       }
 
-      // optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;
-      private LdpProtocol.LdpVolumeInfoRequest volumeInfoRequest_ = LdpProtocol.LdpVolumeInfoRequest.getDefaultInstance();
+      // optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;
+      private LdpProtocol.LdpPreparableVolumeInfoResponse preparableVolumeInfoResponse_ = LdpProtocol.LdpPreparableVolumeInfoResponse.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
-          LdpProtocol.LdpVolumeInfoRequest, LdpProtocol.LdpVolumeInfoRequest.Builder, LdpProtocol.LdpVolumeInfoRequestOrBuilder> volumeInfoRequestBuilder_;
+          LdpProtocol.LdpPreparableVolumeInfoResponse, LdpProtocol.LdpPreparableVolumeInfoResponse.Builder, LdpProtocol.LdpPreparableVolumeInfoResponseOrBuilder> preparableVolumeInfoResponseBuilder_;
       /**
-       * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+       * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
        */
-      public boolean hasVolumeInfoRequest() {
+      public boolean hasPreparableVolumeInfoResponse() {
         return ((bitField0_ & 0x00000800) == 0x00000800);
       }
       /**
-       * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+       * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
        */
-      public LdpProtocol.LdpVolumeInfoRequest getVolumeInfoRequest() {
-        if (volumeInfoRequestBuilder_ == null) {
-          return volumeInfoRequest_;
+      public LdpProtocol.LdpPreparableVolumeInfoResponse getPreparableVolumeInfoResponse() {
+        if (preparableVolumeInfoResponseBuilder_ == null) {
+          return preparableVolumeInfoResponse_;
         } else {
-          return volumeInfoRequestBuilder_.getMessage();
+          return preparableVolumeInfoResponseBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+       * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
        */
-      public Builder setVolumeInfoRequest(LdpProtocol.LdpVolumeInfoRequest value) {
-        if (volumeInfoRequestBuilder_ == null) {
+      public Builder setPreparableVolumeInfoResponse(LdpProtocol.LdpPreparableVolumeInfoResponse value) {
+        if (preparableVolumeInfoResponseBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          volumeInfoRequest_ = value;
+          preparableVolumeInfoResponse_ = value;
           onChanged();
         } else {
-          volumeInfoRequestBuilder_.setMessage(value);
+          preparableVolumeInfoResponseBuilder_.setMessage(value);
         }
         bitField0_ |= 0x00000800;
         return this;
       }
       /**
-       * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+       * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
        */
-      public Builder setVolumeInfoRequest(
-          LdpProtocol.LdpVolumeInfoRequest.Builder builderForValue) {
-        if (volumeInfoRequestBuilder_ == null) {
-          volumeInfoRequest_ = builderForValue.build();
+      public Builder setPreparableVolumeInfoResponse(
+          LdpProtocol.LdpPreparableVolumeInfoResponse.Builder builderForValue) {
+        if (preparableVolumeInfoResponseBuilder_ == null) {
+          preparableVolumeInfoResponse_ = builderForValue.build();
           onChanged();
         } else {
-          volumeInfoRequestBuilder_.setMessage(builderForValue.build());
+          preparableVolumeInfoResponseBuilder_.setMessage(builderForValue.build());
         }
         bitField0_ |= 0x00000800;
         return this;
       }
       /**
-       * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+       * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
        */
-      public Builder mergeVolumeInfoRequest(LdpProtocol.LdpVolumeInfoRequest value) {
-        if (volumeInfoRequestBuilder_ == null) {
+      public Builder mergePreparableVolumeInfoResponse(LdpProtocol.LdpPreparableVolumeInfoResponse value) {
+        if (preparableVolumeInfoResponseBuilder_ == null) {
           if (((bitField0_ & 0x00000800) == 0x00000800) &&
-              volumeInfoRequest_ != LdpProtocol.LdpVolumeInfoRequest.getDefaultInstance()) {
-            volumeInfoRequest_ =
-              LdpProtocol.LdpVolumeInfoRequest.newBuilder(volumeInfoRequest_).mergeFrom(value).buildPartial();
+              preparableVolumeInfoResponse_ != LdpProtocol.LdpPreparableVolumeInfoResponse.getDefaultInstance()) {
+            preparableVolumeInfoResponse_ =
+              LdpProtocol.LdpPreparableVolumeInfoResponse.newBuilder(preparableVolumeInfoResponse_).mergeFrom(value).buildPartial();
           } else {
-            volumeInfoRequest_ = value;
+            preparableVolumeInfoResponse_ = value;
           }
           onChanged();
         } else {
-          volumeInfoRequestBuilder_.mergeFrom(value);
+          preparableVolumeInfoResponseBuilder_.mergeFrom(value);
         }
         bitField0_ |= 0x00000800;
         return this;
       }
       /**
-       * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+       * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
        */
-      public Builder clearVolumeInfoRequest() {
-        if (volumeInfoRequestBuilder_ == null) {
-          volumeInfoRequest_ = LdpProtocol.LdpVolumeInfoRequest.getDefaultInstance();
+      public Builder clearPreparableVolumeInfoResponse() {
+        if (preparableVolumeInfoResponseBuilder_ == null) {
+          preparableVolumeInfoResponse_ = LdpProtocol.LdpPreparableVolumeInfoResponse.getDefaultInstance();
           onChanged();
         } else {
-          volumeInfoRequestBuilder_.clear();
+          preparableVolumeInfoResponseBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000800);
         return this;
       }
       /**
-       * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+       * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
        */
-      public LdpProtocol.LdpVolumeInfoRequest.Builder getVolumeInfoRequestBuilder() {
+      public LdpProtocol.LdpPreparableVolumeInfoResponse.Builder getPreparableVolumeInfoResponseBuilder() {
         bitField0_ |= 0x00000800;
         onChanged();
-        return getVolumeInfoRequestFieldBuilder().getBuilder();
+        return getPreparableVolumeInfoResponseFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+       * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
        */
-      public LdpProtocol.LdpVolumeInfoRequestOrBuilder getVolumeInfoRequestOrBuilder() {
-        if (volumeInfoRequestBuilder_ != null) {
-          return volumeInfoRequestBuilder_.getMessageOrBuilder();
+      public LdpProtocol.LdpPreparableVolumeInfoResponseOrBuilder getPreparableVolumeInfoResponseOrBuilder() {
+        if (preparableVolumeInfoResponseBuilder_ != null) {
+          return preparableVolumeInfoResponseBuilder_.getMessageOrBuilder();
         } else {
-          return volumeInfoRequest_;
+          return preparableVolumeInfoResponse_;
         }
       }
       /**
-       * <code>optional .LdpVolumeInfoRequest VolumeInfoRequest = 12;</code>
+       * <code>optional .LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          LdpProtocol.LdpVolumeInfoRequest, LdpProtocol.LdpVolumeInfoRequest.Builder, LdpProtocol.LdpVolumeInfoRequestOrBuilder> 
-          getVolumeInfoRequestFieldBuilder() {
-        if (volumeInfoRequestBuilder_ == null) {
-          volumeInfoRequestBuilder_ = new com.google.protobuf.SingleFieldBuilder<
-              LdpProtocol.LdpVolumeInfoRequest, LdpProtocol.LdpVolumeInfoRequest.Builder, LdpProtocol.LdpVolumeInfoRequestOrBuilder>(
-                  volumeInfoRequest_,
+          LdpProtocol.LdpPreparableVolumeInfoResponse, LdpProtocol.LdpPreparableVolumeInfoResponse.Builder, LdpProtocol.LdpPreparableVolumeInfoResponseOrBuilder> 
+          getPreparableVolumeInfoResponseFieldBuilder() {
+        if (preparableVolumeInfoResponseBuilder_ == null) {
+          preparableVolumeInfoResponseBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              LdpProtocol.LdpPreparableVolumeInfoResponse, LdpProtocol.LdpPreparableVolumeInfoResponse.Builder, LdpProtocol.LdpPreparableVolumeInfoResponseOrBuilder>(
+                  preparableVolumeInfoResponse_,
                   getParentForChildren(),
                   isClean());
-          volumeInfoRequest_ = null;
+          preparableVolumeInfoResponse_ = null;
         }
-        return volumeInfoRequestBuilder_;
+        return preparableVolumeInfoResponseBuilder_;
+      }
+
+      // optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;
+      private LdpProtocol.LdpVolumeInfoResponse volumeInfoResponse_ = LdpProtocol.LdpVolumeInfoResponse.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          LdpProtocol.LdpVolumeInfoResponse, LdpProtocol.LdpVolumeInfoResponse.Builder, LdpProtocol.LdpVolumeInfoResponseOrBuilder> volumeInfoResponseBuilder_;
+      /**
+       * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+       */
+      public boolean hasVolumeInfoResponse() {
+        return ((bitField0_ & 0x00001000) == 0x00001000);
+      }
+      /**
+       * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+       */
+      public LdpProtocol.LdpVolumeInfoResponse getVolumeInfoResponse() {
+        if (volumeInfoResponseBuilder_ == null) {
+          return volumeInfoResponse_;
+        } else {
+          return volumeInfoResponseBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+       */
+      public Builder setVolumeInfoResponse(LdpProtocol.LdpVolumeInfoResponse value) {
+        if (volumeInfoResponseBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          volumeInfoResponse_ = value;
+          onChanged();
+        } else {
+          volumeInfoResponseBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00001000;
+        return this;
+      }
+      /**
+       * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+       */
+      public Builder setVolumeInfoResponse(
+          LdpProtocol.LdpVolumeInfoResponse.Builder builderForValue) {
+        if (volumeInfoResponseBuilder_ == null) {
+          volumeInfoResponse_ = builderForValue.build();
+          onChanged();
+        } else {
+          volumeInfoResponseBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00001000;
+        return this;
+      }
+      /**
+       * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+       */
+      public Builder mergeVolumeInfoResponse(LdpProtocol.LdpVolumeInfoResponse value) {
+        if (volumeInfoResponseBuilder_ == null) {
+          if (((bitField0_ & 0x00001000) == 0x00001000) &&
+              volumeInfoResponse_ != LdpProtocol.LdpVolumeInfoResponse.getDefaultInstance()) {
+            volumeInfoResponse_ =
+              LdpProtocol.LdpVolumeInfoResponse.newBuilder(volumeInfoResponse_).mergeFrom(value).buildPartial();
+          } else {
+            volumeInfoResponse_ = value;
+          }
+          onChanged();
+        } else {
+          volumeInfoResponseBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00001000;
+        return this;
+      }
+      /**
+       * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+       */
+      public Builder clearVolumeInfoResponse() {
+        if (volumeInfoResponseBuilder_ == null) {
+          volumeInfoResponse_ = LdpProtocol.LdpVolumeInfoResponse.getDefaultInstance();
+          onChanged();
+        } else {
+          volumeInfoResponseBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00001000);
+        return this;
+      }
+      /**
+       * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+       */
+      public LdpProtocol.LdpVolumeInfoResponse.Builder getVolumeInfoResponseBuilder() {
+        bitField0_ |= 0x00001000;
+        onChanged();
+        return getVolumeInfoResponseFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+       */
+      public LdpProtocol.LdpVolumeInfoResponseOrBuilder getVolumeInfoResponseOrBuilder() {
+        if (volumeInfoResponseBuilder_ != null) {
+          return volumeInfoResponseBuilder_.getMessageOrBuilder();
+        } else {
+          return volumeInfoResponse_;
+        }
+      }
+      /**
+       * <code>optional .LdpVolumeInfoResponse VolumeInfoResponse = 13;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          LdpProtocol.LdpVolumeInfoResponse, LdpProtocol.LdpVolumeInfoResponse.Builder, LdpProtocol.LdpVolumeInfoResponseOrBuilder> 
+          getVolumeInfoResponseFieldBuilder() {
+        if (volumeInfoResponseBuilder_ == null) {
+          volumeInfoResponseBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              LdpProtocol.LdpVolumeInfoResponse, LdpProtocol.LdpVolumeInfoResponse.Builder, LdpProtocol.LdpVolumeInfoResponseOrBuilder>(
+                  volumeInfoResponse_,
+                  getParentForChildren(),
+                  isClean());
+          volumeInfoResponse_ = null;
+        }
+        return volumeInfoResponseBuilder_;
       }
 
       // @@protoc_insertion_point(builder_scope:LdpPacket)
@@ -6573,7 +6888,7 @@ public final class LdpProtocol {
     // @@protoc_insertion_point(class_scope:LdpPreparableInfoRequest)
   }
 
-  public interface LdpPreparableInfoResponseOrBuilder
+  public interface LdpPreparableDesktopInfoResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
     // optional int32 ScreenWidth = 1;
@@ -6597,24 +6912,24 @@ public final class LdpProtocol {
     int getScreenHeight();
   }
   /**
-   * Protobuf type {@code LdpPreparableInfoResponse}
+   * Protobuf type {@code LdpPreparableDesktopInfoResponse}
    */
-  public static final class LdpPreparableInfoResponse extends
+  public static final class LdpPreparableDesktopInfoResponse extends
       com.google.protobuf.GeneratedMessage
-      implements LdpPreparableInfoResponseOrBuilder {
-    // Use LdpPreparableInfoResponse.newBuilder() to construct.
-    private LdpPreparableInfoResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      implements LdpPreparableDesktopInfoResponseOrBuilder {
+    // Use LdpPreparableDesktopInfoResponse.newBuilder() to construct.
+    private LdpPreparableDesktopInfoResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private LdpPreparableInfoResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private LdpPreparableDesktopInfoResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final LdpPreparableInfoResponse defaultInstance;
-    public static LdpPreparableInfoResponse getDefaultInstance() {
+    private static final LdpPreparableDesktopInfoResponse defaultInstance;
+    public static LdpPreparableDesktopInfoResponse getDefaultInstance() {
       return defaultInstance;
     }
 
-    public LdpPreparableInfoResponse getDefaultInstanceForType() {
+    public LdpPreparableDesktopInfoResponse getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -6624,7 +6939,7 @@ public final class LdpProtocol {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private LdpPreparableInfoResponse(
+    private LdpPreparableDesktopInfoResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -6671,28 +6986,28 @@ public final class LdpProtocol {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return LdpProtocol.internal_static_LdpPreparableInfoResponse_descriptor;
+      return LdpProtocol.internal_static_LdpPreparableDesktopInfoResponse_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return LdpProtocol.internal_static_LdpPreparableInfoResponse_fieldAccessorTable
+      return LdpProtocol.internal_static_LdpPreparableDesktopInfoResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              LdpProtocol.LdpPreparableInfoResponse.class, LdpProtocol.LdpPreparableInfoResponse.Builder.class);
+              LdpProtocol.LdpPreparableDesktopInfoResponse.class, LdpProtocol.LdpPreparableDesktopInfoResponse.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<LdpPreparableInfoResponse> PARSER =
-        new com.google.protobuf.AbstractParser<LdpPreparableInfoResponse>() {
-      public LdpPreparableInfoResponse parsePartialFrom(
+    public static com.google.protobuf.Parser<LdpPreparableDesktopInfoResponse> PARSER =
+        new com.google.protobuf.AbstractParser<LdpPreparableDesktopInfoResponse>() {
+      public LdpPreparableDesktopInfoResponse parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new LdpPreparableInfoResponse(input, extensionRegistry);
+        return new LdpPreparableDesktopInfoResponse(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<LdpPreparableInfoResponse> getParserForType() {
+    public com.google.protobuf.Parser<LdpPreparableDesktopInfoResponse> getParserForType() {
       return PARSER;
     }
 
@@ -6780,53 +7095,53 @@ public final class LdpProtocol {
       return super.writeReplace();
     }
 
-    public static LdpProtocol.LdpPreparableInfoResponse parseFrom(
+    public static LdpProtocol.LdpPreparableDesktopInfoResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static LdpProtocol.LdpPreparableInfoResponse parseFrom(
+    public static LdpProtocol.LdpPreparableDesktopInfoResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static LdpProtocol.LdpPreparableInfoResponse parseFrom(byte[] data)
+    public static LdpProtocol.LdpPreparableDesktopInfoResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static LdpProtocol.LdpPreparableInfoResponse parseFrom(
+    public static LdpProtocol.LdpPreparableDesktopInfoResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static LdpProtocol.LdpPreparableInfoResponse parseFrom(java.io.InputStream input)
+    public static LdpProtocol.LdpPreparableDesktopInfoResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static LdpProtocol.LdpPreparableInfoResponse parseFrom(
+    public static LdpProtocol.LdpPreparableDesktopInfoResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static LdpProtocol.LdpPreparableInfoResponse parseDelimitedFrom(java.io.InputStream input)
+    public static LdpProtocol.LdpPreparableDesktopInfoResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static LdpProtocol.LdpPreparableInfoResponse parseDelimitedFrom(
+    public static LdpProtocol.LdpPreparableDesktopInfoResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static LdpProtocol.LdpPreparableInfoResponse parseFrom(
+    public static LdpProtocol.LdpPreparableDesktopInfoResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static LdpProtocol.LdpPreparableInfoResponse parseFrom(
+    public static LdpProtocol.LdpPreparableDesktopInfoResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -6835,7 +7150,7 @@ public final class LdpProtocol {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(LdpProtocol.LdpPreparableInfoResponse prototype) {
+    public static Builder newBuilder(LdpProtocol.LdpPreparableDesktopInfoResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -6847,24 +7162,24 @@ public final class LdpProtocol {
       return builder;
     }
     /**
-     * Protobuf type {@code LdpPreparableInfoResponse}
+     * Protobuf type {@code LdpPreparableDesktopInfoResponse}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements LdpProtocol.LdpPreparableInfoResponseOrBuilder {
+       implements LdpProtocol.LdpPreparableDesktopInfoResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return LdpProtocol.internal_static_LdpPreparableInfoResponse_descriptor;
+        return LdpProtocol.internal_static_LdpPreparableDesktopInfoResponse_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return LdpProtocol.internal_static_LdpPreparableInfoResponse_fieldAccessorTable
+        return LdpProtocol.internal_static_LdpPreparableDesktopInfoResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                LdpProtocol.LdpPreparableInfoResponse.class, LdpProtocol.LdpPreparableInfoResponse.Builder.class);
+                LdpProtocol.LdpPreparableDesktopInfoResponse.class, LdpProtocol.LdpPreparableDesktopInfoResponse.Builder.class);
       }
 
-      // Construct using LdpProtocol.LdpPreparableInfoResponse.newBuilder()
+      // Construct using LdpProtocol.LdpPreparableDesktopInfoResponse.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -6897,23 +7212,23 @@ public final class LdpProtocol {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return LdpProtocol.internal_static_LdpPreparableInfoResponse_descriptor;
+        return LdpProtocol.internal_static_LdpPreparableDesktopInfoResponse_descriptor;
       }
 
-      public LdpProtocol.LdpPreparableInfoResponse getDefaultInstanceForType() {
-        return LdpProtocol.LdpPreparableInfoResponse.getDefaultInstance();
+      public LdpProtocol.LdpPreparableDesktopInfoResponse getDefaultInstanceForType() {
+        return LdpProtocol.LdpPreparableDesktopInfoResponse.getDefaultInstance();
       }
 
-      public LdpProtocol.LdpPreparableInfoResponse build() {
-        LdpProtocol.LdpPreparableInfoResponse result = buildPartial();
+      public LdpProtocol.LdpPreparableDesktopInfoResponse build() {
+        LdpProtocol.LdpPreparableDesktopInfoResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public LdpProtocol.LdpPreparableInfoResponse buildPartial() {
-        LdpProtocol.LdpPreparableInfoResponse result = new LdpProtocol.LdpPreparableInfoResponse(this);
+      public LdpProtocol.LdpPreparableDesktopInfoResponse buildPartial() {
+        LdpProtocol.LdpPreparableDesktopInfoResponse result = new LdpProtocol.LdpPreparableDesktopInfoResponse(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -6930,16 +7245,16 @@ public final class LdpProtocol {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof LdpProtocol.LdpPreparableInfoResponse) {
-          return mergeFrom((LdpProtocol.LdpPreparableInfoResponse)other);
+        if (other instanceof LdpProtocol.LdpPreparableDesktopInfoResponse) {
+          return mergeFrom((LdpProtocol.LdpPreparableDesktopInfoResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(LdpProtocol.LdpPreparableInfoResponse other) {
-        if (other == LdpProtocol.LdpPreparableInfoResponse.getDefaultInstance()) return this;
+      public Builder mergeFrom(LdpProtocol.LdpPreparableDesktopInfoResponse other) {
+        if (other == LdpProtocol.LdpPreparableDesktopInfoResponse.getDefaultInstance()) return this;
         if (other.hasScreenWidth()) {
           setScreenWidth(other.getScreenWidth());
         }
@@ -6958,11 +7273,11 @@ public final class LdpProtocol {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        LdpProtocol.LdpPreparableInfoResponse parsedMessage = null;
+        LdpProtocol.LdpPreparableDesktopInfoResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (LdpProtocol.LdpPreparableInfoResponse) e.getUnfinishedMessage();
+          parsedMessage = (LdpProtocol.LdpPreparableDesktopInfoResponse) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -7039,15 +7354,15 @@ public final class LdpProtocol {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:LdpPreparableInfoResponse)
+      // @@protoc_insertion_point(builder_scope:LdpPreparableDesktopInfoResponse)
     }
 
     static {
-      defaultInstance = new LdpPreparableInfoResponse(true);
+      defaultInstance = new LdpPreparableDesktopInfoResponse(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:LdpPreparableInfoResponse)
+    // @@protoc_insertion_point(class_scope:LdpPreparableDesktopInfoResponse)
   }
 
   public interface LdpRectangleOrBuilder
@@ -8734,7 +9049,7 @@ public final class LdpProtocol {
     // @@protoc_insertion_point(class_scope:LdpScreenResponse)
   }
 
-  public interface LdpVolumeInfoRequestOrBuilder
+  public interface LdpPreparableVolumeInfoResponseOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
     // optional int32 Volume = 1;
@@ -8758,24 +9073,24 @@ public final class LdpProtocol {
     boolean getIsMute();
   }
   /**
-   * Protobuf type {@code LdpVolumeInfoRequest}
+   * Protobuf type {@code LdpPreparableVolumeInfoResponse}
    */
-  public static final class LdpVolumeInfoRequest extends
+  public static final class LdpPreparableVolumeInfoResponse extends
       com.google.protobuf.GeneratedMessage
-      implements LdpVolumeInfoRequestOrBuilder {
-    // Use LdpVolumeInfoRequest.newBuilder() to construct.
-    private LdpVolumeInfoRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      implements LdpPreparableVolumeInfoResponseOrBuilder {
+    // Use LdpPreparableVolumeInfoResponse.newBuilder() to construct.
+    private LdpPreparableVolumeInfoResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private LdpVolumeInfoRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private LdpPreparableVolumeInfoResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final LdpVolumeInfoRequest defaultInstance;
-    public static LdpVolumeInfoRequest getDefaultInstance() {
+    private static final LdpPreparableVolumeInfoResponse defaultInstance;
+    public static LdpPreparableVolumeInfoResponse getDefaultInstance() {
       return defaultInstance;
     }
 
-    public LdpVolumeInfoRequest getDefaultInstanceForType() {
+    public LdpPreparableVolumeInfoResponse getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -8785,7 +9100,7 @@ public final class LdpProtocol {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private LdpVolumeInfoRequest(
+    private LdpPreparableVolumeInfoResponse(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -8832,28 +9147,28 @@ public final class LdpProtocol {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return LdpProtocol.internal_static_LdpVolumeInfoRequest_descriptor;
+      return LdpProtocol.internal_static_LdpPreparableVolumeInfoResponse_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return LdpProtocol.internal_static_LdpVolumeInfoRequest_fieldAccessorTable
+      return LdpProtocol.internal_static_LdpPreparableVolumeInfoResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              LdpProtocol.LdpVolumeInfoRequest.class, LdpProtocol.LdpVolumeInfoRequest.Builder.class);
+              LdpProtocol.LdpPreparableVolumeInfoResponse.class, LdpProtocol.LdpPreparableVolumeInfoResponse.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<LdpVolumeInfoRequest> PARSER =
-        new com.google.protobuf.AbstractParser<LdpVolumeInfoRequest>() {
-      public LdpVolumeInfoRequest parsePartialFrom(
+    public static com.google.protobuf.Parser<LdpPreparableVolumeInfoResponse> PARSER =
+        new com.google.protobuf.AbstractParser<LdpPreparableVolumeInfoResponse>() {
+      public LdpPreparableVolumeInfoResponse parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new LdpVolumeInfoRequest(input, extensionRegistry);
+        return new LdpPreparableVolumeInfoResponse(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<LdpVolumeInfoRequest> getParserForType() {
+    public com.google.protobuf.Parser<LdpPreparableVolumeInfoResponse> getParserForType() {
       return PARSER;
     }
 
@@ -8941,53 +9256,53 @@ public final class LdpProtocol {
       return super.writeReplace();
     }
 
-    public static LdpProtocol.LdpVolumeInfoRequest parseFrom(
+    public static LdpProtocol.LdpPreparableVolumeInfoResponse parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static LdpProtocol.LdpVolumeInfoRequest parseFrom(
+    public static LdpProtocol.LdpPreparableVolumeInfoResponse parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static LdpProtocol.LdpVolumeInfoRequest parseFrom(byte[] data)
+    public static LdpProtocol.LdpPreparableVolumeInfoResponse parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static LdpProtocol.LdpVolumeInfoRequest parseFrom(
+    public static LdpProtocol.LdpPreparableVolumeInfoResponse parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static LdpProtocol.LdpVolumeInfoRequest parseFrom(java.io.InputStream input)
+    public static LdpProtocol.LdpPreparableVolumeInfoResponse parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static LdpProtocol.LdpVolumeInfoRequest parseFrom(
+    public static LdpProtocol.LdpPreparableVolumeInfoResponse parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static LdpProtocol.LdpVolumeInfoRequest parseDelimitedFrom(java.io.InputStream input)
+    public static LdpProtocol.LdpPreparableVolumeInfoResponse parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static LdpProtocol.LdpVolumeInfoRequest parseDelimitedFrom(
+    public static LdpProtocol.LdpPreparableVolumeInfoResponse parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static LdpProtocol.LdpVolumeInfoRequest parseFrom(
+    public static LdpProtocol.LdpPreparableVolumeInfoResponse parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static LdpProtocol.LdpVolumeInfoRequest parseFrom(
+    public static LdpProtocol.LdpPreparableVolumeInfoResponse parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -8996,7 +9311,7 @@ public final class LdpProtocol {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(LdpProtocol.LdpVolumeInfoRequest prototype) {
+    public static Builder newBuilder(LdpProtocol.LdpPreparableVolumeInfoResponse prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -9008,24 +9323,24 @@ public final class LdpProtocol {
       return builder;
     }
     /**
-     * Protobuf type {@code LdpVolumeInfoRequest}
+     * Protobuf type {@code LdpPreparableVolumeInfoResponse}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements LdpProtocol.LdpVolumeInfoRequestOrBuilder {
+       implements LdpProtocol.LdpPreparableVolumeInfoResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return LdpProtocol.internal_static_LdpVolumeInfoRequest_descriptor;
+        return LdpProtocol.internal_static_LdpPreparableVolumeInfoResponse_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return LdpProtocol.internal_static_LdpVolumeInfoRequest_fieldAccessorTable
+        return LdpProtocol.internal_static_LdpPreparableVolumeInfoResponse_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                LdpProtocol.LdpVolumeInfoRequest.class, LdpProtocol.LdpVolumeInfoRequest.Builder.class);
+                LdpProtocol.LdpPreparableVolumeInfoResponse.class, LdpProtocol.LdpPreparableVolumeInfoResponse.Builder.class);
       }
 
-      // Construct using LdpProtocol.LdpVolumeInfoRequest.newBuilder()
+      // Construct using LdpProtocol.LdpPreparableVolumeInfoResponse.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -9058,23 +9373,23 @@ public final class LdpProtocol {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return LdpProtocol.internal_static_LdpVolumeInfoRequest_descriptor;
+        return LdpProtocol.internal_static_LdpPreparableVolumeInfoResponse_descriptor;
       }
 
-      public LdpProtocol.LdpVolumeInfoRequest getDefaultInstanceForType() {
-        return LdpProtocol.LdpVolumeInfoRequest.getDefaultInstance();
+      public LdpProtocol.LdpPreparableVolumeInfoResponse getDefaultInstanceForType() {
+        return LdpProtocol.LdpPreparableVolumeInfoResponse.getDefaultInstance();
       }
 
-      public LdpProtocol.LdpVolumeInfoRequest build() {
-        LdpProtocol.LdpVolumeInfoRequest result = buildPartial();
+      public LdpProtocol.LdpPreparableVolumeInfoResponse build() {
+        LdpProtocol.LdpPreparableVolumeInfoResponse result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public LdpProtocol.LdpVolumeInfoRequest buildPartial() {
-        LdpProtocol.LdpVolumeInfoRequest result = new LdpProtocol.LdpVolumeInfoRequest(this);
+      public LdpProtocol.LdpPreparableVolumeInfoResponse buildPartial() {
+        LdpProtocol.LdpPreparableVolumeInfoResponse result = new LdpProtocol.LdpPreparableVolumeInfoResponse(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -9091,16 +9406,16 @@ public final class LdpProtocol {
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof LdpProtocol.LdpVolumeInfoRequest) {
-          return mergeFrom((LdpProtocol.LdpVolumeInfoRequest)other);
+        if (other instanceof LdpProtocol.LdpPreparableVolumeInfoResponse) {
+          return mergeFrom((LdpProtocol.LdpPreparableVolumeInfoResponse)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(LdpProtocol.LdpVolumeInfoRequest other) {
-        if (other == LdpProtocol.LdpVolumeInfoRequest.getDefaultInstance()) return this;
+      public Builder mergeFrom(LdpProtocol.LdpPreparableVolumeInfoResponse other) {
+        if (other == LdpProtocol.LdpPreparableVolumeInfoResponse.getDefaultInstance()) return this;
         if (other.hasVolume()) {
           setVolume(other.getVolume());
         }
@@ -9119,11 +9434,11 @@ public final class LdpProtocol {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        LdpProtocol.LdpVolumeInfoRequest parsedMessage = null;
+        LdpProtocol.LdpPreparableVolumeInfoResponse parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (LdpProtocol.LdpVolumeInfoRequest) e.getUnfinishedMessage();
+          parsedMessage = (LdpProtocol.LdpPreparableVolumeInfoResponse) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -9200,15 +9515,590 @@ public final class LdpProtocol {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:LdpVolumeInfoRequest)
+      // @@protoc_insertion_point(builder_scope:LdpPreparableVolumeInfoResponse)
     }
 
     static {
-      defaultInstance = new LdpVolumeInfoRequest(true);
+      defaultInstance = new LdpPreparableVolumeInfoResponse(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:LdpVolumeInfoRequest)
+    // @@protoc_insertion_point(class_scope:LdpPreparableVolumeInfoResponse)
+  }
+
+  public interface LdpVolumeInfoResponseOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // required .VolumeInfoType Type = 1;
+    /**
+     * <code>required .VolumeInfoType Type = 1;</code>
+     */
+    boolean hasType();
+    /**
+     * <code>required .VolumeInfoType Type = 1;</code>
+     */
+    LdpProtocol.VolumeInfoType getType();
+
+    // optional int32 Volume = 2;
+    /**
+     * <code>optional int32 Volume = 2;</code>
+     */
+    boolean hasVolume();
+    /**
+     * <code>optional int32 Volume = 2;</code>
+     */
+    int getVolume();
+
+    // optional bool IsMute = 3;
+    /**
+     * <code>optional bool IsMute = 3;</code>
+     */
+    boolean hasIsMute();
+    /**
+     * <code>optional bool IsMute = 3;</code>
+     */
+    boolean getIsMute();
+  }
+  /**
+   * Protobuf type {@code LdpVolumeInfoResponse}
+   */
+  public static final class LdpVolumeInfoResponse extends
+      com.google.protobuf.GeneratedMessage
+      implements LdpVolumeInfoResponseOrBuilder {
+    // Use LdpVolumeInfoResponse.newBuilder() to construct.
+    private LdpVolumeInfoResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private LdpVolumeInfoResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final LdpVolumeInfoResponse defaultInstance;
+    public static LdpVolumeInfoResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public LdpVolumeInfoResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private LdpVolumeInfoResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              LdpProtocol.VolumeInfoType value = LdpProtocol.VolumeInfoType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                type_ = value;
+              }
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              volume_ = input.readInt32();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              isMute_ = input.readBool();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return LdpProtocol.internal_static_LdpVolumeInfoResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return LdpProtocol.internal_static_LdpVolumeInfoResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              LdpProtocol.LdpVolumeInfoResponse.class, LdpProtocol.LdpVolumeInfoResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<LdpVolumeInfoResponse> PARSER =
+        new com.google.protobuf.AbstractParser<LdpVolumeInfoResponse>() {
+      public LdpVolumeInfoResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new LdpVolumeInfoResponse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<LdpVolumeInfoResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // required .VolumeInfoType Type = 1;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private LdpProtocol.VolumeInfoType type_;
+    /**
+     * <code>required .VolumeInfoType Type = 1;</code>
+     */
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .VolumeInfoType Type = 1;</code>
+     */
+    public LdpProtocol.VolumeInfoType getType() {
+      return type_;
+    }
+
+    // optional int32 Volume = 2;
+    public static final int VOLUME_FIELD_NUMBER = 2;
+    private int volume_;
+    /**
+     * <code>optional int32 Volume = 2;</code>
+     */
+    public boolean hasVolume() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional int32 Volume = 2;</code>
+     */
+    public int getVolume() {
+      return volume_;
+    }
+
+    // optional bool IsMute = 3;
+    public static final int ISMUTE_FIELD_NUMBER = 3;
+    private boolean isMute_;
+    /**
+     * <code>optional bool IsMute = 3;</code>
+     */
+    public boolean hasIsMute() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional bool IsMute = 3;</code>
+     */
+    public boolean getIsMute() {
+      return isMute_;
+    }
+
+    private void initFields() {
+      type_ = LdpProtocol.VolumeInfoType.VOLUME;
+      volume_ = 0;
+      isMute_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt32(2, volume_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBool(3, isMute_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, volume_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, isMute_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static LdpProtocol.LdpVolumeInfoResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static LdpProtocol.LdpVolumeInfoResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static LdpProtocol.LdpVolumeInfoResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static LdpProtocol.LdpVolumeInfoResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static LdpProtocol.LdpVolumeInfoResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static LdpProtocol.LdpVolumeInfoResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static LdpProtocol.LdpVolumeInfoResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static LdpProtocol.LdpVolumeInfoResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static LdpProtocol.LdpVolumeInfoResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static LdpProtocol.LdpVolumeInfoResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(LdpProtocol.LdpVolumeInfoResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code LdpVolumeInfoResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements LdpProtocol.LdpVolumeInfoResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return LdpProtocol.internal_static_LdpVolumeInfoResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return LdpProtocol.internal_static_LdpVolumeInfoResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                LdpProtocol.LdpVolumeInfoResponse.class, LdpProtocol.LdpVolumeInfoResponse.Builder.class);
+      }
+
+      // Construct using LdpProtocol.LdpVolumeInfoResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        type_ = LdpProtocol.VolumeInfoType.VOLUME;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        volume_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        isMute_ = false;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return LdpProtocol.internal_static_LdpVolumeInfoResponse_descriptor;
+      }
+
+      public LdpProtocol.LdpVolumeInfoResponse getDefaultInstanceForType() {
+        return LdpProtocol.LdpVolumeInfoResponse.getDefaultInstance();
+      }
+
+      public LdpProtocol.LdpVolumeInfoResponse build() {
+        LdpProtocol.LdpVolumeInfoResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public LdpProtocol.LdpVolumeInfoResponse buildPartial() {
+        LdpProtocol.LdpVolumeInfoResponse result = new LdpProtocol.LdpVolumeInfoResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.type_ = type_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.volume_ = volume_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.isMute_ = isMute_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof LdpProtocol.LdpVolumeInfoResponse) {
+          return mergeFrom((LdpProtocol.LdpVolumeInfoResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(LdpProtocol.LdpVolumeInfoResponse other) {
+        if (other == LdpProtocol.LdpVolumeInfoResponse.getDefaultInstance()) return this;
+        if (other.hasType()) {
+          setType(other.getType());
+        }
+        if (other.hasVolume()) {
+          setVolume(other.getVolume());
+        }
+        if (other.hasIsMute()) {
+          setIsMute(other.getIsMute());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasType()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        LdpProtocol.LdpVolumeInfoResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (LdpProtocol.LdpVolumeInfoResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // required .VolumeInfoType Type = 1;
+      private LdpProtocol.VolumeInfoType type_ = LdpProtocol.VolumeInfoType.VOLUME;
+      /**
+       * <code>required .VolumeInfoType Type = 1;</code>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .VolumeInfoType Type = 1;</code>
+       */
+      public LdpProtocol.VolumeInfoType getType() {
+        return type_;
+      }
+      /**
+       * <code>required .VolumeInfoType Type = 1;</code>
+       */
+      public Builder setType(LdpProtocol.VolumeInfoType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required .VolumeInfoType Type = 1;</code>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        type_ = LdpProtocol.VolumeInfoType.VOLUME;
+        onChanged();
+        return this;
+      }
+
+      // optional int32 Volume = 2;
+      private int volume_ ;
+      /**
+       * <code>optional int32 Volume = 2;</code>
+       */
+      public boolean hasVolume() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional int32 Volume = 2;</code>
+       */
+      public int getVolume() {
+        return volume_;
+      }
+      /**
+       * <code>optional int32 Volume = 2;</code>
+       */
+      public Builder setVolume(int value) {
+        bitField0_ |= 0x00000002;
+        volume_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 Volume = 2;</code>
+       */
+      public Builder clearVolume() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        volume_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // optional bool IsMute = 3;
+      private boolean isMute_ ;
+      /**
+       * <code>optional bool IsMute = 3;</code>
+       */
+      public boolean hasIsMute() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional bool IsMute = 3;</code>
+       */
+      public boolean getIsMute() {
+        return isMute_;
+      }
+      /**
+       * <code>optional bool IsMute = 3;</code>
+       */
+      public Builder setIsMute(boolean value) {
+        bitField0_ |= 0x00000004;
+        isMute_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool IsMute = 3;</code>
+       */
+      public Builder clearIsMute() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        isMute_ = false;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:LdpVolumeInfoResponse)
+    }
+
+    static {
+      defaultInstance = new LdpVolumeInfoResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:LdpVolumeInfoResponse)
   }
 
   private static com.google.protobuf.Descriptors.Descriptor
@@ -9252,10 +10142,10 @@ public final class LdpProtocol {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_LdpPreparableInfoRequest_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_LdpPreparableInfoResponse_descriptor;
+    internal_static_LdpPreparableDesktopInfoResponse_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_LdpPreparableInfoResponse_fieldAccessorTable;
+      internal_static_LdpPreparableDesktopInfoResponse_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_LdpRectangle_descriptor;
   private static
@@ -9272,10 +10162,15 @@ public final class LdpProtocol {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_LdpScreenResponse_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_LdpVolumeInfoRequest_descriptor;
+    internal_static_LdpPreparableVolumeInfoResponse_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_LdpVolumeInfoRequest_fieldAccessorTable;
+      internal_static_LdpPreparableVolumeInfoResponse_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_LdpVolumeInfoResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_LdpVolumeInfoResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -9292,45 +10187,52 @@ public final class LdpProtocol {
       "\n\024LdpDisconnectRequest\022 \n\004Type\030\001 \002(\0162\022.D" +
       "isconnectionType\"&\n\027LdpKeyboardInfoRespo" +
       "nse\022\013\n\003Key\030\001 \001(\t\"F\n\024LdpMouseInfoResponse" +
-      "\022\t\n\001X\030\001 \001(\005\022\t\n\001Y\030\002 \001(\005\022\030\n\004Type\030\003 \001(\0162\n.M" +
-      "ouseType\"\300\004\n\tLdpPacket\022\031\n\004Type\030\001 \002(\0162\013.P" +
+      "\022\030\n\004Type\030\001 \002(\0162\n.MouseType\022\t\n\001X\030\002 \001(\005\022\t\n" +
+      "\001Y\030\003 \001(\005\"\224\005\n\tLdpPacket\022\031\n\004Type\030\001 \002(\0162\013.P" +
       "acketType\022$\n\013AuthRequest\030\002 \001(\0132\017.LdpAuth",
       "Request\022&\n\014AuthResponse\030\003 \001(\0132\020.LdpAuthR" +
       "esponse\0220\n\021ClientInfoRequest\030\004 \001(\0132\025.Ldp" +
       "ClientInfoRequest\0228\n\025PreparableInfoReque" +
-      "st\030\005 \001(\0132\031.LdpPreparableInfoRequest\022:\n\026P" +
-      "reparableInfoResponse\030\006 \001(\0132\032.LdpPrepara" +
-      "bleInfoResponse\022(\n\rScreenRequest\030\007 \001(\0132\021" +
-      ".LdpScreenRequest\022*\n\016ScreenResponse\030\010 \001(" +
-      "\0132\022.LdpScreenResponse\0220\n\021DisconnectReque" +
-      "st\030\t \001(\0132\025.LdpDisconnectRequest\0220\n\021Mouse" +
-      "InfoResponse\030\n \001(\0132\025.LdpMouseInfoRespons",
-      "e\0226\n\024KeyboardInfoResponse\030\013 \001(\0132\030.LdpKey" +
-      "boardInfoResponse\0220\n\021VolumeInfoRequest\030\014" +
-      " \001(\0132\025.LdpVolumeInfoRequest\"9\n\030LdpPrepar" +
-      "ableInfoRequest\022\035\n\004Type\030\001 \002(\0162\017.Connecti" +
-      "onType\"F\n\031LdpPreparableInfoResponse\022\023\n\013S" +
-      "creenWidth\030\001 \001(\005\022\024\n\014ScreenHeight\030\002 \001(\005\"H" +
-      "\n\014LdpRectangle\022\014\n\004Left\030\001 \002(\005\022\013\n\003Top\030\002 \002(" +
-      "\005\022\r\n\005Right\030\003 \002(\005\022\016\n\006Bottom\030\004 \002(\005\"\022\n\020LdpS" +
-      "creenRequest\"^\n\021LdpScreenResponse\022\030\n\020Com" +
-      "pressedScreen\030\001 \002(\014\022\022\n\nBaseLenght\030\002 \002(\005\022",
-      "\033\n\004Rect\030\003 \002(\0132\r.LdpRectangle\"6\n\024LdpVolum" +
-      "eInfoRequest\022\016\n\006Volume\030\001 \001(\005\022\016\n\006IsMute\030\002" +
-      " \001(\010*G\n\016ConnectionType\022\032\n\026REMOTE_DESKTOP" +
-      "_CONTROL\020\001\022\031\n\025REMOTE_VOLUME_CONTROL\020\002*T\n" +
-      "\021DisconnectionType\022\017\n\013FROM_SERVER\020\001\022\026\n\022F" +
-      "ROM_SCREEN_THREAD\020\002\022\026\n\022FROM_VOLUME_THREA" +
-      "D\020\003*W\n\tMouseType\022\016\n\nLEFT_CLICK\020\001\022\017\n\013RIGH" +
-      "T_CLICK\020\002\022\025\n\021LEFT_DOUBLE_CLICK\020\003\022\022\n\016SET_" +
-      "CURSOR_POS\020\004*\224\002\n\nPacketType\022\020\n\014AUTH_REQU" +
-      "EST\020\001\022\021\n\rAUTH_RESPONSE\020\002\022\027\n\023CLIENT_INFO_",
-      "REQUEST\020\003\022\033\n\027PREPARABLE_INFO_REQUEST\020\004\022\034" +
-      "\n\030PREPARABLE_INFO_RESPONSE\020\005\022\022\n\016SCREEN_R" +
-      "EQUEST\020\006\022\023\n\017SCREEN_RESPONSE\020\007\022\027\n\023VOLUME_" +
-      "INFO_REQUEST\020\010\022\027\n\023MOUSE_INFO_RESPONSE\020\t\022" +
-      "\032\n\026KEYBOARD_INFO_RESPONSE\020\n\022\026\n\022DISCONNEC" +
-      "T_REQUEST\020\013B\017B\013LdpProtocolH\001"
+      "st\030\005 \001(\0132\031.LdpPreparableInfoRequest\022D\n\031P" +
+      "reparableDesktopResponse\030\006 \001(\0132!.LdpPrep" +
+      "arableDesktopInfoResponse\022(\n\rScreenReque" +
+      "st\030\007 \001(\0132\021.LdpScreenRequest\022*\n\016ScreenRes" +
+      "ponse\030\010 \001(\0132\022.LdpScreenResponse\0220\n\021Disco" +
+      "nnectRequest\030\t \001(\0132\025.LdpDisconnectReques" +
+      "t\0220\n\021MouseInfoResponse\030\n \001(\0132\025.LdpMouseI",
+      "nfoResponse\0226\n\024KeyboardInfoResponse\030\013 \001(" +
+      "\0132\030.LdpKeyboardInfoResponse\022F\n\034Preparabl" +
+      "eVolumeInfoResponse\030\014 \001(\0132 .LdpPreparabl" +
+      "eVolumeInfoResponse\0222\n\022VolumeInfoRespons" +
+      "e\030\r \001(\0132\026.LdpVolumeInfoResponse\"9\n\030LdpPr" +
+      "eparableInfoRequest\022\035\n\004Type\030\001 \002(\0162\017.Conn" +
+      "ectionType\"M\n LdpPreparableDesktopInfoRe" +
+      "sponse\022\023\n\013ScreenWidth\030\001 \001(\005\022\024\n\014ScreenHei" +
+      "ght\030\002 \001(\005\"H\n\014LdpRectangle\022\014\n\004Left\030\001 \002(\005\022" +
+      "\013\n\003Top\030\002 \002(\005\022\r\n\005Right\030\003 \002(\005\022\016\n\006Bottom\030\004 ",
+      "\002(\005\"\022\n\020LdpScreenRequest\"^\n\021LdpScreenResp" +
+      "onse\022\030\n\020CompressedScreen\030\001 \002(\014\022\022\n\nBaseLe" +
+      "nght\030\002 \002(\005\022\033\n\004Rect\030\003 \002(\0132\r.LdpRectangle\"" +
+      "A\n\037LdpPreparableVolumeInfoResponse\022\016\n\006Vo" +
+      "lume\030\001 \001(\005\022\016\n\006IsMute\030\002 \001(\010\"V\n\025LdpVolumeI" +
+      "nfoResponse\022\035\n\004Type\030\001 \002(\0162\017.VolumeInfoTy" +
+      "pe\022\016\n\006Volume\030\002 \001(\005\022\016\n\006IsMute\030\003 \001(\010*&\n\016Vo" +
+      "lumeInfoType\022\n\n\006VOLUME\020\001\022\010\n\004MUTE\020\002*G\n\016Co" +
+      "nnectionType\022\032\n\026REMOTE_DESKTOP_CONTROL\020\001" +
+      "\022\031\n\025REMOTE_VOLUME_CONTROL\020\002*T\n\021Disconnec",
+      "tionType\022\017\n\013FROM_SERVER\020\001\022\026\n\022FROM_SCREEN" +
+      "_THREAD\020\002\022\026\n\022FROM_VOLUME_THREAD\020\003*W\n\tMou" +
+      "seType\022\016\n\nLEFT_CLICK\020\001\022\017\n\013RIGHT_CLICK\020\002\022" +
+      "\025\n\021LEFT_DOUBLE_CLICK\020\003\022\022\n\016SET_CURSOR_POS" +
+      "\020\004*\302\002\n\nPacketType\022\020\n\014AUTH_REQUEST\020\001\022\021\n\rA" +
+      "UTH_RESPONSE\020\002\022\027\n\023CLIENT_INFO_REQUEST\020\003\022" +
+      "\033\n\027PREPARABLE_INFO_REQUEST\020\004\022$\n PREPARAB" +
+      "LE_DESKTOP_INFO_RESPONSE\020\005\022\022\n\016SCREEN_REQ" +
+      "UEST\020\006\022\023\n\017SCREEN_RESPONSE\020\007\022#\n\037PREPARABL" +
+      "E_VOLUME_INFO_RESPONSE\020\010\022\030\n\024VOLUME_INFO_",
+      "RESPONSE\020\t\022\027\n\023MOUSE_INFO_RESPONSE\020\n\022\032\n\026K" +
+      "EYBOARD_INFO_RESPONSE\020\013\022\026\n\022DISCONNECT_RE" +
+      "QUEST\020\014B\017B\013LdpProtocolH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -9372,24 +10274,24 @@ public final class LdpProtocol {
           internal_static_LdpMouseInfoResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_LdpMouseInfoResponse_descriptor,
-              new java.lang.String[] { "X", "Y", "Type", });
+              new java.lang.String[] { "Type", "X", "Y", });
           internal_static_LdpPacket_descriptor =
             getDescriptor().getMessageTypes().get(6);
           internal_static_LdpPacket_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_LdpPacket_descriptor,
-              new java.lang.String[] { "Type", "AuthRequest", "AuthResponse", "ClientInfoRequest", "PreparableInfoRequest", "PreparableInfoResponse", "ScreenRequest", "ScreenResponse", "DisconnectRequest", "MouseInfoResponse", "KeyboardInfoResponse", "VolumeInfoRequest", });
+              new java.lang.String[] { "Type", "AuthRequest", "AuthResponse", "ClientInfoRequest", "PreparableInfoRequest", "PreparableDesktopResponse", "ScreenRequest", "ScreenResponse", "DisconnectRequest", "MouseInfoResponse", "KeyboardInfoResponse", "PreparableVolumeInfoResponse", "VolumeInfoResponse", });
           internal_static_LdpPreparableInfoRequest_descriptor =
             getDescriptor().getMessageTypes().get(7);
           internal_static_LdpPreparableInfoRequest_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_LdpPreparableInfoRequest_descriptor,
               new java.lang.String[] { "Type", });
-          internal_static_LdpPreparableInfoResponse_descriptor =
+          internal_static_LdpPreparableDesktopInfoResponse_descriptor =
             getDescriptor().getMessageTypes().get(8);
-          internal_static_LdpPreparableInfoResponse_fieldAccessorTable = new
+          internal_static_LdpPreparableDesktopInfoResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_LdpPreparableInfoResponse_descriptor,
+              internal_static_LdpPreparableDesktopInfoResponse_descriptor,
               new java.lang.String[] { "ScreenWidth", "ScreenHeight", });
           internal_static_LdpRectangle_descriptor =
             getDescriptor().getMessageTypes().get(9);
@@ -9409,12 +10311,18 @@ public final class LdpProtocol {
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_LdpScreenResponse_descriptor,
               new java.lang.String[] { "CompressedScreen", "BaseLenght", "Rect", });
-          internal_static_LdpVolumeInfoRequest_descriptor =
+          internal_static_LdpPreparableVolumeInfoResponse_descriptor =
             getDescriptor().getMessageTypes().get(12);
-          internal_static_LdpVolumeInfoRequest_fieldAccessorTable = new
+          internal_static_LdpPreparableVolumeInfoResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_LdpVolumeInfoRequest_descriptor,
+              internal_static_LdpPreparableVolumeInfoResponse_descriptor,
               new java.lang.String[] { "Volume", "IsMute", });
+          internal_static_LdpVolumeInfoResponse_descriptor =
+            getDescriptor().getMessageTypes().get(13);
+          internal_static_LdpVolumeInfoResponse_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_LdpVolumeInfoResponse_descriptor,
+              new java.lang.String[] { "Type", "Volume", "IsMute", });
           return null;
         }
       };

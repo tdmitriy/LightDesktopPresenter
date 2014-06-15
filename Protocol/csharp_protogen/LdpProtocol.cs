@@ -32,16 +32,18 @@ namespace Server.Protocol {
     internal static pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPacket, global::Server.Protocol.LdpPacket.Builder> internal__static_Server_Protocol_LdpPacket__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_Server_Protocol_LdpPreparableInfoRequest__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPreparableInfoRequest, global::Server.Protocol.LdpPreparableInfoRequest.Builder> internal__static_Server_Protocol_LdpPreparableInfoRequest__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_Server_Protocol_LdpPreparableInfoResponse__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPreparableInfoResponse, global::Server.Protocol.LdpPreparableInfoResponse.Builder> internal__static_Server_Protocol_LdpPreparableInfoResponse__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_Server_Protocol_LdpPreparableDesktopInfoResponse__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPreparableDesktopInfoResponse, global::Server.Protocol.LdpPreparableDesktopInfoResponse.Builder> internal__static_Server_Protocol_LdpPreparableDesktopInfoResponse__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_Server_Protocol_LdpRectangle__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpRectangle, global::Server.Protocol.LdpRectangle.Builder> internal__static_Server_Protocol_LdpRectangle__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_Server_Protocol_LdpScreenRequest__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpScreenRequest, global::Server.Protocol.LdpScreenRequest.Builder> internal__static_Server_Protocol_LdpScreenRequest__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_Server_Protocol_LdpScreenResponse__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpScreenResponse, global::Server.Protocol.LdpScreenResponse.Builder> internal__static_Server_Protocol_LdpScreenResponse__FieldAccessorTable;
-    internal static pbd::MessageDescriptor internal__static_Server_Protocol_LdpVolumeInfoRequest__Descriptor;
-    internal static pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpVolumeInfoRequest, global::Server.Protocol.LdpVolumeInfoRequest.Builder> internal__static_Server_Protocol_LdpVolumeInfoRequest__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_Server_Protocol_LdpPreparableVolumeInfoResponse__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPreparableVolumeInfoResponse, global::Server.Protocol.LdpPreparableVolumeInfoResponse.Builder> internal__static_Server_Protocol_LdpPreparableVolumeInfoResponse__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_Server_Protocol_LdpVolumeInfoResponse__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpVolumeInfoResponse, global::Server.Protocol.LdpVolumeInfoResponse.Builder> internal__static_Server_Protocol_LdpVolumeInfoResponse__FieldAccessorTable;
     #endregion
     #region Descriptor
     public static pbd::FileDescriptor Descriptor {
@@ -58,46 +60,53 @@ namespace Server.Protocol {
           "ChRMZHBEaXNjb25uZWN0UmVxdWVzdBIwCgRUeXBlGAEgAigOMiIuU2VydmVy" + 
           "LlByb3RvY29sLkRpc2Nvbm5lY3Rpb25UeXBlIiYKF0xkcEtleWJvYXJkSW5m" + 
           "b1Jlc3BvbnNlEgsKA0tleRgBIAEoCSJWChRMZHBNb3VzZUluZm9SZXNwb25z" + 
-          "ZRIJCgFYGAEgASgFEgkKAVkYAiABKAUSKAoEVHlwZRgDIAEoDjIaLlNlcnZl" + 
-          "ci5Qcm90b2NvbC5Nb3VzZVR5cGUigAYKCUxkcFBhY2tldBIpCgRUeXBlGAEg" + 
+          "ZRIoCgRUeXBlGAEgAigOMhouU2VydmVyLlByb3RvY29sLk1vdXNlVHlwZRIJ" + 
+          "CgFYGAIgASgFEgkKAVkYAyABKAUi5AYKCUxkcFBhY2tldBIpCgRUeXBlGAEg" + 
           "AigOMhsuU2VydmVyLlByb3RvY29sLlBhY2tldFR5cGUSNAoLQXV0aFJlcXVl" + 
           "c3QYAiABKAsyHy5TZXJ2ZXIuUHJvdG9jb2wuTGRwQXV0aFJlcXVlc3QSNgoM" + 
           "QXV0aFJlc3BvbnNlGAMgASgLMiAuU2VydmVyLlByb3RvY29sLkxkcEF1dGhS" + 
           "ZXNwb25zZRJAChFDbGllbnRJbmZvUmVxdWVzdBgEIAEoCzIlLlNlcnZlci5Q" + 
           "cm90b2NvbC5MZHBDbGllbnRJbmZvUmVxdWVzdBJIChVQcmVwYXJhYmxlSW5m" + 
           "b1JlcXVlc3QYBSABKAsyKS5TZXJ2ZXIuUHJvdG9jb2wuTGRwUHJlcGFyYWJs" + 
-          "ZUluZm9SZXF1ZXN0EkoKFlByZXBhcmFibGVJbmZvUmVzcG9uc2UYBiABKAsy" + 
-          "Ki5TZXJ2ZXIuUHJvdG9jb2wuTGRwUHJlcGFyYWJsZUluZm9SZXNwb25zZRI4" + 
-          "Cg1TY3JlZW5SZXF1ZXN0GAcgASgLMiEuU2VydmVyLlByb3RvY29sLkxkcFNj" + 
-          "cmVlblJlcXVlc3QSOgoOU2NyZWVuUmVzcG9uc2UYCCABKAsyIi5TZXJ2ZXIu" + 
-          "UHJvdG9jb2wuTGRwU2NyZWVuUmVzcG9uc2USQAoRRGlzY29ubmVjdFJlcXVl" + 
-          "c3QYCSABKAsyJS5TZXJ2ZXIuUHJvdG9jb2wuTGRwRGlzY29ubmVjdFJlcXVl" + 
-          "c3QSQAoRTW91c2VJbmZvUmVzcG9uc2UYCiABKAsyJS5TZXJ2ZXIuUHJvdG9j" + 
-          "b2wuTGRwTW91c2VJbmZvUmVzcG9uc2USRgoUS2V5Ym9hcmRJbmZvUmVzcG9u" + 
-          "c2UYCyABKAsyKC5TZXJ2ZXIuUHJvdG9jb2wuTGRwS2V5Ym9hcmRJbmZvUmVz" + 
-          "cG9uc2USQAoRVm9sdW1lSW5mb1JlcXVlc3QYDCABKAsyJS5TZXJ2ZXIuUHJv" + 
-          "dG9jb2wuTGRwVm9sdW1lSW5mb1JlcXVlc3QiSQoYTGRwUHJlcGFyYWJsZUlu" + 
-          "Zm9SZXF1ZXN0Ei0KBFR5cGUYASACKA4yHy5TZXJ2ZXIuUHJvdG9jb2wuQ29u" + 
-          "bmVjdGlvblR5cGUiRgoZTGRwUHJlcGFyYWJsZUluZm9SZXNwb25zZRITCgtT" + 
-          "Y3JlZW5XaWR0aBgBIAEoBRIUCgxTY3JlZW5IZWlnaHQYAiABKAUiSAoMTGRw" + 
-          "UmVjdGFuZ2xlEgwKBExlZnQYASACKAUSCwoDVG9wGAIgAigFEg0KBVJpZ2h0" + 
-          "GAMgAigFEg4KBkJvdHRvbRgEIAIoBSISChBMZHBTY3JlZW5SZXF1ZXN0Im4K" + 
-          "EUxkcFNjcmVlblJlc3BvbnNlEhgKEENvbXByZXNzZWRTY3JlZW4YASACKAwS" + 
-          "EgoKQmFzZUxlbmdodBgCIAIoBRIrCgRSZWN0GAMgAigLMh0uU2VydmVyLlBy" + 
-          "b3RvY29sLkxkcFJlY3RhbmdsZSI2ChRMZHBWb2x1bWVJbmZvUmVxdWVzdBIO" + 
-          "CgZWb2x1bWUYASABKAUSDgoGSXNNdXRlGAIgASgIKkcKDkNvbm5lY3Rpb25U" + 
-          "eXBlEhoKFlJFTU9URV9ERVNLVE9QX0NPTlRST0wQARIZChVSRU1PVEVfVk9M" + 
-          "VU1FX0NPTlRST0wQAipUChFEaXNjb25uZWN0aW9uVHlwZRIPCgtGUk9NX1NF" + 
-          "UlZFUhABEhYKEkZST01fU0NSRUVOX1RIUkVBRBACEhYKEkZST01fVk9MVU1F" + 
-          "X1RIUkVBRBADKlcKCU1vdXNlVHlwZRIOCgpMRUZUX0NMSUNLEAESDwoLUklH" + 
-          "SFRfQ0xJQ0sQAhIVChFMRUZUX0RPVUJMRV9DTElDSxADEhIKDlNFVF9DVVJT" + 
-          "T1JfUE9TEAQqlAIKClBhY2tldFR5cGUSEAoMQVVUSF9SRVFVRVNUEAESEQoN" + 
-          "QVVUSF9SRVNQT05TRRACEhcKE0NMSUVOVF9JTkZPX1JFUVVFU1QQAxIbChdQ" + 
-          "UkVQQVJBQkxFX0lORk9fUkVRVUVTVBAEEhwKGFBSRVBBUkFCTEVfSU5GT19S" + 
+          "ZUluZm9SZXF1ZXN0ElQKGVByZXBhcmFibGVEZXNrdG9wUmVzcG9uc2UYBiAB" + 
+          "KAsyMS5TZXJ2ZXIuUHJvdG9jb2wuTGRwUHJlcGFyYWJsZURlc2t0b3BJbmZv" + 
+          "UmVzcG9uc2USOAoNU2NyZWVuUmVxdWVzdBgHIAEoCzIhLlNlcnZlci5Qcm90" + 
+          "b2NvbC5MZHBTY3JlZW5SZXF1ZXN0EjoKDlNjcmVlblJlc3BvbnNlGAggASgL" + 
+          "MiIuU2VydmVyLlByb3RvY29sLkxkcFNjcmVlblJlc3BvbnNlEkAKEURpc2Nv" + 
+          "bm5lY3RSZXF1ZXN0GAkgASgLMiUuU2VydmVyLlByb3RvY29sLkxkcERpc2Nv" + 
+          "bm5lY3RSZXF1ZXN0EkAKEU1vdXNlSW5mb1Jlc3BvbnNlGAogASgLMiUuU2Vy" + 
+          "dmVyLlByb3RvY29sLkxkcE1vdXNlSW5mb1Jlc3BvbnNlEkYKFEtleWJvYXJk" + 
+          "SW5mb1Jlc3BvbnNlGAsgASgLMiguU2VydmVyLlByb3RvY29sLkxkcEtleWJv" + 
+          "YXJkSW5mb1Jlc3BvbnNlElYKHFByZXBhcmFibGVWb2x1bWVJbmZvUmVzcG9u" + 
+          "c2UYDCABKAsyMC5TZXJ2ZXIuUHJvdG9jb2wuTGRwUHJlcGFyYWJsZVZvbHVt" + 
+          "ZUluZm9SZXNwb25zZRJCChJWb2x1bWVJbmZvUmVzcG9uc2UYDSABKAsyJi5T" + 
+          "ZXJ2ZXIuUHJvdG9jb2wuTGRwVm9sdW1lSW5mb1Jlc3BvbnNlIkkKGExkcFBy" + 
+          "ZXBhcmFibGVJbmZvUmVxdWVzdBItCgRUeXBlGAEgAigOMh8uU2VydmVyLlBy" + 
+          "b3RvY29sLkNvbm5lY3Rpb25UeXBlIk0KIExkcFByZXBhcmFibGVEZXNrdG9w" + 
+          "SW5mb1Jlc3BvbnNlEhMKC1NjcmVlbldpZHRoGAEgASgFEhQKDFNjcmVlbkhl" + 
+          "aWdodBgCIAEoBSJICgxMZHBSZWN0YW5nbGUSDAoETGVmdBgBIAIoBRILCgNU" + 
+          "b3AYAiACKAUSDQoFUmlnaHQYAyACKAUSDgoGQm90dG9tGAQgAigFIhIKEExk" + 
+          "cFNjcmVlblJlcXVlc3QibgoRTGRwU2NyZWVuUmVzcG9uc2USGAoQQ29tcHJl" + 
+          "c3NlZFNjcmVlbhgBIAIoDBISCgpCYXNlTGVuZ2h0GAIgAigFEisKBFJlY3QY" + 
+          "AyACKAsyHS5TZXJ2ZXIuUHJvdG9jb2wuTGRwUmVjdGFuZ2xlIkEKH0xkcFBy" + 
+          "ZXBhcmFibGVWb2x1bWVJbmZvUmVzcG9uc2USDgoGVm9sdW1lGAEgASgFEg4K" + 
+          "BklzTXV0ZRgCIAEoCCJmChVMZHBWb2x1bWVJbmZvUmVzcG9uc2USLQoEVHlw" + 
+          "ZRgBIAIoDjIfLlNlcnZlci5Qcm90b2NvbC5Wb2x1bWVJbmZvVHlwZRIOCgZW" + 
+          "b2x1bWUYAiABKAUSDgoGSXNNdXRlGAMgASgIKiYKDlZvbHVtZUluZm9UeXBl" + 
+          "EgoKBlZPTFVNRRABEggKBE1VVEUQAipHCg5Db25uZWN0aW9uVHlwZRIaChZS" + 
+          "RU1PVEVfREVTS1RPUF9DT05UUk9MEAESGQoVUkVNT1RFX1ZPTFVNRV9DT05U" + 
+          "Uk9MEAIqVAoRRGlzY29ubmVjdGlvblR5cGUSDwoLRlJPTV9TRVJWRVIQARIW" + 
+          "ChJGUk9NX1NDUkVFTl9USFJFQUQQAhIWChJGUk9NX1ZPTFVNRV9USFJFQUQQ" + 
+          "AypXCglNb3VzZVR5cGUSDgoKTEVGVF9DTElDSxABEg8KC1JJR0hUX0NMSUNL" + 
+          "EAISFQoRTEVGVF9ET1VCTEVfQ0xJQ0sQAxISCg5TRVRfQ1VSU09SX1BPUxAE" + 
+          "KsICCgpQYWNrZXRUeXBlEhAKDEFVVEhfUkVRVUVTVBABEhEKDUFVVEhfUkVT" + 
+          "UE9OU0UQAhIXChNDTElFTlRfSU5GT19SRVFVRVNUEAMSGwoXUFJFUEFSQUJM" + 
+          "RV9JTkZPX1JFUVVFU1QQBBIkCiBQUkVQQVJBQkxFX0RFU0tUT1BfSU5GT19S" + 
           "RVNQT05TRRAFEhIKDlNDUkVFTl9SRVFVRVNUEAYSEwoPU0NSRUVOX1JFU1BP" + 
-          "TlNFEAcSFwoTVk9MVU1FX0lORk9fUkVRVUVTVBAIEhcKE01PVVNFX0lORk9f" + 
-          "UkVTUE9OU0UQCRIaChZLRVlCT0FSRF9JTkZPX1JFU1BPTlNFEAoSFgoSRElT" + 
-          "Q09OTkVDVF9SRVFVRVNUEAtCAkgB");
+          "TlNFEAcSIwofUFJFUEFSQUJMRV9WT0xVTUVfSU5GT19SRVNQT05TRRAIEhgK" + 
+          "FFZPTFVNRV9JTkZPX1JFU1BPTlNFEAkSFwoTTU9VU0VfSU5GT19SRVNQT05T" + 
+          "RRAKEhoKFktFWUJPQVJEX0lORk9fUkVTUE9OU0UQCxIWChJESVNDT05ORUNU" + 
+          "X1JFUVVFU1QQDEICSAE=");
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_Server_Protocol_LdpAuthRequest__Descriptor = Descriptor.MessageTypes[0];
@@ -123,18 +132,18 @@ namespace Server.Protocol {
         internal__static_Server_Protocol_LdpMouseInfoResponse__Descriptor = Descriptor.MessageTypes[5];
         internal__static_Server_Protocol_LdpMouseInfoResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpMouseInfoResponse, global::Server.Protocol.LdpMouseInfoResponse.Builder>(internal__static_Server_Protocol_LdpMouseInfoResponse__Descriptor,
-                new string[] { "X", "Y", "Type", });
+                new string[] { "Type", "X", "Y", });
         internal__static_Server_Protocol_LdpPacket__Descriptor = Descriptor.MessageTypes[6];
         internal__static_Server_Protocol_LdpPacket__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPacket, global::Server.Protocol.LdpPacket.Builder>(internal__static_Server_Protocol_LdpPacket__Descriptor,
-                new string[] { "Type", "AuthRequest", "AuthResponse", "ClientInfoRequest", "PreparableInfoRequest", "PreparableInfoResponse", "ScreenRequest", "ScreenResponse", "DisconnectRequest", "MouseInfoResponse", "KeyboardInfoResponse", "VolumeInfoRequest", });
+                new string[] { "Type", "AuthRequest", "AuthResponse", "ClientInfoRequest", "PreparableInfoRequest", "PreparableDesktopResponse", "ScreenRequest", "ScreenResponse", "DisconnectRequest", "MouseInfoResponse", "KeyboardInfoResponse", "PreparableVolumeInfoResponse", "VolumeInfoResponse", });
         internal__static_Server_Protocol_LdpPreparableInfoRequest__Descriptor = Descriptor.MessageTypes[7];
         internal__static_Server_Protocol_LdpPreparableInfoRequest__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPreparableInfoRequest, global::Server.Protocol.LdpPreparableInfoRequest.Builder>(internal__static_Server_Protocol_LdpPreparableInfoRequest__Descriptor,
                 new string[] { "Type", });
-        internal__static_Server_Protocol_LdpPreparableInfoResponse__Descriptor = Descriptor.MessageTypes[8];
-        internal__static_Server_Protocol_LdpPreparableInfoResponse__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPreparableInfoResponse, global::Server.Protocol.LdpPreparableInfoResponse.Builder>(internal__static_Server_Protocol_LdpPreparableInfoResponse__Descriptor,
+        internal__static_Server_Protocol_LdpPreparableDesktopInfoResponse__Descriptor = Descriptor.MessageTypes[8];
+        internal__static_Server_Protocol_LdpPreparableDesktopInfoResponse__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPreparableDesktopInfoResponse, global::Server.Protocol.LdpPreparableDesktopInfoResponse.Builder>(internal__static_Server_Protocol_LdpPreparableDesktopInfoResponse__Descriptor,
                 new string[] { "ScreenWidth", "ScreenHeight", });
         internal__static_Server_Protocol_LdpRectangle__Descriptor = Descriptor.MessageTypes[9];
         internal__static_Server_Protocol_LdpRectangle__FieldAccessorTable = 
@@ -148,10 +157,14 @@ namespace Server.Protocol {
         internal__static_Server_Protocol_LdpScreenResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpScreenResponse, global::Server.Protocol.LdpScreenResponse.Builder>(internal__static_Server_Protocol_LdpScreenResponse__Descriptor,
                 new string[] { "CompressedScreen", "BaseLenght", "Rect", });
-        internal__static_Server_Protocol_LdpVolumeInfoRequest__Descriptor = Descriptor.MessageTypes[12];
-        internal__static_Server_Protocol_LdpVolumeInfoRequest__FieldAccessorTable = 
-            new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpVolumeInfoRequest, global::Server.Protocol.LdpVolumeInfoRequest.Builder>(internal__static_Server_Protocol_LdpVolumeInfoRequest__Descriptor,
+        internal__static_Server_Protocol_LdpPreparableVolumeInfoResponse__Descriptor = Descriptor.MessageTypes[12];
+        internal__static_Server_Protocol_LdpPreparableVolumeInfoResponse__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPreparableVolumeInfoResponse, global::Server.Protocol.LdpPreparableVolumeInfoResponse.Builder>(internal__static_Server_Protocol_LdpPreparableVolumeInfoResponse__Descriptor,
                 new string[] { "Volume", "IsMute", });
+        internal__static_Server_Protocol_LdpVolumeInfoResponse__Descriptor = Descriptor.MessageTypes[13];
+        internal__static_Server_Protocol_LdpVolumeInfoResponse__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpVolumeInfoResponse, global::Server.Protocol.LdpVolumeInfoResponse.Builder>(internal__static_Server_Protocol_LdpVolumeInfoResponse__Descriptor,
+                new string[] { "Type", "Volume", "IsMute", });
         return null;
       };
       pbd::FileDescriptor.InternalBuildGeneratedFileFrom(descriptorData,
@@ -162,6 +175,11 @@ namespace Server.Protocol {
     
   }
   #region Enums
+  public enum VolumeInfoType {
+    VOLUME = 1,
+    MUTE = 2,
+  }
+  
   public enum ConnectionType {
     REMOTE_DESKTOP_CONTROL = 1,
     REMOTE_VOLUME_CONTROL = 2,
@@ -185,13 +203,14 @@ namespace Server.Protocol {
     AUTH_RESPONSE = 2,
     CLIENT_INFO_REQUEST = 3,
     PREPARABLE_INFO_REQUEST = 4,
-    PREPARABLE_INFO_RESPONSE = 5,
+    PREPARABLE_DESKTOP_INFO_RESPONSE = 5,
     SCREEN_REQUEST = 6,
     SCREEN_RESPONSE = 7,
-    VOLUME_INFO_REQUEST = 8,
-    MOUSE_INFO_RESPONSE = 9,
-    KEYBOARD_INFO_RESPONSE = 10,
-    DISCONNECT_REQUEST = 11,
+    PREPARABLE_VOLUME_INFO_RESPONSE = 8,
+    VOLUME_INFO_RESPONSE = 9,
+    MOUSE_INFO_RESPONSE = 10,
+    KEYBOARD_INFO_RESPONSE = 11,
+    DISCONNECT_REQUEST = 12,
   }
   
   #endregion
@@ -1656,7 +1675,7 @@ namespace Server.Protocol {
     private LdpMouseInfoResponse() { }
     private static readonly LdpMouseInfoResponse defaultInstance = new LdpMouseInfoResponse().MakeReadOnly();
     private static readonly string[] _ldpMouseInfoResponseFieldNames = new string[] { "Type", "X", "Y" };
-    private static readonly uint[] _ldpMouseInfoResponseFieldTags = new uint[] { 24, 8, 16 };
+    private static readonly uint[] _ldpMouseInfoResponseFieldTags = new uint[] { 8, 16, 24 };
     public static LdpMouseInfoResponse DefaultInstance {
       get { return defaultInstance; }
     }
@@ -1677,27 +1696,7 @@ namespace Server.Protocol {
       get { return global::Server.Protocol.LdpProtocol.internal__static_Server_Protocol_LdpMouseInfoResponse__FieldAccessorTable; }
     }
     
-    public const int XFieldNumber = 1;
-    private bool hasX;
-    private int x_;
-    public bool HasX {
-      get { return hasX; }
-    }
-    public int X {
-      get { return x_; }
-    }
-    
-    public const int YFieldNumber = 2;
-    private bool hasY;
-    private int y_;
-    public bool HasY {
-      get { return hasY; }
-    }
-    public int Y {
-      get { return y_; }
-    }
-    
-    public const int TypeFieldNumber = 3;
+    public const int TypeFieldNumber = 1;
     private bool hasType;
     private global::Server.Protocol.MouseType type_ = global::Server.Protocol.MouseType.LEFT_CLICK;
     public bool HasType {
@@ -1707,8 +1706,29 @@ namespace Server.Protocol {
       get { return type_; }
     }
     
+    public const int XFieldNumber = 2;
+    private bool hasX;
+    private int x_;
+    public bool HasX {
+      get { return hasX; }
+    }
+    public int X {
+      get { return x_; }
+    }
+    
+    public const int YFieldNumber = 3;
+    private bool hasY;
+    private int y_;
+    public bool HasY {
+      get { return hasY; }
+    }
+    public int Y {
+      get { return y_; }
+    }
+    
     public override bool IsInitialized {
       get {
+        if (!hasType) return false;
         return true;
       }
     }
@@ -1716,14 +1736,14 @@ namespace Server.Protocol {
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
       string[] field_names = _ldpMouseInfoResponseFieldNames;
+      if (hasType) {
+        output.WriteEnum(1, field_names[0], (int) Type, Type);
+      }
       if (hasX) {
-        output.WriteInt32(1, field_names[1], X);
+        output.WriteInt32(2, field_names[1], X);
       }
       if (hasY) {
-        output.WriteInt32(2, field_names[2], Y);
-      }
-      if (hasType) {
-        output.WriteEnum(3, field_names[0], (int) Type, Type);
+        output.WriteInt32(3, field_names[2], Y);
       }
       UnknownFields.WriteTo(output);
     }
@@ -1735,14 +1755,14 @@ namespace Server.Protocol {
         if (size != -1) return size;
         
         size = 0;
+        if (hasType) {
+          size += pb::CodedOutputStream.ComputeEnumSize(1, (int) Type);
+        }
         if (hasX) {
-          size += pb::CodedOutputStream.ComputeInt32Size(1, X);
+          size += pb::CodedOutputStream.ComputeInt32Size(2, X);
         }
         if (hasY) {
-          size += pb::CodedOutputStream.ComputeInt32Size(2, Y);
-        }
-        if (hasType) {
-          size += pb::CodedOutputStream.ComputeEnumSize(3, (int) Type);
+          size += pb::CodedOutputStream.ComputeInt32Size(3, Y);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -1868,14 +1888,14 @@ namespace Server.Protocol {
       public override Builder MergeFrom(LdpMouseInfoResponse other) {
         if (other == global::Server.Protocol.LdpMouseInfoResponse.DefaultInstance) return this;
         PrepareBuilder();
+        if (other.HasType) {
+          Type = other.Type;
+        }
         if (other.HasX) {
           X = other.X;
         }
         if (other.HasY) {
           Y = other.Y;
-        }
-        if (other.HasType) {
-          Type = other.Type;
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -1921,14 +1941,6 @@ namespace Server.Protocol {
               break;
             }
             case 8: {
-              result.hasX = input.ReadInt32(ref result.x_);
-              break;
-            }
-            case 16: {
-              result.hasY = input.ReadInt32(ref result.y_);
-              break;
-            }
-            case 24: {
               object unknown;
               if(input.ReadEnum(ref result.type_, out unknown)) {
                 result.hasType = true;
@@ -1936,8 +1948,16 @@ namespace Server.Protocol {
                 if (unknownFields == null) {
                   unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
                 }
-                unknownFields.MergeVarintField(3, (ulong)(int)unknown);
+                unknownFields.MergeVarintField(1, (ulong)(int)unknown);
               }
+              break;
+            }
+            case 16: {
+              result.hasX = input.ReadInt32(ref result.x_);
+              break;
+            }
+            case 24: {
+              result.hasY = input.ReadInt32(ref result.y_);
               break;
             }
           }
@@ -1949,6 +1969,26 @@ namespace Server.Protocol {
         return this;
       }
       
+      
+      public bool HasType {
+       get { return result.hasType; }
+      }
+      public global::Server.Protocol.MouseType Type {
+        get { return result.Type; }
+        set { SetType(value); }
+      }
+      public Builder SetType(global::Server.Protocol.MouseType value) {
+        PrepareBuilder();
+        result.hasType = true;
+        result.type_ = value;
+        return this;
+      }
+      public Builder ClearType() {
+        PrepareBuilder();
+        result.hasType = false;
+        result.type_ = global::Server.Protocol.MouseType.LEFT_CLICK;
+        return this;
+      }
       
       public bool HasX {
         get { return result.hasX; }
@@ -1989,26 +2029,6 @@ namespace Server.Protocol {
         result.y_ = 0;
         return this;
       }
-      
-      public bool HasType {
-       get { return result.hasType; }
-      }
-      public global::Server.Protocol.MouseType Type {
-        get { return result.Type; }
-        set { SetType(value); }
-      }
-      public Builder SetType(global::Server.Protocol.MouseType value) {
-        PrepareBuilder();
-        result.hasType = true;
-        result.type_ = value;
-        return this;
-      }
-      public Builder ClearType() {
-        PrepareBuilder();
-        result.hasType = false;
-        result.type_ = global::Server.Protocol.MouseType.LEFT_CLICK;
-        return this;
-      }
     }
     static LdpMouseInfoResponse() {
       object.ReferenceEquals(global::Server.Protocol.LdpProtocol.Descriptor, null);
@@ -2019,8 +2039,8 @@ namespace Server.Protocol {
   public sealed partial class LdpPacket : pb::GeneratedMessage<LdpPacket, LdpPacket.Builder> {
     private LdpPacket() { }
     private static readonly LdpPacket defaultInstance = new LdpPacket().MakeReadOnly();
-    private static readonly string[] _ldpPacketFieldNames = new string[] { "AuthRequest", "AuthResponse", "ClientInfoRequest", "DisconnectRequest", "KeyboardInfoResponse", "MouseInfoResponse", "PreparableInfoRequest", "PreparableInfoResponse", "ScreenRequest", "ScreenResponse", "Type", "VolumeInfoRequest" };
-    private static readonly uint[] _ldpPacketFieldTags = new uint[] { 18, 26, 34, 74, 90, 82, 42, 50, 58, 66, 8, 98 };
+    private static readonly string[] _ldpPacketFieldNames = new string[] { "AuthRequest", "AuthResponse", "ClientInfoRequest", "DisconnectRequest", "KeyboardInfoResponse", "MouseInfoResponse", "PreparableDesktopResponse", "PreparableInfoRequest", "PreparableVolumeInfoResponse", "ScreenRequest", "ScreenResponse", "Type", "VolumeInfoResponse" };
+    private static readonly uint[] _ldpPacketFieldTags = new uint[] { 18, 26, 34, 74, 90, 82, 50, 42, 98, 58, 66, 8, 106 };
     public static LdpPacket DefaultInstance {
       get { return defaultInstance; }
     }
@@ -2091,14 +2111,14 @@ namespace Server.Protocol {
       get { return preparableInfoRequest_ ?? global::Server.Protocol.LdpPreparableInfoRequest.DefaultInstance; }
     }
     
-    public const int PreparableInfoResponseFieldNumber = 6;
-    private bool hasPreparableInfoResponse;
-    private global::Server.Protocol.LdpPreparableInfoResponse preparableInfoResponse_;
-    public bool HasPreparableInfoResponse {
-      get { return hasPreparableInfoResponse; }
+    public const int PreparableDesktopResponseFieldNumber = 6;
+    private bool hasPreparableDesktopResponse;
+    private global::Server.Protocol.LdpPreparableDesktopInfoResponse preparableDesktopResponse_;
+    public bool HasPreparableDesktopResponse {
+      get { return hasPreparableDesktopResponse; }
     }
-    public global::Server.Protocol.LdpPreparableInfoResponse PreparableInfoResponse {
-      get { return preparableInfoResponse_ ?? global::Server.Protocol.LdpPreparableInfoResponse.DefaultInstance; }
+    public global::Server.Protocol.LdpPreparableDesktopInfoResponse PreparableDesktopResponse {
+      get { return preparableDesktopResponse_ ?? global::Server.Protocol.LdpPreparableDesktopInfoResponse.DefaultInstance; }
     }
     
     public const int ScreenRequestFieldNumber = 7;
@@ -2151,14 +2171,24 @@ namespace Server.Protocol {
       get { return keyboardInfoResponse_ ?? global::Server.Protocol.LdpKeyboardInfoResponse.DefaultInstance; }
     }
     
-    public const int VolumeInfoRequestFieldNumber = 12;
-    private bool hasVolumeInfoRequest;
-    private global::Server.Protocol.LdpVolumeInfoRequest volumeInfoRequest_;
-    public bool HasVolumeInfoRequest {
-      get { return hasVolumeInfoRequest; }
+    public const int PreparableVolumeInfoResponseFieldNumber = 12;
+    private bool hasPreparableVolumeInfoResponse;
+    private global::Server.Protocol.LdpPreparableVolumeInfoResponse preparableVolumeInfoResponse_;
+    public bool HasPreparableVolumeInfoResponse {
+      get { return hasPreparableVolumeInfoResponse; }
     }
-    public global::Server.Protocol.LdpVolumeInfoRequest VolumeInfoRequest {
-      get { return volumeInfoRequest_ ?? global::Server.Protocol.LdpVolumeInfoRequest.DefaultInstance; }
+    public global::Server.Protocol.LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse {
+      get { return preparableVolumeInfoResponse_ ?? global::Server.Protocol.LdpPreparableVolumeInfoResponse.DefaultInstance; }
+    }
+    
+    public const int VolumeInfoResponseFieldNumber = 13;
+    private bool hasVolumeInfoResponse;
+    private global::Server.Protocol.LdpVolumeInfoResponse volumeInfoResponse_;
+    public bool HasVolumeInfoResponse {
+      get { return hasVolumeInfoResponse; }
+    }
+    public global::Server.Protocol.LdpVolumeInfoResponse VolumeInfoResponse {
+      get { return volumeInfoResponse_ ?? global::Server.Protocol.LdpVolumeInfoResponse.DefaultInstance; }
     }
     
     public override bool IsInitialized {
@@ -2179,6 +2209,12 @@ namespace Server.Protocol {
         if (HasDisconnectRequest) {
           if (!DisconnectRequest.IsInitialized) return false;
         }
+        if (HasMouseInfoResponse) {
+          if (!MouseInfoResponse.IsInitialized) return false;
+        }
+        if (HasVolumeInfoResponse) {
+          if (!VolumeInfoResponse.IsInitialized) return false;
+        }
         return true;
       }
     }
@@ -2187,7 +2223,7 @@ namespace Server.Protocol {
       int size = SerializedSize;
       string[] field_names = _ldpPacketFieldNames;
       if (hasType) {
-        output.WriteEnum(1, field_names[10], (int) Type, Type);
+        output.WriteEnum(1, field_names[11], (int) Type, Type);
       }
       if (hasAuthRequest) {
         output.WriteMessage(2, field_names[0], AuthRequest);
@@ -2199,16 +2235,16 @@ namespace Server.Protocol {
         output.WriteMessage(4, field_names[2], ClientInfoRequest);
       }
       if (hasPreparableInfoRequest) {
-        output.WriteMessage(5, field_names[6], PreparableInfoRequest);
+        output.WriteMessage(5, field_names[7], PreparableInfoRequest);
       }
-      if (hasPreparableInfoResponse) {
-        output.WriteMessage(6, field_names[7], PreparableInfoResponse);
+      if (hasPreparableDesktopResponse) {
+        output.WriteMessage(6, field_names[6], PreparableDesktopResponse);
       }
       if (hasScreenRequest) {
-        output.WriteMessage(7, field_names[8], ScreenRequest);
+        output.WriteMessage(7, field_names[9], ScreenRequest);
       }
       if (hasScreenResponse) {
-        output.WriteMessage(8, field_names[9], ScreenResponse);
+        output.WriteMessage(8, field_names[10], ScreenResponse);
       }
       if (hasDisconnectRequest) {
         output.WriteMessage(9, field_names[3], DisconnectRequest);
@@ -2219,8 +2255,11 @@ namespace Server.Protocol {
       if (hasKeyboardInfoResponse) {
         output.WriteMessage(11, field_names[4], KeyboardInfoResponse);
       }
-      if (hasVolumeInfoRequest) {
-        output.WriteMessage(12, field_names[11], VolumeInfoRequest);
+      if (hasPreparableVolumeInfoResponse) {
+        output.WriteMessage(12, field_names[8], PreparableVolumeInfoResponse);
+      }
+      if (hasVolumeInfoResponse) {
+        output.WriteMessage(13, field_names[12], VolumeInfoResponse);
       }
       UnknownFields.WriteTo(output);
     }
@@ -2247,8 +2286,8 @@ namespace Server.Protocol {
         if (hasPreparableInfoRequest) {
           size += pb::CodedOutputStream.ComputeMessageSize(5, PreparableInfoRequest);
         }
-        if (hasPreparableInfoResponse) {
-          size += pb::CodedOutputStream.ComputeMessageSize(6, PreparableInfoResponse);
+        if (hasPreparableDesktopResponse) {
+          size += pb::CodedOutputStream.ComputeMessageSize(6, PreparableDesktopResponse);
         }
         if (hasScreenRequest) {
           size += pb::CodedOutputStream.ComputeMessageSize(7, ScreenRequest);
@@ -2265,8 +2304,11 @@ namespace Server.Protocol {
         if (hasKeyboardInfoResponse) {
           size += pb::CodedOutputStream.ComputeMessageSize(11, KeyboardInfoResponse);
         }
-        if (hasVolumeInfoRequest) {
-          size += pb::CodedOutputStream.ComputeMessageSize(12, VolumeInfoRequest);
+        if (hasPreparableVolumeInfoResponse) {
+          size += pb::CodedOutputStream.ComputeMessageSize(12, PreparableVolumeInfoResponse);
+        }
+        if (hasVolumeInfoResponse) {
+          size += pb::CodedOutputStream.ComputeMessageSize(13, VolumeInfoResponse);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -2407,8 +2449,8 @@ namespace Server.Protocol {
         if (other.HasPreparableInfoRequest) {
           MergePreparableInfoRequest(other.PreparableInfoRequest);
         }
-        if (other.HasPreparableInfoResponse) {
-          MergePreparableInfoResponse(other.PreparableInfoResponse);
+        if (other.HasPreparableDesktopResponse) {
+          MergePreparableDesktopResponse(other.PreparableDesktopResponse);
         }
         if (other.HasScreenRequest) {
           MergeScreenRequest(other.ScreenRequest);
@@ -2425,8 +2467,11 @@ namespace Server.Protocol {
         if (other.HasKeyboardInfoResponse) {
           MergeKeyboardInfoResponse(other.KeyboardInfoResponse);
         }
-        if (other.HasVolumeInfoRequest) {
-          MergeVolumeInfoRequest(other.VolumeInfoRequest);
+        if (other.HasPreparableVolumeInfoResponse) {
+          MergePreparableVolumeInfoResponse(other.PreparableVolumeInfoResponse);
+        }
+        if (other.HasVolumeInfoResponse) {
+          MergeVolumeInfoResponse(other.VolumeInfoResponse);
         }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
@@ -2520,12 +2565,12 @@ namespace Server.Protocol {
               break;
             }
             case 50: {
-              global::Server.Protocol.LdpPreparableInfoResponse.Builder subBuilder = global::Server.Protocol.LdpPreparableInfoResponse.CreateBuilder();
-              if (result.hasPreparableInfoResponse) {
-                subBuilder.MergeFrom(PreparableInfoResponse);
+              global::Server.Protocol.LdpPreparableDesktopInfoResponse.Builder subBuilder = global::Server.Protocol.LdpPreparableDesktopInfoResponse.CreateBuilder();
+              if (result.hasPreparableDesktopResponse) {
+                subBuilder.MergeFrom(PreparableDesktopResponse);
               }
               input.ReadMessage(subBuilder, extensionRegistry);
-              PreparableInfoResponse = subBuilder.BuildPartial();
+              PreparableDesktopResponse = subBuilder.BuildPartial();
               break;
             }
             case 58: {
@@ -2574,12 +2619,21 @@ namespace Server.Protocol {
               break;
             }
             case 98: {
-              global::Server.Protocol.LdpVolumeInfoRequest.Builder subBuilder = global::Server.Protocol.LdpVolumeInfoRequest.CreateBuilder();
-              if (result.hasVolumeInfoRequest) {
-                subBuilder.MergeFrom(VolumeInfoRequest);
+              global::Server.Protocol.LdpPreparableVolumeInfoResponse.Builder subBuilder = global::Server.Protocol.LdpPreparableVolumeInfoResponse.CreateBuilder();
+              if (result.hasPreparableVolumeInfoResponse) {
+                subBuilder.MergeFrom(PreparableVolumeInfoResponse);
               }
               input.ReadMessage(subBuilder, extensionRegistry);
-              VolumeInfoRequest = subBuilder.BuildPartial();
+              PreparableVolumeInfoResponse = subBuilder.BuildPartial();
+              break;
+            }
+            case 106: {
+              global::Server.Protocol.LdpVolumeInfoResponse.Builder subBuilder = global::Server.Protocol.LdpVolumeInfoResponse.CreateBuilder();
+              if (result.hasVolumeInfoResponse) {
+                subBuilder.MergeFrom(VolumeInfoResponse);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              VolumeInfoResponse = subBuilder.BuildPartial();
               break;
             }
           }
@@ -2772,43 +2826,43 @@ namespace Server.Protocol {
         return this;
       }
       
-      public bool HasPreparableInfoResponse {
-       get { return result.hasPreparableInfoResponse; }
+      public bool HasPreparableDesktopResponse {
+       get { return result.hasPreparableDesktopResponse; }
       }
-      public global::Server.Protocol.LdpPreparableInfoResponse PreparableInfoResponse {
-        get { return result.PreparableInfoResponse; }
-        set { SetPreparableInfoResponse(value); }
+      public global::Server.Protocol.LdpPreparableDesktopInfoResponse PreparableDesktopResponse {
+        get { return result.PreparableDesktopResponse; }
+        set { SetPreparableDesktopResponse(value); }
       }
-      public Builder SetPreparableInfoResponse(global::Server.Protocol.LdpPreparableInfoResponse value) {
+      public Builder SetPreparableDesktopResponse(global::Server.Protocol.LdpPreparableDesktopInfoResponse value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.hasPreparableInfoResponse = true;
-        result.preparableInfoResponse_ = value;
+        result.hasPreparableDesktopResponse = true;
+        result.preparableDesktopResponse_ = value;
         return this;
       }
-      public Builder SetPreparableInfoResponse(global::Server.Protocol.LdpPreparableInfoResponse.Builder builderForValue) {
+      public Builder SetPreparableDesktopResponse(global::Server.Protocol.LdpPreparableDesktopInfoResponse.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
-        result.hasPreparableInfoResponse = true;
-        result.preparableInfoResponse_ = builderForValue.Build();
+        result.hasPreparableDesktopResponse = true;
+        result.preparableDesktopResponse_ = builderForValue.Build();
         return this;
       }
-      public Builder MergePreparableInfoResponse(global::Server.Protocol.LdpPreparableInfoResponse value) {
+      public Builder MergePreparableDesktopResponse(global::Server.Protocol.LdpPreparableDesktopInfoResponse value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        if (result.hasPreparableInfoResponse &&
-            result.preparableInfoResponse_ != global::Server.Protocol.LdpPreparableInfoResponse.DefaultInstance) {
-            result.preparableInfoResponse_ = global::Server.Protocol.LdpPreparableInfoResponse.CreateBuilder(result.preparableInfoResponse_).MergeFrom(value).BuildPartial();
+        if (result.hasPreparableDesktopResponse &&
+            result.preparableDesktopResponse_ != global::Server.Protocol.LdpPreparableDesktopInfoResponse.DefaultInstance) {
+            result.preparableDesktopResponse_ = global::Server.Protocol.LdpPreparableDesktopInfoResponse.CreateBuilder(result.preparableDesktopResponse_).MergeFrom(value).BuildPartial();
         } else {
-          result.preparableInfoResponse_ = value;
+          result.preparableDesktopResponse_ = value;
         }
-        result.hasPreparableInfoResponse = true;
+        result.hasPreparableDesktopResponse = true;
         return this;
       }
-      public Builder ClearPreparableInfoResponse() {
+      public Builder ClearPreparableDesktopResponse() {
         PrepareBuilder();
-        result.hasPreparableInfoResponse = false;
-        result.preparableInfoResponse_ = null;
+        result.hasPreparableDesktopResponse = false;
+        result.preparableDesktopResponse_ = null;
         return this;
       }
       
@@ -3012,43 +3066,83 @@ namespace Server.Protocol {
         return this;
       }
       
-      public bool HasVolumeInfoRequest {
-       get { return result.hasVolumeInfoRequest; }
+      public bool HasPreparableVolumeInfoResponse {
+       get { return result.hasPreparableVolumeInfoResponse; }
       }
-      public global::Server.Protocol.LdpVolumeInfoRequest VolumeInfoRequest {
-        get { return result.VolumeInfoRequest; }
-        set { SetVolumeInfoRequest(value); }
+      public global::Server.Protocol.LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse {
+        get { return result.PreparableVolumeInfoResponse; }
+        set { SetPreparableVolumeInfoResponse(value); }
       }
-      public Builder SetVolumeInfoRequest(global::Server.Protocol.LdpVolumeInfoRequest value) {
+      public Builder SetPreparableVolumeInfoResponse(global::Server.Protocol.LdpPreparableVolumeInfoResponse value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        result.hasVolumeInfoRequest = true;
-        result.volumeInfoRequest_ = value;
+        result.hasPreparableVolumeInfoResponse = true;
+        result.preparableVolumeInfoResponse_ = value;
         return this;
       }
-      public Builder SetVolumeInfoRequest(global::Server.Protocol.LdpVolumeInfoRequest.Builder builderForValue) {
+      public Builder SetPreparableVolumeInfoResponse(global::Server.Protocol.LdpPreparableVolumeInfoResponse.Builder builderForValue) {
         pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
         PrepareBuilder();
-        result.hasVolumeInfoRequest = true;
-        result.volumeInfoRequest_ = builderForValue.Build();
+        result.hasPreparableVolumeInfoResponse = true;
+        result.preparableVolumeInfoResponse_ = builderForValue.Build();
         return this;
       }
-      public Builder MergeVolumeInfoRequest(global::Server.Protocol.LdpVolumeInfoRequest value) {
+      public Builder MergePreparableVolumeInfoResponse(global::Server.Protocol.LdpPreparableVolumeInfoResponse value) {
         pb::ThrowHelper.ThrowIfNull(value, "value");
         PrepareBuilder();
-        if (result.hasVolumeInfoRequest &&
-            result.volumeInfoRequest_ != global::Server.Protocol.LdpVolumeInfoRequest.DefaultInstance) {
-            result.volumeInfoRequest_ = global::Server.Protocol.LdpVolumeInfoRequest.CreateBuilder(result.volumeInfoRequest_).MergeFrom(value).BuildPartial();
+        if (result.hasPreparableVolumeInfoResponse &&
+            result.preparableVolumeInfoResponse_ != global::Server.Protocol.LdpPreparableVolumeInfoResponse.DefaultInstance) {
+            result.preparableVolumeInfoResponse_ = global::Server.Protocol.LdpPreparableVolumeInfoResponse.CreateBuilder(result.preparableVolumeInfoResponse_).MergeFrom(value).BuildPartial();
         } else {
-          result.volumeInfoRequest_ = value;
+          result.preparableVolumeInfoResponse_ = value;
         }
-        result.hasVolumeInfoRequest = true;
+        result.hasPreparableVolumeInfoResponse = true;
         return this;
       }
-      public Builder ClearVolumeInfoRequest() {
+      public Builder ClearPreparableVolumeInfoResponse() {
         PrepareBuilder();
-        result.hasVolumeInfoRequest = false;
-        result.volumeInfoRequest_ = null;
+        result.hasPreparableVolumeInfoResponse = false;
+        result.preparableVolumeInfoResponse_ = null;
+        return this;
+      }
+      
+      public bool HasVolumeInfoResponse {
+       get { return result.hasVolumeInfoResponse; }
+      }
+      public global::Server.Protocol.LdpVolumeInfoResponse VolumeInfoResponse {
+        get { return result.VolumeInfoResponse; }
+        set { SetVolumeInfoResponse(value); }
+      }
+      public Builder SetVolumeInfoResponse(global::Server.Protocol.LdpVolumeInfoResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasVolumeInfoResponse = true;
+        result.volumeInfoResponse_ = value;
+        return this;
+      }
+      public Builder SetVolumeInfoResponse(global::Server.Protocol.LdpVolumeInfoResponse.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasVolumeInfoResponse = true;
+        result.volumeInfoResponse_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeVolumeInfoResponse(global::Server.Protocol.LdpVolumeInfoResponse value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasVolumeInfoResponse &&
+            result.volumeInfoResponse_ != global::Server.Protocol.LdpVolumeInfoResponse.DefaultInstance) {
+            result.volumeInfoResponse_ = global::Server.Protocol.LdpVolumeInfoResponse.CreateBuilder(result.volumeInfoResponse_).MergeFrom(value).BuildPartial();
+        } else {
+          result.volumeInfoResponse_ = value;
+        }
+        result.hasVolumeInfoResponse = true;
+        return this;
+      }
+      public Builder ClearVolumeInfoResponse() {
+        PrepareBuilder();
+        result.hasVolumeInfoResponse = false;
+        result.volumeInfoResponse_ = null;
         return this;
       }
     }
@@ -3337,29 +3431,29 @@ namespace Server.Protocol {
   }
   
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public sealed partial class LdpPreparableInfoResponse : pb::GeneratedMessage<LdpPreparableInfoResponse, LdpPreparableInfoResponse.Builder> {
-    private LdpPreparableInfoResponse() { }
-    private static readonly LdpPreparableInfoResponse defaultInstance = new LdpPreparableInfoResponse().MakeReadOnly();
-    private static readonly string[] _ldpPreparableInfoResponseFieldNames = new string[] { "ScreenHeight", "ScreenWidth" };
-    private static readonly uint[] _ldpPreparableInfoResponseFieldTags = new uint[] { 16, 8 };
-    public static LdpPreparableInfoResponse DefaultInstance {
+  public sealed partial class LdpPreparableDesktopInfoResponse : pb::GeneratedMessage<LdpPreparableDesktopInfoResponse, LdpPreparableDesktopInfoResponse.Builder> {
+    private LdpPreparableDesktopInfoResponse() { }
+    private static readonly LdpPreparableDesktopInfoResponse defaultInstance = new LdpPreparableDesktopInfoResponse().MakeReadOnly();
+    private static readonly string[] _ldpPreparableDesktopInfoResponseFieldNames = new string[] { "ScreenHeight", "ScreenWidth" };
+    private static readonly uint[] _ldpPreparableDesktopInfoResponseFieldTags = new uint[] { 16, 8 };
+    public static LdpPreparableDesktopInfoResponse DefaultInstance {
       get { return defaultInstance; }
     }
     
-    public override LdpPreparableInfoResponse DefaultInstanceForType {
+    public override LdpPreparableDesktopInfoResponse DefaultInstanceForType {
       get { return DefaultInstance; }
     }
     
-    protected override LdpPreparableInfoResponse ThisMessage {
+    protected override LdpPreparableDesktopInfoResponse ThisMessage {
       get { return this; }
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::Server.Protocol.LdpProtocol.internal__static_Server_Protocol_LdpPreparableInfoResponse__Descriptor; }
+      get { return global::Server.Protocol.LdpProtocol.internal__static_Server_Protocol_LdpPreparableDesktopInfoResponse__Descriptor; }
     }
     
-    protected override pb::FieldAccess.FieldAccessorTable<LdpPreparableInfoResponse, LdpPreparableInfoResponse.Builder> InternalFieldAccessors {
-      get { return global::Server.Protocol.LdpProtocol.internal__static_Server_Protocol_LdpPreparableInfoResponse__FieldAccessorTable; }
+    protected override pb::FieldAccess.FieldAccessorTable<LdpPreparableDesktopInfoResponse, LdpPreparableDesktopInfoResponse.Builder> InternalFieldAccessors {
+      get { return global::Server.Protocol.LdpProtocol.internal__static_Server_Protocol_LdpPreparableDesktopInfoResponse__FieldAccessorTable; }
     }
     
     public const int ScreenWidthFieldNumber = 1;
@@ -3390,7 +3484,7 @@ namespace Server.Protocol {
     
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
-      string[] field_names = _ldpPreparableInfoResponseFieldNames;
+      string[] field_names = _ldpPreparableDesktopInfoResponseFieldNames;
       if (hasScreenWidth) {
         output.WriteInt32(1, field_names[1], ScreenWidth);
       }
@@ -3419,49 +3513,49 @@ namespace Server.Protocol {
       }
     }
     
-    public static LdpPreparableInfoResponse ParseFrom(pb::ByteString data) {
+    public static LdpPreparableDesktopInfoResponse ParseFrom(pb::ByteString data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
-    public static LdpPreparableInfoResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+    public static LdpPreparableDesktopInfoResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
-    public static LdpPreparableInfoResponse ParseFrom(byte[] data) {
+    public static LdpPreparableDesktopInfoResponse ParseFrom(byte[] data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
-    public static LdpPreparableInfoResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+    public static LdpPreparableDesktopInfoResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
-    public static LdpPreparableInfoResponse ParseFrom(global::System.IO.Stream input) {
+    public static LdpPreparableDesktopInfoResponse ParseFrom(global::System.IO.Stream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
-    public static LdpPreparableInfoResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static LdpPreparableDesktopInfoResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    public static LdpPreparableInfoResponse ParseDelimitedFrom(global::System.IO.Stream input) {
+    public static LdpPreparableDesktopInfoResponse ParseDelimitedFrom(global::System.IO.Stream input) {
       return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
     }
-    public static LdpPreparableInfoResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static LdpPreparableDesktopInfoResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
     }
-    public static LdpPreparableInfoResponse ParseFrom(pb::ICodedInputStream input) {
+    public static LdpPreparableDesktopInfoResponse ParseFrom(pb::ICodedInputStream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
-    public static LdpPreparableInfoResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+    public static LdpPreparableDesktopInfoResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    private LdpPreparableInfoResponse MakeReadOnly() {
+    private LdpPreparableDesktopInfoResponse MakeReadOnly() {
       return this;
     }
     
     public static Builder CreateBuilder() { return new Builder(); }
     public override Builder ToBuilder() { return CreateBuilder(this); }
     public override Builder CreateBuilderForType() { return new Builder(); }
-    public static Builder CreateBuilder(LdpPreparableInfoResponse prototype) {
+    public static Builder CreateBuilder(LdpPreparableDesktopInfoResponse prototype) {
       return new Builder(prototype);
     }
     
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    public sealed partial class Builder : pb::GeneratedBuilder<LdpPreparableInfoResponse, Builder> {
+    public sealed partial class Builder : pb::GeneratedBuilder<LdpPreparableDesktopInfoResponse, Builder> {
       protected override Builder ThisBuilder {
         get { return this; }
       }
@@ -3469,18 +3563,18 @@ namespace Server.Protocol {
         result = DefaultInstance;
         resultIsReadOnly = true;
       }
-      internal Builder(LdpPreparableInfoResponse cloneFrom) {
+      internal Builder(LdpPreparableDesktopInfoResponse cloneFrom) {
         result = cloneFrom;
         resultIsReadOnly = true;
       }
       
       private bool resultIsReadOnly;
-      private LdpPreparableInfoResponse result;
+      private LdpPreparableDesktopInfoResponse result;
       
-      private LdpPreparableInfoResponse PrepareBuilder() {
+      private LdpPreparableDesktopInfoResponse PrepareBuilder() {
         if (resultIsReadOnly) {
-          LdpPreparableInfoResponse original = result;
-          result = new LdpPreparableInfoResponse();
+          LdpPreparableDesktopInfoResponse original = result;
+          result = new LdpPreparableDesktopInfoResponse();
           resultIsReadOnly = false;
           MergeFrom(original);
         }
@@ -3491,7 +3585,7 @@ namespace Server.Protocol {
         get { return result.IsInitialized; }
       }
       
-      protected override LdpPreparableInfoResponse MessageBeingBuilt {
+      protected override LdpPreparableDesktopInfoResponse MessageBeingBuilt {
         get { return PrepareBuilder(); }
       }
       
@@ -3510,14 +3604,14 @@ namespace Server.Protocol {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::Server.Protocol.LdpPreparableInfoResponse.Descriptor; }
+        get { return global::Server.Protocol.LdpPreparableDesktopInfoResponse.Descriptor; }
       }
       
-      public override LdpPreparableInfoResponse DefaultInstanceForType {
-        get { return global::Server.Protocol.LdpPreparableInfoResponse.DefaultInstance; }
+      public override LdpPreparableDesktopInfoResponse DefaultInstanceForType {
+        get { return global::Server.Protocol.LdpPreparableDesktopInfoResponse.DefaultInstance; }
       }
       
-      public override LdpPreparableInfoResponse BuildPartial() {
+      public override LdpPreparableDesktopInfoResponse BuildPartial() {
         if (resultIsReadOnly) {
           return result;
         }
@@ -3526,16 +3620,16 @@ namespace Server.Protocol {
       }
       
       public override Builder MergeFrom(pb::IMessage other) {
-        if (other is LdpPreparableInfoResponse) {
-          return MergeFrom((LdpPreparableInfoResponse) other);
+        if (other is LdpPreparableDesktopInfoResponse) {
+          return MergeFrom((LdpPreparableDesktopInfoResponse) other);
         } else {
           base.MergeFrom(other);
           return this;
         }
       }
       
-      public override Builder MergeFrom(LdpPreparableInfoResponse other) {
-        if (other == global::Server.Protocol.LdpPreparableInfoResponse.DefaultInstance) return this;
+      public override Builder MergeFrom(LdpPreparableDesktopInfoResponse other) {
+        if (other == global::Server.Protocol.LdpPreparableDesktopInfoResponse.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasScreenWidth) {
           ScreenWidth = other.ScreenWidth;
@@ -3558,9 +3652,9 @@ namespace Server.Protocol {
         string field_name;
         while (input.ReadTag(out tag, out field_name)) {
           if(tag == 0 && field_name != null) {
-            int field_ordinal = global::System.Array.BinarySearch(_ldpPreparableInfoResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
+            int field_ordinal = global::System.Array.BinarySearch(_ldpPreparableDesktopInfoResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
             if(field_ordinal >= 0)
-              tag = _ldpPreparableInfoResponseFieldTags[field_ordinal];
+              tag = _ldpPreparableDesktopInfoResponseFieldTags[field_ordinal];
             else {
               if (unknownFields == null) {
                 unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
@@ -3644,7 +3738,7 @@ namespace Server.Protocol {
         return this;
       }
     }
-    static LdpPreparableInfoResponse() {
+    static LdpPreparableDesktopInfoResponse() {
       object.ReferenceEquals(global::Server.Protocol.LdpProtocol.Descriptor, null);
     }
   }
@@ -4666,29 +4760,29 @@ namespace Server.Protocol {
   }
   
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-  public sealed partial class LdpVolumeInfoRequest : pb::GeneratedMessage<LdpVolumeInfoRequest, LdpVolumeInfoRequest.Builder> {
-    private LdpVolumeInfoRequest() { }
-    private static readonly LdpVolumeInfoRequest defaultInstance = new LdpVolumeInfoRequest().MakeReadOnly();
-    private static readonly string[] _ldpVolumeInfoRequestFieldNames = new string[] { "IsMute", "Volume" };
-    private static readonly uint[] _ldpVolumeInfoRequestFieldTags = new uint[] { 16, 8 };
-    public static LdpVolumeInfoRequest DefaultInstance {
+  public sealed partial class LdpPreparableVolumeInfoResponse : pb::GeneratedMessage<LdpPreparableVolumeInfoResponse, LdpPreparableVolumeInfoResponse.Builder> {
+    private LdpPreparableVolumeInfoResponse() { }
+    private static readonly LdpPreparableVolumeInfoResponse defaultInstance = new LdpPreparableVolumeInfoResponse().MakeReadOnly();
+    private static readonly string[] _ldpPreparableVolumeInfoResponseFieldNames = new string[] { "IsMute", "Volume" };
+    private static readonly uint[] _ldpPreparableVolumeInfoResponseFieldTags = new uint[] { 16, 8 };
+    public static LdpPreparableVolumeInfoResponse DefaultInstance {
       get { return defaultInstance; }
     }
     
-    public override LdpVolumeInfoRequest DefaultInstanceForType {
+    public override LdpPreparableVolumeInfoResponse DefaultInstanceForType {
       get { return DefaultInstance; }
     }
     
-    protected override LdpVolumeInfoRequest ThisMessage {
+    protected override LdpPreparableVolumeInfoResponse ThisMessage {
       get { return this; }
     }
     
     public static pbd::MessageDescriptor Descriptor {
-      get { return global::Server.Protocol.LdpProtocol.internal__static_Server_Protocol_LdpVolumeInfoRequest__Descriptor; }
+      get { return global::Server.Protocol.LdpProtocol.internal__static_Server_Protocol_LdpPreparableVolumeInfoResponse__Descriptor; }
     }
     
-    protected override pb::FieldAccess.FieldAccessorTable<LdpVolumeInfoRequest, LdpVolumeInfoRequest.Builder> InternalFieldAccessors {
-      get { return global::Server.Protocol.LdpProtocol.internal__static_Server_Protocol_LdpVolumeInfoRequest__FieldAccessorTable; }
+    protected override pb::FieldAccess.FieldAccessorTable<LdpPreparableVolumeInfoResponse, LdpPreparableVolumeInfoResponse.Builder> InternalFieldAccessors {
+      get { return global::Server.Protocol.LdpProtocol.internal__static_Server_Protocol_LdpPreparableVolumeInfoResponse__FieldAccessorTable; }
     }
     
     public const int VolumeFieldNumber = 1;
@@ -4719,7 +4813,7 @@ namespace Server.Protocol {
     
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
-      string[] field_names = _ldpVolumeInfoRequestFieldNames;
+      string[] field_names = _ldpPreparableVolumeInfoResponseFieldNames;
       if (hasVolume) {
         output.WriteInt32(1, field_names[1], Volume);
       }
@@ -4748,49 +4842,49 @@ namespace Server.Protocol {
       }
     }
     
-    public static LdpVolumeInfoRequest ParseFrom(pb::ByteString data) {
+    public static LdpPreparableVolumeInfoResponse ParseFrom(pb::ByteString data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
-    public static LdpVolumeInfoRequest ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+    public static LdpPreparableVolumeInfoResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
-    public static LdpVolumeInfoRequest ParseFrom(byte[] data) {
+    public static LdpPreparableVolumeInfoResponse ParseFrom(byte[] data) {
       return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
     }
-    public static LdpVolumeInfoRequest ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+    public static LdpPreparableVolumeInfoResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
     }
-    public static LdpVolumeInfoRequest ParseFrom(global::System.IO.Stream input) {
+    public static LdpPreparableVolumeInfoResponse ParseFrom(global::System.IO.Stream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
-    public static LdpVolumeInfoRequest ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static LdpPreparableVolumeInfoResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    public static LdpVolumeInfoRequest ParseDelimitedFrom(global::System.IO.Stream input) {
+    public static LdpPreparableVolumeInfoResponse ParseDelimitedFrom(global::System.IO.Stream input) {
       return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
     }
-    public static LdpVolumeInfoRequest ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+    public static LdpPreparableVolumeInfoResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
       return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
     }
-    public static LdpVolumeInfoRequest ParseFrom(pb::ICodedInputStream input) {
+    public static LdpPreparableVolumeInfoResponse ParseFrom(pb::ICodedInputStream input) {
       return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
     }
-    public static LdpVolumeInfoRequest ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+    public static LdpPreparableVolumeInfoResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
       return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
     }
-    private LdpVolumeInfoRequest MakeReadOnly() {
+    private LdpPreparableVolumeInfoResponse MakeReadOnly() {
       return this;
     }
     
     public static Builder CreateBuilder() { return new Builder(); }
     public override Builder ToBuilder() { return CreateBuilder(this); }
     public override Builder CreateBuilderForType() { return new Builder(); }
-    public static Builder CreateBuilder(LdpVolumeInfoRequest prototype) {
+    public static Builder CreateBuilder(LdpPreparableVolumeInfoResponse prototype) {
       return new Builder(prototype);
     }
     
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    public sealed partial class Builder : pb::GeneratedBuilder<LdpVolumeInfoRequest, Builder> {
+    public sealed partial class Builder : pb::GeneratedBuilder<LdpPreparableVolumeInfoResponse, Builder> {
       protected override Builder ThisBuilder {
         get { return this; }
       }
@@ -4798,18 +4892,18 @@ namespace Server.Protocol {
         result = DefaultInstance;
         resultIsReadOnly = true;
       }
-      internal Builder(LdpVolumeInfoRequest cloneFrom) {
+      internal Builder(LdpPreparableVolumeInfoResponse cloneFrom) {
         result = cloneFrom;
         resultIsReadOnly = true;
       }
       
       private bool resultIsReadOnly;
-      private LdpVolumeInfoRequest result;
+      private LdpPreparableVolumeInfoResponse result;
       
-      private LdpVolumeInfoRequest PrepareBuilder() {
+      private LdpPreparableVolumeInfoResponse PrepareBuilder() {
         if (resultIsReadOnly) {
-          LdpVolumeInfoRequest original = result;
-          result = new LdpVolumeInfoRequest();
+          LdpPreparableVolumeInfoResponse original = result;
+          result = new LdpPreparableVolumeInfoResponse();
           resultIsReadOnly = false;
           MergeFrom(original);
         }
@@ -4820,7 +4914,7 @@ namespace Server.Protocol {
         get { return result.IsInitialized; }
       }
       
-      protected override LdpVolumeInfoRequest MessageBeingBuilt {
+      protected override LdpPreparableVolumeInfoResponse MessageBeingBuilt {
         get { return PrepareBuilder(); }
       }
       
@@ -4839,14 +4933,14 @@ namespace Server.Protocol {
       }
       
       public override pbd::MessageDescriptor DescriptorForType {
-        get { return global::Server.Protocol.LdpVolumeInfoRequest.Descriptor; }
+        get { return global::Server.Protocol.LdpPreparableVolumeInfoResponse.Descriptor; }
       }
       
-      public override LdpVolumeInfoRequest DefaultInstanceForType {
-        get { return global::Server.Protocol.LdpVolumeInfoRequest.DefaultInstance; }
+      public override LdpPreparableVolumeInfoResponse DefaultInstanceForType {
+        get { return global::Server.Protocol.LdpPreparableVolumeInfoResponse.DefaultInstance; }
       }
       
-      public override LdpVolumeInfoRequest BuildPartial() {
+      public override LdpPreparableVolumeInfoResponse BuildPartial() {
         if (resultIsReadOnly) {
           return result;
         }
@@ -4855,16 +4949,16 @@ namespace Server.Protocol {
       }
       
       public override Builder MergeFrom(pb::IMessage other) {
-        if (other is LdpVolumeInfoRequest) {
-          return MergeFrom((LdpVolumeInfoRequest) other);
+        if (other is LdpPreparableVolumeInfoResponse) {
+          return MergeFrom((LdpPreparableVolumeInfoResponse) other);
         } else {
           base.MergeFrom(other);
           return this;
         }
       }
       
-      public override Builder MergeFrom(LdpVolumeInfoRequest other) {
-        if (other == global::Server.Protocol.LdpVolumeInfoRequest.DefaultInstance) return this;
+      public override Builder MergeFrom(LdpPreparableVolumeInfoResponse other) {
+        if (other == global::Server.Protocol.LdpPreparableVolumeInfoResponse.DefaultInstance) return this;
         PrepareBuilder();
         if (other.HasVolume) {
           Volume = other.Volume;
@@ -4887,9 +4981,9 @@ namespace Server.Protocol {
         string field_name;
         while (input.ReadTag(out tag, out field_name)) {
           if(tag == 0 && field_name != null) {
-            int field_ordinal = global::System.Array.BinarySearch(_ldpVolumeInfoRequestFieldNames, field_name, global::System.StringComparer.Ordinal);
+            int field_ordinal = global::System.Array.BinarySearch(_ldpPreparableVolumeInfoResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
             if(field_ordinal >= 0)
-              tag = _ldpVolumeInfoRequestFieldTags[field_ordinal];
+              tag = _ldpPreparableVolumeInfoResponseFieldTags[field_ordinal];
             else {
               if (unknownFields == null) {
                 unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
@@ -4973,7 +5067,372 @@ namespace Server.Protocol {
         return this;
       }
     }
-    static LdpVolumeInfoRequest() {
+    static LdpPreparableVolumeInfoResponse() {
+      object.ReferenceEquals(global::Server.Protocol.LdpProtocol.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class LdpVolumeInfoResponse : pb::GeneratedMessage<LdpVolumeInfoResponse, LdpVolumeInfoResponse.Builder> {
+    private LdpVolumeInfoResponse() { }
+    private static readonly LdpVolumeInfoResponse defaultInstance = new LdpVolumeInfoResponse().MakeReadOnly();
+    private static readonly string[] _ldpVolumeInfoResponseFieldNames = new string[] { "IsMute", "Type", "Volume" };
+    private static readonly uint[] _ldpVolumeInfoResponseFieldTags = new uint[] { 24, 8, 16 };
+    public static LdpVolumeInfoResponse DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override LdpVolumeInfoResponse DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override LdpVolumeInfoResponse ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::Server.Protocol.LdpProtocol.internal__static_Server_Protocol_LdpVolumeInfoResponse__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<LdpVolumeInfoResponse, LdpVolumeInfoResponse.Builder> InternalFieldAccessors {
+      get { return global::Server.Protocol.LdpProtocol.internal__static_Server_Protocol_LdpVolumeInfoResponse__FieldAccessorTable; }
+    }
+    
+    public const int TypeFieldNumber = 1;
+    private bool hasType;
+    private global::Server.Protocol.VolumeInfoType type_ = global::Server.Protocol.VolumeInfoType.VOLUME;
+    public bool HasType {
+      get { return hasType; }
+    }
+    public global::Server.Protocol.VolumeInfoType Type {
+      get { return type_; }
+    }
+    
+    public const int VolumeFieldNumber = 2;
+    private bool hasVolume;
+    private int volume_;
+    public bool HasVolume {
+      get { return hasVolume; }
+    }
+    public int Volume {
+      get { return volume_; }
+    }
+    
+    public const int IsMuteFieldNumber = 3;
+    private bool hasIsMute;
+    private bool isMute_;
+    public bool HasIsMute {
+      get { return hasIsMute; }
+    }
+    public bool IsMute {
+      get { return isMute_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasType) return false;
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _ldpVolumeInfoResponseFieldNames;
+      if (hasType) {
+        output.WriteEnum(1, field_names[1], (int) Type, Type);
+      }
+      if (hasVolume) {
+        output.WriteInt32(2, field_names[2], Volume);
+      }
+      if (hasIsMute) {
+        output.WriteBool(3, field_names[0], IsMute);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasType) {
+          size += pb::CodedOutputStream.ComputeEnumSize(1, (int) Type);
+        }
+        if (hasVolume) {
+          size += pb::CodedOutputStream.ComputeInt32Size(2, Volume);
+        }
+        if (hasIsMute) {
+          size += pb::CodedOutputStream.ComputeBoolSize(3, IsMute);
+        }
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static LdpVolumeInfoResponse ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static LdpVolumeInfoResponse ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static LdpVolumeInfoResponse ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static LdpVolumeInfoResponse ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static LdpVolumeInfoResponse ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static LdpVolumeInfoResponse ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static LdpVolumeInfoResponse ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static LdpVolumeInfoResponse ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static LdpVolumeInfoResponse ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static LdpVolumeInfoResponse ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private LdpVolumeInfoResponse MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(LdpVolumeInfoResponse prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<LdpVolumeInfoResponse, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(LdpVolumeInfoResponse cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private LdpVolumeInfoResponse result;
+      
+      private LdpVolumeInfoResponse PrepareBuilder() {
+        if (resultIsReadOnly) {
+          LdpVolumeInfoResponse original = result;
+          result = new LdpVolumeInfoResponse();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override LdpVolumeInfoResponse MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::Server.Protocol.LdpVolumeInfoResponse.Descriptor; }
+      }
+      
+      public override LdpVolumeInfoResponse DefaultInstanceForType {
+        get { return global::Server.Protocol.LdpVolumeInfoResponse.DefaultInstance; }
+      }
+      
+      public override LdpVolumeInfoResponse BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is LdpVolumeInfoResponse) {
+          return MergeFrom((LdpVolumeInfoResponse) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(LdpVolumeInfoResponse other) {
+        if (other == global::Server.Protocol.LdpVolumeInfoResponse.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasType) {
+          Type = other.Type;
+        }
+        if (other.HasVolume) {
+          Volume = other.Volume;
+        }
+        if (other.HasIsMute) {
+          IsMute = other.IsMute;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_ldpVolumeInfoResponseFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _ldpVolumeInfoResponseFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              object unknown;
+              if(input.ReadEnum(ref result.type_, out unknown)) {
+                result.hasType = true;
+              } else if(unknown is int) {
+                if (unknownFields == null) {
+                  unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+                }
+                unknownFields.MergeVarintField(1, (ulong)(int)unknown);
+              }
+              break;
+            }
+            case 16: {
+              result.hasVolume = input.ReadInt32(ref result.volume_);
+              break;
+            }
+            case 24: {
+              result.hasIsMute = input.ReadBool(ref result.isMute_);
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasType {
+       get { return result.hasType; }
+      }
+      public global::Server.Protocol.VolumeInfoType Type {
+        get { return result.Type; }
+        set { SetType(value); }
+      }
+      public Builder SetType(global::Server.Protocol.VolumeInfoType value) {
+        PrepareBuilder();
+        result.hasType = true;
+        result.type_ = value;
+        return this;
+      }
+      public Builder ClearType() {
+        PrepareBuilder();
+        result.hasType = false;
+        result.type_ = global::Server.Protocol.VolumeInfoType.VOLUME;
+        return this;
+      }
+      
+      public bool HasVolume {
+        get { return result.hasVolume; }
+      }
+      public int Volume {
+        get { return result.Volume; }
+        set { SetVolume(value); }
+      }
+      public Builder SetVolume(int value) {
+        PrepareBuilder();
+        result.hasVolume = true;
+        result.volume_ = value;
+        return this;
+      }
+      public Builder ClearVolume() {
+        PrepareBuilder();
+        result.hasVolume = false;
+        result.volume_ = 0;
+        return this;
+      }
+      
+      public bool HasIsMute {
+        get { return result.hasIsMute; }
+      }
+      public bool IsMute {
+        get { return result.IsMute; }
+        set { SetIsMute(value); }
+      }
+      public Builder SetIsMute(bool value) {
+        PrepareBuilder();
+        result.hasIsMute = true;
+        result.isMute_ = value;
+        return this;
+      }
+      public Builder ClearIsMute() {
+        PrepareBuilder();
+        result.hasIsMute = false;
+        result.isMute_ = false;
+        return this;
+      }
+    }
+    static LdpVolumeInfoResponse() {
       object.ReferenceEquals(global::Server.Protocol.LdpProtocol.Descriptor, null);
     }
   }

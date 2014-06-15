@@ -1,6 +1,7 @@
 ﻿using Server.Network.Handlers.PacketHandlerBase;
 using Server.Protocol;
 using Server.RemoteDesktopSender;
+using Server.RemoteVolumeSender;
 using Server.WindowsUtils;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,6 @@ namespace Server.Network.Handlers
     {
         private LdpServer serverHandler;
         private LdpProtocolPacketFactory packetFactory;
-        private LdpRemoteDesktopSender remoteDesktopSender;
         public LdpPreparableInfoRequestHandler()
         {
             packetFactory = new LdpProtocolPacketFactory();
@@ -31,44 +31,33 @@ namespace Server.Network.Handlers
                     switch (request.Type)
                     {
                         case ConnectionType.REMOTE_DESKTOP_CONTROL:
-                            SendPreparableInfoResponse(ConnectionType.REMOTE_DESKTOP_CONTROL);
+                            SendRemoteDesktopPreparableInfo();
                             break;
                         case ConnectionType.REMOTE_VOLUME_CONTROL:
-                            //TODO
+                            SendRemoteVolumePreparableInfo();
                             break;
                     }
                     break;
             }
         }
 
-        private void SendPreparableInfoResponse(ConnectionType type)
-        {
-            switch (type)
-            {
-                case ConnectionType.REMOTE_DESKTOP_CONTROL:
-                    SendRemoteDesktopPreparableInfo();
-                    break;
-                case ConnectionType.REMOTE_VOLUME_CONTROL:
-                    //TODO
-                    break;
-            }
-        }
-
         private void SendRemoteDesktopPreparableInfo()
         {
-            LdpPreparableInfoResponse response = packetFactory
+            var response = packetFactory
                                 .SetRemoteDesktopInfo(LdpUtils.SCREEN_WIDTH,
                                 LdpUtils.SCREEN_HEIGHT);
-            LdpPacket responsePacket = packetFactory.BuildPacket(response);
+            var responsePacket = packetFactory.BuildPacket(response);
             serverHandler.GetSenderChannel.Send(responsePacket);
 
-            remoteDesktopSender = new LdpRemoteDesktopSender();
+            var remoteDesktopSender = new LdpRemoteDesktopSender();
             serverHandler.GetListenerChannel.RemoveListener(this);
         }
 
         private void SendRemoteVolumePreparableInfo()
         {
-            // TODO
+            var remoteVolumeSender = new LdpRemoteVolumeSender();
+            remoteVolumeSender.SendPreparableVolumeInfoPacket();
+            serverHandler.GetListenerChannel.RemoveListener(this);
         }
 
         public void Dispose()
