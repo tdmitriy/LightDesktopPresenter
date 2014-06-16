@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.ImageView;
@@ -42,6 +43,9 @@ public class LdpCursorView extends ImageView implements ICursorView {
     private LdpProtocolPacketFactory packetFactory;
     private LdpMouseInfoResponse mouseInfoResponse;
     private LdpPacket packet;
+
+
+    private boolean isDragging = false;
 
     public LdpCursorView(Context context) {
         super(context);
@@ -131,6 +135,12 @@ public class LdpCursorView extends ImageView implements ICursorView {
         scrollTo(scrollX, scrollY);
     }
 
+
+    private static final long TIME_TO_MOVE_CURSOR = 90;
+    private long startTimeToMove;
+    private long durationMove;
+    private boolean actionMoveCursor = false;
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         gestureDetector.onTouchEvent(event);
@@ -139,19 +149,35 @@ public class LdpCursorView extends ImageView implements ICursorView {
                 x_prev = event.getX();
                 y_prev = event.getY();
 
+                actionMoveCursor = true;
+                startTimeToMove = System.currentTimeMillis();
+                break;
+            case MotionEvent.ACTION_UP:
+                durationMove = System.currentTimeMillis() - startTimeToMove;
+                actionMoveCursor = durationMove > TIME_TO_MOVE_CURSOR;
                 break;
             case MotionEvent.ACTION_MOVE:
-                computeScroll(x_prev, y_prev, event);
 
-                invalidate();
+                durationMove = System.currentTimeMillis() - startTimeToMove;
+                if (durationMove <= TIME_TO_MOVE_CURSOR) {
+                    actionMoveCursor = false;
+                } else {
+                    actionMoveCursor = true;
+                }
 
-                x_prev = event.getX();
-                y_prev = event.getY();
 
-                desktopCursorX = canvasCursorX * coefX;
-                desktopCursorY = canvasCursorY * coefY;
+                if (actionMoveCursor) {
+                    computeScroll(x_prev, y_prev, event);
 
-                sendCursorInfoPacket(MouseType.SET_CURSOR_POS);
+                    invalidate();
+                    x_prev = event.getX();
+                    y_prev = event.getY();
+
+                    desktopCursorX = canvasCursorX * coefX;
+                    desktopCursorY = canvasCursorY * coefY;
+
+                    sendCursorInfoPacket(MouseType.SET_CURSOR_POS);
+                }
                 break;
         }
         return true;
@@ -164,10 +190,10 @@ public class LdpCursorView extends ImageView implements ICursorView {
         int y = getDesktopCursorY();
 
         if (x < 0) x = 0;
-        if (x > rmdWidth) x = (int)rmdWidth;
+        if (x > rmdWidth) x = (int) rmdWidth;
 
-        if (y < 0) y = (int)rmdHeight;
-        if (y > rmdHeight) y = (int)rmdHeight;
+        if (y < 0) y = (int) rmdHeight;
+        if (y > rmdHeight) y = (int) rmdHeight;
 
         mouseInfoResponse = packetFactory
                 .setMouseInfoResponse(x, y, type);
@@ -214,26 +240,50 @@ public class LdpCursorView extends ImageView implements ICursorView {
 
     private final class GestureListener extends GestureDetector.SimpleOnGestureListener {
 
+        private static final int TIME_TO_DOUBLE_TAP = 100;
+        private long startDoubleTapTime = 0;
+        private long resultDoubleTapTime = 0;
+
         @Override
         public boolean onSingleTapConfirmed(MotionEvent ev) {
-            /*Toast.makeText(context, "Single tap. X=" + getDesktopCursorX() +
-                    ", Y=" + getDesktopCursorY(), Toast.LENGTH_SHORT).show();*/
+
             sendCursorInfoPacket(MouseType.LEFT_CLICK);
             return true;
         }
 
         @Override
-        public boolean onDoubleTap(MotionEvent e) {
-            /*Toast.makeText(context, "Double tap. X=" + getDesktopCursorX() +
-                    ", Y=" + getDesktopCursorY(), Toast.LENGTH_SHORT).show();*/
-            sendCursorInfoPacket(MouseType.LEFT_DOUBLE_CLICK);
-            return true;
+        public void onLongPress(MotionEvent e) {
+            if (!isDragging)
+                sendCursorInfoPacket(MouseType.RIGHT_CLICK);
         }
 
         @Override
-        public void onLongPress(MotionEvent e) {
-            //Toast.makeText(context, "On Long Press.", Toast.LENGTH_SHORT).show();
-            sendCursorInfoPacket(MouseType.RIGHT_CLICK);
+        public boolean onDoubleTapEvent(MotionEvent e) {
+            switch (e.getAction()) {
+                case MotionEvent.ACTION_UP:
+                    resultDoubleTapTime = System.currentTimeMillis() - startDoubleTapTime;
+                    if (resultDoubleTapTime <= TIME_TO_DOUBLE_TAP) {
+                        //Log.i("", "EndDragging");
+                        sendCursorInfoPacket(MouseType.LEFT_BTN_UP);
+                        //Log.i("", "DoubleTap");
+                        sendCursorInfoPacket(MouseType.LEFT_CLICK);
+                        isDragging = false;
+                    } else {
+                        //Log.i("", "EndDragging");
+                        sendCursorInfoPacket(MouseType.LEFT_BTN_UP);
+                        isDragging = false;
+                    }
+                    break;
+
+                case MotionEvent.ACTION_DOWN:
+                    startDoubleTapTime = System.currentTimeMillis();
+                    //Log.i("", "BeginDragging");
+                    isDragging = true;
+                    sendCursorInfoPacket(MouseType.LEFT_BTN_DOWN);
+                    break;
+
+            }
+            return true;
         }
     }
 }

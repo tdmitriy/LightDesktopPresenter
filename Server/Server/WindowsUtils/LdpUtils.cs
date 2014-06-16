@@ -24,13 +24,13 @@ namespace Server.WindowsUtils
         {
             get
             {
-                Version win7version = new Version(6, 1);
-                if (os.Platform == PlatformID.Win32NT &&
-                    vs == win7version)
+                if (os.Platform == PlatformID.Win32NT)
                 {
-                    //it's win7
-                    return true;
+                    if (vs.Major == 6 && vs.Minor != 0)
+                        //it's win7
+                        return true;
                 }
+
                 return false;
             }
         }

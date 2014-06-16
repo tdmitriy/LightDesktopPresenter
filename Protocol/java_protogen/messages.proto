@@ -103,6 +103,8 @@ enum MouseType {
    RIGHT_CLICK = 2;
    LEFT_DOUBLE_CLICK = 3;
    SET_CURSOR_POS = 4;
+   LEFT_BTN_UP = 5;
+   LEFT_BTN_DOWN = 6;
 }
 
 enum PacketType {

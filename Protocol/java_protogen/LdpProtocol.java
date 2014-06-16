@@ -282,6 +282,14 @@ public final class LdpProtocol {
      * <code>SET_CURSOR_POS = 4;</code>
      */
     SET_CURSOR_POS(3, 4),
+    /**
+     * <code>LEFT_BTN_UP = 5;</code>
+     */
+    LEFT_BTN_UP(4, 5),
+    /**
+     * <code>LEFT_BTN_DOWN = 6;</code>
+     */
+    LEFT_BTN_DOWN(5, 6),
     ;
 
     /**
@@ -300,6 +308,14 @@ public final class LdpProtocol {
      * <code>SET_CURSOR_POS = 4;</code>
      */
     public static final int SET_CURSOR_POS_VALUE = 4;
+    /**
+     * <code>LEFT_BTN_UP = 5;</code>
+     */
+    public static final int LEFT_BTN_UP_VALUE = 5;
+    /**
+     * <code>LEFT_BTN_DOWN = 6;</code>
+     */
+    public static final int LEFT_BTN_DOWN_VALUE = 6;
 
 
     public final int getNumber() { return value; }
@@ -310,6 +326,8 @@ public final class LdpProtocol {
         case 2: return RIGHT_CLICK;
         case 3: return LEFT_DOUBLE_CLICK;
         case 4: return SET_CURSOR_POS;
+        case 5: return LEFT_BTN_UP;
+        case 6: return LEFT_BTN_DOWN;
         default: return null;
       }
     }
@@ -10221,18 +10239,19 @@ public final class LdpProtocol {
       "nnectionType\022\032\n\026REMOTE_DESKTOP_CONTROL\020\001" +
       "\022\031\n\025REMOTE_VOLUME_CONTROL\020\002*T\n\021Disconnec",
       "tionType\022\017\n\013FROM_SERVER\020\001\022\026\n\022FROM_SCREEN" +
-      "_THREAD\020\002\022\026\n\022FROM_VOLUME_THREAD\020\003*W\n\tMou" +
+      "_THREAD\020\002\022\026\n\022FROM_VOLUME_THREAD\020\003*{\n\tMou" +
       "seType\022\016\n\nLEFT_CLICK\020\001\022\017\n\013RIGHT_CLICK\020\002\022" +
       "\025\n\021LEFT_DOUBLE_CLICK\020\003\022\022\n\016SET_CURSOR_POS" +
-      "\020\004*\302\002\n\nPacketType\022\020\n\014AUTH_REQUEST\020\001\022\021\n\rA" +
-      "UTH_RESPONSE\020\002\022\027\n\023CLIENT_INFO_REQUEST\020\003\022" +
-      "\033\n\027PREPARABLE_INFO_REQUEST\020\004\022$\n PREPARAB" +
-      "LE_DESKTOP_INFO_RESPONSE\020\005\022\022\n\016SCREEN_REQ" +
-      "UEST\020\006\022\023\n\017SCREEN_RESPONSE\020\007\022#\n\037PREPARABL" +
-      "E_VOLUME_INFO_RESPONSE\020\010\022\030\n\024VOLUME_INFO_",
-      "RESPONSE\020\t\022\027\n\023MOUSE_INFO_RESPONSE\020\n\022\032\n\026K" +
-      "EYBOARD_INFO_RESPONSE\020\013\022\026\n\022DISCONNECT_RE" +
-      "QUEST\020\014B\017B\013LdpProtocolH\001"
+      "\020\004\022\017\n\013LEFT_BTN_UP\020\005\022\021\n\rLEFT_BTN_DOWN\020\006*\302" +
+      "\002\n\nPacketType\022\020\n\014AUTH_REQUEST\020\001\022\021\n\rAUTH_" +
+      "RESPONSE\020\002\022\027\n\023CLIENT_INFO_REQUEST\020\003\022\033\n\027P" +
+      "REPARABLE_INFO_REQUEST\020\004\022$\n PREPARABLE_D" +
+      "ESKTOP_INFO_RESPONSE\020\005\022\022\n\016SCREEN_REQUEST" +
+      "\020\006\022\023\n\017SCREEN_RESPONSE\020\007\022#\n\037PREPARABLE_VO",
+      "LUME_INFO_RESPONSE\020\010\022\030\n\024VOLUME_INFO_RESP" +
+      "ONSE\020\t\022\027\n\023MOUSE_INFO_RESPONSE\020\n\022\032\n\026KEYBO" +
+      "ARD_INFO_RESPONSE\020\013\022\026\n\022DISCONNECT_REQUES" +
+      "T\020\014B\017B\013LdpProtocolH\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

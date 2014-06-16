@@ -67,19 +67,19 @@ public class LdpActivityRemoteDesktopBase extends Activity {
         cursorView = new LdpCursorView(this, backgroundW, backgroundH, remoteImageView);
         cursorView.setLayoutParams(new ViewGroup.LayoutParams(backgroundW, backgroundH));
 
-        Button settingsButton = new Button(this);
+        /*Button settingsButton = new Button(this);
         settingsButton.setText("Settings");
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         settingsButton.setGravity(Gravity.BOTTOM);
-        settingsButton.setLayoutParams(params);
+        settingsButton.setLayoutParams(params);*/
 
 
         ViewGroup root = (ViewGroup) findViewById(android.R.id.content);
         root.addView(remoteImageView);
         root.addView(cursorView);
-        root.addView(settingsButton);
+        //root.addView(settingsButton);
     }
 
     private void showKeyboard() {

@@ -83,6 +83,12 @@ namespace Server.RemoteDesktopSender
                 case MouseType.RIGHT_CLICK:
                     MouseRightClick();
                     break;
+                case MouseType.LEFT_BTN_DOWN:
+                    MouseLeftBtnDown();
+                    break;
+                case MouseType.LEFT_BTN_UP:
+                    MouseLeftBtnUp();
+                    break;
             }
         }
 
@@ -137,9 +143,24 @@ namespace Server.RemoteDesktopSender
             return currentMousePoint;
         }
 
+
+        public void MouseLeftBtnDown()
+        {
+            MousePoint position = GetCursorPosition();
+            mouse_event((int)MouseFlags.LeftDown, position.X, position.Y, 0, 0);
+        }
+
+        public void MouseLeftBtnUp()
+        {
+            MousePoint position = GetCursorPosition();
+            mouse_event((int)MouseFlags.LeftUp, position.X, position.Y, 0, 0);
+        }
+
         public void Dispose()
         {
             serverHandler = null;
         }
+
+
     }
 }

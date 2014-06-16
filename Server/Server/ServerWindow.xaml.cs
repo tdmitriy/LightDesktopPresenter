@@ -35,13 +35,8 @@ namespace Server
             server = LdpServer.GetInstance();
             labelStatus = LdpLabelStatus.GetInstance();
             lblConnectionStatus.DataContext = labelStatus;
-            //LdpUtils.CheckStartupWindowsVersion(this);
+            LdpUtils.CheckStartupWindowsVersion(this);
             StartServer();
-
-            //Binding LdpDisplayedConnectionInfo to label
-            
-            
-            //LdpProtoGenerator.GenerateProtoJava();
         }
 
         private void StartServer()

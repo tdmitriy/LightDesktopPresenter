@@ -17,6 +17,7 @@ namespace Server.ScreenGrabber
 
         private LdpScreenGrabberBase screenGrabber;
         private LdpScreenGrabberType type;
+        private static readonly object LOCK = new object();
         public LdpScreenGrabber()
         {
             LoadScreenGrabber();
@@ -51,7 +52,10 @@ namespace Server.ScreenGrabber
 
         public Bitmap GetScreenShot()
         {
-            return screenGrabber.GetScreenShot();
+            lock (LOCK)
+            {
+                return screenGrabber.GetScreenShot();
+            }
         }
 
         public void Dispose()

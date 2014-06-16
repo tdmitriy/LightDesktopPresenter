@@ -31,6 +31,7 @@ namespace Server.RemoteDesktopSender
         private static readonly int SCREEN_HEIGHT = LdpUtils.SCREEN_HEIGHT;
 
         private Thread ScreenProcessing;
+        private volatile bool interruptGrabbing = false;
         private static readonly object LOCK = new object();
         private int baseLenght;
         private byte[] origData, compressed;
@@ -54,6 +55,7 @@ namespace Server.RemoteDesktopSender
             switch (packet.Type)
             {
                 case PacketType.SCREEN_REQUEST:
+                    interruptGrabbing = true;
                     ScreenProcessing = new Thread(() => GetScreen());
                     ScreenProcessing.Start();
                     break;
@@ -62,6 +64,7 @@ namespace Server.RemoteDesktopSender
                     switch (result.Type)
                     {
                         case DisconnectionType.FROM_SCREEN_THREAD:
+                            interruptGrabbing = false;
                             LdpLog.Info("Exiting screen thread.");
                             serverHandler.GetListenerChannel.RemoveListener(this);
                             break;
@@ -97,13 +100,16 @@ namespace Server.RemoteDesktopSender
             {
                 Rectangle bounds = Rectangle.Empty;
 
-                while (bounds == Rectangle.Empty)
+                while (interruptGrabbing)
                 {
+                    
                     nextScreen = screenGrabber.GetScreenShot();
+                    if (nextScreen == null) break;
                     bounds = LdpScreenProcessingUtils.GetBoundingBoxForChanges(nextScreen, prevScreen);
 
                     if (bounds != Rectangle.Empty)
                     {
+                        interruptGrabbing = false;
                         CheckRectangleBounds(ref bounds);
                         difference = LdpScreenProcessingUtils.CopyRegion(nextScreen, bounds);
 
@@ -124,6 +130,7 @@ namespace Server.RemoteDesktopSender
                         rect = null;
                         origData = null;
                         compressed = null;
+                        
                     }
                     prevScreen = nextScreen;
                     try
@@ -137,6 +144,7 @@ namespace Server.RemoteDesktopSender
 
         public void Dispose()
         {
+            interruptGrabbing = false;
             serverHandler = null;
             screenResponse = null;
             packetFactory = null;
