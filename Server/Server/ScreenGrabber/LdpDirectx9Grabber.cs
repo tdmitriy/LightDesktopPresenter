@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.ExceptionServices;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -74,39 +76,51 @@ namespace Server.ScreenGrabber
             return GetDX9ScreenShot();
         }
 
+        [HandleProcessCorruptedStateExceptions]
+        [SecurityCritical]
         private Bitmap GetDX9ScreenShot()
         {
-            screenShot = null;
-            screenShot = new System.Drawing.Bitmap(WIDTH, HEIGHT, pixelFormat);
-            dx9ScreenSurface = SharpDX.Direct3D9.Surface.CreateOffscreenPlain(
-            dx9Device,
-            WIDTH,
-            HEIGHT,
-            SharpDX.Direct3D9.Format.A8R8G8B8,
-            Pool.SystemMemory);
-
-            dx9Device.GetFrontBufferData(0, dx9ScreenSurface);
-
-            dx9Map = dx9ScreenSurface.LockRectangle(LockFlags.None);
-            bmpData = screenShot.LockBits(boundsRect,
-                System.Drawing.Imaging.ImageLockMode.WriteOnly, screenShot.PixelFormat);
-
-            var sourcePtr = dx9Map.DataPointer;
-            var destPtr = bmpData.Scan0;
-            for (int y = 0; y < HEIGHT; y++)
+            try
             {
-                // Copy a single line 
-                Utilities.CopyMemory(destPtr, sourcePtr, ARGB_WIDTH);
-                // Advance pointers
-                sourcePtr = IntPtr.Add(sourcePtr, dx9Map.Pitch);
-                destPtr = IntPtr.Add(destPtr, bmpData.Stride);
-            }
+                screenShot = null;
+                screenShot = new System.Drawing.Bitmap(WIDTH, HEIGHT, pixelFormat);
+                dx9ScreenSurface = SharpDX.Direct3D9.Surface.CreateOffscreenPlain(
+                dx9Device,
+                WIDTH,
+                HEIGHT,
+                SharpDX.Direct3D9.Format.A8R8G8B8,
+                Pool.SystemMemory);
 
-            screenShot.UnlockBits(bmpData);
-            dx9ScreenSurface.UnlockRectangle();
-            dx9ScreenSurface.Dispose();
-            bmpData = null;
-            return screenShot;
+                dx9Device.GetFrontBufferData(0, dx9ScreenSurface);
+
+                dx9Map = dx9ScreenSurface.LockRectangle(LockFlags.None);
+                bmpData = screenShot.LockBits(boundsRect,
+                    System.Drawing.Imaging.ImageLockMode.WriteOnly, screenShot.PixelFormat);
+
+                var sourcePtr = dx9Map.DataPointer;
+                var destPtr = bmpData.Scan0;
+                for (int y = 0; y < HEIGHT; y++)
+                {
+                    // Copy a single line 
+                    Utilities.CopyMemory(destPtr, sourcePtr, ARGB_WIDTH);
+                    // Advance pointers
+                    sourcePtr = IntPtr.Add(sourcePtr, dx9Map.Pitch);
+                    destPtr = IntPtr.Add(destPtr, bmpData.Stride);
+                }
+
+                screenShot.UnlockBits(bmpData);
+                dx9ScreenSurface.UnlockRectangle();
+                dx9ScreenSurface.Dispose();
+                bmpData = null;
+                GC.Collect();
+                return screenShot;
+            }
+            catch (Exception ex)
+            {
+                LdpLog.Error("GetDX9ScreenShot error.\n" + ex.Message);
+                return screenShot = null;
+            }
+            
         }
 
         public override void Dispose()

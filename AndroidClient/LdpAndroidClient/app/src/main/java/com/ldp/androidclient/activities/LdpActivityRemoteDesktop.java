@@ -1,7 +1,6 @@
 package com.ldp.androidclient.activities;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,11 +12,10 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 import com.ldp.androidclient.R;
-import com.ldp.androidclient.controls.LdpMessageBox;
 import com.ldp.androidclient.network.ILdpPacketHandler;
 import com.ldp.androidclient.protocol.LdpProtocol.*;
 import com.ldp.androidclient.protocol.LdpProtocolPacketFactory;
-import com.ldp.androidclient.screen_scaling_settings.LdpScreenScalingSettings;
+import com.ldp.androidclient.screen_utils.LdpScreenScalingSettings;
 import com.ldp.androidclient.tcp_client.LdpClient;
 import com.ldp.androidclient.image_processing.LdpImageProcessor;
 
@@ -90,7 +88,7 @@ public class LdpActivityRemoteDesktop extends LdpActivityRemoteDesktopBase
                     scalingSettings.getCanvasHeight(), Bitmap.Config.ARGB_8888);
 
             canvas = new Canvas(background);
-            initializeContent(background);
+            initializeMainControls(background);
 
             paint = new Paint();
             paint.setStyle(Paint.Style.STROKE);

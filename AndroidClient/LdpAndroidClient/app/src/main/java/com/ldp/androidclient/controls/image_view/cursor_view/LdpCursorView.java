@@ -59,10 +59,12 @@ public class LdpCursorView extends ImageView implements ICursorView {
         super(context, attrs, defStyle);
     }
 
-    public LdpCursorView(Context context, int canvasW, int canvasH, LdpRemoteImageView remoteImageView) {
+    /*public LdpCursorView(Context context, int canvasW, int canvasH, LdpRemoteImageView remoteImageView) {
         super(context);
-        clientHandler = LdpClient.getInstance();
-        packetFactory = new LdpProtocolPacketFactory();
+
+    }*/
+
+    public void prepareView(Context context, int canvasW, int canvasH, LdpRemoteImageView remoteImageView) {
         this.context = context;
         this.remoteImageView = remoteImageView;
         this.canvasW = canvasW;
@@ -72,6 +74,9 @@ public class LdpCursorView extends ImageView implements ICursorView {
 
 
     private void initializeComponents() {
+        clientHandler = LdpClient.getInstance();
+        packetFactory = new LdpProtocolPacketFactory();
+
         DisplayMetrics dm = getResources().getDisplayMetrics();
         screenW = dm.widthPixels;
         screenH = dm.heightPixels;

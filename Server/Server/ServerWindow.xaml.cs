@@ -21,13 +21,17 @@ using Server.Properties;
 using Server.ProtoGeneration;
 using System.Text.RegularExpressions;
 using MahApps.Metro.Controls;
+using System.Runtime.ExceptionServices;
+using System.Security;
 
 namespace Server
 {
+    
     public partial class ServerWindow : MetroWindow
     {
         private LdpServer server;
         private LdpLabelStatus labelStatus;
+        private bool OS_SUPPORTED = false;
         public ServerWindow()
         {
             
@@ -35,8 +39,9 @@ namespace Server
             server = LdpServer.GetInstance();
             labelStatus = LdpLabelStatus.GetInstance();
             lblConnectionStatus.DataContext = labelStatus;
-            LdpUtils.CheckStartupWindowsVersion(this);
-            StartServer();
+            OS_SUPPORTED = LdpUtils.CheckStartupWindowsVersion(this);
+            if (OS_SUPPORTED)
+                StartServer();
         }
 
         private void StartServer()
@@ -56,18 +61,24 @@ namespace Server
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
-            if (MessageBox.Show("Close server?", "Question", 
-                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (OS_SUPPORTED)
             {
-                StopServer();
-                e.Cancel = false;
-                base.OnClosing(e);       
+                if (MessageBox.Show("Close server?", "Question",
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    StopServer();
+                    e.Cancel = false;
+                }
+                else
+                {
+                    e.Cancel = true;
+                    return;
+                }
             }
             else
-            {
-                e.Cancel = true;
-                return;
-            }
+                e.Cancel = false;
+            base.OnClosing(e);
+
         }
 
         private void btnAbout_Click(object sender, RoutedEventArgs e)
@@ -80,6 +91,11 @@ namespace Server
         {
             Password_form password_form = new Password_form();
             password_form.ShowDialog();
+        }
+
+        private void btnFile_Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

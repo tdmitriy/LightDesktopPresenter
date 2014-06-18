@@ -11,6 +11,9 @@ using System.Text;
 using System.Threading.Tasks;
 using LZ4;
 using System.Threading;
+using Server.RemoteDesktopSender.MouseController;
+using Server.RemoteDesktopSender.KeyboardController;
+using Server.RemoteDesktopSender.CommandsController;
 
 namespace Server.RemoteDesktopSender
 {
@@ -30,21 +33,25 @@ namespace Server.RemoteDesktopSender
         private static readonly int SCREEN_WIDTH = LdpUtils.SCREEN_WIDTH;
         private static readonly int SCREEN_HEIGHT = LdpUtils.SCREEN_HEIGHT;
 
-        private Thread ScreenProcessing;
-        private volatile bool interruptGrabbing = false;
+        private bool interruptGrabbing = false;
         private static readonly object LOCK = new object();
         private int baseLenght;
         private byte[] origData, compressed;
         private LdpRectangle.Builder rect;
-        private static readonly int SLEEP_TIME = 10;
         #endregion
 
+
         private LdpMouseController mouseController;
+        private LdpKeyboardController keyboardController;
+        private LdpCommandController commander;
+        private static Thread ScreenThread;
         public LdpRemoteDesktopSender()
         {
             serverHandler = LdpServer.GetInstance();
             serverHandler.GetListenerChannel.AddListener(this);
             mouseController = new LdpMouseController();
+            keyboardController = new LdpKeyboardController();
+            commander = new LdpCommandController();
 
             packetFactory = new LdpProtocolPacketFactory();
             screenGrabber = new LdpScreenGrabber();
@@ -55,9 +62,14 @@ namespace Server.RemoteDesktopSender
             switch (packet.Type)
             {
                 case PacketType.SCREEN_REQUEST:
-                    interruptGrabbing = true;
-                    ScreenProcessing = new Thread(() => GetScreen());
-                    ScreenProcessing.Start();
+                        /*ThreadPool.QueueUserWorkItem(new WaitCallback((s) =>
+                        {
+                            GetScreen();
+                        }));*/
+                    //if (ScreenThread != null && ScreenThread.IsAlive)
+                        //ScreenThread.Join();
+                    ScreenThread = new Thread(() => GetScreen());
+                    ScreenThread.Start();
                     break;
                 case PacketType.DISCONNECT_REQUEST:
                     var result = packet.DisconnectRequest;
@@ -98,46 +110,48 @@ namespace Server.RemoteDesktopSender
         {
             lock (LOCK)
             {
-                Rectangle bounds = Rectangle.Empty;
-
-                while (interruptGrabbing)
+                try
                 {
-                    
-                    nextScreen = screenGrabber.GetScreenShot();
-                    if (nextScreen == null) break;
-                    bounds = LdpScreenProcessingUtils.GetBoundingBoxForChanges(nextScreen, prevScreen);
+                    Rectangle bounds = Rectangle.Empty;
+                    interruptGrabbing = false;
 
-                    if (bounds != Rectangle.Empty)
+                    while (!interruptGrabbing)
                     {
-                        interruptGrabbing = false;
-                        CheckRectangleBounds(ref bounds);
-                        difference = LdpScreenProcessingUtils.CopyRegion(nextScreen, bounds);
 
-                        origData = LdpScreenProcessingUtils.ImageToByteArray(difference);
-                        baseLenght = origData.Length;
-                        compressed = LZ4Codec.Encode(origData, 0, baseLenght);
+                        nextScreen = screenGrabber.GetScreenShot();
+                        if (nextScreen == null) break;
+                        bounds = LdpScreenProcessingUtils.GetBoundingBoxForChanges(nextScreen, prevScreen);
 
-                        rect = LdpRectangle.CreateBuilder();
-                        rect.Left = bounds.Left;
-                        rect.Top = bounds.Top;
-                        rect.Right = bounds.Right;
-                        rect.Bottom = bounds.Bottom;
+                        if (bounds != Rectangle.Empty)
+                        {
+                            interruptGrabbing = true;
+                            CheckRectangleBounds(ref bounds);
+                            difference = LdpScreenProcessingUtils.CopyRegion(nextScreen, bounds);
 
-                        SendScreenResponse(compressed, baseLenght, rect);
+                            origData = LdpScreenProcessingUtils.ImageToByteArray(difference);
+                            baseLenght = origData.Length;
+                            compressed = LZ4Codec.Encode(origData, 0, baseLenght);
 
-                        difference.Dispose();
-                        difference = null;
-                        rect = null;
-                        origData = null;
-                        compressed = null;
-                        
+                            rect = LdpRectangle.CreateBuilder();
+                            rect.Left = bounds.Left;
+                            rect.Top = bounds.Top;
+                            rect.Right = bounds.Right;
+                            rect.Bottom = bounds.Bottom;
+
+                            SendScreenResponse(compressed, baseLenght, rect);
+
+                            difference.Dispose();
+                            difference = null;
+                            rect = null;
+                            origData = null;
+                            compressed = null;
+                        }
+                        prevScreen = nextScreen;
                     }
-                    prevScreen = nextScreen;
-                    try
-                    {
-                        Thread.Sleep(SLEEP_TIME);
-                    }
-                    catch { }
+                }
+                catch (Exception ex)
+                {
+                    LdpLog.Error("GetScreen thrown:\n" + ex.Message);
                 }
             }
         }
@@ -152,13 +166,18 @@ namespace Server.RemoteDesktopSender
 
             try
             {
-                if (ScreenProcessing != null)
-                    ScreenProcessing.Abort();
+                if (ScreenThread != null && ScreenThread.IsAlive)
+                    ScreenThread.Abort();
             }
             catch { }
-           
             mouseController.Dispose();
             mouseController = null;
+
+            keyboardController.Dispose();
+            keyboardController = null;
+
+            commander.Dispose();
+            commander = null;
 
             screenGrabber.Dispose();
             screenGrabber = null;

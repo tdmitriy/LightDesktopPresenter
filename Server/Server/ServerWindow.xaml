@@ -29,9 +29,9 @@
     <Grid Background="#FFECEAEA">
         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Top">
-                <Menu Background="#FFECEAEA" >
+                <Menu Background="#FFECEAEA">
                     <MenuItem Header="_File">
-                        <MenuItem Header="_Close"/>
+                        <MenuItem Header="_Close" Click="btnFile_Close_Click"/>
                     </MenuItem>
                     <MenuItem Header="_Settings">
                         <MenuItem Header="_Set password" Click="btnSetPassword_Click"/>

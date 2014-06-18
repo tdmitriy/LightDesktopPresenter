@@ -56,6 +56,19 @@ public class LdpProtocolPacketFactory {
                 .build();
     }
 
+    public LdpKeyboardInfoResponse setKeyboardInfoResponse(String text, KeyboardKey type) {
+        return LdpKeyboardInfoResponse.newBuilder()
+                .setType(type)
+                .setKey(text)
+                .build();
+    }
+
+    public LdpCommand setLdpCommand(CommandType type) {
+        return LdpCommand.newBuilder()
+                .setType(type)
+                .build();
+    }
+
     public LdpPacket buildPacket(LdpScreenRequest screenRequest) {
         return LdpPacket.newBuilder()
                 .setType(PacketType.SCREEN_REQUEST)
@@ -101,6 +114,20 @@ public class LdpProtocolPacketFactory {
         return LdpPacket.newBuilder()
                 .setType(PacketType.VOLUME_INFO_RESPONSE)
                 .setVolumeInfoResponse(builder)
+                .build();
+    }
+
+    public LdpPacket buildPacket(LdpKeyboardInfoResponse builder) {
+        return LdpPacket.newBuilder()
+                .setType(PacketType.KEYBOARD_INFO_RESPONSE)
+                .setKeyboardInfoResponse(builder)
+                .build();
+    }
+
+    public LdpPacket buildPacket(LdpCommand builder) {
+        return LdpPacket.newBuilder()
+                .setType(PacketType.COMMAND)
+                .setCommand(builder)
                 .build();
     }
 }

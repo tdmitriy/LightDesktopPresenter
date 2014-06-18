@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Runtime.ExceptionServices;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,7 +28,6 @@ namespace Server.ScreenGrabber
 
         #region DX11Constants
         private const int NEXT_FRAME_TIMEOUT = 4000;
-        private static ushort MAX_TRYING_ATTEMPS = 0;
         private static SharpDX.Direct3D11.Device dx11Device;
         private static SharpDX.DXGI.Factory1 dx11Factory;
         private static SharpDX.Direct3D11.Texture2DDescription dx11Texture2Ddescr;
@@ -97,6 +98,8 @@ namespace Server.ScreenGrabber
             return GetDX11ScreenShot();
         }
 
+        [HandleProcessCorruptedStateExceptions]
+        [SecurityCritical]
         private Bitmap GetDX11ScreenShot()
         {
             try
@@ -114,7 +117,7 @@ namespace Server.ScreenGrabber
                         dx11ScreenTexture);
 
                     // cast from texture to surface, so we can access its bytes
-                                        dx11ScreenSurface = dx11ScreenTexture.QueryInterface<SharpDX.DXGI.Surface>();
+                    dx11ScreenSurface = dx11ScreenTexture.QueryInterface<SharpDX.DXGI.Surface>();
                     // map the resource to access it
                     dx11Map = dx11ScreenSurface.Map(SharpDX.DXGI.MapFlags.Read);
                     bmpData = screenShot.LockBits(boundsRect, ImageLockMode.WriteOnly, screenShot.PixelFormat);
@@ -129,6 +132,7 @@ namespace Server.ScreenGrabber
                         destPtr = IntPtr.Add(destPtr, bmpData.Stride);
                     }
 
+                    dx11Device.ImmediateContext.UnmapSubresource(dx11ScreenTexture, 0);
                     screenShot.UnlockBits(bmpData);
                     dx11ScreenSurface.Unmap();
                     dx11ScreenSurface.Dispose();
@@ -136,7 +140,7 @@ namespace Server.ScreenGrabber
                     dx11DuplicatedOutput.ReleaseFrame();
                 }
                 else return screenShot = null;
-                
+
                 dx11ScreenSurface = null;
                 bmpData = null;
                 GC.Collect();
@@ -151,18 +155,12 @@ namespace Server.ScreenGrabber
                     LdpLog.Warning("DX11 surface timeout.. Recursion is coming:)");
                     return GetDX11ScreenShot();
                 }
-                else
-                {
-                    if (MAX_TRYING_ATTEMPS < 5)
-                    {
-                        MAX_TRYING_ATTEMPS++;
-                        LdpLog.Error("GetDX11ScreenShot\n" + e.Message + "\nMaxAttemps=" + MAX_TRYING_ATTEMPS);
-                        return GetDX11ScreenShot();
-                    }
-                    else
-                        return null;
-
-                }
+                else { return screenShot = null; }
+            }
+            catch (Exception ex)
+            {
+                LdpLog.Error("GetDX11ScreenShot\n" + ex.Message);
+                return screenShot = null;
             }
 
         }

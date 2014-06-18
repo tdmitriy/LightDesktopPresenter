@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Server.Network.Handlers
@@ -48,8 +49,8 @@ namespace Server.Network.Handlers
                                 LdpUtils.SCREEN_HEIGHT);
             var responsePacket = packetFactory.BuildPacket(response);
             serverHandler.GetSenderChannel.Send(responsePacket);
-
             var remoteDesktopSender = new LdpRemoteDesktopSender();
+            
             serverHandler.GetListenerChannel.RemoveListener(this);
         }
 

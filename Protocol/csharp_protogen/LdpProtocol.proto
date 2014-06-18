@@ -19,13 +19,18 @@ message LdpDisconnectRequest {
 }
 
 message LdpKeyboardInfoResponse {
-   optional string Key = 1;
+   required KeyboardKey Type = 1;
+   optional string Key = 2;
 }
 
 message LdpMouseInfoResponse {
    required MouseType Type = 1;
    optional int32 X = 2;
    optional int32 Y = 3;
+}
+
+message LdpCommand {
+   required CommandType Type = 1;
 }
 
 message LdpPacket {
@@ -42,6 +47,7 @@ message LdpPacket {
    optional LdpKeyboardInfoResponse KeyboardInfoResponse = 11;
    optional LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;
    optional LdpVolumeInfoResponse VolumeInfoResponse = 13;
+   optional LdpCommand Command = 14;
 }
 
 message LdpPreparableInfoRequest {
@@ -81,6 +87,12 @@ message LdpVolumeInfoResponse {
 	optional bool IsMute = 3;
 }
 
+enum CommandType {
+   SHOW_WINDOWS_KEYBOARD = 1;
+   REBOOT_PC = 2;
+   TURN_OFF_PC = 3;
+}
+
 enum VolumeInfoType {
 	VOLUME = 1;
 	MUTE = 2;
@@ -95,6 +107,12 @@ enum DisconnectionType {
    FROM_SERVER = 1;
    FROM_SCREEN_THREAD = 2;
    FROM_VOLUME_THREAD = 3;
+}
+
+enum KeyboardKey {
+	KEY_DEL = 1;
+	KEY_ENTER = 2;
+	KEY_TEXT = 3;
 }
 
 enum MouseType {
@@ -119,4 +137,5 @@ enum PacketType {
    MOUSE_INFO_RESPONSE = 10;
    KEYBOARD_INFO_RESPONSE = 11;
    DISCONNECT_REQUEST = 12;
+   COMMAND = 13;
 }

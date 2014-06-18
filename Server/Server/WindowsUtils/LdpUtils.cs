@@ -26,7 +26,7 @@ namespace Server.WindowsUtils
             {
                 if (os.Platform == PlatformID.Win32NT)
                 {
-                    if (vs.Major == 6 && vs.Minor != 0)
+                    if (vs.Major == 6 && vs.Minor == 1)
                         //it's win7
                         return true;
                 }
@@ -39,34 +39,34 @@ namespace Server.WindowsUtils
         {
             get
             {
-                Version win8version = new Version(6, 2);
-                if (os.Platform == PlatformID.Win32NT &&
-                    vs >= win8version)
+                if (os.Platform == PlatformID.Win32NT)
                 {
-                    //it's win8 or higher.
-                    return true;
+                    if (vs.Major == 6 && vs.Minor >= 2)
+                        //it's win8 or higher
+                        return true;
                 }
                 return false;
             }
         }
 
-        public static void CheckStartupWindowsVersion(ServerWindow window)
+        public static bool CheckStartupWindowsVersion(ServerWindow window)
         {
             if (LdpUtils.IsWindows7)
             {
-                MessageBox.Show("7");
-                return;
+                LdpLog.Info("Current OS: Windows 7.");
+                return true;
             }
             else if (LdpUtils.IsWindows8)
             {
-                MessageBox.Show("8");
-                return;
+                LdpLog.Info("Current OS: Windows 8.");
+                return true;
             }
             else
             {
                 MessageBox.Show("Unsuported windows version.\nWorks only on Windows 7 or higher..",
                     "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 window.Close();
+                return false;
             }
         }
         #endregion

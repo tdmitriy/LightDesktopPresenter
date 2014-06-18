@@ -1,4 +1,4 @@
-package com.ldp.androidclient.screen_scaling_settings;
+package com.ldp.androidclient.screen_utils;
 
 public interface ILdpScreenScalingSettings {
     int getDesktopWidth();

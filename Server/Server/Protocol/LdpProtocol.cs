@@ -28,6 +28,8 @@ namespace Server.Protocol {
     internal static pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpKeyboardInfoResponse, global::Server.Protocol.LdpKeyboardInfoResponse.Builder> internal__static_Server_Protocol_LdpKeyboardInfoResponse__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_Server_Protocol_LdpMouseInfoResponse__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpMouseInfoResponse, global::Server.Protocol.LdpMouseInfoResponse.Builder> internal__static_Server_Protocol_LdpMouseInfoResponse__FieldAccessorTable;
+    internal static pbd::MessageDescriptor internal__static_Server_Protocol_LdpCommand__Descriptor;
+    internal static pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpCommand, global::Server.Protocol.LdpCommand.Builder> internal__static_Server_Protocol_LdpCommand__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_Server_Protocol_LdpPacket__Descriptor;
     internal static pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPacket, global::Server.Protocol.LdpPacket.Builder> internal__static_Server_Protocol_LdpPacket__FieldAccessorTable;
     internal static pbd::MessageDescriptor internal__static_Server_Protocol_LdpPreparableInfoRequest__Descriptor;
@@ -58,56 +60,62 @@ namespace Server.Protocol {
           "ZRIRCglpc1N1Y2Nlc3MYASACKAgiQgoUTGRwQ2xpZW50SW5mb1JlcXVlc3QS" + 
           "CgoCSVAYASACKAkSCgoCT1MYAiACKAkSEgoKRGV2aWNlTmFtZRgDIAIoCSJI" + 
           "ChRMZHBEaXNjb25uZWN0UmVxdWVzdBIwCgRUeXBlGAEgAigOMiIuU2VydmVy" + 
-          "LlByb3RvY29sLkRpc2Nvbm5lY3Rpb25UeXBlIiYKF0xkcEtleWJvYXJkSW5m" + 
-          "b1Jlc3BvbnNlEgsKA0tleRgBIAEoCSJWChRMZHBNb3VzZUluZm9SZXNwb25z" + 
-          "ZRIoCgRUeXBlGAEgAigOMhouU2VydmVyLlByb3RvY29sLk1vdXNlVHlwZRIJ" + 
-          "CgFYGAIgASgFEgkKAVkYAyABKAUi5AYKCUxkcFBhY2tldBIpCgRUeXBlGAEg" + 
-          "AigOMhsuU2VydmVyLlByb3RvY29sLlBhY2tldFR5cGUSNAoLQXV0aFJlcXVl" + 
-          "c3QYAiABKAsyHy5TZXJ2ZXIuUHJvdG9jb2wuTGRwQXV0aFJlcXVlc3QSNgoM" + 
-          "QXV0aFJlc3BvbnNlGAMgASgLMiAuU2VydmVyLlByb3RvY29sLkxkcEF1dGhS" + 
-          "ZXNwb25zZRJAChFDbGllbnRJbmZvUmVxdWVzdBgEIAEoCzIlLlNlcnZlci5Q" + 
-          "cm90b2NvbC5MZHBDbGllbnRJbmZvUmVxdWVzdBJIChVQcmVwYXJhYmxlSW5m" + 
-          "b1JlcXVlc3QYBSABKAsyKS5TZXJ2ZXIuUHJvdG9jb2wuTGRwUHJlcGFyYWJs" + 
-          "ZUluZm9SZXF1ZXN0ElQKGVByZXBhcmFibGVEZXNrdG9wUmVzcG9uc2UYBiAB" + 
-          "KAsyMS5TZXJ2ZXIuUHJvdG9jb2wuTGRwUHJlcGFyYWJsZURlc2t0b3BJbmZv" + 
-          "UmVzcG9uc2USOAoNU2NyZWVuUmVxdWVzdBgHIAEoCzIhLlNlcnZlci5Qcm90" + 
-          "b2NvbC5MZHBTY3JlZW5SZXF1ZXN0EjoKDlNjcmVlblJlc3BvbnNlGAggASgL" + 
-          "MiIuU2VydmVyLlByb3RvY29sLkxkcFNjcmVlblJlc3BvbnNlEkAKEURpc2Nv" + 
-          "bm5lY3RSZXF1ZXN0GAkgASgLMiUuU2VydmVyLlByb3RvY29sLkxkcERpc2Nv" + 
-          "bm5lY3RSZXF1ZXN0EkAKEU1vdXNlSW5mb1Jlc3BvbnNlGAogASgLMiUuU2Vy" + 
-          "dmVyLlByb3RvY29sLkxkcE1vdXNlSW5mb1Jlc3BvbnNlEkYKFEtleWJvYXJk" + 
-          "SW5mb1Jlc3BvbnNlGAsgASgLMiguU2VydmVyLlByb3RvY29sLkxkcEtleWJv" + 
-          "YXJkSW5mb1Jlc3BvbnNlElYKHFByZXBhcmFibGVWb2x1bWVJbmZvUmVzcG9u" + 
-          "c2UYDCABKAsyMC5TZXJ2ZXIuUHJvdG9jb2wuTGRwUHJlcGFyYWJsZVZvbHVt" + 
-          "ZUluZm9SZXNwb25zZRJCChJWb2x1bWVJbmZvUmVzcG9uc2UYDSABKAsyJi5T" + 
-          "ZXJ2ZXIuUHJvdG9jb2wuTGRwVm9sdW1lSW5mb1Jlc3BvbnNlIkkKGExkcFBy" + 
-          "ZXBhcmFibGVJbmZvUmVxdWVzdBItCgRUeXBlGAEgAigOMh8uU2VydmVyLlBy" + 
-          "b3RvY29sLkNvbm5lY3Rpb25UeXBlIk0KIExkcFByZXBhcmFibGVEZXNrdG9w" + 
-          "SW5mb1Jlc3BvbnNlEhMKC1NjcmVlbldpZHRoGAEgASgFEhQKDFNjcmVlbkhl" + 
-          "aWdodBgCIAEoBSJICgxMZHBSZWN0YW5nbGUSDAoETGVmdBgBIAIoBRILCgNU" + 
-          "b3AYAiACKAUSDQoFUmlnaHQYAyACKAUSDgoGQm90dG9tGAQgAigFIhIKEExk" + 
-          "cFNjcmVlblJlcXVlc3QibgoRTGRwU2NyZWVuUmVzcG9uc2USGAoQQ29tcHJl" + 
-          "c3NlZFNjcmVlbhgBIAIoDBISCgpCYXNlTGVuZ2h0GAIgAigFEisKBFJlY3QY" + 
-          "AyACKAsyHS5TZXJ2ZXIuUHJvdG9jb2wuTGRwUmVjdGFuZ2xlIkEKH0xkcFBy" + 
-          "ZXBhcmFibGVWb2x1bWVJbmZvUmVzcG9uc2USDgoGVm9sdW1lGAEgASgFEg4K" + 
-          "BklzTXV0ZRgCIAEoCCJmChVMZHBWb2x1bWVJbmZvUmVzcG9uc2USLQoEVHlw" + 
-          "ZRgBIAIoDjIfLlNlcnZlci5Qcm90b2NvbC5Wb2x1bWVJbmZvVHlwZRIOCgZW" + 
-          "b2x1bWUYAiABKAUSDgoGSXNNdXRlGAMgASgIKiYKDlZvbHVtZUluZm9UeXBl" + 
-          "EgoKBlZPTFVNRRABEggKBE1VVEUQAipHCg5Db25uZWN0aW9uVHlwZRIaChZS" + 
-          "RU1PVEVfREVTS1RPUF9DT05UUk9MEAESGQoVUkVNT1RFX1ZPTFVNRV9DT05U" + 
-          "Uk9MEAIqVAoRRGlzY29ubmVjdGlvblR5cGUSDwoLRlJPTV9TRVJWRVIQARIW" + 
-          "ChJGUk9NX1NDUkVFTl9USFJFQUQQAhIWChJGUk9NX1ZPTFVNRV9USFJFQUQQ" + 
-          "Ayp7CglNb3VzZVR5cGUSDgoKTEVGVF9DTElDSxABEg8KC1JJR0hUX0NMSUNL" + 
-          "EAISFQoRTEVGVF9ET1VCTEVfQ0xJQ0sQAxISCg5TRVRfQ1VSU09SX1BPUxAE" + 
-          "Eg8KC0xFRlRfQlROX1VQEAUSEQoNTEVGVF9CVE5fRE9XThAGKsICCgpQYWNr" + 
-          "ZXRUeXBlEhAKDEFVVEhfUkVRVUVTVBABEhEKDUFVVEhfUkVTUE9OU0UQAhIX" + 
-          "ChNDTElFTlRfSU5GT19SRVFVRVNUEAMSGwoXUFJFUEFSQUJMRV9JTkZPX1JF" + 
-          "UVVFU1QQBBIkCiBQUkVQQVJBQkxFX0RFU0tUT1BfSU5GT19SRVNQT05TRRAF" + 
-          "EhIKDlNDUkVFTl9SRVFVRVNUEAYSEwoPU0NSRUVOX1JFU1BPTlNFEAcSIwof" + 
-          "UFJFUEFSQUJMRV9WT0xVTUVfSU5GT19SRVNQT05TRRAIEhgKFFZPTFVNRV9J" + 
-          "TkZPX1JFU1BPTlNFEAkSFwoTTU9VU0VfSU5GT19SRVNQT05TRRAKEhoKFktF" + 
-          "WUJPQVJEX0lORk9fUkVTUE9OU0UQCxIWChJESVNDT05ORUNUX1JFUVVFU1QQ" + 
-          "DEICSAE=");
+          "LlByb3RvY29sLkRpc2Nvbm5lY3Rpb25UeXBlIlIKF0xkcEtleWJvYXJkSW5m" + 
+          "b1Jlc3BvbnNlEioKBFR5cGUYASACKA4yHC5TZXJ2ZXIuUHJvdG9jb2wuS2V5" + 
+          "Ym9hcmRLZXkSCwoDS2V5GAIgASgJIlYKFExkcE1vdXNlSW5mb1Jlc3BvbnNl" + 
+          "EigKBFR5cGUYASACKA4yGi5TZXJ2ZXIuUHJvdG9jb2wuTW91c2VUeXBlEgkK" + 
+          "AVgYAiABKAUSCQoBWRgDIAEoBSI4CgpMZHBDb21tYW5kEioKBFR5cGUYASAC" + 
+          "KA4yHC5TZXJ2ZXIuUHJvdG9jb2wuQ29tbWFuZFR5cGUikgcKCUxkcFBhY2tl" + 
+          "dBIpCgRUeXBlGAEgAigOMhsuU2VydmVyLlByb3RvY29sLlBhY2tldFR5cGUS" + 
+          "NAoLQXV0aFJlcXVlc3QYAiABKAsyHy5TZXJ2ZXIuUHJvdG9jb2wuTGRwQXV0" + 
+          "aFJlcXVlc3QSNgoMQXV0aFJlc3BvbnNlGAMgASgLMiAuU2VydmVyLlByb3Rv" + 
+          "Y29sLkxkcEF1dGhSZXNwb25zZRJAChFDbGllbnRJbmZvUmVxdWVzdBgEIAEo" + 
+          "CzIlLlNlcnZlci5Qcm90b2NvbC5MZHBDbGllbnRJbmZvUmVxdWVzdBJIChVQ" + 
+          "cmVwYXJhYmxlSW5mb1JlcXVlc3QYBSABKAsyKS5TZXJ2ZXIuUHJvdG9jb2wu" + 
+          "TGRwUHJlcGFyYWJsZUluZm9SZXF1ZXN0ElQKGVByZXBhcmFibGVEZXNrdG9w" + 
+          "UmVzcG9uc2UYBiABKAsyMS5TZXJ2ZXIuUHJvdG9jb2wuTGRwUHJlcGFyYWJs" + 
+          "ZURlc2t0b3BJbmZvUmVzcG9uc2USOAoNU2NyZWVuUmVxdWVzdBgHIAEoCzIh" + 
+          "LlNlcnZlci5Qcm90b2NvbC5MZHBTY3JlZW5SZXF1ZXN0EjoKDlNjcmVlblJl" + 
+          "c3BvbnNlGAggASgLMiIuU2VydmVyLlByb3RvY29sLkxkcFNjcmVlblJlc3Bv" + 
+          "bnNlEkAKEURpc2Nvbm5lY3RSZXF1ZXN0GAkgASgLMiUuU2VydmVyLlByb3Rv" + 
+          "Y29sLkxkcERpc2Nvbm5lY3RSZXF1ZXN0EkAKEU1vdXNlSW5mb1Jlc3BvbnNl" + 
+          "GAogASgLMiUuU2VydmVyLlByb3RvY29sLkxkcE1vdXNlSW5mb1Jlc3BvbnNl" + 
+          "EkYKFEtleWJvYXJkSW5mb1Jlc3BvbnNlGAsgASgLMiguU2VydmVyLlByb3Rv" + 
+          "Y29sLkxkcEtleWJvYXJkSW5mb1Jlc3BvbnNlElYKHFByZXBhcmFibGVWb2x1" + 
+          "bWVJbmZvUmVzcG9uc2UYDCABKAsyMC5TZXJ2ZXIuUHJvdG9jb2wuTGRwUHJl" + 
+          "cGFyYWJsZVZvbHVtZUluZm9SZXNwb25zZRJCChJWb2x1bWVJbmZvUmVzcG9u" + 
+          "c2UYDSABKAsyJi5TZXJ2ZXIuUHJvdG9jb2wuTGRwVm9sdW1lSW5mb1Jlc3Bv" + 
+          "bnNlEiwKB0NvbW1hbmQYDiABKAsyGy5TZXJ2ZXIuUHJvdG9jb2wuTGRwQ29t" + 
+          "bWFuZCJJChhMZHBQcmVwYXJhYmxlSW5mb1JlcXVlc3QSLQoEVHlwZRgBIAIo" + 
+          "DjIfLlNlcnZlci5Qcm90b2NvbC5Db25uZWN0aW9uVHlwZSJNCiBMZHBQcmVw" + 
+          "YXJhYmxlRGVza3RvcEluZm9SZXNwb25zZRITCgtTY3JlZW5XaWR0aBgBIAEo" + 
+          "BRIUCgxTY3JlZW5IZWlnaHQYAiABKAUiSAoMTGRwUmVjdGFuZ2xlEgwKBExl" + 
+          "ZnQYASACKAUSCwoDVG9wGAIgAigFEg0KBVJpZ2h0GAMgAigFEg4KBkJvdHRv" + 
+          "bRgEIAIoBSISChBMZHBTY3JlZW5SZXF1ZXN0Im4KEUxkcFNjcmVlblJlc3Bv" + 
+          "bnNlEhgKEENvbXByZXNzZWRTY3JlZW4YASACKAwSEgoKQmFzZUxlbmdodBgC" + 
+          "IAIoBRIrCgRSZWN0GAMgAigLMh0uU2VydmVyLlByb3RvY29sLkxkcFJlY3Rh" + 
+          "bmdsZSJBCh9MZHBQcmVwYXJhYmxlVm9sdW1lSW5mb1Jlc3BvbnNlEg4KBlZv" + 
+          "bHVtZRgBIAEoBRIOCgZJc011dGUYAiABKAgiZgoVTGRwVm9sdW1lSW5mb1Jl" + 
+          "c3BvbnNlEi0KBFR5cGUYASACKA4yHy5TZXJ2ZXIuUHJvdG9jb2wuVm9sdW1l" + 
+          "SW5mb1R5cGUSDgoGVm9sdW1lGAIgASgFEg4KBklzTXV0ZRgDIAEoCCpICgtD" + 
+          "b21tYW5kVHlwZRIZChVTSE9XX1dJTkRPV1NfS0VZQk9BUkQQARINCglSRUJP" + 
+          "T1RfUEMQAhIPCgtUVVJOX09GRl9QQxADKiYKDlZvbHVtZUluZm9UeXBlEgoK" + 
+          "BlZPTFVNRRABEggKBE1VVEUQAipHCg5Db25uZWN0aW9uVHlwZRIaChZSRU1P" + 
+          "VEVfREVTS1RPUF9DT05UUk9MEAESGQoVUkVNT1RFX1ZPTFVNRV9DT05UUk9M" + 
+          "EAIqVAoRRGlzY29ubmVjdGlvblR5cGUSDwoLRlJPTV9TRVJWRVIQARIWChJG" + 
+          "Uk9NX1NDUkVFTl9USFJFQUQQAhIWChJGUk9NX1ZPTFVNRV9USFJFQUQQAyo3" + 
+          "CgtLZXlib2FyZEtleRILCgdLRVlfREVMEAESDQoJS0VZX0VOVEVSEAISDAoI" + 
+          "S0VZX1RFWFQQAyp7CglNb3VzZVR5cGUSDgoKTEVGVF9DTElDSxABEg8KC1JJ" + 
+          "R0hUX0NMSUNLEAISFQoRTEVGVF9ET1VCTEVfQ0xJQ0sQAxISCg5TRVRfQ1VS" + 
+          "U09SX1BPUxAEEg8KC0xFRlRfQlROX1VQEAUSEQoNTEVGVF9CVE5fRE9XThAG" + 
+          "Ks8CCgpQYWNrZXRUeXBlEhAKDEFVVEhfUkVRVUVTVBABEhEKDUFVVEhfUkVT" + 
+          "UE9OU0UQAhIXChNDTElFTlRfSU5GT19SRVFVRVNUEAMSGwoXUFJFUEFSQUJM" + 
+          "RV9JTkZPX1JFUVVFU1QQBBIkCiBQUkVQQVJBQkxFX0RFU0tUT1BfSU5GT19S" + 
+          "RVNQT05TRRAFEhIKDlNDUkVFTl9SRVFVRVNUEAYSEwoPU0NSRUVOX1JFU1BP" + 
+          "TlNFEAcSIwofUFJFUEFSQUJMRV9WT0xVTUVfSU5GT19SRVNQT05TRRAIEhgK" + 
+          "FFZPTFVNRV9JTkZPX1JFU1BPTlNFEAkSFwoTTU9VU0VfSU5GT19SRVNQT05T" + 
+          "RRAKEhoKFktFWUJPQVJEX0lORk9fUkVTUE9OU0UQCxIWChJESVNDT05ORUNU" + 
+          "X1JFUVVFU1QQDBILCgdDT01NQU5EEA1CAkgB");
       pbd::FileDescriptor.InternalDescriptorAssigner assigner = delegate(pbd::FileDescriptor root) {
         descriptor = root;
         internal__static_Server_Protocol_LdpAuthRequest__Descriptor = Descriptor.MessageTypes[0];
@@ -129,40 +137,44 @@ namespace Server.Protocol {
         internal__static_Server_Protocol_LdpKeyboardInfoResponse__Descriptor = Descriptor.MessageTypes[4];
         internal__static_Server_Protocol_LdpKeyboardInfoResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpKeyboardInfoResponse, global::Server.Protocol.LdpKeyboardInfoResponse.Builder>(internal__static_Server_Protocol_LdpKeyboardInfoResponse__Descriptor,
-                new string[] { "Key", });
+                new string[] { "Type", "Key", });
         internal__static_Server_Protocol_LdpMouseInfoResponse__Descriptor = Descriptor.MessageTypes[5];
         internal__static_Server_Protocol_LdpMouseInfoResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpMouseInfoResponse, global::Server.Protocol.LdpMouseInfoResponse.Builder>(internal__static_Server_Protocol_LdpMouseInfoResponse__Descriptor,
                 new string[] { "Type", "X", "Y", });
-        internal__static_Server_Protocol_LdpPacket__Descriptor = Descriptor.MessageTypes[6];
+        internal__static_Server_Protocol_LdpCommand__Descriptor = Descriptor.MessageTypes[6];
+        internal__static_Server_Protocol_LdpCommand__FieldAccessorTable = 
+            new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpCommand, global::Server.Protocol.LdpCommand.Builder>(internal__static_Server_Protocol_LdpCommand__Descriptor,
+                new string[] { "Type", });
+        internal__static_Server_Protocol_LdpPacket__Descriptor = Descriptor.MessageTypes[7];
         internal__static_Server_Protocol_LdpPacket__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPacket, global::Server.Protocol.LdpPacket.Builder>(internal__static_Server_Protocol_LdpPacket__Descriptor,
-                new string[] { "Type", "AuthRequest", "AuthResponse", "ClientInfoRequest", "PreparableInfoRequest", "PreparableDesktopResponse", "ScreenRequest", "ScreenResponse", "DisconnectRequest", "MouseInfoResponse", "KeyboardInfoResponse", "PreparableVolumeInfoResponse", "VolumeInfoResponse", });
-        internal__static_Server_Protocol_LdpPreparableInfoRequest__Descriptor = Descriptor.MessageTypes[7];
+                new string[] { "Type", "AuthRequest", "AuthResponse", "ClientInfoRequest", "PreparableInfoRequest", "PreparableDesktopResponse", "ScreenRequest", "ScreenResponse", "DisconnectRequest", "MouseInfoResponse", "KeyboardInfoResponse", "PreparableVolumeInfoResponse", "VolumeInfoResponse", "Command", });
+        internal__static_Server_Protocol_LdpPreparableInfoRequest__Descriptor = Descriptor.MessageTypes[8];
         internal__static_Server_Protocol_LdpPreparableInfoRequest__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPreparableInfoRequest, global::Server.Protocol.LdpPreparableInfoRequest.Builder>(internal__static_Server_Protocol_LdpPreparableInfoRequest__Descriptor,
                 new string[] { "Type", });
-        internal__static_Server_Protocol_LdpPreparableDesktopInfoResponse__Descriptor = Descriptor.MessageTypes[8];
+        internal__static_Server_Protocol_LdpPreparableDesktopInfoResponse__Descriptor = Descriptor.MessageTypes[9];
         internal__static_Server_Protocol_LdpPreparableDesktopInfoResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPreparableDesktopInfoResponse, global::Server.Protocol.LdpPreparableDesktopInfoResponse.Builder>(internal__static_Server_Protocol_LdpPreparableDesktopInfoResponse__Descriptor,
                 new string[] { "ScreenWidth", "ScreenHeight", });
-        internal__static_Server_Protocol_LdpRectangle__Descriptor = Descriptor.MessageTypes[9];
+        internal__static_Server_Protocol_LdpRectangle__Descriptor = Descriptor.MessageTypes[10];
         internal__static_Server_Protocol_LdpRectangle__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpRectangle, global::Server.Protocol.LdpRectangle.Builder>(internal__static_Server_Protocol_LdpRectangle__Descriptor,
                 new string[] { "Left", "Top", "Right", "Bottom", });
-        internal__static_Server_Protocol_LdpScreenRequest__Descriptor = Descriptor.MessageTypes[10];
+        internal__static_Server_Protocol_LdpScreenRequest__Descriptor = Descriptor.MessageTypes[11];
         internal__static_Server_Protocol_LdpScreenRequest__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpScreenRequest, global::Server.Protocol.LdpScreenRequest.Builder>(internal__static_Server_Protocol_LdpScreenRequest__Descriptor,
                 new string[] { });
-        internal__static_Server_Protocol_LdpScreenResponse__Descriptor = Descriptor.MessageTypes[11];
+        internal__static_Server_Protocol_LdpScreenResponse__Descriptor = Descriptor.MessageTypes[12];
         internal__static_Server_Protocol_LdpScreenResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpScreenResponse, global::Server.Protocol.LdpScreenResponse.Builder>(internal__static_Server_Protocol_LdpScreenResponse__Descriptor,
                 new string[] { "CompressedScreen", "BaseLenght", "Rect", });
-        internal__static_Server_Protocol_LdpPreparableVolumeInfoResponse__Descriptor = Descriptor.MessageTypes[12];
+        internal__static_Server_Protocol_LdpPreparableVolumeInfoResponse__Descriptor = Descriptor.MessageTypes[13];
         internal__static_Server_Protocol_LdpPreparableVolumeInfoResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpPreparableVolumeInfoResponse, global::Server.Protocol.LdpPreparableVolumeInfoResponse.Builder>(internal__static_Server_Protocol_LdpPreparableVolumeInfoResponse__Descriptor,
                 new string[] { "Volume", "IsMute", });
-        internal__static_Server_Protocol_LdpVolumeInfoResponse__Descriptor = Descriptor.MessageTypes[13];
+        internal__static_Server_Protocol_LdpVolumeInfoResponse__Descriptor = Descriptor.MessageTypes[14];
         internal__static_Server_Protocol_LdpVolumeInfoResponse__FieldAccessorTable = 
             new pb::FieldAccess.FieldAccessorTable<global::Server.Protocol.LdpVolumeInfoResponse, global::Server.Protocol.LdpVolumeInfoResponse.Builder>(internal__static_Server_Protocol_LdpVolumeInfoResponse__Descriptor,
                 new string[] { "Type", "Volume", "IsMute", });
@@ -176,6 +188,12 @@ namespace Server.Protocol {
     
   }
   #region Enums
+  public enum CommandType {
+    SHOW_WINDOWS_KEYBOARD = 1,
+    REBOOT_PC = 2,
+    TURN_OFF_PC = 3,
+  }
+  
   public enum VolumeInfoType {
     VOLUME = 1,
     MUTE = 2,
@@ -190,6 +208,12 @@ namespace Server.Protocol {
     FROM_SERVER = 1,
     FROM_SCREEN_THREAD = 2,
     FROM_VOLUME_THREAD = 3,
+  }
+  
+  public enum KeyboardKey {
+    KEY_DEL = 1,
+    KEY_ENTER = 2,
+    KEY_TEXT = 3,
   }
   
   public enum MouseType {
@@ -214,6 +238,7 @@ namespace Server.Protocol {
     MOUSE_INFO_RESPONSE = 10,
     KEYBOARD_INFO_RESPONSE = 11,
     DISCONNECT_REQUEST = 12,
+    COMMAND = 13,
   }
   
   #endregion
@@ -1406,8 +1431,8 @@ namespace Server.Protocol {
   public sealed partial class LdpKeyboardInfoResponse : pb::GeneratedMessage<LdpKeyboardInfoResponse, LdpKeyboardInfoResponse.Builder> {
     private LdpKeyboardInfoResponse() { }
     private static readonly LdpKeyboardInfoResponse defaultInstance = new LdpKeyboardInfoResponse().MakeReadOnly();
-    private static readonly string[] _ldpKeyboardInfoResponseFieldNames = new string[] { "Key" };
-    private static readonly uint[] _ldpKeyboardInfoResponseFieldTags = new uint[] { 10 };
+    private static readonly string[] _ldpKeyboardInfoResponseFieldNames = new string[] { "Key", "Type" };
+    private static readonly uint[] _ldpKeyboardInfoResponseFieldTags = new uint[] { 18, 8 };
     public static LdpKeyboardInfoResponse DefaultInstance {
       get { return defaultInstance; }
     }
@@ -1428,7 +1453,17 @@ namespace Server.Protocol {
       get { return global::Server.Protocol.LdpProtocol.internal__static_Server_Protocol_LdpKeyboardInfoResponse__FieldAccessorTable; }
     }
     
-    public const int KeyFieldNumber = 1;
+    public const int TypeFieldNumber = 1;
+    private bool hasType;
+    private global::Server.Protocol.KeyboardKey type_ = global::Server.Protocol.KeyboardKey.KEY_DEL;
+    public bool HasType {
+      get { return hasType; }
+    }
+    public global::Server.Protocol.KeyboardKey Type {
+      get { return type_; }
+    }
+    
+    public const int KeyFieldNumber = 2;
     private bool hasKey;
     private string key_ = "";
     public bool HasKey {
@@ -1440,6 +1475,7 @@ namespace Server.Protocol {
     
     public override bool IsInitialized {
       get {
+        if (!hasType) return false;
         return true;
       }
     }
@@ -1447,8 +1483,11 @@ namespace Server.Protocol {
     public override void WriteTo(pb::ICodedOutputStream output) {
       int size = SerializedSize;
       string[] field_names = _ldpKeyboardInfoResponseFieldNames;
+      if (hasType) {
+        output.WriteEnum(1, field_names[1], (int) Type, Type);
+      }
       if (hasKey) {
-        output.WriteString(1, field_names[0], Key);
+        output.WriteString(2, field_names[0], Key);
       }
       UnknownFields.WriteTo(output);
     }
@@ -1460,8 +1499,11 @@ namespace Server.Protocol {
         if (size != -1) return size;
         
         size = 0;
+        if (hasType) {
+          size += pb::CodedOutputStream.ComputeEnumSize(1, (int) Type);
+        }
         if (hasKey) {
-          size += pb::CodedOutputStream.ComputeStringSize(1, Key);
+          size += pb::CodedOutputStream.ComputeStringSize(2, Key);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -1587,6 +1629,9 @@ namespace Server.Protocol {
       public override Builder MergeFrom(LdpKeyboardInfoResponse other) {
         if (other == global::Server.Protocol.LdpKeyboardInfoResponse.DefaultInstance) return this;
         PrepareBuilder();
+        if (other.HasType) {
+          Type = other.Type;
+        }
         if (other.HasKey) {
           Key = other.Key;
         }
@@ -1633,7 +1678,19 @@ namespace Server.Protocol {
               ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
               break;
             }
-            case 10: {
+            case 8: {
+              object unknown;
+              if(input.ReadEnum(ref result.type_, out unknown)) {
+                result.hasType = true;
+              } else if(unknown is int) {
+                if (unknownFields == null) {
+                  unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+                }
+                unknownFields.MergeVarintField(1, (ulong)(int)unknown);
+              }
+              break;
+            }
+            case 18: {
               result.hasKey = input.ReadString(ref result.key_);
               break;
             }
@@ -1646,6 +1703,26 @@ namespace Server.Protocol {
         return this;
       }
       
+      
+      public bool HasType {
+       get { return result.hasType; }
+      }
+      public global::Server.Protocol.KeyboardKey Type {
+        get { return result.Type; }
+        set { SetType(value); }
+      }
+      public Builder SetType(global::Server.Protocol.KeyboardKey value) {
+        PrepareBuilder();
+        result.hasType = true;
+        result.type_ = value;
+        return this;
+      }
+      public Builder ClearType() {
+        PrepareBuilder();
+        result.hasType = false;
+        result.type_ = global::Server.Protocol.KeyboardKey.KEY_DEL;
+        return this;
+      }
       
       public bool HasKey {
         get { return result.hasKey; }
@@ -2039,11 +2116,290 @@ namespace Server.Protocol {
   }
   
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+  public sealed partial class LdpCommand : pb::GeneratedMessage<LdpCommand, LdpCommand.Builder> {
+    private LdpCommand() { }
+    private static readonly LdpCommand defaultInstance = new LdpCommand().MakeReadOnly();
+    private static readonly string[] _ldpCommandFieldNames = new string[] { "Type" };
+    private static readonly uint[] _ldpCommandFieldTags = new uint[] { 8 };
+    public static LdpCommand DefaultInstance {
+      get { return defaultInstance; }
+    }
+    
+    public override LdpCommand DefaultInstanceForType {
+      get { return DefaultInstance; }
+    }
+    
+    protected override LdpCommand ThisMessage {
+      get { return this; }
+    }
+    
+    public static pbd::MessageDescriptor Descriptor {
+      get { return global::Server.Protocol.LdpProtocol.internal__static_Server_Protocol_LdpCommand__Descriptor; }
+    }
+    
+    protected override pb::FieldAccess.FieldAccessorTable<LdpCommand, LdpCommand.Builder> InternalFieldAccessors {
+      get { return global::Server.Protocol.LdpProtocol.internal__static_Server_Protocol_LdpCommand__FieldAccessorTable; }
+    }
+    
+    public const int TypeFieldNumber = 1;
+    private bool hasType;
+    private global::Server.Protocol.CommandType type_ = global::Server.Protocol.CommandType.SHOW_WINDOWS_KEYBOARD;
+    public bool HasType {
+      get { return hasType; }
+    }
+    public global::Server.Protocol.CommandType Type {
+      get { return type_; }
+    }
+    
+    public override bool IsInitialized {
+      get {
+        if (!hasType) return false;
+        return true;
+      }
+    }
+    
+    public override void WriteTo(pb::ICodedOutputStream output) {
+      int size = SerializedSize;
+      string[] field_names = _ldpCommandFieldNames;
+      if (hasType) {
+        output.WriteEnum(1, field_names[0], (int) Type, Type);
+      }
+      UnknownFields.WriteTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public override int SerializedSize {
+      get {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+        
+        size = 0;
+        if (hasType) {
+          size += pb::CodedOutputStream.ComputeEnumSize(1, (int) Type);
+        }
+        size += UnknownFields.SerializedSize;
+        memoizedSerializedSize = size;
+        return size;
+      }
+    }
+    
+    public static LdpCommand ParseFrom(pb::ByteString data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static LdpCommand ParseFrom(pb::ByteString data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static LdpCommand ParseFrom(byte[] data) {
+      return ((Builder) CreateBuilder().MergeFrom(data)).BuildParsed();
+    }
+    public static LdpCommand ParseFrom(byte[] data, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(data, extensionRegistry)).BuildParsed();
+    }
+    public static LdpCommand ParseFrom(global::System.IO.Stream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static LdpCommand ParseFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    public static LdpCommand ParseDelimitedFrom(global::System.IO.Stream input) {
+      return CreateBuilder().MergeDelimitedFrom(input).BuildParsed();
+    }
+    public static LdpCommand ParseDelimitedFrom(global::System.IO.Stream input, pb::ExtensionRegistry extensionRegistry) {
+      return CreateBuilder().MergeDelimitedFrom(input, extensionRegistry).BuildParsed();
+    }
+    public static LdpCommand ParseFrom(pb::ICodedInputStream input) {
+      return ((Builder) CreateBuilder().MergeFrom(input)).BuildParsed();
+    }
+    public static LdpCommand ParseFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+      return ((Builder) CreateBuilder().MergeFrom(input, extensionRegistry)).BuildParsed();
+    }
+    private LdpCommand MakeReadOnly() {
+      return this;
+    }
+    
+    public static Builder CreateBuilder() { return new Builder(); }
+    public override Builder ToBuilder() { return CreateBuilder(this); }
+    public override Builder CreateBuilderForType() { return new Builder(); }
+    public static Builder CreateBuilder(LdpCommand prototype) {
+      return new Builder(prototype);
+    }
+    
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class Builder : pb::GeneratedBuilder<LdpCommand, Builder> {
+      protected override Builder ThisBuilder {
+        get { return this; }
+      }
+      public Builder() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+      }
+      internal Builder(LdpCommand cloneFrom) {
+        result = cloneFrom;
+        resultIsReadOnly = true;
+      }
+      
+      private bool resultIsReadOnly;
+      private LdpCommand result;
+      
+      private LdpCommand PrepareBuilder() {
+        if (resultIsReadOnly) {
+          LdpCommand original = result;
+          result = new LdpCommand();
+          resultIsReadOnly = false;
+          MergeFrom(original);
+        }
+        return result;
+      }
+      
+      public override bool IsInitialized {
+        get { return result.IsInitialized; }
+      }
+      
+      protected override LdpCommand MessageBeingBuilt {
+        get { return PrepareBuilder(); }
+      }
+      
+      public override Builder Clear() {
+        result = DefaultInstance;
+        resultIsReadOnly = true;
+        return this;
+      }
+      
+      public override Builder Clone() {
+        if (resultIsReadOnly) {
+          return new Builder(result);
+        } else {
+          return new Builder().MergeFrom(result);
+        }
+      }
+      
+      public override pbd::MessageDescriptor DescriptorForType {
+        get { return global::Server.Protocol.LdpCommand.Descriptor; }
+      }
+      
+      public override LdpCommand DefaultInstanceForType {
+        get { return global::Server.Protocol.LdpCommand.DefaultInstance; }
+      }
+      
+      public override LdpCommand BuildPartial() {
+        if (resultIsReadOnly) {
+          return result;
+        }
+        resultIsReadOnly = true;
+        return result.MakeReadOnly();
+      }
+      
+      public override Builder MergeFrom(pb::IMessage other) {
+        if (other is LdpCommand) {
+          return MergeFrom((LdpCommand) other);
+        } else {
+          base.MergeFrom(other);
+          return this;
+        }
+      }
+      
+      public override Builder MergeFrom(LdpCommand other) {
+        if (other == global::Server.Protocol.LdpCommand.DefaultInstance) return this;
+        PrepareBuilder();
+        if (other.HasType) {
+          Type = other.Type;
+        }
+        this.MergeUnknownFields(other.UnknownFields);
+        return this;
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input) {
+        return MergeFrom(input, pb::ExtensionRegistry.Empty);
+      }
+      
+      public override Builder MergeFrom(pb::ICodedInputStream input, pb::ExtensionRegistry extensionRegistry) {
+        PrepareBuilder();
+        pb::UnknownFieldSet.Builder unknownFields = null;
+        uint tag;
+        string field_name;
+        while (input.ReadTag(out tag, out field_name)) {
+          if(tag == 0 && field_name != null) {
+            int field_ordinal = global::System.Array.BinarySearch(_ldpCommandFieldNames, field_name, global::System.StringComparer.Ordinal);
+            if(field_ordinal >= 0)
+              tag = _ldpCommandFieldTags[field_ordinal];
+            else {
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              continue;
+            }
+          }
+          switch (tag) {
+            case 0: {
+              throw pb::InvalidProtocolBufferException.InvalidTag();
+            }
+            default: {
+              if (pb::WireFormat.IsEndGroupTag(tag)) {
+                if (unknownFields != null) {
+                  this.UnknownFields = unknownFields.Build();
+                }
+                return this;
+              }
+              if (unknownFields == null) {
+                unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+              }
+              ParseUnknownField(input, unknownFields, extensionRegistry, tag, field_name);
+              break;
+            }
+            case 8: {
+              object unknown;
+              if(input.ReadEnum(ref result.type_, out unknown)) {
+                result.hasType = true;
+              } else if(unknown is int) {
+                if (unknownFields == null) {
+                  unknownFields = pb::UnknownFieldSet.CreateBuilder(this.UnknownFields);
+                }
+                unknownFields.MergeVarintField(1, (ulong)(int)unknown);
+              }
+              break;
+            }
+          }
+        }
+        
+        if (unknownFields != null) {
+          this.UnknownFields = unknownFields.Build();
+        }
+        return this;
+      }
+      
+      
+      public bool HasType {
+       get { return result.hasType; }
+      }
+      public global::Server.Protocol.CommandType Type {
+        get { return result.Type; }
+        set { SetType(value); }
+      }
+      public Builder SetType(global::Server.Protocol.CommandType value) {
+        PrepareBuilder();
+        result.hasType = true;
+        result.type_ = value;
+        return this;
+      }
+      public Builder ClearType() {
+        PrepareBuilder();
+        result.hasType = false;
+        result.type_ = global::Server.Protocol.CommandType.SHOW_WINDOWS_KEYBOARD;
+        return this;
+      }
+    }
+    static LdpCommand() {
+      object.ReferenceEquals(global::Server.Protocol.LdpProtocol.Descriptor, null);
+    }
+  }
+  
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
   public sealed partial class LdpPacket : pb::GeneratedMessage<LdpPacket, LdpPacket.Builder> {
     private LdpPacket() { }
     private static readonly LdpPacket defaultInstance = new LdpPacket().MakeReadOnly();
-    private static readonly string[] _ldpPacketFieldNames = new string[] { "AuthRequest", "AuthResponse", "ClientInfoRequest", "DisconnectRequest", "KeyboardInfoResponse", "MouseInfoResponse", "PreparableDesktopResponse", "PreparableInfoRequest", "PreparableVolumeInfoResponse", "ScreenRequest", "ScreenResponse", "Type", "VolumeInfoResponse" };
-    private static readonly uint[] _ldpPacketFieldTags = new uint[] { 18, 26, 34, 74, 90, 82, 50, 42, 98, 58, 66, 8, 106 };
+    private static readonly string[] _ldpPacketFieldNames = new string[] { "AuthRequest", "AuthResponse", "ClientInfoRequest", "Command", "DisconnectRequest", "KeyboardInfoResponse", "MouseInfoResponse", "PreparableDesktopResponse", "PreparableInfoRequest", "PreparableVolumeInfoResponse", "ScreenRequest", "ScreenResponse", "Type", "VolumeInfoResponse" };
+    private static readonly uint[] _ldpPacketFieldTags = new uint[] { 18, 26, 34, 114, 74, 90, 82, 50, 42, 98, 58, 66, 8, 106 };
     public static LdpPacket DefaultInstance {
       get { return defaultInstance; }
     }
@@ -2194,6 +2550,16 @@ namespace Server.Protocol {
       get { return volumeInfoResponse_ ?? global::Server.Protocol.LdpVolumeInfoResponse.DefaultInstance; }
     }
     
+    public const int CommandFieldNumber = 14;
+    private bool hasCommand;
+    private global::Server.Protocol.LdpCommand command_;
+    public bool HasCommand {
+      get { return hasCommand; }
+    }
+    public global::Server.Protocol.LdpCommand Command {
+      get { return command_ ?? global::Server.Protocol.LdpCommand.DefaultInstance; }
+    }
+    
     public override bool IsInitialized {
       get {
         if (!hasType) return false;
@@ -2215,8 +2581,14 @@ namespace Server.Protocol {
         if (HasMouseInfoResponse) {
           if (!MouseInfoResponse.IsInitialized) return false;
         }
+        if (HasKeyboardInfoResponse) {
+          if (!KeyboardInfoResponse.IsInitialized) return false;
+        }
         if (HasVolumeInfoResponse) {
           if (!VolumeInfoResponse.IsInitialized) return false;
+        }
+        if (HasCommand) {
+          if (!Command.IsInitialized) return false;
         }
         return true;
       }
@@ -2226,7 +2598,7 @@ namespace Server.Protocol {
       int size = SerializedSize;
       string[] field_names = _ldpPacketFieldNames;
       if (hasType) {
-        output.WriteEnum(1, field_names[11], (int) Type, Type);
+        output.WriteEnum(1, field_names[12], (int) Type, Type);
       }
       if (hasAuthRequest) {
         output.WriteMessage(2, field_names[0], AuthRequest);
@@ -2238,31 +2610,34 @@ namespace Server.Protocol {
         output.WriteMessage(4, field_names[2], ClientInfoRequest);
       }
       if (hasPreparableInfoRequest) {
-        output.WriteMessage(5, field_names[7], PreparableInfoRequest);
+        output.WriteMessage(5, field_names[8], PreparableInfoRequest);
       }
       if (hasPreparableDesktopResponse) {
-        output.WriteMessage(6, field_names[6], PreparableDesktopResponse);
+        output.WriteMessage(6, field_names[7], PreparableDesktopResponse);
       }
       if (hasScreenRequest) {
-        output.WriteMessage(7, field_names[9], ScreenRequest);
+        output.WriteMessage(7, field_names[10], ScreenRequest);
       }
       if (hasScreenResponse) {
-        output.WriteMessage(8, field_names[10], ScreenResponse);
+        output.WriteMessage(8, field_names[11], ScreenResponse);
       }
       if (hasDisconnectRequest) {
-        output.WriteMessage(9, field_names[3], DisconnectRequest);
+        output.WriteMessage(9, field_names[4], DisconnectRequest);
       }
       if (hasMouseInfoResponse) {
-        output.WriteMessage(10, field_names[5], MouseInfoResponse);
+        output.WriteMessage(10, field_names[6], MouseInfoResponse);
       }
       if (hasKeyboardInfoResponse) {
-        output.WriteMessage(11, field_names[4], KeyboardInfoResponse);
+        output.WriteMessage(11, field_names[5], KeyboardInfoResponse);
       }
       if (hasPreparableVolumeInfoResponse) {
-        output.WriteMessage(12, field_names[8], PreparableVolumeInfoResponse);
+        output.WriteMessage(12, field_names[9], PreparableVolumeInfoResponse);
       }
       if (hasVolumeInfoResponse) {
-        output.WriteMessage(13, field_names[12], VolumeInfoResponse);
+        output.WriteMessage(13, field_names[13], VolumeInfoResponse);
+      }
+      if (hasCommand) {
+        output.WriteMessage(14, field_names[3], Command);
       }
       UnknownFields.WriteTo(output);
     }
@@ -2312,6 +2687,9 @@ namespace Server.Protocol {
         }
         if (hasVolumeInfoResponse) {
           size += pb::CodedOutputStream.ComputeMessageSize(13, VolumeInfoResponse);
+        }
+        if (hasCommand) {
+          size += pb::CodedOutputStream.ComputeMessageSize(14, Command);
         }
         size += UnknownFields.SerializedSize;
         memoizedSerializedSize = size;
@@ -2476,6 +2854,9 @@ namespace Server.Protocol {
         if (other.HasVolumeInfoResponse) {
           MergeVolumeInfoResponse(other.VolumeInfoResponse);
         }
+        if (other.HasCommand) {
+          MergeCommand(other.Command);
+        }
         this.MergeUnknownFields(other.UnknownFields);
         return this;
       }
@@ -2637,6 +3018,15 @@ namespace Server.Protocol {
               }
               input.ReadMessage(subBuilder, extensionRegistry);
               VolumeInfoResponse = subBuilder.BuildPartial();
+              break;
+            }
+            case 114: {
+              global::Server.Protocol.LdpCommand.Builder subBuilder = global::Server.Protocol.LdpCommand.CreateBuilder();
+              if (result.hasCommand) {
+                subBuilder.MergeFrom(Command);
+              }
+              input.ReadMessage(subBuilder, extensionRegistry);
+              Command = subBuilder.BuildPartial();
               break;
             }
           }
@@ -3146,6 +3536,46 @@ namespace Server.Protocol {
         PrepareBuilder();
         result.hasVolumeInfoResponse = false;
         result.volumeInfoResponse_ = null;
+        return this;
+      }
+      
+      public bool HasCommand {
+       get { return result.hasCommand; }
+      }
+      public global::Server.Protocol.LdpCommand Command {
+        get { return result.Command; }
+        set { SetCommand(value); }
+      }
+      public Builder SetCommand(global::Server.Protocol.LdpCommand value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        result.hasCommand = true;
+        result.command_ = value;
+        return this;
+      }
+      public Builder SetCommand(global::Server.Protocol.LdpCommand.Builder builderForValue) {
+        pb::ThrowHelper.ThrowIfNull(builderForValue, "builderForValue");
+        PrepareBuilder();
+        result.hasCommand = true;
+        result.command_ = builderForValue.Build();
+        return this;
+      }
+      public Builder MergeCommand(global::Server.Protocol.LdpCommand value) {
+        pb::ThrowHelper.ThrowIfNull(value, "value");
+        PrepareBuilder();
+        if (result.hasCommand &&
+            result.command_ != global::Server.Protocol.LdpCommand.DefaultInstance) {
+            result.command_ = global::Server.Protocol.LdpCommand.CreateBuilder(result.command_).MergeFrom(value).BuildPartial();
+        } else {
+          result.command_ = value;
+        }
+        result.hasCommand = true;
+        return this;
+      }
+      public Builder ClearCommand() {
+        PrepareBuilder();
+        result.hasCommand = false;
+        result.command_ = null;
         return this;
       }
     }

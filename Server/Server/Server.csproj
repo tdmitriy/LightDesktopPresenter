@@ -97,10 +97,15 @@
       <DependentUpon>Password_form.xaml</DependentUpon>
     </Compile>
     <Compile Include="Protocol\LdpProtocol.cs" />
-    <Compile Include="RemoteDesktopSender\ILdpMouseController.cs" />
-    <Compile Include="RemoteDesktopSender\LdpMouseController.cs" />
+    <Compile Include="RemoteDesktopSender\CommandsController\ILdpCommandController.cs" />
+    <Compile Include="RemoteDesktopSender\CommandsController\LdpCommandController.cs" />
+    <Compile Include="RemoteDesktopSender\KeyboardController\ILdpKeyboardController.cs" />
+    <Compile Include="RemoteDesktopSender\MouseController\ILdpMouseController.cs" />
+    <Compile Include="RemoteDesktopSender\KeyboardController\LdpKeyboardController.cs" />
+    <Compile Include="RemoteDesktopSender\KeyboardController\LdpKeys.cs" />
+    <Compile Include="RemoteDesktopSender\MouseController\LdpMouseController.cs" />
     <Compile Include="RemoteDesktopSender\LdpRemoteDesktopSender.cs" />
-    <Compile Include="RemoteDesktopSender\MousePoint.cs" />
+    <Compile Include="RemoteDesktopSender\MouseController\MousePoint.cs" />
     <Compile Include="RemoteVolumeSender\ILdpVolumeController.cs" />
     <Compile Include="RemoteVolumeSender\LdpRemoteVolumeSender.cs" />
     <Compile Include="RemoteVolumeSender\LdpVolumeController.cs" />

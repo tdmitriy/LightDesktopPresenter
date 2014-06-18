@@ -5,8 +5,10 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -33,6 +35,8 @@ namespace Server.ScreenGrabber
             }
         }
 
+        [HandleProcessCorruptedStateExceptions]
+        [SecurityCritical]
         public static Rectangle GetBoundingBoxForChanges(Bitmap newBitmap, Bitmap previousBitmap)
         {
             // The search algorithm starts by looking

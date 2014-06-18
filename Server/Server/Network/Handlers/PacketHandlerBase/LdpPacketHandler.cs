@@ -42,6 +42,8 @@ namespace Server.Network.Handlers.PacketHandlerBase
             {
                 for (int i = listeners.Count - 1; i >= 0; i--)
                 {
+                    LdpLog.Info(String.Format("Listener removed: {0}.",
+                        listeners[i].GetType()));
                     listeners[i].Dispose();
                     listeners[i] = null;
                     listeners.Remove(listeners[i]);
