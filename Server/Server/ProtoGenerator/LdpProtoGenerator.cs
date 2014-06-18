@@ -1,10 +1,10 @@
-﻿using ProtoBuf;
-using Server.Network;
+﻿using Server.Network;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -43,10 +43,22 @@ namespace Server.ProtoGeneration
         {
             try
             {
-                string proto = Serializer.GetProto<LdpPacket>();
+                string proto = "";
                 string[] splittet = proto.Split('\n');
                 splittet[0] = "option java_outer_classname = \"" + JAVA_PROTOCOL_NAME + "\";" + "\r\n";
                 splittet[0] += "option optimize_for = SPEED;" + "\r\n";
+
+                // remove text in brackets, exmaple:
+                // required int32 Left = 1 [default = 0];
+                // will be
+                // required int32 Left = 1;
+                // becouse protoc.exe throw an error during generation java classes
+                string regex = "(\\[.*\\])";
+                for (int i = 0; i < splittet.Length; i++)
+                {
+                    if (splittet[i].Contains('['))
+                        splittet[i] = Regex.Replace(splittet[i], regex, "");
+                }
 
                 return String.Join("", splittet);
             }

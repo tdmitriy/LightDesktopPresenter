@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- array list for connection type preferences (settings) dialog -->
+    <string name="item_string_edit_con">Edit connection</string>
+    <string name="item_string_delete_con">Delete connection</string>
+
+    <string-array name="connection_info_list">
+        <item>@string/item_string_edit_con</item>
+        <item>@string/item_string_delete_con</item>
+    </string-array>
+
+
+    <!-- array list for connection type dialog -->
+    <string name="item_remote_desktop_control">Desktop control</string>
+    <string name="item_remote_volume_control">Volume control</string>
+
+    <string-array name="connection_type_list">
+        <item>@string/item_remote_desktop_control</item>
+        <item>@string/item_remote_volume_control</item>
+    </string-array>
+
+
+</resources>

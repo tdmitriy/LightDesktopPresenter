@@ -1,26 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">LdpAndroidClient</string>
+    <string name="app_name">Ldp client</string>
 
+
+    <!-- Activities names -->
+    <string name="activity_LdpLdpActivityMain">com.ldp.androidclient.activities.LdpActivityMain</string>
+
+    <!-- Activities title's -->
+    <string name="activity_connection_title">Add new connection</string>
+    <string name="activity_connection_settings_title">Edit connection</string>
+    <string name="activity_conection_chooser">Select the type of connection</string>
 
     <!-- Settings -->
     <string name="action_settings">Settings</string>
     <string name="action_add_new_connection">Add new connection</string>
+    <string name="action_delete_connection">Delete connection</string>
+    <string name="action_show_keyboard">Show keyboard</string>
     <!-- End settings -->
 
 
-    <!--    New connection activity      -->
-
     <!-- EditText watermark(hints)-->
     <string name="hint_ip_address">IP address</string>
-    <string name="hint_displayed_name">Displayed name</string>
+    <string name="hint_connection_name">Connection name</string>
+    <string name="hint_password">Password</string>
+
+    <!-- TextView -->
+    <string name="string_enter_ip">IP address:</string>
+    <string name="string_enter_con_name">Connection name:</string>
+    <string name="string_enter_pass_if_need">Password:</string>
 
     <!-- Buttons -->
     <string name="string_btn_done">Done</string>
     <string name="string_btn_cancel">Cancel</string>
+    <string name="string_btn_save">Save</string>
 
 
-    <!--   End new connection activity      -->
+    <!-- Empty connection list -->
+    <string name="string_empty_list">Your connection list is empty.\n\nTap + to add new connection.</string>
 
 </resources>

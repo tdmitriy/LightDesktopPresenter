@@ -1,0 +1,142 @@
+option java_outer_classname = "LdpProtocol";
+option optimize_for = SPEED;
+
+message LdpAuthRequest {
+   optional string Password = 1;
+}
+
+message LdpAuthResponse {
+   required bool isSuccess = 1;
+}
+
+message LdpClientInfoRequest {
+   required string IP = 1;
+   required string OS = 2;
+   required string DeviceName = 3;
+}
+
+message LdpDisconnectRequest {
+   required DisconnectionType Type = 1;
+}
+
+message LdpKeyboardInfoResponse {
+   required KeyboardKey Type = 1;
+   optional string Key = 2;
+}
+
+message LdpMouseInfoResponse {
+   required MouseType Type = 1;
+   optional int32 X = 2;
+   optional int32 Y = 3;
+}
+
+message LdpCommand {
+   required CommandType Type = 1;
+}
+
+message LdpPacket {
+   required PacketType Type = 1;
+   optional LdpAuthRequest AuthRequest = 2;
+   optional LdpAuthResponse AuthResponse = 3;
+   optional LdpClientInfoRequest ClientInfoRequest = 4;
+   optional LdpPreparableInfoRequest PreparableInfoRequest = 5;
+   optional LdpPreparableDesktopInfoResponse PreparableDesktopResponse = 6;
+   optional LdpScreenRequest ScreenRequest = 7;
+   optional LdpScreenResponse ScreenResponse = 8;
+   optional LdpDisconnectRequest DisconnectRequest = 9;
+   optional LdpMouseInfoResponse MouseInfoResponse = 10;
+   optional LdpKeyboardInfoResponse KeyboardInfoResponse = 11;
+   optional LdpPreparableVolumeInfoResponse PreparableVolumeInfoResponse = 12;
+   optional LdpVolumeInfoResponse VolumeInfoResponse = 13;
+   optional LdpCommand Command = 14;
+}
+
+message LdpPreparableInfoRequest {
+   required ConnectionType Type = 1;
+}
+
+message LdpPreparableDesktopInfoResponse {
+   optional int32 ScreenWidth = 1;
+   optional int32 ScreenHeight = 2;
+}
+
+message LdpRectangle {
+   required int32 Left = 1;
+   required int32 Top = 2;
+   required int32 Right = 3;
+   required int32 Bottom = 4;
+}
+
+message LdpScreenRequest {
+
+}
+
+message LdpScreenResponse {
+   required bytes CompressedScreen = 1;
+   required int32 BaseLenght = 2;
+   required LdpRectangle Rect = 3;
+}
+
+message LdpPreparableVolumeInfoResponse {
+   optional int32 Volume = 1;
+   optional bool IsMute = 2;
+}
+
+message LdpVolumeInfoResponse {
+	required VolumeInfoType Type = 1;
+	optional int32 Volume = 2;
+	optional bool IsMute = 3;
+}
+
+enum CommandType {
+   SHOW_WINDOWS_KEYBOARD = 1;
+   REBOOT_PC = 2;
+   TURN_OFF_PC = 3;
+}
+
+enum VolumeInfoType {
+	VOLUME = 1;
+	MUTE = 2;
+}
+
+enum ConnectionType {
+   REMOTE_DESKTOP_CONTROL = 1;
+   REMOTE_VOLUME_CONTROL = 2;
+}
+
+enum DisconnectionType {
+   FROM_SERVER = 1;
+   FROM_SCREEN_THREAD = 2;
+   FROM_VOLUME_THREAD = 3;
+}
+
+enum KeyboardKey {
+	KEY_DEL = 1;
+	KEY_ENTER = 2;
+	KEY_TEXT = 3;
+}
+
+enum MouseType {
+   LEFT_CLICK = 1;
+   RIGHT_CLICK = 2;
+   LEFT_DOUBLE_CLICK = 3;
+   SET_CURSOR_POS = 4;
+   LEFT_BTN_UP = 5;
+   LEFT_BTN_DOWN = 6;
+}
+
+enum PacketType {
+   AUTH_REQUEST = 1;
+   AUTH_RESPONSE = 2;
+   CLIENT_INFO_REQUEST = 3;
+   PREPARABLE_INFO_REQUEST = 4;
+   PREPARABLE_DESKTOP_INFO_RESPONSE = 5;
+   SCREEN_REQUEST = 6;
+   SCREEN_RESPONSE = 7;
+   PREPARABLE_VOLUME_INFO_RESPONSE = 8;
+   VOLUME_INFO_RESPONSE = 9;
+   MOUSE_INFO_RESPONSE = 10;
+   KEYBOARD_INFO_RESPONSE = 11;
+   DISCONNECT_REQUEST = 12;
+   COMMAND = 13;
+}

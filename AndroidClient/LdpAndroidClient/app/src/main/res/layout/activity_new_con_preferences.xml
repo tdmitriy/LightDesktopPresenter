@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <EditText
+        android:id="@+id/txtIPAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:hint="@string/hint_ip_address"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/txtConnectionName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtIPAddress"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:hint="@string/hint_connection_name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/txtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtConnectionName"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:hint="@string/hint_password"
+        android:inputType="textVisiblePassword" />
+
+    <View
+        android:id="@+id/border"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_above="@+id/bottomLayout"
+        android:background="@color/light_gray" />
+
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btnDone"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/string_btn_done" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/light_gray" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/string_btn_cancel" />
+    </LinearLayout>
+</RelativeLayout>

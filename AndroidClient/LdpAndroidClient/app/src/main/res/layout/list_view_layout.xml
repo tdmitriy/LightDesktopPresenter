@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_item_selector"
+    android:orientation="horizontal"
+    android:padding="10dip">
+
+
+    <!-- ListRow Left sied Thumbnail image -->
+    <ImageView
+        android:id="@+id/list_image"
+        android:layout_width="?android:attr/listPreferredItemHeight"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/app_name"
+        android:scaleType="center"
+        android:src="@drawable/icon_pc" />
+
+
+    <!-- txtDisplayedName -->
+    <TextView
+        android:id="@+id/txtConnectionName"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="fill_vertical"
+        android:textColor="#040404"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        android:typeface="sans" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="fill_parent"
+        android:background="@color/light_gray" />
+
+    <com.ldp.androidclient.controls.image_view.LdpClickableImageView
+        android:id="@+id/imageViewSettings"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:scaleType="center"
+        android:src="@drawable/ic_action_settings" />
+
+</LinearLayout>

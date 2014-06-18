@@ -17,45 +17,85 @@ using System.Diagnostics;
 using System.IO;
 using Server.WindowsUtils;
 using Server.Network;
-using ProtoBuf;
 using Server.Properties;
-using Server.LdpThreads;
+using Server.ProtoGeneration;
+using System.Text.RegularExpressions;
+using MahApps.Metro.Controls;
+using System.Runtime.ExceptionServices;
+using System.Security;
 
 namespace Server
 {
-    public partial class ServerWindow : Window
+    
+    public partial class ServerWindow : MetroWindow
     {
+        private LdpServer server;
+        private LdpLabelStatus labelStatus;
+        private bool OS_SUPPORTED = false;
         public ServerWindow()
         {
-            InitializeComponent();
-            CheckWindowsVersion();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
             
+            InitializeComponent();
+            server = LdpServer.GetInstance();
+            labelStatus = LdpLabelStatus.GetInstance();
+            lblConnectionStatus.DataContext = labelStatus;
+            OS_SUPPORTED = LdpUtils.CheckStartupWindowsVersion(this);
+            if (OS_SUPPORTED)
+                StartServer();
         }
 
-        private void CheckWindowsVersion()
+        private void StartServer()
         {
-            if (LdpUtils.IsWindows7)
+            if (server != null)
+                server.Start();
+        }
+
+        private void StopServer()
+        {
+            if (server != null)
             {
-                MessageBox.Show("7");
-                return;
+                server.DisconnectClient();
+                server.Stop();
             }
-                
-            else if (LdpUtils.IsWindows8)
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            if (OS_SUPPORTED)
             {
-                MessageBox.Show("8");
-                return;
+                if (MessageBox.Show("Close server?", "Question",
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    StopServer();
+                    e.Cancel = false;
+                }
+                else
+                {
+                    e.Cancel = true;
+                    return;
+                }
             }
             else
-            {
-                MessageBox.Show("Unsuported windows version.\nWorks only on Windows 7 or higher..",
-                    "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.Close();
-            }
-                
+                e.Cancel = false;
+            base.OnClosing(e);
+
+        }
+
+        private void btnAbout_Click(object sender, RoutedEventArgs e)
+        {
+            About about = new About();
+            about.ShowDialog();
+        }
+
+        private void btnSetPassword_Click(object sender, RoutedEventArgs e)
+        {
+            Password_form password_form = new Password_form();
+            password_form.ShowDialog();
+        }
+
+        private void btnFile_Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
