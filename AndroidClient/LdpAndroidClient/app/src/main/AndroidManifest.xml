@@ -50,7 +50,8 @@
 
         <!-- Activity remote desktop control -->
         <activity android:name=".activities.LdpActivityRemoteDesktop"
-            android:theme="@style/ThemeRemoteDesktop">
+            android:theme="@style/ThemeRemoteDesktop"
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- Activity remote volume control -->
