@@ -1,4 +1,4 @@
-LightDesktopPresenter
+Light Desktop Presenter
 =====================
 
-Diploma work
+This project provide remote desktop and volume control for OS Windows via Android phone using TCP connection.
