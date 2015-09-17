@@ -3,7 +3,7 @@ Light Desktop Presenter (Graduate work)
 
 This project provide remote desktop and volume control for OS Windows via Android phone using TCP protocol.
 
-##Code review
+##Project review
 
 Server side is - .net C# (WPF)
 
