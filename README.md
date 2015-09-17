@@ -7,6 +7,8 @@ This project provide remote desktop and volume control for OS Windows via Androi
 
 Server side is - .net C# (WPF)
 
+Client side is - Android (java)
+
 [Google Protocol Buffers](https://developers.google.com/protocol-buffers/?hl=en) has been used to establish communication between server side(c#) and client side(java).
 
-Client side is - Android (java)
+
