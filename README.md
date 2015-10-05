@@ -6,6 +6,7 @@ This project provides remote desktop and volume control for OS Windows via Andro
 ##Features
 
 * Desktop sharing
+* Mouse/Keyboard controlling
 * Volume Controling
 * Shutdown/Restart
 
