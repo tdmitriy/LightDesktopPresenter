@@ -1,7 +1,7 @@
 Light Desktop Presenter (Graduate coursework)
 =====================
 
-This project provides remote desktop and volume control over Tcp protocol for OS Windows via Android.
+This project provides remote desktop and volume control for OS Windows via Android over TCP Protocol.
 
 ##Features
 
