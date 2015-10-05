@@ -1,14 +1,24 @@
-Light Desktop Presenter (Graduate work)
+Light Desktop Presenter (Graduate coursework)
 =====================
 
 This project provides remote desktop and volume control over Tcp protocol for OS Windows via Android.
 
-##Project review
+##Features
 
-Server side is - .net C# (WPF)
+* Desktop sharing
+* Volume Controling
+* Shutdown/Restart
 
-Client side is - Android (Java)
+##Technologies
 
-[Google Protocol Buffers](https://developers.google.com/protocol-buffers/?hl=en) has been used to establish communication between server side(c#) and client side(java).
+Server side (C#):
+- [Google Protocol Buffers](https://developers.google.com/protocol-buffers/?hl=en) (to establish communication between platforms)
+- CoreAudioApi (windows volume controlling api)
+- SharpDX (DirectX wrapper for capturing desktop screenshots)
+- LZ4 (compress/decompress lib to reduce network traffic)
+
+Client side (Android Java):
+- Google Protocol Buffers
+- LZ4
 
 
